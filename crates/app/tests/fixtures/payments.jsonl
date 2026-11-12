@@ -1,0 +1,360 @@
+{"ts":"2026-11-12T00:00:00.030Z","level":"info","service":"auth","msg":"request handled","request_id":"r-a31d6efe","method":"DELETE","path":"/v1/users/17808","status":200,"latency_ms":305}
+{"ts":"2026-11-12T00:00:00.059Z","level":"info","service":"worker","msg":"connection opened","request_id":"r-bfa03020","method":"DELETE","path":"/v1/login","status":200,"latency_ms":126}
+{"ts":"2026-11-12T00:00:00.084Z","level":"info","service":"worker","msg":"user signed in","request_id":"r-692242e6","method":"GET","path":"/v1/orders/55636","status":304,"latency_ms":127}
+{"ts":"2026-11-12T00:00:00.085Z","level":"warn","service":"api","msg":"retrying upstream","request_id":"r-e1b156b6","method":"GET","path":"/healthz","status":429,"latency_ms":60}
+{"ts":"2026-11-12T00:00:00.093Z","level":"info","service":"auth","msg":"cache miss","request_id":"r-6306ba53","method":"GET","path":"/healthz","status":304,"latency_ms":395}
+{"ts":"2026-11-12T00:00:00.125Z","level":"info","service":"search","msg":"request handled","request_id":"r-0017d554","method":"POST","path":"/v1/pay","status":200,"latency_ms":305}
+{"ts":"2026-11-12T00:00:00.164Z","level":"info","service":"auth","msg":"user signed in","request_id":"r-f45c6f34","method":"GET","path":"/v1/orders","status":204,"latency_ms":26}
+{"ts":"2026-11-12T00:00:00.202Z","level":"info","service":"api","msg":"user signed in","request_id":"r-21253797","method":"PUT","path":"/v1/search","status":304,"latency_ms":317}
+{"ts":"2026-11-12T00:00:00.233Z","level":"info","service":"search","msg":"order created","request_id":"r-cf9f0e9c","method":"GET","path":"/v1/users/39704","status":200,"latency_ms":383}
+{"ts":"2026-11-12T00:00:00.260Z","level":"info","service":"payments","msg":"job finished","request_id":"r-16aa588c","method":"GET","path":"/v1/search","status":204,"latency_ms":189}
+{"ts":"2026-11-12T00:00:00.283Z","level":"info","service":"api","msg":"order created","request_id":"r-da4c376f","method":"GET","path":"/v1/users/67884","status":200,"latency_ms":102}
+{"ts":"2026-11-12T00:00:00.318Z","level":"info","service":"payments","msg":"order created","request_id":"r-1723a519","method":"DELETE","path":"/v1/orders/16836","status":204,"latency_ms":227}
+{"ts":"2026-11-12T00:00:00.354Z","level":"info","service":"search","msg":"connection opened","request_id":"r-ab49ce1c","method":"GET","path":"/v1/orders","status":304,"latency_ms":197}
+{"ts":"2026-11-12T00:00:00.372Z","level":"info","service":"worker","msg":"user signed in","request_id":"r-0bb14d89","method":"DELETE","path":"/v1/login","status":200,"latency_ms":40}
+{"ts":"2026-11-12T00:00:00.384Z","level":"info","service":"search","msg":"job finished","request_id":"r-7bc49185","method":"GET","path":"/v1/search","status":201,"latency_ms":53}
+{"ts":"2026-11-12T00:00:00.385Z","level":"info","service":"search","msg":"order created","request_id":"r-9534c9ef","method":"GET","path":"/v1/users/90554","status":304,"latency_ms":388}
+{"ts":"2026-11-12T00:00:00.403Z","level":"info","service":"search","msg":"request handled","request_id":"r-5cdf3862","method":"GET","path":"/v1/login","status":201,"latency_ms":20}
+{"ts":"2026-11-12T00:00:00.407Z","level":"debug","service":"api","msg":"pool stats","request_id":"r-2cc2bcbe","method":"PUT","path":"/v1/users/44023","status":204,"latency_ms":126}
+{"ts":"2026-11-12T00:00:00.437Z","level":"debug","service":"auth","msg":"db query","request_id":"r-8f0cb3a0","method":"GET","path":"/healthz","status":200,"latency_ms":121}
+{"ts":"2026-11-12T00:00:00.471Z","level":"info","service":"auth","msg":"cache miss","request_id":"r-ff07caf1","method":"PUT","path":"/v1/orders/91209","status":200,"latency_ms":56}
+{"ts":"2026-11-12T00:00:00.493Z","level":"info","service":"auth","msg":"user signed in","request_id":"r-ee21458a","method":"POST","path":"/v1/login","status":200,"latency_ms":372}
+{"ts":"2026-11-12T00:00:00.513Z","level":"info","service":"auth","msg":"cache miss","request_id":"r-9f0a249c","method":"GET","path":"/v1/login","status":304,"latency_ms":30}
+{"ts":"2026-11-12T00:00:00.514Z","level":"debug","service":"api","msg":"config reloaded","request_id":"r-7bcade0f","method":"DELETE","path":"/v1/orders","status":204,"latency_ms":364}
+{"ts":"2026-11-12T00:00:00.533Z","level":"info","service":"api","msg":"request handled","request_id":"r-1bd10914","method":"POST","path":"/v1/orders","status":304,"latency_ms":312}
+{"ts":"2026-11-12T00:00:00.566Z","level":"info","service":"payments","msg":"order created","request_id":"r-14d0eddc","method":"PUT","path":"/v1/pay","status":200,"latency_ms":113}
+{"ts":"2026-11-12T00:00:00.576Z","level":"debug","service":"payments","msg":"pool stats","request_id":"r-26372696","method":"DELETE","path":"/v1/login","status":200,"latency_ms":347}
+{"ts":"2026-11-12T00:00:00.592Z","level":"info","service":"worker","msg":"connection opened","request_id":"r-3f074e79","method":"GET","path":"/v1/pay","status":304,"latency_ms":236}
+{"ts":"2026-11-12T00:00:00.626Z","level":"info","service":"worker","msg":"job finished","request_id":"r-2d3cb50f","method":"PUT","path":"/v1/orders","status":204,"latency_ms":20}
+{"ts":"2026-11-12T00:00:00.656Z","level":"info","service":"worker","msg":"job finished","request_id":"r-4fbaab0d","method":"GET","path":"/v1/orders","status":304,"latency_ms":368}
+{"ts":"2026-11-12T00:00:00.666Z","level":"info","service":"payments","msg":"order created","request_id":"r-da555d25","method":"GET","path":"/healthz","status":201,"latency_ms":114}
+{"ts":"2026-11-12T00:00:00.688Z","level":"info","service":"payments","msg":"request handled","request_id":"r-046c186e","method":"PUT","path":"/v1/login","status":201,"latency_ms":56}
+{"ts":"2026-11-12T00:00:00.692Z","level":"info","service":"worker","msg":"job finished","request_id":"r-987b3fbc","method":"POST","path":"/v1/users/46720","status":200,"latency_ms":55}
+{"ts":"2026-11-12T00:00:00.727Z","level":"warn","service":"auth","msg":"queue depth high","request_id":"r-27251782","method":"POST","path":"/v1/users/48665","status":200,"latency_ms":45}
+{"ts":"2026-11-12T00:00:00.731Z","level":"error","service":"worker","msg":"connection refused","request_id":"r-403cca04","method":"GET","path":"/v1/login","status":502,"latency_ms":25625}
+{"ts":"2026-11-12T00:00:00.742Z","level":"error","service":"auth","msg":"deadlock detected","request_id":"r-ef5de17c","method":"GET","path":"/v1/search","status":503,"latency_ms":12399}
+{"ts":"2026-11-12T00:00:00.771Z","level":"warn","service":"worker","msg":"slow request","request_id":"r-85773b8f","method":"GET","path":"/v1/orders/87719","status":200,"latency_ms":296}
+{"ts":"2026-11-12T00:00:00.810Z","level":"error","service":"search","msg":"connection refused","request_id":"r-0074af1b","method":"PUT","path":"/v1/orders/34728","status":503,"latency_ms":6801}
+{"ts":"2026-11-12T00:00:00.814Z","level":"error","service":"worker","msg":"invalid signature","request_id":"r-1dc8daf6","method":"POST","path":"/healthz","status":504,"latency_ms":14824}
+{"ts":"2026-11-12T00:00:00.825Z","level":"error","service":"api","msg":"connection refused","request_id":"r-ab4da669","method":"GET","path":"/v1/users/66823","status":504,"latency_ms":16468}
+{"ts":"2026-11-12T00:00:00.851Z","level":"error","service":"auth","msg":"deadlock detected","request_id":"r-97165301","method":"GET","path":"/v1/search","status":500,"latency_ms":12549}
+{"ts":"2026-11-12T00:00:00.859Z","level":"error","service":"api","msg":"upstream timeout","request_id":"r-96cda4f9","method":"POST","path":"/v1/search","status":500,"latency_ms":11642}
+{"ts":"2026-11-12T00:00:00.893Z","level":"warn","service":"auth","msg":"deprecated header","request_id":"r-ee4d6e94","method":"GET","path":"/v1/orders/29667","status":200,"latency_ms":301}
+{"ts":"2026-11-12T00:00:00.917Z","level":"error","service":"worker","msg":"upstream timeout","request_id":"r-40763691","method":"PUT","path":"/v1/login","status":503,"latency_ms":3329}
+{"ts":"2026-11-12T00:00:00.935Z","level":"error","service":"auth","msg":"deadlock detected","request_id":"r-40854f30","method":"GET","path":"/healthz","status":503,"latency_ms":16232}
+{"ts":"2026-11-12T00:00:00.963Z","level":"warn","service":"payments","msg":"deprecated header","request_id":"r-5222ccdb","method":"GET","path":"/v1/orders","status":200,"latency_ms":175}
+{"ts":"2026-11-12T00:00:00.967Z","level":"info","service":"api","msg":"order created","request_id":"r-5214170a","method":"GET","path":"/v1/search","status":204,"latency_ms":162}
+{"ts":"2026-11-12T00:00:00.975Z","level":"info","service":"auth","msg":"order created","request_id":"r-d1f5cec4","method":"GET","path":"/v1/users/1293","status":304,"latency_ms":262}
+{"ts":"2026-11-12T00:00:01.002Z","level":"debug","service":"payments","msg":"span exported","request_id":"r-455b28b2","method":"POST","path":"/v1/search","status":200,"latency_ms":9}
+{"ts":"2026-11-12T00:00:01.041Z","level":"warn","service":"auth","msg":"retrying upstream","request_id":"r-e4ea745e","method":"GET","path":"/v1/users/94517","status":200,"latency_ms":229}
+{"ts":"2026-11-12T00:00:01.066Z","level":"info","service":"search","msg":"user signed in","request_id":"r-fdf282e5","method":"PUT","path":"/v1/login","status":200,"latency_ms":98}
+{"ts":"2026-11-12T00:00:01.085Z","level":"info","service":"auth","msg":"request handled","request_id":"r-4bd11fc7","method":"POST","path":"/v1/login","status":304,"latency_ms":382}
+{"ts":"2026-11-12T00:00:01.107Z","level":"debug","service":"payments","msg":"span exported","request_id":"r-9cf1a621","method":"DELETE","path":"/v1/orders","status":204,"latency_ms":23}
+{"ts":"2026-11-12T00:00:01.138Z","level":"info","service":"worker","msg":"order created","request_id":"r-f1c189fd","method":"PUT","path":"/healthz","status":200,"latency_ms":340}
+{"ts":"2026-11-12T00:00:01.143Z","level":"info","service":"worker","msg":"connection opened","request_id":"r-a6bddc0b","method":"DELETE","path":"/v1/search","status":201,"latency_ms":127}
+{"ts":"2026-11-12T00:00:01.179Z","level":"info","service":"api","msg":"cache hit","request_id":"r-e60c5c05","method":"GET","path":"/v1/pay","status":200,"latency_ms":40}
+{"ts":"2026-11-12T00:00:01.197Z","level":"warn","service":"search","msg":"deprecated header","request_id":"r-9a308ec6","method":"POST","path":"/v1/pay","status":200,"latency_ms":86}
+{"ts":"2026-11-12T00:00:01.201Z","level":"debug","service":"worker","msg":"config reloaded","request_id":"r-0d9ae98b","method":"GET","path":"/v1/pay","status":204,"latency_ms":370}
+{"ts":"2026-11-12T00:00:01.232Z","level":"debug","service":"payments","msg":"span exported","request_id":"r-b9ff4792","method":"POST","path":"/v1/orders/61645","status":304,"latency_ms":291}
+{"ts":"2026-11-12T00:00:01.270Z","level":"info","service":"api","msg":"user signed in","request_id":"r-2356209b","method":"POST","path":"/v1/users/73745","status":204,"latency_ms":275}
+{"ts":"2026-11-12T00:00:01.284Z","level":"info","service":"worker","msg":"job finished","request_id":"r-7c5042e2","method":"GET","path":"/healthz","status":204,"latency_ms":395}
+{"ts":"2026-11-12T00:00:01.313Z","level":"debug","service":"worker","msg":"retry scheduled","request_id":"r-75646b1d","method":"POST","path":"/v1/pay","status":200,"latency_ms":130}
+{"ts":"2026-11-12T00:00:01.332Z","level":"info","service":"search","msg":"request handled","request_id":"r-6d220ae0","method":"PUT","path":"/v1/pay","status":200,"latency_ms":19}
+{"ts":"2026-11-12T00:00:01.344Z","level":"info","service":"worker","msg":"connection opened","request_id":"r-46a2a4a8","method":"GET","path":"/v1/orders","status":304,"latency_ms":330}
+{"ts":"2026-11-12T00:00:01.368Z","level":"info","service":"search","msg":"order created","request_id":"r-7f3aa41f","method":"PUT","path":"/v1/login","status":304,"latency_ms":179}
+{"ts":"2026-11-12T00:00:01.399Z","level":"debug","service":"worker","msg":"retry scheduled","request_id":"r-afdd3dff","method":"GET","path":"/v1/orders","status":200,"latency_ms":64}
+{"ts":"2026-11-12T00:00:01.424Z","level":"info","service":"payments","msg":"connection opened","request_id":"r-4637f1e0","method":"GET","path":"/v1/search","status":200,"latency_ms":329}
+{"ts":"2026-11-12T00:00:01.439Z","level":"info","service":"payments","msg":"cache hit","request_id":"r-e3d4bffd","method":"GET","path":"/v1/pay","status":200,"latency_ms":153}
+{"ts":"2026-11-12T00:00:01.441Z","level":"info","service":"payments","msg":"job finished","request_id":"r-f6f7d297","method":"POST","path":"/healthz","status":200,"latency_ms":259}
+{"ts":"2026-11-12T00:00:01.445Z","level":"warn","service":"api","msg":"retrying upstream","request_id":"r-39e653b9","method":"GET","path":"/v1/orders/82733","status":404,"latency_ms":105}
+{"ts":"2026-11-12T00:00:01.463Z","level":"debug","service":"auth","msg":"db query","request_id":"r-ee4abdf7","method":"DELETE","path":"/v1/pay","status":201,"latency_ms":1}
+{"ts":"2026-11-12T00:00:01.495Z","level":"info","service":"search","msg":"job finished","request_id":"r-23757f94","method":"GET","path":"/v1/search","status":200,"latency_ms":46}
+{"ts":"2026-11-12T00:00:01.529Z","level":"info","service":"auth","msg":"request handled","request_id":"r-39389853","method":"PUT","path":"/v1/users/19413","status":201,"latency_ms":83}
+{"ts":"2026-11-12T00:00:01.546Z","level":"info","service":"payments","msg":"order created","request_id":"r-bb34265e","method":"GET","path":"/v1/pay","status":200,"latency_ms":41}
+{"ts":"2026-11-12T00:00:01.582Z","level":"info","service":"payments","msg":"user signed in","request_id":"r-88e5c491","method":"DELETE","path":"/v1/login","status":304,"latency_ms":198}
+{"ts":"2026-11-12T00:00:01.587Z","level":"debug","service":"api","msg":"pool stats","request_id":"r-91c777dd","method":"GET","path":"/v1/orders/96804","status":200,"latency_ms":142}
+{"ts":"2026-11-12T00:00:01.608Z","level":"info","service":"worker","msg":"job finished","request_id":"r-8172eb54","method":"GET","path":"/v1/orders/38809","status":304,"latency_ms":245}
+{"ts":"2026-11-12T00:00:01.640Z","level":"info","service":"payments","msg":"job finished","request_id":"r-abe95daf","method":"POST","path":"/v1/pay","status":200,"latency_ms":331}
+{"ts":"2026-11-12T00:00:01.677Z","level":"debug","service":"api","msg":"db query","request_id":"r-be9db3a8","method":"GET","path":"/v1/orders/40849","status":201,"latency_ms":165}
+{"ts":"2026-11-12T00:00:01.679Z","level":"info","service":"auth","msg":"connection opened","request_id":"r-371a81e3","method":"PUT","path":"/v1/login","status":204,"latency_ms":177}
+{"ts":"2026-11-12T00:00:01.680Z","level":"info","service":"auth","msg":"user signed in","request_id":"r-4554c4ec","method":"PUT","path":"/v1/orders/42723","status":204,"latency_ms":108}
+{"ts":"2026-11-12T00:00:01.716Z","level":"debug","service":"api","msg":"span exported","request_id":"r-81bf82c2","method":"POST","path":"/v1/orders","status":304,"latency_ms":326}
+{"ts":"2026-11-12T00:00:01.717Z","level":"info","service":"payments","msg":"order created","request_id":"r-6aa3e54c","method":"GET","path":"/v1/orders/33960","status":200,"latency_ms":141}
+{"ts":"2026-11-12T00:00:01.728Z","level":"debug","service":"payments","msg":"span exported","request_id":"r-f84c1e28","method":"GET","path":"/v1/orders/71702","status":304,"latency_ms":118}
+{"ts":"2026-11-12T00:00:01.760Z","level":"info","service":"payments","msg":"cache hit","request_id":"r-2bf7e443","method":"POST","path":"/v1/pay","status":200,"latency_ms":343}
+{"ts":"2026-11-12T00:00:01.781Z","level":"info","service":"payments","msg":"order created","request_id":"r-24ecdf7e","method":"GET","path":"/v1/orders","status":201,"latency_ms":31}
+{"ts":"2026-11-12T00:00:01.816Z","level":"info","service":"worker","msg":"connection opened","request_id":"r-218dd2a0","method":"POST","path":"/v1/orders","status":201,"latency_ms":251}
+{"ts":"2026-11-12T00:00:01.834Z","level":"info","service":"auth","msg":"user signed in","request_id":"r-6f9cefa2","method":"DELETE","path":"/v1/users/45093","status":200,"latency_ms":184}
+{"ts":"2026-11-12T00:00:01.867Z","level":"info","service":"search","msg":"cache miss","request_id":"r-c3945687","method":"GET","path":"/v1/orders/98754","status":201,"latency_ms":301}
+{"ts":"2026-11-12T00:00:01.893Z","level":"info","service":"payments","msg":"cache hit","request_id":"r-db45de6c","method":"POST","path":"/v1/orders","status":200,"latency_ms":375}
+{"ts":"2026-11-12T00:00:01.913Z","level":"info","service":"auth","msg":"request handled","request_id":"r-7cf5c3e3","method":"GET","path":"/healthz","status":304,"latency_ms":312}
+{"ts":"2026-11-12T00:00:01.951Z","level":"info","service":"auth","msg":"request handled","request_id":"r-b8b64c48","method":"GET","path":"/v1/orders/73991","status":200,"latency_ms":61}
+{"ts":"2026-11-12T00:00:01.952Z","level":"info","service":"search","msg":"job finished","request_id":"r-9f4e01c1","method":"GET","path":"/v1/search","status":304,"latency_ms":189}
+{"ts":"2026-11-12T00:00:01.959Z","level":"info","service":"auth","msg":"connection opened","request_id":"r-01f450a3","method":"GET","path":"/healthz","status":200,"latency_ms":219}
+{"ts":"2026-11-12T00:00:01.995Z","level":"info","service":"search","msg":"user signed in","request_id":"r-0415ba53","method":"DELETE","path":"/v1/users/54051","status":200,"latency_ms":237}
+{"ts":"2026-11-12T00:00:02.026Z","level":"info","service":"worker","msg":"order created","request_id":"r-2b222491","method":"PUT","path":"/healthz","status":200,"latency_ms":198}
+{"ts":"2026-11-12T00:00:02.061Z","level":"info","service":"worker","msg":"job finished","request_id":"r-010b194c","method":"DELETE","path":"/v1/pay","status":201,"latency_ms":314}
+{"ts":"2026-11-12T00:00:02.081Z","level":"info","service":"auth","msg":"cache hit","request_id":"r-e2374652","method":"GET","path":"/v1/search","status":200,"latency_ms":153}
+{"ts":"2026-11-12T00:00:02.117Z","level":"info","service":"api","msg":"job finished","request_id":"r-8c526731","method":"PUT","path":"/v1/login","status":200,"latency_ms":6}
+{"ts":"2026-11-12T00:00:02.123Z","level":"info","service":"api","msg":"cache miss","request_id":"r-e0fb490e","method":"GET","path":"/v1/users/8351","status":200,"latency_ms":156}
+{"ts":"2026-11-12T00:00:02.142Z","level":"debug","service":"worker","msg":"config reloaded","request_id":"r-fa90acca","method":"GET","path":"/healthz","status":304,"latency_ms":126}
+{"ts":"2026-11-12T00:00:02.172Z","level":"info","service":"auth","msg":"order created","request_id":"r-a570ac6d","method":"GET","path":"/v1/login","status":200,"latency_ms":179}
+{"ts":"2026-11-12T00:00:02.189Z","level":"info","service":"auth","msg":"order created","request_id":"r-34bb5cd8","method":"GET","path":"/v1/login","status":200,"latency_ms":45}
+{"ts":"2026-11-12T00:00:02.199Z","level":"info","service":"worker","msg":"cache miss","request_id":"r-dde4b299","method":"POST","path":"/v1/users/94563","status":304,"latency_ms":89}
+{"ts":"2026-11-12T00:00:02.230Z","level":"debug","service":"payments","msg":"span exported","request_id":"r-6479ae28","method":"DELETE","path":"/v1/login","status":204,"latency_ms":184}
+{"ts":"2026-11-12T00:00:02.242Z","level":"info","service":"search","msg":"connection opened","request_id":"r-bab33226","method":"GET","path":"/v1/search","status":200,"latency_ms":382}
+{"ts":"2026-11-12T00:00:02.274Z","level":"info","service":"auth","msg":"connection opened","request_id":"r-4eac1964","method":"DELETE","path":"/v1/pay","status":200,"latency_ms":29}
+{"ts":"2026-11-12T00:00:02.295Z","level":"info","service":"search","msg":"job finished","request_id":"r-78f4fa3b","method":"GET","path":"/v1/orders","status":204,"latency_ms":33}
+{"ts":"2026-11-12T00:00:02.332Z","level":"info","service":"worker","msg":"connection opened","request_id":"r-150b41f5","method":"GET","path":"/healthz","status":200,"latency_ms":156}
+{"ts":"2026-11-12T00:00:02.337Z","level":"info","service":"search","msg":"connection opened","request_id":"r-6010aa44","method":"PUT","path":"/v1/orders/30908","status":201,"latency_ms":219}
+{"ts":"2026-11-12T00:00:02.375Z","level":"info","service":"worker","msg":"request handled","request_id":"r-c89a5f04","method":"GET","path":"/v1/orders","status":200,"latency_ms":360}
+{"ts":"2026-11-12T00:00:02.379Z","level":"info","service":"search","msg":"order created","request_id":"r-470854fc","method":"GET","path":"/v1/pay","status":200,"latency_ms":299}
+{"ts":"2026-11-12T00:00:02.413Z","level":"info","service":"payments","msg":"cache hit","request_id":"r-caa2864c","method":"POST","path":"/v1/orders","status":200,"latency_ms":338}
+{"ts":"2026-11-12T00:00:02.427Z","level":"warn","service":"search","msg":"token near expiry","request_id":"r-e34b3901","method":"GET","path":"/v1/search","status":429,"latency_ms":286}
+{"ts":"2026-11-12T00:00:02.428Z","level":"info","service":"worker","msg":"cache hit","request_id":"r-cf39cba6","method":"GET","path":"/v1/orders","status":204,"latency_ms":128}
+{"ts":"2026-11-12T00:00:02.459Z","level":"info","service":"worker","msg":"user signed in","request_id":"r-0efec915","method":"GET","path":"/v1/users/86639","status":200,"latency_ms":347}
+{"ts":"2026-11-12T00:00:02.471Z","level":"info","service":"auth","msg":"job finished","request_id":"r-f3770846","method":"DELETE","path":"/v1/search","status":200,"latency_ms":338}
+{"ts":"2026-11-12T00:00:02.494Z","level":"info","service":"auth","msg":"connection opened","request_id":"r-666e4ed2","method":"PUT","path":"/healthz","status":204,"latency_ms":13}
+{"ts":"2026-11-12T00:00:02.522Z","level":"info","service":"auth","msg":"job finished","request_id":"r-e975e441","method":"GET","path":"/v1/login","status":200,"latency_ms":84}
+{"ts":"2026-11-12T00:00:02.552Z","level":"info","service":"auth","msg":"order created","request_id":"r-538ddf7d","method":"PUT","path":"/v1/search","status":200,"latency_ms":50}
+{"ts":"2026-11-12T00:00:02.574Z","level":"info","service":"search","msg":"request handled","request_id":"r-d102c898","method":"GET","path":"/v1/users/32173","status":200,"latency_ms":20}
+{"ts":"2026-11-12T00:00:02.606Z","level":"debug","service":"payments","msg":"pool stats","request_id":"r-b5e85a3e","method":"PUT","path":"/v1/search","status":201,"latency_ms":167}
+{"ts":"2026-11-12T00:00:02.613Z","level":"info","service":"worker","msg":"user signed in","request_id":"r-19c35167","method":"DELETE","path":"/v1/search","status":200,"latency_ms":170}
+{"ts":"2026-11-12T00:00:02.630Z","level":"info","service":"api","msg":"user signed in","request_id":"r-e1f7b6f3","method":"GET","path":"/v1/orders/72603","status":204,"latency_ms":281}
+{"ts":"2026-11-12T00:00:02.645Z","level":"info","service":"api","msg":"user signed in","request_id":"r-8ddefd7e","method":"DELETE","path":"/v1/users/3867","status":201,"latency_ms":319}
+{"ts":"2026-11-12T00:00:02.660Z","level":"info","service":"search","msg":"cache hit","request_id":"r-a976aa84","method":"DELETE","path":"/v1/search","status":200,"latency_ms":383}
+{"ts":"2026-11-12T00:00:02.668Z","level":"info","service":"search","msg":"cache miss","request_id":"r-04a0fa25","method":"GET","path":"/v1/pay","status":304,"latency_ms":133}
+{"ts":"2026-11-12T00:00:02.700Z","level":"info","service":"api","msg":"cache hit","request_id":"r-ca614e4b","method":"POST","path":"/v1/search","status":304,"latency_ms":189}
+{"ts":"2026-11-12T00:00:02.723Z","level":"info","service":"search","msg":"user signed in","request_id":"r-10add809","method":"GET","path":"/v1/orders","status":204,"latency_ms":133}
+{"ts":"2026-11-12T00:00:02.735Z","level":"info","service":"worker","msg":"cache hit","request_id":"r-0f04cf84","method":"POST","path":"/v1/orders","status":304,"latency_ms":350}
+{"ts":"2026-11-12T00:00:02.761Z","level":"info","service":"api","msg":"request handled","request_id":"r-ffa1129d","method":"GET","path":"/v1/pay","status":200,"latency_ms":180}
+{"ts":"2026-11-12T00:00:02.769Z","level":"info","service":"auth","msg":"job finished","request_id":"r-583c5ce4","method":"GET","path":"/healthz","status":200,"latency_ms":271}
+{"ts":"2026-11-12T00:00:02.779Z","level":"info","service":"worker","msg":"request handled","request_id":"r-349498cc","method":"GET","path":"/v1/search","status":200,"latency_ms":93}
+{"ts":"2026-11-12T00:00:02.782Z","level":"info","service":"api","msg":"job finished","request_id":"r-9fa967bd","method":"GET","path":"/v1/users/67513","status":200,"latency_ms":31}
+{"ts":"2026-11-12T00:00:02.788Z","level":"warn","service":"search","msg":"slow request","request_id":"r-47166091","method":"DELETE","path":"/v1/search","status":429,"latency_ms":237}
+{"ts":"2026-11-12T00:00:02.790Z","level":"info","service":"api","msg":"cache miss","request_id":"r-86de16f0","method":"GET","path":"/healthz","status":304,"latency_ms":118}
+{"ts":"2026-11-12T00:00:02.818Z","level":"info","service":"api","msg":"connection opened","request_id":"r-3074c718","method":"GET","path":"/v1/orders/84153","status":200,"latency_ms":165}
+{"ts":"2026-11-12T00:00:02.835Z","level":"warn","service":"worker","msg":"queue depth high","request_id":"r-ae9ed574","method":"GET","path":"/v1/orders/56531","status":404,"latency_ms":227}
+{"ts":"2026-11-12T00:00:02.873Z","level":"info","service":"payments","msg":"order created","request_id":"r-2becb265","method":"GET","path":"/v1/search","status":304,"latency_ms":267}
+{"ts":"2026-11-12T00:00:02.898Z","level":"info","service":"auth","msg":"cache hit","request_id":"r-aed55dd4","method":"GET","path":"/healthz","status":200,"latency_ms":368}
+{"ts":"2026-11-12T00:00:02.934Z","level":"info","service":"search","msg":"user signed in","request_id":"r-3aed57d7","method":"PUT","path":"/v1/users/95874","status":204,"latency_ms":351}
+{"ts":"2026-11-12T00:00:02.959Z","level":"info","service":"search","msg":"cache hit","request_id":"r-33474c2b","method":"GET","path":"/v1/search","status":204,"latency_ms":200}
+{"ts":"2026-11-12T00:00:02.976Z","level":"info","service":"worker","msg":"request handled","request_id":"r-b7de3b68","method":"PUT","path":"/v1/pay","status":200,"latency_ms":37}
+{"ts":"2026-11-12T00:00:03.004Z","level":"info","service":"payments","msg":"cache miss","request_id":"r-65f66ee6","method":"GET","path":"/v1/search","status":200,"latency_ms":284}
+{"ts":"2026-11-12T00:00:03.007Z","level":"info","service":"search","msg":"request handled","request_id":"r-80935d65","method":"POST","path":"/v1/orders","status":200,"latency_ms":273}
+{"ts":"2026-11-12T00:00:03.009Z","level":"info","service":"auth","msg":"cache miss","request_id":"r-efb5cb3c","method":"GET","path":"/v1/login","status":201,"latency_ms":253}
+{"ts":"2026-11-12T00:00:03.013Z","level":"info","service":"payments","msg":"job finished","request_id":"r-4d8f650d","method":"GET","path":"/v1/login","status":200,"latency_ms":39}
+{"ts":"2026-11-12T00:00:03.030Z","level":"info","service":"worker","msg":"cache hit","request_id":"r-9460a940","method":"GET","path":"/v1/users/52884","status":204,"latency_ms":266}
+{"ts":"2026-11-12T00:00:03.036Z","level":"info","service":"api","msg":"order created","request_id":"r-756901d5","method":"PUT","path":"/v1/orders/43579","status":200,"latency_ms":2}
+{"ts":"2026-11-12T00:00:03.038Z","level":"info","service":"search","msg":"cache hit","request_id":"r-ee2aee27","method":"DELETE","path":"/v1/login","status":201,"latency_ms":12}
+{"ts":"2026-11-12T00:00:03.070Z","level":"info","service":"payments","msg":"cache miss","request_id":"r-9d94896d","method":"GET","path":"/v1/users/37075","status":204,"latency_ms":125}
+{"ts":"2026-11-12T00:00:03.095Z","level":"info","service":"api","msg":"cache hit","request_id":"r-ebf7b28c","method":"DELETE","path":"/healthz","status":200,"latency_ms":324}
+{"ts":"2026-11-12T00:00:03.105Z","level":"info","service":"search","msg":"request handled","request_id":"r-226acc16","method":"GET","path":"/v1/login","status":201,"latency_ms":20}
+{"ts":"2026-11-12T00:00:03.125Z","level":"info","service":"worker","msg":"user signed in","request_id":"r-d09cd969","method":"PUT","path":"/v1/search","status":200,"latency_ms":320}
+{"ts":"2026-11-12T00:00:03.153Z","level":"info","service":"api","msg":"cache hit","request_id":"r-4d6cc512","method":"GET","path":"/healthz","status":200,"latency_ms":268}
+{"ts":"2026-11-12T00:00:03.165Z","level":"info","service":"search","msg":"cache hit","request_id":"r-94dfc0c0","method":"PUT","path":"/v1/users/97994","status":200,"latency_ms":94}
+{"ts":"2026-11-12T00:00:03.169Z","level":"info","service":"api","msg":"job finished","request_id":"r-f74c3980","method":"GET","path":"/v1/login","status":201,"latency_ms":91}
+{"ts":"2026-11-12T00:00:03.207Z","level":"info","service":"worker","msg":"order created","request_id":"r-25004c30","method":"GET","path":"/v1/orders/87045","status":200,"latency_ms":352}
+{"ts":"2026-11-12T00:00:03.241Z","level":"info","service":"auth","msg":"user signed in","request_id":"r-bfb36ef4","method":"PUT","path":"/healthz","status":200,"latency_ms":236}
+{"ts":"2026-11-12T00:00:03.272Z","level":"info","service":"worker","msg":"connection opened","request_id":"r-433bc9f9","method":"PUT","path":"/v1/users/1845","status":200,"latency_ms":54}
+{"ts":"2026-11-12T00:00:03.282Z","level":"info","service":"auth","msg":"job finished","request_id":"r-757e8a63","method":"POST","path":"/v1/login","status":200,"latency_ms":391}
+{"ts":"2026-11-12T00:00:03.307Z","level":"info","service":"payments","msg":"user signed in","request_id":"r-cf05cc46","method":"POST","path":"/v1/users/77139","status":200,"latency_ms":63}
+{"ts":"2026-11-12T00:00:03.332Z","level":"debug","service":"api","msg":"pool stats","request_id":"r-67eb62d9","method":"PUT","path":"/v1/users/29400","status":200,"latency_ms":119}
+{"ts":"2026-11-12T00:00:03.355Z","level":"info","service":"worker","msg":"connection opened","request_id":"r-aa8280d3","method":"DELETE","path":"/healthz","status":304,"latency_ms":329}
+{"ts":"2026-11-12T00:00:03.363Z","level":"debug","service":"search","msg":"db query","request_id":"r-39e3905f","method":"GET","path":"/v1/login","status":200,"latency_ms":234}
+{"ts":"2026-11-12T00:00:03.376Z","level":"info","service":"payments","msg":"connection opened","request_id":"r-fcfaac81","method":"GET","path":"/v1/orders/29636","status":204,"latency_ms":355}
+{"ts":"2026-11-12T00:00:03.397Z","level":"info","service":"api","msg":"connection opened","request_id":"r-f8729707","method":"GET","path":"/v1/orders","status":200,"latency_ms":83}
+{"ts":"2026-11-12T00:00:03.424Z","level":"info","service":"search","msg":"request handled","request_id":"r-01c95886","method":"POST","path":"/v1/search","status":200,"latency_ms":67}
+{"ts":"2026-11-12T00:00:03.449Z","level":"info","service":"search","msg":"user signed in","request_id":"r-0777c3fa","method":"GET","path":"/v1/users/68324","status":201,"latency_ms":171}
+{"ts":"2026-11-12T00:00:03.482Z","level":"info","service":"worker","msg":"order created","request_id":"r-b540ae6f","method":"GET","path":"/v1/orders/84497","status":201,"latency_ms":239}
+{"ts":"2026-11-12T00:00:03.495Z","level":"warn","service":"api","msg":"queue depth high","request_id":"r-ff6350a6","method":"PUT","path":"/v1/users/41492","status":404,"latency_ms":221}
+{"ts":"2026-11-12T00:00:03.510Z","level":"info","service":"worker","msg":"job finished","request_id":"r-13a29b33","method":"GET","path":"/healthz","status":204,"latency_ms":240}
+{"ts":"2026-11-12T00:00:03.542Z","level":"info","service":"worker","msg":"cache miss","request_id":"r-66fac705","method":"GET","path":"/v1/orders/98255","status":200,"latency_ms":201}
+{"ts":"2026-11-12T00:00:03.566Z","level":"info","service":"search","msg":"job finished","request_id":"r-7c79d800","method":"GET","path":"/v1/orders","status":200,"latency_ms":46}
+{"ts":"2026-11-12T00:00:03.596Z","level":"warn","service":"api","msg":"queue depth high","request_id":"r-e8a0d46d","method":"GET","path":"/v1/search","status":429,"latency_ms":151}
+{"ts":"2026-11-12T00:00:03.626Z","level":"info","service":"api","msg":"cache miss","request_id":"r-77d2e39b","method":"POST","path":"/v1/pay","status":201,"latency_ms":13}
+{"ts":"2026-11-12T00:00:03.642Z","level":"info","service":"api","msg":"order created","request_id":"r-58e19780","method":"GET","path":"/v1/pay","status":200,"latency_ms":39}
+{"ts":"2026-11-12T00:00:03.669Z","level":"info","service":"api","msg":"user signed in","request_id":"r-ed9f1740","method":"GET","path":"/healthz","status":201,"latency_ms":256}
+{"ts":"2026-11-12T00:00:03.693Z","level":"info","service":"payments","msg":"cache miss","request_id":"r-8814d93d","method":"GET","path":"/v1/orders/75322","status":200,"latency_ms":124}
+{"ts":"2026-11-12T00:00:03.699Z","level":"info","service":"api","msg":"connection opened","request_id":"r-35ddfc65","method":"DELETE","path":"/v1/search","status":200,"latency_ms":108}
+{"ts":"2026-11-12T00:00:03.726Z","level":"info","service":"payments","msg":"job finished","request_id":"r-733da58b","method":"DELETE","path":"/healthz","status":200,"latency_ms":45}
+{"ts":"2026-11-12T00:00:03.728Z","level":"info","service":"search","msg":"cache miss","request_id":"r-5eae4112","method":"GET","path":"/v1/orders/26599","status":204,"latency_ms":238}
+{"ts":"2026-11-12T00:00:03.755Z","level":"info","service":"auth","msg":"cache hit","request_id":"r-1038417f","method":"GET","path":"/healthz","status":200,"latency_ms":145}
+{"ts":"2026-11-12T00:00:03.769Z","level":"info","service":"auth","msg":"order created","request_id":"r-5e44984c","method":"POST","path":"/v1/pay","status":204,"latency_ms":321}
+{"ts":"2026-11-12T00:00:03.774Z","level":"warn","service":"search","msg":"token near expiry","request_id":"r-f0cc3bc3","method":"GET","path":"/v1/search","status":200,"latency_ms":358}
+{"ts":"2026-11-12T00:00:03.799Z","level":"warn","service":"search","msg":"deprecated header","request_id":"r-8eb61659","method":"GET","path":"/v1/orders","status":200,"latency_ms":351}
+{"ts":"2026-11-12T00:00:03.825Z","level":"info","service":"api","msg":"connection opened","request_id":"r-5b0b7f13","method":"DELETE","path":"/v1/login","status":201,"latency_ms":193}
+{"ts":"2026-11-12T00:00:03.853Z","level":"info","service":"worker","msg":"cache hit","request_id":"r-094e4504","method":"GET","path":"/v1/orders/41252","status":200,"latency_ms":254}
+{"ts":"2026-11-12T00:00:03.873Z","level":"info","service":"auth","msg":"user signed in","request_id":"r-a8c5f626","method":"POST","path":"/v1/orders/60578","status":200,"latency_ms":121}
+{"ts":"2026-11-12T00:00:03.884Z","level":"info","service":"api","msg":"cache miss","request_id":"r-2e97505b","method":"POST","path":"/v1/orders/66014","status":204,"latency_ms":197}
+{"ts":"2026-11-12T00:00:03.904Z","level":"info","service":"search","msg":"request handled","request_id":"r-bcc82d29","method":"GET","path":"/v1/users/87311","status":200,"latency_ms":344}
+{"ts":"2026-11-12T00:00:03.931Z","level":"warn","service":"api","msg":"deprecated header","request_id":"r-46890499","method":"GET","path":"/v1/login","status":404,"latency_ms":48}
+{"ts":"2026-11-12T00:00:03.933Z","level":"info","service":"search","msg":"connection opened","request_id":"r-b17bb29c","method":"GET","path":"/v1/orders","status":200,"latency_ms":6}
+{"ts":"2026-11-12T00:00:03.959Z","level":"info","service":"payments","msg":"job finished","request_id":"r-7450dab2","method":"DELETE","path":"/v1/search","status":200,"latency_ms":316}
+{"ts":"2026-11-12T00:00:03.959Z","level":"info","service":"search","msg":"cache hit","request_id":"r-77926edc","method":"POST","path":"/v1/login","status":200,"latency_ms":237}
+{"ts":"2026-11-12T00:00:03.971Z","level":"info","service":"auth","msg":"order created","request_id":"r-546cd3ab","method":"PUT","path":"/v1/orders","status":204,"latency_ms":28}
+{"ts":"2026-11-12T00:00:03.975Z","level":"info","service":"search","msg":"cache miss","request_id":"r-1adfbb33","method":"DELETE","path":"/v1/orders/70764","status":201,"latency_ms":239}
+{"ts":"2026-11-12T00:00:04.015Z","level":"debug","service":"api","msg":"span exported","request_id":"r-7daea9d3","method":"PUT","path":"/v1/pay","status":200,"latency_ms":311}
+{"ts":"2026-11-12T00:00:04.038Z","level":"debug","service":"payments","msg":"db query","request_id":"r-c2b9d793","method":"GET","path":"/v1/login","status":200,"latency_ms":47}
+{"ts":"2026-11-12T00:00:04.058Z","level":"info","service":"worker","msg":"user signed in","request_id":"r-b8c5d69b","method":"GET","path":"/v1/search","status":201,"latency_ms":152}
+{"ts":"2026-11-12T00:00:04.083Z","level":"info","service":"api","msg":"connection opened","request_id":"r-3d2910d9","method":"DELETE","path":"/v1/pay","status":201,"latency_ms":210}
+{"ts":"2026-11-12T00:00:04.114Z","level":"debug","service":"auth","msg":"config reloaded","request_id":"r-f0801406","method":"GET","path":"/v1/users/78301","status":201,"latency_ms":34}
+{"ts":"2026-11-12T00:00:04.147Z","level":"info","service":"search","msg":"connection opened","request_id":"r-267150b8","method":"DELETE","path":"/v1/orders","status":201,"latency_ms":380}
+{"ts":"2026-11-12T00:00:04.162Z","level":"info","service":"search","msg":"user signed in","request_id":"r-1712f439","method":"DELETE","path":"/v1/pay","status":304,"latency_ms":59}
+{"ts":"2026-11-12T00:00:04.174Z","level":"warn","service":"api","msg":"queue depth high","request_id":"r-fa017bc5","method":"PUT","path":"/healthz","status":404,"latency_ms":386}
+{"ts":"2026-11-12T00:00:04.205Z","level":"debug","service":"payments","msg":"pool stats","request_id":"r-d8b689a4","method":"GET","path":"/v1/orders/80375","status":200,"latency_ms":273}
+{"ts":"2026-11-12T00:00:04.226Z","level":"info","service":"api","msg":"request handled","request_id":"r-26feb245","method":"PUT","path":"/v1/pay","status":304,"latency_ms":231}
+{"ts":"2026-11-12T00:00:04.255Z","level":"debug","service":"auth","msg":"retry scheduled","request_id":"r-31afc451","method":"GET","path":"/healthz","status":200,"latency_ms":132}
+{"ts":"2026-11-12T00:00:04.294Z","level":"info","service":"search","msg":"cache hit","request_id":"r-a94cad3e","method":"GET","path":"/v1/login","status":200,"latency_ms":27}
+{"ts":"2026-11-12T00:00:04.325Z","level":"info","service":"api","msg":"cache hit","request_id":"r-84d7972c","method":"PUT","path":"/v1/search","status":304,"latency_ms":326}
+{"ts":"2026-11-12T00:00:04.335Z","level":"info","service":"auth","msg":"cache miss","request_id":"r-a5b8c0ea","method":"DELETE","path":"/v1/orders","status":200,"latency_ms":5}
+{"ts":"2026-11-12T00:00:04.340Z","level":"info","service":"api","msg":"request handled","request_id":"r-12db058a","method":"GET","path":"/v1/search","status":200,"latency_ms":186}
+{"ts":"2026-11-12T00:00:04.344Z","level":"info","service":"payments","msg":"order created","request_id":"r-8df70122","method":"GET","path":"/v1/search","status":200,"latency_ms":197}
+{"ts":"2026-11-12T00:00:04.375Z","level":"info","service":"payments","msg":"connection opened","request_id":"r-15e5015e","method":"POST","path":"/v1/orders/97058","status":200,"latency_ms":335}
+{"ts":"2026-11-12T00:00:04.411Z","level":"info","service":"search","msg":"job finished","request_id":"r-36813703","method":"GET","path":"/v1/search","status":201,"latency_ms":147}
+{"ts":"2026-11-12T00:00:04.442Z","level":"info","service":"search","msg":"request handled","request_id":"r-e5d615bc","method":"DELETE","path":"/v1/users/34827","status":200,"latency_ms":293}
+{"ts":"2026-11-12T00:00:04.482Z","level":"info","service":"auth","msg":"job finished","request_id":"r-a542a536","method":"GET","path":"/v1/search","status":304,"latency_ms":143}
+{"ts":"2026-11-12T00:00:04.483Z","level":"info","service":"search","msg":"user signed in","request_id":"r-03037318","method":"POST","path":"/v1/orders","status":200,"latency_ms":280}
+{"ts":"2026-11-12T00:00:04.497Z","level":"info","service":"worker","msg":"job finished","request_id":"r-af16b6c6","method":"DELETE","path":"/v1/users/21266","status":304,"latency_ms":79}
+{"ts":"2026-11-12T00:00:04.504Z","level":"info","service":"search","msg":"job finished","request_id":"r-5819a76e","method":"GET","path":"/v1/pay","status":200,"latency_ms":324}
+{"ts":"2026-11-12T00:00:04.529Z","level":"info","service":"search","msg":"connection opened","request_id":"r-4ffbf680","method":"GET","path":"/v1/pay","status":204,"latency_ms":159}
+{"ts":"2026-11-12T00:00:04.538Z","level":"info","service":"payments","msg":"job finished","request_id":"r-c2c3df1f","method":"GET","path":"/v1/orders","status":204,"latency_ms":217}
+{"ts":"2026-11-12T00:00:04.554Z","level":"info","service":"worker","msg":"cache miss","request_id":"r-c1e27a40","method":"PUT","path":"/v1/login","status":200,"latency_ms":369}
+{"ts":"2026-11-12T00:00:04.582Z","level":"info","service":"worker","msg":"order created","request_id":"r-9f758b93","method":"PUT","path":"/v1/users/2872","status":304,"latency_ms":384}
+{"ts":"2026-11-12T00:00:04.620Z","level":"info","service":"search","msg":"order created","request_id":"r-b053e2f3","method":"GET","path":"/v1/pay","status":201,"latency_ms":244}
+{"ts":"2026-11-12T00:00:04.637Z","level":"info","service":"worker","msg":"order created","request_id":"r-b30f18e8","method":"GET","path":"/v1/search","status":200,"latency_ms":271}
+{"ts":"2026-11-12T00:00:04.658Z","level":"info","service":"auth","msg":"cache hit","request_id":"r-fb56d03d","method":"DELETE","path":"/v1/pay","status":200,"latency_ms":320}
+{"ts":"2026-11-12T00:00:04.693Z","level":"info","service":"payments","msg":"connection opened","request_id":"r-6cfdc5c8","method":"DELETE","path":"/healthz","status":200,"latency_ms":179}
+{"ts":"2026-11-12T00:00:04.701Z","level":"debug","service":"search","msg":"db query","request_id":"r-8d12c997","method":"GET","path":"/v1/pay","status":200,"latency_ms":138}
+{"ts":"2026-11-12T00:00:04.714Z","level":"info","service":"api","msg":"job finished","request_id":"r-2e43518e","method":"DELETE","path":"/healthz","status":201,"latency_ms":179}
+{"ts":"2026-11-12T00:00:04.727Z","level":"info","service":"search","msg":"job finished","request_id":"r-75798ff9","method":"GET","path":"/v1/login","status":200,"latency_ms":135}
+{"ts":"2026-11-12T00:00:04.735Z","level":"info","service":"api","msg":"connection opened","request_id":"r-1f9033b9","method":"DELETE","path":"/v1/search","status":200,"latency_ms":147}
+{"ts":"2026-11-12T00:00:04.750Z","level":"info","service":"api","msg":"cache hit","request_id":"r-b1f2c71d","method":"POST","path":"/v1/orders","status":304,"latency_ms":237}
+{"ts":"2026-11-12T00:00:04.786Z","level":"info","service":"auth","msg":"order created","request_id":"r-898c81d5","method":"POST","path":"/v1/login","status":201,"latency_ms":226}
+{"ts":"2026-11-12T00:00:04.797Z","level":"info","service":"auth","msg":"cache hit","request_id":"r-568451da","method":"GET","path":"/v1/pay","status":201,"latency_ms":143}
+{"ts":"2026-11-12T00:00:04.809Z","level":"info","service":"api","msg":"user signed in","request_id":"r-fe5aeedb","method":"DELETE","path":"/v1/users/41089","status":204,"latency_ms":41}
+{"ts":"2026-11-12T00:00:04.813Z","level":"info","service":"payments","msg":"job finished","request_id":"r-f60da938","method":"DELETE","path":"/healthz","status":204,"latency_ms":263}
+{"ts":"2026-11-12T00:00:04.852Z","level":"info","service":"worker","msg":"user signed in","request_id":"r-178ccab8","method":"GET","path":"/v1/orders/72305","status":200,"latency_ms":379}
+{"ts":"2026-11-12T00:00:04.877Z","level":"debug","service":"api","msg":"db query","request_id":"r-96d9e734","method":"GET","path":"/v1/users/81595","status":304,"latency_ms":3}
+{"ts":"2026-11-12T00:00:04.906Z","level":"info","service":"api","msg":"user signed in","request_id":"r-49627694","method":"PUT","path":"/v1/orders/96872","status":200,"latency_ms":59}
+{"ts":"2026-11-12T00:00:04.921Z","level":"info","service":"payments","msg":"job finished","request_id":"r-27b701ed","method":"POST","path":"/v1/search","status":201,"latency_ms":226}
+{"ts":"2026-11-12T00:00:04.945Z","level":"warn","service":"worker","msg":"deprecated header","request_id":"r-9c1a4baf","method":"GET","path":"/v1/users/75134","status":429,"latency_ms":118}
+{"ts":"2026-11-12T00:00:04.978Z","level":"info","service":"auth","msg":"cache hit","request_id":"r-ba89fec6","method":"GET","path":"/v1/orders/59564","status":200,"latency_ms":350}
+{"ts":"2026-11-12T00:00:04.999Z","level":"info","service":"auth","msg":"order created","request_id":"r-d4b8f7e0","method":"GET","path":"/v1/login","status":200,"latency_ms":140}
+{"ts":"2026-11-12T00:00:05.008Z","level":"info","service":"search","msg":"user signed in","request_id":"r-30b7cdb7","method":"GET","path":"/v1/pay","status":201,"latency_ms":154}
+{"ts":"2026-11-12T00:00:05.020Z","level":"info","service":"api","msg":"user signed in","request_id":"r-13fcac76","method":"GET","path":"/healthz","status":200,"latency_ms":43}
+{"ts":"2026-11-12T00:00:05.031Z","level":"info","service":"search","msg":"request handled","request_id":"r-5bb62435","method":"DELETE","path":"/v1/orders","status":201,"latency_ms":197}
+{"ts":"2026-11-12T00:00:05.033Z","level":"info","service":"auth","msg":"connection opened","request_id":"r-14e4782b","method":"DELETE","path":"/v1/search","status":200,"latency_ms":362}
+{"ts":"2026-11-12T00:00:05.055Z","level":"info","service":"worker","msg":"user signed in","request_id":"r-373a5e3c","method":"GET","path":"/v1/users/54686","status":200,"latency_ms":229}
+{"ts":"2026-11-12T00:00:05.073Z","level":"info","service":"search","msg":"user signed in","request_id":"r-76391c37","method":"GET","path":"/v1/search","status":201,"latency_ms":243}
+{"ts":"2026-11-12T00:00:05.099Z","level":"info","service":"payments","msg":"cache miss","request_id":"r-68280169","method":"DELETE","path":"/v1/users/12175","status":200,"latency_ms":398}
+{"ts":"2026-11-12T00:00:05.134Z","level":"info","service":"api","msg":"request handled","request_id":"r-eeed05f3","method":"GET","path":"/v1/pay","status":200,"latency_ms":128}
+{"ts":"2026-11-12T00:00:05.151Z","level":"warn","service":"payments","msg":"queue depth high","request_id":"r-0dfd40e9","method":"POST","path":"/v1/login","status":404,"latency_ms":97}
+{"ts":"2026-11-12T00:00:05.178Z","level":"info","service":"api","msg":"cache hit","request_id":"r-c755ad72","method":"PUT","path":"/v1/users/85588","status":200,"latency_ms":122}
+{"ts":"2026-11-12T00:00:05.203Z","level":"info","service":"payments","msg":"request handled","request_id":"r-d389dd56","method":"POST","path":"/v1/search","status":201,"latency_ms":189}
+{"ts":"2026-11-12T00:00:05.211Z","level":"warn","service":"auth","msg":"slow request","request_id":"r-f5c1588a","method":"POST","path":"/v1/search","status":200,"latency_ms":99}
+{"ts":"2026-11-12T00:00:05.239Z","level":"debug","service":"auth","msg":"db query","request_id":"r-1e3f5f4d","method":"GET","path":"/healthz","status":200,"latency_ms":0}
+{"ts":"2026-11-12T00:00:05.250Z","level":"info","service":"api","msg":"cache miss","request_id":"r-7d8f437f","method":"GET","path":"/v1/orders/34530","status":201,"latency_ms":314}
+{"ts":"2026-11-12T00:00:05.286Z","level":"warn","service":"api","msg":"deprecated header","request_id":"r-ca6fd2ec","method":"GET","path":"/v1/login","status":429,"latency_ms":21}
+{"ts":"2026-11-12T00:00:05.294Z","level":"info","service":"auth","msg":"user signed in","request_id":"r-44da9a5f","method":"DELETE","path":"/v1/login","status":304,"latency_ms":105}
+{"ts":"2026-11-12T00:00:05.328Z","level":"warn","service":"search","msg":"token near expiry","request_id":"r-14a91da6","method":"POST","path":"/healthz","status":200,"latency_ms":325}
+{"ts":"2026-11-12T00:00:05.329Z","level":"debug","service":"search","msg":"config reloaded","request_id":"r-39989280","method":"PUT","path":"/v1/login","status":200,"latency_ms":161}
+{"ts":"2026-11-12T00:00:05.357Z","level":"info","service":"auth","msg":"connection opened","request_id":"r-3cd1a500","method":"GET","path":"/v1/pay","status":304,"latency_ms":339}
+{"ts":"2026-11-12T00:00:05.360Z","level":"info","service":"auth","msg":"request handled","request_id":"r-c5443ac2","method":"GET","path":"/v1/login","status":304,"latency_ms":310}
+{"ts":"2026-11-12T00:00:05.376Z","level":"info","service":"api","msg":"job finished","request_id":"r-ab8e3107","method":"DELETE","path":"/v1/orders/95908","status":200,"latency_ms":182}
+{"ts":"2026-11-12T00:00:05.383Z","level":"info","service":"search","msg":"connection opened","request_id":"r-60a91a59","method":"POST","path":"/v1/orders/81956","status":200,"latency_ms":258}
+{"ts":"2026-11-12T00:00:05.414Z","level":"debug","service":"api","msg":"span exported","request_id":"r-bf8e7d52","method":"GET","path":"/v1/search","status":200,"latency_ms":100}
+{"ts":"2026-11-12T00:00:05.442Z","level":"warn","service":"auth","msg":"retrying upstream","request_id":"r-16c4fdae","method":"GET","path":"/v1/login","status":200,"latency_ms":194}
+{"ts":"2026-11-12T00:00:05.449Z","level":"debug","service":"worker","msg":"db query","request_id":"r-feb3d16d","method":"POST","path":"/healthz","status":304,"latency_ms":35}
+{"ts":"2026-11-12T00:00:05.463Z","level":"debug","service":"auth","msg":"config reloaded","request_id":"r-8bac132e","method":"GET","path":"/v1/pay","status":304,"latency_ms":377}
+{"ts":"2026-11-12T00:00:05.488Z","level":"info","service":"payments","msg":"request handled","request_id":"r-fd071bf4","method":"GET","path":"/v1/login","status":304,"latency_ms":223}
+{"ts":"2026-11-12T00:00:05.496Z","level":"info","service":"api","msg":"order created","request_id":"r-7ba71ddc","method":"GET","path":"/v1/orders/53216","status":200,"latency_ms":185}
+{"ts":"2026-11-12T00:00:05.498Z","level":"debug","service":"search","msg":"config reloaded","request_id":"r-ed7714fe","method":"POST","path":"/v1/orders/61980","status":200,"latency_ms":104}
+{"ts":"2026-11-12T00:00:05.520Z","level":"info","service":"auth","msg":"job finished","request_id":"r-f789a3d5","method":"GET","path":"/v1/login","status":200,"latency_ms":109}
+{"ts":"2026-11-12T00:00:05.543Z","level":"info","service":"auth","msg":"job finished","request_id":"r-02a8d9d5","method":"GET","path":"/v1/login","status":204,"latency_ms":345}
+{"ts":"2026-11-12T00:00:05.568Z","level":"info","service":"payments","msg":"user signed in","request_id":"r-a5d725b4","method":"POST","path":"/v1/login","status":200,"latency_ms":197}
+{"ts":"2026-11-12T00:00:05.584Z","level":"info","service":"worker","msg":"order created","request_id":"r-8fd55c66","method":"PUT","path":"/v1/users/88390","status":200,"latency_ms":37}
+{"ts":"2026-11-12T00:00:05.610Z","level":"info","service":"api","msg":"order created","request_id":"r-60d4a8bc","method":"GET","path":"/v1/orders/99397","status":204,"latency_ms":281}
+{"ts":"2026-11-12T00:00:05.637Z","level":"debug","service":"payments","msg":"pool stats","request_id":"r-9250d5e9","method":"GET","path":"/v1/pay","status":200,"latency_ms":156}
+{"ts":"2026-11-12T00:00:05.653Z","level":"info","service":"api","msg":"connection opened","request_id":"r-ca9213bb","method":"GET","path":"/v1/users/17481","status":200,"latency_ms":76}
+{"ts":"2026-11-12T00:00:05.672Z","level":"info","service":"worker","msg":"connection opened","request_id":"r-8d1056f8","method":"GET","path":"/v1/pay","status":201,"latency_ms":252}
+{"ts":"2026-11-12T00:00:05.681Z","level":"info","service":"search","msg":"connection opened","request_id":"r-1ce4b895","method":"GET","path":"/v1/orders","status":200,"latency_ms":31}
+{"ts":"2026-11-12T00:00:05.710Z","level":"debug","service":"search","msg":"retry scheduled","request_id":"r-3419ff34","method":"GET","path":"/v1/login","status":204,"latency_ms":335}
+{"ts":"2026-11-12T00:00:05.731Z","level":"info","service":"worker","msg":"request handled","request_id":"r-39c41f5f","method":"POST","path":"/v1/pay","status":304,"latency_ms":271}
+{"ts":"2026-11-12T00:00:05.770Z","level":"warn","service":"worker","msg":"queue depth high","request_id":"r-c4d2b80b","method":"POST","path":"/v1/orders/84330","status":429,"latency_ms":370}
+{"ts":"2026-11-12T00:00:05.797Z","level":"info","service":"payments","msg":"user signed in","request_id":"r-1f1224c3","method":"POST","path":"/v1/users/55235","status":200,"latency_ms":364}
+{"ts":"2026-11-12T00:00:05.835Z","level":"info","service":"auth","msg":"connection opened","request_id":"r-e79b7f0c","method":"GET","path":"/v1/pay","status":201,"latency_ms":346}
+{"ts":"2026-11-12T00:00:05.869Z","level":"info","service":"auth","msg":"request handled","request_id":"r-a82a76ca","method":"GET","path":"/v1/orders/56205","status":204,"latency_ms":70}
+{"ts":"2026-11-12T00:00:05.899Z","level":"info","service":"search","msg":"order created","request_id":"r-75796acc","method":"GET","path":"/v1/pay","status":304,"latency_ms":203}
+{"ts":"2026-11-12T00:00:05.903Z","level":"warn","service":"worker","msg":"slow request","request_id":"r-65139ce5","method":"GET","path":"/v1/orders/51737","status":429,"latency_ms":209}
+{"ts":"2026-11-12T00:00:05.905Z","level":"info","service":"api","msg":"connection opened","request_id":"r-592a65f8","method":"PUT","path":"/v1/login","status":204,"latency_ms":278}
+{"ts":"2026-11-12T00:00:05.910Z","level":"debug","service":"search","msg":"span exported","request_id":"r-0a395bd7","method":"PUT","path":"/v1/orders","status":200,"latency_ms":253}
+{"ts":"2026-11-12T00:00:05.944Z","level":"info","service":"search","msg":"user signed in","request_id":"r-c396b6d8","method":"DELETE","path":"/v1/login","status":304,"latency_ms":215}
+{"ts":"2026-11-12T00:00:05.976Z","level":"info","service":"api","msg":"request handled","request_id":"r-1a64ec8c","method":"GET","path":"/healthz","status":304,"latency_ms":63}
+{"ts":"2026-11-12T00:00:06.013Z","level":"info","service":"api","msg":"connection opened","request_id":"r-0f9226be","method":"GET","path":"/v1/pay","status":204,"latency_ms":265}
+{"ts":"2026-11-12T00:00:06.053Z","level":"info","service":"search","msg":"job finished","request_id":"r-33c10530","method":"GET","path":"/v1/login","status":304,"latency_ms":201,"auth":"user1531@example.com"}
+{"ts":"2026-11-12T00:00:06.073Z","level":"info","service":"worker","msg":"job finished","request_id":"r-df5f538d","method":"POST","path":"/v1/users/10849","status":200,"latency_ms":78}
+{"ts":"2026-11-12T00:00:06.103Z","level":"info","service":"api","msg":"user signed in","request_id":"r-fe6b95de","method":"POST","path":"/v1/pay","status":200,"latency_ms":389}
+{"ts":"2026-11-12T00:00:06.128Z","level":"info","service":"worker","msg":"cache miss","request_id":"r-02bc9ce8","method":"DELETE","path":"/v1/search","status":200,"latency_ms":335}
+{"ts":"2026-11-12T00:00:06.144Z","level":"info","service":"payments","msg":"cache miss","request_id":"r-0f3df696","method":"DELETE","path":"/v1/users/82030","status":201,"latency_ms":240}
+{"ts":"2026-11-12T00:00:06.161Z","level":"info","service":"api","msg":"user signed in","request_id":"r-14c75bc4","method":"POST","path":"/v1/orders/83133","status":201,"latency_ms":23}
+{"ts":"2026-11-12T00:00:06.192Z","level":"info","service":"worker","msg":"cache hit","request_id":"r-8b3c7e6a","method":"PUT","path":"/healthz","status":200,"latency_ms":209}
+{"ts":"2026-11-12T00:00:06.204Z","level":"debug","service":"search","msg":"retry scheduled","request_id":"r-1e5d843d","method":"POST","path":"/v1/search","status":204,"latency_ms":237}
+{"ts":"2026-11-12T00:00:06.241Z","level":"info","service":"api","msg":"job finished","request_id":"r-041bebb3","method":"DELETE","path":"/v1/orders/57570","status":304,"latency_ms":238}
+{"ts":"2026-11-12T00:00:06.246Z","level":"warn","service":"api","msg":"slow request","request_id":"r-acef591a","method":"GET","path":"/v1/pay","status":200,"latency_ms":299}
+{"ts":"2026-11-12T00:00:06.286Z","level":"debug","service":"payments","msg":"config reloaded","request_id":"r-97617f30","method":"PUT","path":"/v1/orders/95435","status":201,"latency_ms":397}
+{"ts":"2026-11-12T00:00:06.322Z","level":"info","service":"payments","msg":"cache miss","request_id":"r-70bc4d5c","method":"DELETE","path":"/v1/login","status":200,"latency_ms":301}
+{"ts":"2026-11-12T00:00:06.362Z","level":"info","service":"payments","msg":"order created","request_id":"r-4929c205","method":"PUT","path":"/healthz","status":204,"latency_ms":293}
+{"ts":"2026-11-12T00:00:06.398Z","level":"info","service":"worker","msg":"cache miss","request_id":"r-2aa169ef","method":"DELETE","path":"/v1/pay","status":200,"latency_ms":313}
+{"ts":"2026-11-12T00:00:06.427Z","level":"info","service":"auth","msg":"order created","request_id":"r-4c1d26aa","method":"GET","path":"/v1/orders","status":204,"latency_ms":344}
+{"ts":"2026-11-12T00:00:06.433Z","level":"info","service":"auth","msg":"job finished","request_id":"r-9c98ab6c","method":"GET","path":"/v1/search","status":204,"latency_ms":366}
+{"ts":"2026-11-12T00:00:06.468Z","level":"info","service":"worker","msg":"cache miss","request_id":"r-be44eb47","method":"DELETE","path":"/v1/orders","status":204,"latency_ms":110}
+{"ts":"2026-11-12T00:00:06.497Z","level":"info","service":"auth","msg":"cache miss","request_id":"r-3fe8f50b","method":"GET","path":"/v1/search","status":200,"latency_ms":250}
+{"ts":"2026-11-12T00:00:06.526Z","level":"info","service":"payments","msg":"cache miss","request_id":"r-9ee1b69d","method":"GET","path":"/v1/search","status":200,"latency_ms":273}
+{"ts":"2026-11-12T00:00:06.541Z","level":"info","service":"api","msg":"request handled","request_id":"r-a40166e8","method":"GET","path":"/v1/pay","status":200,"latency_ms":267}
+{"ts":"2026-11-12T00:00:06.548Z","level":"error","service":"payments","msg":"deadlock detected","request_id":"r-eba51267","method":"DELETE","path":"/v1/pay","status":500,"latency_ms":25124}
+{"ts":"2026-11-12T00:00:06.575Z","level":"warn","service":"payments","msg":"token near expiry","request_id":"r-30b14379","method":"GET","path":"/v1/login","status":429,"latency_ms":263}
+{"ts":"2026-11-12T00:00:06.609Z","level":"error","service":"search","msg":"payment declined","request_id":"r-4925c8bc","method":"GET","path":"/v1/users/9764","status":500,"latency_ms":7591}
+{"ts":"2026-11-12T00:00:06.624Z","level":"warn","service":"worker","msg":"queue depth high","request_id":"r-8c8905b5","method":"PUT","path":"/v1/search","status":404,"latency_ms":139}
+{"ts":"2026-11-12T00:00:06.640Z","level":"error","service":"payments","msg":"deadlock detected","request_id":"r-a8b1eba7","method":"POST","path":"/v1/users/11541","status":504,"latency_ms":17925}
+{"ts":"2026-11-12T00:00:06.669Z","level":"error","service":"api","msg":"invalid signature","request_id":"r-75f0257d","method":"GET","path":"/v1/pay","status":503,"latency_ms":19368}
+{"ts":"2026-11-12T00:00:06.699Z","level":"warn","service":"auth","msg":"slow request","request_id":"r-93bf0dc7","method":"PUT","path":"/v1/orders","status":200,"latency_ms":41}
+{"ts":"2026-11-12T00:00:06.729Z","level":"warn","service":"search","msg":"token near expiry","request_id":"r-c04cf006","method":"POST","path":"/v1/search","status":429,"latency_ms":153}
+{"ts":"2026-11-12T00:00:06.766Z","level":"info","service":"api","msg":"connection opened","request_id":"r-94482228","method":"DELETE","path":"/v1/users/15488","status":201,"latency_ms":286}
+{"ts":"2026-11-12T00:00:06.796Z","level":"info","service":"search","msg":"connection opened","request_id":"r-d0e65f5f","method":"GET","path":"/v1/search","status":200,"latency_ms":79}
+{"ts":"2026-11-12T00:00:06.800Z","level":"info","service":"auth","msg":"connection opened","request_id":"r-4fd676fc","method":"DELETE","path":"/v1/search","status":200,"latency_ms":68}
+{"ts":"2026-11-12T00:00:06.801Z","level":"info","service":"payments","msg":"user signed in","request_id":"r-05c79825","method":"DELETE","path":"/v1/login","status":204,"latency_ms":37}
+{"ts":"2026-11-12T00:00:06.837Z","level":"debug","service":"auth","msg":"db query","request_id":"r-c4992aeb","method":"GET","path":"/v1/users/18665","status":304,"latency_ms":333}
+{"ts":"2026-11-12T00:00:06.871Z","level":"warn","service":"auth","msg":"token near expiry","request_id":"r-35746669","method":"GET","path":"/v1/orders/22993","status":200,"latency_ms":389}
+{"ts":"2026-11-12T00:00:06.878Z","level":"info","service":"worker","msg":"connection opened","request_id":"r-f5648fda","method":"DELETE","path":"/v1/orders","status":200,"latency_ms":307}
+{"ts":"2026-11-12T00:00:06.913Z","level":"info","service":"search","msg":"connection opened","request_id":"r-0cf48386","method":"PUT","path":"/healthz","status":304,"latency_ms":192}
+{"ts":"2026-11-12T00:00:06.952Z","level":"info","service":"search","msg":"connection opened","request_id":"r-048861c8","method":"PUT","path":"/v1/orders/89852","status":200,"latency_ms":364}
+{"ts":"2026-11-12T00:00:06.971Z","level":"info","service":"worker","msg":"order created","request_id":"r-4f16c401","method":"GET","path":"/healthz","status":304,"latency_ms":254}
+{"ts":"2026-11-12T00:00:06.984Z","level":"info","service":"search","msg":"connection opened","request_id":"r-d4f08985","method":"GET","path":"/v1/pay","status":304,"latency_ms":210}
+{"ts":"2026-11-12T00:00:07.006Z","level":"info","service":"api","msg":"request handled","request_id":"r-58b17ebc","method":"POST","path":"/v1/pay","status":304,"latency_ms":133}
+{"ts":"2026-11-12T00:00:07.010Z","level":"info","service":"auth","msg":"user signed in","request_id":"r-34bc3983","method":"PUT","path":"/v1/orders/30268","status":200,"latency_ms":185}
+{"ts":"2026-11-12T00:00:07.020Z","level":"info","service":"auth","msg":"cache miss","request_id":"r-5eacecb4","method":"DELETE","path":"/v1/orders","status":304,"latency_ms":282}
+{"ts":"2026-11-12T00:00:07.047Z","level":"info","service":"search","msg":"cache miss","request_id":"r-ce104dc9","method":"GET","path":"/v1/orders/48199","status":200,"latency_ms":67}
+{"ts":"2026-11-12T00:00:07.066Z","level":"info","service":"api","msg":"request handled","request_id":"r-36a69b3c","method":"GET","path":"/v1/orders","status":200,"latency_ms":209}
+{"ts":"2026-11-12T00:00:07.090Z","level":"debug","service":"auth","msg":"db query","request_id":"r-b40cae9c","method":"GET","path":"/v1/pay","status":304,"latency_ms":108}
+{"ts":"2026-11-12T00:00:07.093Z","level":"info","service":"auth","msg":"cache hit","request_id":"r-75c5088d","method":"GET","path":"/v1/orders/10390","status":200,"latency_ms":262}
+{"ts":"2026-11-12T00:00:07.117Z","level":"info","service":"payments","msg":"user signed in","request_id":"r-95889bab","method":"GET","path":"/v1/pay","status":304,"latency_ms":368}
+{"ts":"2026-11-12T00:00:07.119Z","level":"info","service":"worker","msg":"order created","request_id":"r-fb72ff2c","method":"GET","path":"/v1/orders/45986","status":200,"latency_ms":335}
+{"ts":"2026-11-12T00:00:07.158Z","level":"info","service":"payments","msg":"request handled","request_id":"r-2d2ab8bb","method":"DELETE","path":"/v1/orders","status":204,"latency_ms":259}
+{"ts":"2026-11-12T00:00:07.178Z","level":"info","service":"auth","msg":"connection opened","request_id":"r-97b292ac","method":"PUT","path":"/v1/login","status":200,"latency_ms":204}
+{"ts":"2026-11-12T00:00:07.183Z","level":"debug","service":"search","msg":"pool stats","request_id":"r-28b44917","method":"GET","path":"/v1/users/47374","status":201,"latency_ms":264}
+{"ts":"2026-11-12T00:00:07.200Z","level":"debug","service":"worker","msg":"db query","request_id":"r-eb8a9ca2","method":"PUT","path":"/healthz","status":204,"latency_ms":356}
+{"ts":"2026-11-12T00:00:07.230Z","level":"info","service":"search","msg":"connection opened","request_id":"r-7c6abb7a","method":"POST","path":"/v1/orders/9440","status":200,"latency_ms":72}
+{"ts":"2026-11-12T00:00:07.242Z","level":"info","service":"payments","msg":"connection opened","request_id":"r-d1eff74e","method":"GET","path":"/v1/search","status":304,"latency_ms":175}
+{"ts":"2026-11-12T00:00:07.244Z","level":"debug","service":"worker","msg":"config reloaded","request_id":"r-c984d990","method":"GET","path":"/v1/pay","status":204,"latency_ms":334}
+{"ts":"2026-11-12T00:00:07.244Z","level":"warn","service":"payments","msg":"slow request","request_id":"r-fec7078c","method":"GET","path":"/v1/pay","status":404,"latency_ms":214}
+{"ts":"2026-11-12T00:00:07.250Z","level":"info","service":"payments","msg":"job finished","request_id":"r-00586d30","method":"PUT","path":"/v1/orders/37229","status":200,"latency_ms":110}
+{"ts":"2026-11-12T00:00:07.276Z","level":"info","service":"auth","msg":"connection opened","request_id":"r-b88c1561","method":"PUT","path":"/v1/orders/97618","status":304,"latency_ms":309}
+{"ts":"2026-11-12T00:00:07.299Z","level":"info","service":"api","msg":"connection opened","request_id":"r-3405160f","method":"DELETE","path":"/v1/users/16237","status":201,"latency_ms":199}
+{"ts":"2026-11-12T00:00:07.304Z","level":"info","service":"worker","msg":"cache hit","request_id":"r-5bc387a9","method":"PUT","path":"/v1/pay","status":201,"latency_ms":89}
+{"ts":"2026-11-12T00:00:07.332Z","level":"info","service":"worker","msg":"order created","request_id":"r-1ee7d456","method":"GET","path":"/v1/orders","status":204,"latency_ms":328}
+{"ts":"2026-11-12T00:00:07.339Z","level":"info","service":"payments","msg":"connection opened","request_id":"r-8cb4e9f0","method":"PUT","path":"/v1/orders/77665","status":200,"latency_ms":176}
+{"ts":"2026-11-12T00:00:07.369Z","level":"debug","service":"api","msg":"config reloaded","request_id":"r-057eda7c","method":"PUT","path":"/v1/orders/24395","status":304,"latency_ms":44}
+{"ts":"2026-11-12T00:00:07.393Z","level":"info","service":"worker","msg":"connection opened","request_id":"r-4376a6e8","method":"DELETE","path":"/v1/users/31659","status":204,"latency_ms":219}
+{"ts":"2026-11-12T00:00:07.415Z","level":"info","service":"api","msg":"cache hit","request_id":"r-66576130","method":"GET","path":"/v1/users/51048","status":304,"latency_ms":113}
+{"ts":"2026-11-12T00:00:07.455Z","level":"info","service":"payments","msg":"user signed in","request_id":"r-76478446","method":"GET","path":"/v1/search","status":204,"latency_ms":346}

@@ -137,7 +137,12 @@ pub const READ_ONLY: &[&str] = &[LOG_FILES, LOG_STATS, LOG_SEARCH, LOG_LINES, LO
 // ---------------------------------------------------------------------------------------------
 
 pub const LOG_OPEN_DIALOG: &str = "log.open_dialog";
-pub const LOG_OPEN_DIALOG_PARAMS: &[Param] = &[];
+/// With `path`, opens that file without asking (drag and drop, recent files, `.ui` scripts);
+/// without, the window asks with the native dialog. (`path` and `follow`: added by the ui stream.)
+pub const LOG_OPEN_DIALOG_PARAMS: &[Param] = &[
+    Param::string("path").about("open this file without asking; absent: show the open dialog"),
+    Param::bool("follow").about("follow the file as it grows (default false)"),
+];
 
 pub const LOG_CLOSE: &str = "log.close";
 pub const LOG_CLOSE_PARAMS: &[Param] = &[FILE];

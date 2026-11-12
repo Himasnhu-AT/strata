@@ -1,6 +1,7 @@
 [package]
 name = "strata"
 description = "A log viewer for huge files that you and your AI agent can read together"
+default-run = "strata"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
