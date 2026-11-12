@@ -1,8 +1,16 @@
-//! The detail pane: the selected line pretty-printed as JSON (a JSON line as written, other
-//! formats as their parsed fields), with Copy line, Copy JSON and Filter by this value.
+//! The detail pane. A JSON line is pretty-printed as written, with Copy line, Copy JSON and
+//! Filter by this value. Any other line (plain text, logfmt, syslog …) shows the raw line as
+//! written, then its parsed parts as a small table (time, level, service, message, `key=value`
+//! fields), with Copy line and Filter by; there is no JSON block for it.
 //!
-//! A click on a line of the JSON picks that field for "Filter by"; the default is the service
-//! (or the first field).
+//! **Multi-line entries.** The core indexes physical lines, so a stack trace's lines are rows of
+//! their own. In timestamped text a line with no time and no level is a *continuation* of the
+//! entry above it ([`is_continuation`]): the table marks it (a guide in the time column, dimmed
+//! text, the entry's error tint), the pane of an entry shows its continuation lines under the
+//! raw line, and the pane of a continuation line names the entry it belongs to.
+//!
+//! A click on a line of the JSON (or a row of the parts table) picks that field for "Filter
+//! by"; the default is the service (or the first field).
 
 use std::ops::Range;
 use std::sync::Arc;
@@ -219,11 +227,111 @@ pub fn as_json(line: &str, kind: FormatKind, file: &LogFile) -> JsonView {
     out
 }
 
+/// Lines looked at above a continuation line for its entry, and below an entry for its
+/// continuation lines.
+pub const MAX_ENTRY_LINES: u64 = 200;
+/// Bytes of continuation lines shown under an entry.
+const MAX_TRACE_BYTES: usize = 64 << 10;
+
+/// Whether a parsed line continues the entry above it (a stack trace line): in timestamped text,
+/// a line with neither a time nor a level.
+pub fn is_continuation(kind: FormatKind, parsed: &Parsed) -> bool {
+    kind == FormatKind::Timestamped && parsed.time.is_none() && parsed.level.is_none()
+}
+
+fn parse_at(file: &LogFile, kind: FormatKind, line: u64) -> Option<Parsed> {
+    let l = file.line(line, 512)?;
+    Some(strata_core::formats::parser(kind).parse(&l.bytes, file.names()))
+}
+
+/// The line that starts the entry `line` continues (itself when it is not a continuation line),
+/// looking back at most [`MAX_ENTRY_LINES`]; `None` when no entry start is that close.
+pub fn entry_start(file: &LogFile, kind: FormatKind, line: u64) -> Option<u64> {
+    let mut l = line;
+    loop {
+        let p = parse_at(file, kind, l)?;
+        if !is_continuation(kind, &p) {
+            return Some(l);
+        }
+        if l == 0 || line - l >= MAX_ENTRY_LINES {
+            return None;
+        }
+        l -= 1;
+    }
+}
+
+/// The continuation lines right after entry `line` (a stack trace), capped.
+pub fn continuation_lines(file: &LogFile, kind: FormatKind, line: u64) -> Vec<String> {
+    let mut out = Vec::new();
+    let mut bytes = 0usize;
+    let mut l = line.saturating_add(1);
+    while l < file.lines() && l - line <= MAX_ENTRY_LINES && bytes < MAX_TRACE_BYTES {
+        let Some(raw) = file.line(l, strata_core::limits::MAX_LINE_BYTES) else { break };
+        let p = strata_core::formats::parser(kind).parse(&raw.bytes, file.names());
+        if !is_continuation(kind, &p) || raw.bytes.iter().all(u8::is_ascii_whitespace) {
+            break;
+        }
+        let text = raw.text().into_owned();
+        bytes += text.len();
+        out.push(text);
+        l += 1;
+    }
+    out
+}
+
+/// One row of the parts table: the name, the value as shown, and the value "Filter by" uses
+/// (`None`: not a filter, like the time or the message).
+#[derive(Clone, Debug, Default, PartialEq)]
+pub struct Part {
+    pub name: String,
+    pub value: String,
+    pub filter: Option<String>,
+}
+
+/// A line that is not JSON: as written (with its continuation lines) and its parsed parts.
+#[derive(Clone, Debug, Default, PartialEq)]
+pub struct PartsView {
+    /// The line as written, then the continuation lines of its entry, one per line.
+    pub raw: String,
+    /// How many continuation lines `raw` holds.
+    pub trace: usize,
+    pub parts: Vec<Part>,
+    /// The entry (line number, 0-based) this continuation line belongs to.
+    pub continues: Option<u64>,
+}
+
+/// `line`'s parsed parts: time, level, the service, the message, then the other fields.
+pub fn parts(line: &str, kind: FormatKind, file: &LogFile) -> Vec<Part> {
+    let parsed = strata_core::formats::parser(kind).parse(line.as_bytes(), file.names());
+    let mut out = Vec::new();
+    if let Some(t) = parsed.time {
+        out.push(Part { name: "time".into(), value: t.to_rfc3339(), filter: None });
+    }
+    if let Some(l) = parsed.level {
+        out.push(Part { name: "level".into(), value: l.as_str().into(), filter: Some(l.as_str().into()) });
+    }
+    let fields = fields(line, &parsed, file);
+    let service = fields.iter().position(|(n, _)| super::table::is_service(n));
+    if let Some((n, v)) = service.and_then(|i| fields.get(i)) {
+        out.push(Part { name: n.clone(), value: v.clone(), filter: Some(v.clone()) });
+    }
+    let message = span_text(line, parsed.message).filter(|m| !m.trim().is_empty()).unwrap_or(line);
+    out.push(Part { name: "message".into(), value: message.replace('\t', "    "), filter: None });
+    for (i, (n, v)) in fields.into_iter().enumerate() {
+        if Some(i) != service {
+            out.push(Part { name: n, value: v.clone(), filter: Some(v) });
+        }
+    }
+    out
+}
+
 /// What the pane keeps between frames.
 #[derive(Default)]
 pub struct DetailState {
     key: Option<(u64, u64, usize, FormatKind)>,
     view: JsonView,
+    /// Set for a line that is not JSON (the pane shows it instead of `view`).
+    plain: Option<PartsView>,
     header: String,
     title: String,
     revision: u64,
@@ -246,7 +354,7 @@ impl DetailState {
             return;
         };
         let text = l.text();
-        self.view = as_json(&text, kind, file);
+        let json = (kind == FormatKind::JsonLines).then(|| pretty_json(&text)).flatten();
         let parsed = strata_core::formats::parser(kind).parse(&l.bytes, file.names());
         let mut parts = Vec::new();
         if let Some(t) = parsed.time {
@@ -263,13 +371,50 @@ impl DetailState {
             parts.push(format!("cut at {}", fmt::bytes(l.bytes.len() as u64)));
         }
         self.title = format!("Line {}", fmt::thousands(line + 1));
+        self.picked = None;
+        if let Some(view) = json {
+            self.view = view;
+            self.plain = None;
+            self.picked =
+                self.view.fields.iter().position(|f| f.as_ref().is_some_and(|(n, _)| super::table::is_service(n))).or_else(|| {
+                    self.view.fields.iter().position(|f| f.as_ref().is_some_and(|(n, _)| !matches!(n.as_str(), "time" | "ts" | "level")))
+                });
+        } else {
+            self.view = JsonView::default();
+            let mut view = PartsView { raw: text.replace('\t', "    "), ..PartsView::default() };
+            if is_continuation(kind, &parsed) {
+                view.continues = entry_start(file, kind, line).filter(|&e| e != line);
+                if let Some(e) = view.continues {
+                    parts.push(format!("continues line {}", fmt::thousands(e + 1)));
+                }
+            } else {
+                view.parts = self::parts(&text, kind, file);
+                for t in continuation_lines(file, kind, line) {
+                    view.raw.push('\n');
+                    view.raw.push_str(&t.replace('\t', "    "));
+                    view.trace += 1;
+                }
+                if view.trace > 0 {
+                    parts.push(format!("{} more {}", view.trace, if view.trace == 1 { "line" } else { "lines" }));
+                }
+            }
+            self.picked = view
+                .parts
+                .iter()
+                .position(|p| p.filter.is_some() && super::table::is_service(&p.name))
+                .or_else(|| view.parts.iter().position(|p| p.filter.is_some() && p.name != "level"));
+            self.plain = Some(view);
+        }
         self.header = parts.join(" · ");
-        self.picked = self
-            .view
-            .fields
-            .iter()
-            .position(|f| f.as_ref().is_some_and(|(n, _)| super::table::is_service(n)))
-            .or_else(|| self.view.fields.iter().position(|f| f.as_ref().is_some_and(|(n, _)| !matches!(n.as_str(), "time" | "ts" | "level"))));
+    }
+
+    /// The (field, value) "Filter by" uses.
+    fn picked_filter(&self) -> Option<(String, String)> {
+        let i = self.picked?;
+        match &self.plain {
+            Some(v) => v.parts.get(i).and_then(|p| Some((p.name.clone(), p.filter.clone()?))),
+            None => self.view.fields.get(i).cloned().flatten(),
+        }
     }
 }
 
@@ -294,13 +439,13 @@ pub fn show(ui: &mut egui::Ui, cx: &mut Cx<'_, StrataDoc>, st: &mut DetailState,
         automation::register(ui, &header, "strata.detail.summary", &st.header, Role::Label);
         ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
             ui.add_space(t.space.xl);
-            if let Some((field, value)) = st.picked.and_then(|i| st.view.fields.get(i).cloned().flatten()) {
+            if let Some((field, value)) = st.picked_filter() {
                 let label = format!("Filter by {field}");
                 if Button::new("strata.detail.filter", &label).size(Size::Sm).show(ui).on_hover_text(format!("{field} = {value}")).clicked() {
                     cx.dispatch(ids::DETAIL_FILTER_BY_VALUE, json!({"file": file.id().0, "field": field, "value": value}));
                 }
             }
-            if Button::new("strata.detail.copy_json", "Copy JSON").size(Size::Sm).show(ui).clicked() {
+            if st.plain.is_none() && Button::new("strata.detail.copy_json", "Copy JSON").size(Size::Sm).show(ui).clicked() {
                 cx.dispatch(ids::DETAIL_COPY_JSON, json!({}));
             }
             if Button::new("strata.detail.copy_line", "Copy line").size(Size::Sm).variant(Variant::Secondary).show(ui).clicked() {
@@ -311,6 +456,10 @@ pub fn show(ui: &mut egui::Ui, cx: &mut Cx<'_, StrataDoc>, st: &mut DetailState,
     let r = ui.max_rect();
     ui.painter().hline(r.x_range(), ui.cursor().top(), egui::Stroke::new(1.0, t.separator));
     ui.add_space(t.space.sm);
+    if st.plain.is_some() {
+        plain_body(ui, &t, st);
+        return;
+    }
     let marks: Vec<Range<usize>> = st.picked.and_then(|i| st.view.line_range(i)).filter(|r| !r.is_empty()).into_iter().collect();
     egui::Frame::new().inner_margin(egui::Margin { left: t.space.xl as i8, right: t.space.md as i8, top: 0, bottom: 0 }).show(ui, |ui| {
         let out =
@@ -321,6 +470,110 @@ pub fn show(ui: &mut egui::Ui, cx: &mut Cx<'_, StrataDoc>, st: &mut DetailState,
             st.picked = Some(l);
         }
     });
+}
+
+/// A line that is not JSON: the raw line (and its stack trace) on the left, the parts table on
+/// the right (stacked when the pane is narrow). Both stay inside the pane's height.
+fn plain_body(ui: &mut egui::Ui, t: &ashlar::ui::tokens::Tokens, st: &mut DetailState) {
+    let Some(view) = &st.plain else { return };
+    let mono = egui::FontId::monospace(t.type_scale.mono);
+    let row_h = ui.fonts_mut(|f| f.row_height(&mono)) + 4.0;
+    let avail = ui.available_rect_before_wrap();
+    ui.allocate_rect(avail, egui::Sense::hover());
+    let inner = egui::Rect::from_min_max(
+        egui::pos2(avail.left() + t.space.xl, avail.top()),
+        egui::pos2(avail.right() - t.space.md, avail.bottom() - t.space.sm),
+    );
+    if inner.width() < 40.0 || inner.height() < 20.0 {
+        return;
+    }
+    let gap = t.space.lg;
+    let (raw_rect, side_rect) = if inner.width() >= 560.0 {
+        // the parts want room for a full time (`2026-11-12T00:00:00.742Z`) beside its name
+        let side_w = (inner.width() * 0.42).clamp(300.0, 440.0);
+        let split = (inner.right() - side_w - gap).round();
+        (
+            egui::Rect::from_min_max(inner.min, egui::pos2(split, inner.bottom())),
+            egui::Rect::from_min_max(egui::pos2(split + gap, inner.top()), inner.max),
+        )
+    } else {
+        let split = inner.top() + (inner.height() * 0.45).round();
+        (
+            egui::Rect::from_min_max(inner.min, egui::pos2(inner.right(), split)),
+            egui::Rect::from_min_max(egui::pos2(inner.left(), split + gap), inner.max),
+        )
+    };
+    // the raw line, as written, with its continuation lines
+    let mut raw_ui = ui.new_child(egui::UiBuilder::new().max_rect(raw_rect).layout(egui::Layout::top_down(egui::Align::Min)));
+    let pad = t.space.sm;
+    egui::Frame::new().fill(t.surface.sunken).corner_radius(t.radius.sm).inner_margin(egui::Margin::same(pad as i8)).show(&mut raw_ui, |ui| {
+        ui.set_width(ui.available_width());
+        let lines = view.raw.lines().count().max(1) as f32;
+        let h = (lines * row_h).min(raw_rect.height() - pad * 2.0).max(row_h);
+        CodeView::new("strata.detail.raw", &view.raw).lang(None).revision(st.revision).line_numbers(false).wrap(true).max_height(h).show(ui);
+    });
+    // the parts (or, for a continuation line, the entry it belongs to)
+    let mut side = ui.new_child(egui::UiBuilder::new().max_rect(side_rect).layout(egui::Layout::top_down(egui::Align::Min)));
+    let ui = &mut side;
+    if let Some(e) = view.continues {
+        let note = format!("Part of the entry that starts at line {} (a stack trace or another multi-line message).", fmt::thousands(e + 1));
+        let r = ui.add(egui::Label::new(egui::RichText::new(&note).color(t.text.secondary)).wrap());
+        automation::register(ui, &r, "strata.detail.continues", &note, Role::Label);
+        return;
+    }
+    if view.parts.is_empty() {
+        return;
+    }
+    let name_w = view.parts.iter().map(|p| p.name.chars().count()).max().unwrap_or(4).clamp(4, 16) as f32 * (t.type_scale.mono * 0.62) + t.space.lg;
+    let mut clicked = None;
+    egui::ScrollArea::vertical().id_salt("strata.detail.parts").auto_shrink([false, false]).max_height(side_rect.height()).show(ui, |ui| {
+        for (i, p) in view.parts.iter().enumerate() {
+            let top = ui.cursor().top();
+            let full = ui.available_width();
+            let bg = ui.painter().add(egui::Shape::Noop);
+            let resp = ui
+                .horizontal_top(|ui| {
+                    ui.add_space(t.space.xs);
+                    ui.allocate_ui_with_layout(egui::vec2(name_w, row_h), egui::Layout::left_to_right(egui::Align::Center), |ui| {
+                        ui.set_min_size(egui::vec2(name_w, row_h));
+                        ui.add(
+                            egui::Label::new(egui::RichText::new(&p.name).font(mono.clone()).color(t.text.secondary)).selectable(false).truncate(),
+                        );
+                    });
+                    let color = if p.name == "level" { super::theme::level_color(t, strata_core::Level::parse(&p.value)) } else { t.text.primary };
+                    ui.allocate_ui_with_layout(
+                        egui::vec2(ui.available_width() - t.space.xs, row_h),
+                        egui::Layout::left_to_right(egui::Align::Center).with_main_wrap(true),
+                        |ui| {
+                            ui.add(egui::Label::new(egui::RichText::new(&p.value).font(mono.clone()).color(color)).selectable(false).wrap());
+                        },
+                    );
+                })
+                .response;
+            let row =
+                egui::Rect::from_min_max(egui::pos2(resp.rect.left(), top), egui::pos2(resp.rect.left() + full, resp.rect.bottom().max(top + row_h)));
+            let id = format!("strata.detail.part.{}", p.name);
+            let sense = if p.filter.is_some() { egui::Sense::click() } else { egui::Sense::hover() };
+            let hit = ui.interact(row, ui.make_persistent_id(&id), sense);
+            let fill = if st.picked == Some(i) {
+                Some(super::theme::tint(t.accent, 34))
+            } else if hit.hovered() && p.filter.is_some() {
+                Some(super::theme::tint(t.text.primary, 12))
+            } else {
+                None
+            };
+            if let Some(fill) = fill {
+                ui.painter().set(bg, egui::Shape::rect_filled(row, t.radius.sm, fill));
+            }
+            automation::register(ui, &hit, &id, &format!("{}: {}", p.name, p.value), Role::Label);
+            if hit.clicked() {
+                clicked = Some(i);
+            }
+        }
+    });
+    if clicked.is_some() {
+        st.picked = clicked;
+    }
 }
 
 #[cfg(test)]

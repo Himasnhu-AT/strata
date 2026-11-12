@@ -6,24 +6,24 @@
 - menu "Bookmarks" [id=menu.5]
 - menu "Agent" [id=menu.6]
 - status "Status bar" [id=strata.status]
-  - status "360 lines" [id=strata.status.lines]
+  - status "629 lines" [id=strata.status.lines]
   - status "64 KB" [id=strata.status.size]
-  - status "JSON lines" [id=strata.status.format]
+  - status "Timestamped text" [id=strata.status.format]
   - status "● following" [id=strata.status.follow]
   - status "built with ashlar" [id=strata.status.ashlar]
 - searchbox "Search  ⌘F" [id=strata.toolbar.search] [value=""]
 - checkbox "Regular expression" [id=strata.toolbar.regex] [unchecked]
 - checkbox "Match case" [id=strata.toolbar.case] [unchecked]
 - checkbox "Whole word" [id=strata.toolbar.word] [unchecked]
-- checkbox "Error 13" [id=strata.toolbar.level.error] [value="13"] [checked]
-- checkbox "Warn 32" [id=strata.toolbar.level.warn] [value="32"] [checked]
-- checkbox "Info 271" [id=strata.toolbar.level.info] [value="271"] [checked]
-- checkbox "Debug 44" [id=strata.toolbar.level.debug] [value="44"] [checked]
+- checkbox "Error 14" [id=strata.toolbar.level.error] [value="14"] [checked]
+- checkbox "Warn 40" [id=strata.toolbar.level.warn] [value="40"] [checked]
+- checkbox "Info 485" [id=strata.toolbar.level.info] [value="485"] [checked]
+- checkbox "Debug 69" [id=strata.toolbar.level.debug] [value="69"] [checked]
 - textbox "Filter" [id=strata.toolbar.filter_field] [value=""]
 - checkbox "● Following" [id=strata.toolbar.follow] [checked]
-- list "Files, bookmarks and filters" [id=strata.sidebar] [value="payments-api.jsonl"]
+- list "Files, bookmarks and filters" [id=strata.sidebar] [value="payments-api.log"]
   - button "Files" [id=strata.sidebar.section.0] [value="1"] [selected]
-  - listitem "payments-api.jsonl" [id=strata.sidebar.section.0.item.0] [value="64 KB"] [selected]
+  - listitem "payments-api.log" [id=strata.sidebar.section.0.item.0] [value="64 KB"] [selected]
   - button "Bookmarks" [id=strata.sidebar.section.1] [value="0"] [selected]
   - button "Saved filters" [id=strata.sidebar.section.2] [value="0"] [selected]
   - button "Recent" [id=strata.sidebar.section.3] [value="0"] [selected]
@@ -44,7 +44,7 @@
     - group
     - columnheader "Message" [id=strata.table.header.4]
     - group
-  - listitem "Line 1, info, 00:00:00.030, request handled" [id=strata.table.row.0]
+  - listitem "Line 1, info, 00:00:00.030, DELETE /v1/users/17808 200 in 305 ms request_id=r-a3…" [id=strata.table.row.0]
     - cell
       - label "1"
     - cell
@@ -54,8 +54,8 @@
     - cell
       - label "auth"
     - cell
-      - label "request handled"
-  - listitem "Line 2, info, 00:00:00.059, connection opened" [id=strata.table.row.1]
+      - label "DELETE /v1/users/17808 200 in 305 ms request_id=r-a31d6efe"
+  - listitem "Line 2, info, 00:00:00.059, connection opened request_id=r-bfa03020 status=200 l…" [id=strata.table.row.1]
     - cell
       - label "2"
     - cell
@@ -65,8 +65,8 @@
     - cell
       - label "worker"
     - cell
-      - label "connection opened"
-  - listitem "Line 3, info, 00:00:00.084, user signed in" [id=strata.table.row.2]
+      - label "connection opened request_id=r-bfa03020 status=200 latency_ms=126"
+  - listitem "Line 3, info, 00:00:00.084, user signed in user=u-7030 request_id=r-692242e6 sta…" [id=strata.table.row.2]
     - cell
       - label "3"
     - cell
@@ -76,8 +76,8 @@
     - cell
       - label "worker"
     - cell
-      - label "user signed in"
-  - listitem "Line 4, warn, 00:00:00.085, retrying upstream" [id=strata.table.row.3]
+      - label "user signed in user=u-7030 request_id=r-692242e6 status=304 latency_ms=127"
+  - listitem "Line 4, warn, 00:00:00.085, retrying upstream request_id=r-e1b156b6 status=429 l…" [id=strata.table.row.3]
     - cell
       - label "4"
     - cell
@@ -87,8 +87,8 @@
     - cell
       - label "api"
     - cell
-      - label "retrying upstream"
-  - listitem "Line 5, info, 00:00:00.093, cache miss" [id=strata.table.row.4]
+      - label "retrying upstream request_id=r-e1b156b6 status=429 latency_ms=60"
+  - listitem "Line 5, info, 00:00:00.093, cache miss request_id=r-6306ba53 status=304 latency_…" [id=strata.table.row.4]
     - cell
       - label "5"
     - cell
@@ -98,8 +98,8 @@
     - cell
       - label "auth"
     - cell
-      - label "cache miss"
-  - listitem "Line 6, info, 00:00:00.125, request handled" [id=strata.table.row.5]
+      - label "cache miss request_id=r-6306ba53 status=304 latency_ms=395"
+  - listitem "Line 6, info, 00:00:00.125, POST /v1/pay 200 in 305 ms request_id=r-0017d554" [id=strata.table.row.5]
     - cell
       - label "6"
     - cell
@@ -109,8 +109,8 @@
     - cell
       - label "search"
     - cell
-      - label "request handled"
-  - listitem "Line 7, info, 00:00:00.164, user signed in" [id=strata.table.row.6]
+      - label "POST /v1/pay 200 in 305 ms request_id=r-0017d554"
+  - listitem "Line 7, info, 00:00:00.164, user signed in user=u-1484 request_id=r-f45c6f34 sta…" [id=strata.table.row.6]
     - cell
       - label "7"
     - cell
@@ -120,8 +120,8 @@
     - cell
       - label "auth"
     - cell
-      - label "user signed in"
-  - listitem "Line 8, info, 00:00:00.202, user signed in" [id=strata.table.row.7]
+      - label "user signed in user=u-1484 request_id=r-f45c6f34 status=204 latency_ms=26"
+  - listitem "Line 8, info, 00:00:00.202, user signed in user=u-5191 request_id=r-21253797 sta…" [id=strata.table.row.7]
     - cell
       - label "8"
     - cell
@@ -131,8 +131,8 @@
     - cell
       - label "api"
     - cell
-      - label "user signed in"
-  - listitem "Line 9, info, 00:00:00.233, order created" [id=strata.table.row.8]
+      - label "user signed in user=u-5191 request_id=r-21253797 status=304 latency_ms=317"
+  - listitem "Line 9, info, 00:00:00.233, order created order=9676 user=u-2676 amount=81.76 re…" [id=strata.table.row.8]
     - cell
       - label "9"
     - cell
@@ -142,8 +142,8 @@
     - cell
       - label "search"
     - cell
-      - label "order created"
-  - listitem "Line 10, info, 00:00:00.260, job finished" [id=strata.table.row.9]
+      - label "order created order=9676 user=u-2676 amount=81.76 request_id=r-cf9f0e9c status=2…"
+  - listitem "Line 10, info, 00:00:00.260, job finished request_id=r-16aa588c status=204 laten…" [id=strata.table.row.9]
     - cell
       - label "10"
     - cell
@@ -153,8 +153,8 @@
     - cell
       - label "payments"
     - cell
-      - label "job finished"
-  - listitem "Line 11, info, 00:00:00.283, order created" [id=strata.table.row.10]
+      - label "job finished request_id=r-16aa588c status=204 latency_ms=189"
+  - listitem "Line 11, info, 00:00:00.283, order created order=8015 user=u-5015 amount=20.15 r…" [id=strata.table.row.10]
     - cell
       - label "11"
     - cell
@@ -164,8 +164,8 @@
     - cell
       - label "api"
     - cell
-      - label "order created"
-  - listitem "Line 12, info, 00:00:00.318, order created" [id=strata.table.row.11]
+      - label "order created order=8015 user=u-5015 amount=20.15 request_id=r-da4c376f status=2…"
+  - listitem "Line 12, info, 00:00:00.318, order created order=9993 user=u-6993 amount=398.93 …" [id=strata.table.row.11]
     - cell
       - label "12"
     - cell
@@ -175,8 +175,8 @@
     - cell
       - label "payments"
     - cell
-      - label "order created"
-  - listitem "Line 13, info, 00:00:00.354, connection opened" [id=strata.table.row.12]
+      - label "order created order=9993 user=u-6993 amount=398.93 request_id=r-1723a519 status=…"
+  - listitem "Line 13, info, 00:00:00.354, connection opened request_id=r-ab49ce1c status=304 …" [id=strata.table.row.12]
     - cell
       - label "13"
     - cell
@@ -186,8 +186,8 @@
     - cell
       - label "search"
     - cell
-      - label "connection opened"
-  - listitem "Line 14, info, 00:00:00.372, user signed in" [id=strata.table.row.13]
+      - label "connection opened request_id=r-ab49ce1c status=304 latency_ms=197"
+  - listitem "Line 14, info, 00:00:00.372, user signed in user=u-6097 request_id=r-0bb14d89 st…" [id=strata.table.row.13]
     - cell
       - label "14"
     - cell
@@ -197,8 +197,8 @@
     - cell
       - label "worker"
     - cell
-      - label "user signed in"
-  - listitem "Line 15, info, 00:00:00.384, job finished" [id=strata.table.row.14]
+      - label "user signed in user=u-6097 request_id=r-0bb14d89 status=200 latency_ms=40"
+  - listitem "Line 15, info, 00:00:00.384, job finished request_id=r-7bc49185 status=201 laten…" [id=strata.table.row.14]
     - cell
       - label "15"
     - cell
@@ -208,8 +208,8 @@
     - cell
       - label "search"
     - cell
-      - label "job finished"
-  - row "Line 16, info, 00:00:00.385, order created" [offscreen]
+      - label "job finished request_id=r-7bc49185 status=201 latency_ms=53"
+  - row "Line 16, info, 00:00:00.385, order created order=8751 user=u-5751 amount=356.51 …" [offscreen]
     - cell [offscreen]
       - label "16" [offscreen]
     - cell [offscreen]
@@ -219,8 +219,8 @@
     - cell [offscreen]
       - label "search" [offscreen]
     - cell [offscreen]
-      - label "order created" [offscreen]
-  - row "Line 17, info, 00:00:00.403, request handled" [offscreen]
+      - label "order created order=8751 user=u-5751 amount=356.51 request_id=r-9534c9ef status=…" [offscreen]
+  - row "Line 17, info, 00:00:00.403, GET /v1/login 201 in 20 ms request_id=r-5cdf3862" [offscreen]
     - cell [offscreen]
       - label "17" [offscreen]
     - cell [offscreen]
@@ -230,5 +230,5 @@
     - cell [offscreen]
       - label "search" [offscreen]
     - cell [offscreen]
-      - label "request handled" [offscreen]
+      - label "GET /v1/login 201 in 20 ms request_id=r-5cdf3862" [offscreen]
   - scrollbar

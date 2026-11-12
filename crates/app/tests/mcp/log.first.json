@@ -20,8 +20,8 @@
     ],
     "level": "error",
     "line": 48213,
-    "message": "upstream timeout",
-    "text": "{\"ts\":\"2026-11-12T14:02:07.118Z\",\"level\":\"error\",\"service\":\"payments\",\"msg\":\"upstream timeout\",\"request_id\":\"r-4821\",\"status\":502}",
+    "message": "upstream timeout request_id=r-4821 status=502",
+    "text": "2026-11-12 14:02:07.118 ERROR [payments] upstream timeout request_id=r-4821 status=502",
     "time": "2026-11-12T14:02:07.118Z"
   }
 }

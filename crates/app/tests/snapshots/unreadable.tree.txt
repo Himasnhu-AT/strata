@@ -6,8 +6,8 @@
 - menu "Bookmarks" [id=menu.5]
 - menu "Agent" [id=menu.6]
 - label "Drop a log file here" [id=strata.empty.title]
-- label "Any size. JSON lines, logfmt, syslog and plain text are detected automatically. …" [id=strata.empty.body]
-  - label "Any size. JSON lines, logfmt, syslog and plain text are detected "
+- label "Any size. Plain text logs, JSON lines, logfmt and syslog are detected automatica…" [id=strata.empty.body]
+  - label "Any size. Plain text logs, JSON lines, logfmt and syslog are detected "
   - label "automatically. .gz works too."
 - button "Open a file…  ⌘⇧O" [id=strata.empty.open]
 - label "Let Claude, Cursor or another agent read logs with you."

@@ -9,6 +9,11 @@
 //! agent's `view.goto`) moves the window so that line is in it. A filter keeps the first 10 M
 //! matching lines and says so.
 //!
+//! **Multi-line entries.** A stack trace's lines are rows of their own (the core indexes physical
+//! lines). A continuation line ([`detail::is_continuation`]) is marked: a guide in the time column
+//! ties it to the entry above, its text is dimmed with tabs kept as indentation, and it takes the
+//! error tint of an error entry, so a trace reads as one block under its ERROR line.
+//!
 //! **Columns.** `VirtualTable` has no column reorder or hide in 0.2: the table is rebuilt from the
 //! document's columns (`view.toggle_column`, `view.move_column`), offered by a right click on the
 //! header. Widths dragged in the header are saved with `view.resize_column` when the drag ends.
@@ -54,6 +59,8 @@ pub struct RowData {
     pub level: Option<Level>,
     pub message: String,
     pub fields: Vec<(String, String)>,
+    /// A line of a multi-line entry (a stack trace) after its first.
+    pub continuation: bool,
     /// What a screen reader says for the row.
     pub label: String,
 }
@@ -66,12 +73,16 @@ impl RowData {
         let text = l.text().into_owned();
         let parsed = strata_core::formats::parser(kind).parse(&l.bytes, file.names());
         let fields = detail::fields(&text, &parsed, file);
+        let continuation = detail::is_continuation(kind, &parsed);
         let message = text.get(parsed.message.start as usize..parsed.message.end as usize).filter(|m| !m.trim().is_empty()).unwrap_or(&text);
-        let mut message = message.replace(['\t', '\r'], " ");
+        let mut message = if continuation { message.replace('\t', "    ").replace('\r', " ") } else { message.replace(['\t', '\r'], " ") };
         if l.cut {
             message.push('…');
         }
         let mut label = format!("Line {}", line + 1);
+        if continuation {
+            label.push_str(", continued");
+        }
         if let Some(lv) = parsed.level {
             label.push_str(", ");
             label.push_str(lv.as_str());
@@ -82,7 +93,7 @@ impl RowData {
         }
         label.push_str(", ");
         label.push_str(message.get(..message.floor_char_boundary(200)).unwrap_or_default());
-        RowData { time: parsed.time, level: parsed.level, message, fields, label, text }
+        RowData { time: parsed.time, level: parsed.level, message, fields, continuation, label, text }
     }
 
     fn field(&self, name: &str) -> Option<&str> {
@@ -216,6 +227,19 @@ impl TableState {
             self.cache_key = Some(key);
         }
         Arc::clone(self.cache.entry(line).or_insert_with(|| Arc::new(RowData::read(file, kind, line))))
+    }
+
+    /// The level of the entry continuation line `line` belongs to (looking back a little).
+    fn entry_level(&mut self, file: &LogFile, kind: FormatKind, line: u64) -> Option<Level> {
+        let mut l = line;
+        for _ in 0..detail::MAX_ENTRY_LINES {
+            l = l.checked_sub(1)?;
+            let row = self.row(file, kind, l);
+            if !row.continuation {
+                return row.level;
+            }
+        }
+        None
     }
 
     /// Forget parsed rows (the file was truncated or reloaded).
@@ -372,10 +396,11 @@ pub fn show(ui: &mut egui::Ui, cx: &mut Cx<'_, StrataDoc>, st: &mut TableState, 
             let Some(col) = cols.get(c) else { return };
             let is_selected = Some(row) == selected_row;
             let hl = highlighted(line);
+            let level = if data.continuation { st.entry_level(&file, kind, line) } else { data.level };
             if !is_selected {
                 if hl.is_some() {
                     cell_background(ui, &t, theme::tint(t.accent, 26));
-                } else if matches!(data.level, Some(Level::Error | Level::Fatal)) {
+                } else if matches!(level, Some(Level::Error | Level::Fatal)) {
                     cell_background(ui, &t, theme::tint(t.status.danger, 20));
                 }
             }
@@ -395,6 +420,20 @@ pub fn show(ui: &mut egui::Ui, cx: &mut Cx<'_, StrataDoc>, st: &mut TableState, 
                     }
                     cell_text(ui, egui::RichText::new(fmt::thousands(line + 1)).font(mono(&t)).color(t.text.disabled));
                 }
+                "time" if data.continuation => {
+                    // a guide from the entry above: └ on the last line of the block, │ before
+                    let r = ui.max_rect();
+                    let x = r.left() + 4.0;
+                    let color = theme::tint(theme::level_color(&t, level), 150);
+                    let row_r = egui::Rect::from_x_y_ranges(r.x_range(), r.center().y - ROW_HEIGHT / 2.0..=r.center().y + ROW_HEIGHT / 2.0);
+                    let last = !st.row(&file, kind, line + 1).continuation;
+                    let p = ui.painter();
+                    let bottom = if last { row_r.center().y } else { row_r.bottom() };
+                    p.line_segment([egui::pos2(x, row_r.top()), egui::pos2(x, bottom)], egui::Stroke::new(1.0, color));
+                    if last {
+                        p.line_segment([egui::pos2(x, bottom), egui::pos2(x + 8.0, bottom)], egui::Stroke::new(1.0, color));
+                    }
+                }
                 "time" => {
                     let s = data.time.map(fmt::time_of_day).unwrap_or_default();
                     cell_text(ui, egui::RichText::new(s).font(mono(&t)).color(t.text.secondary));
@@ -408,7 +447,8 @@ pub fn show(ui: &mut egui::Ui, cx: &mut Cx<'_, StrataDoc>, st: &mut TableState, 
                         let tag = egui::RichText::new("AI").size(10.0).color(t.text.on_accent).background_color(t.accent);
                         ui.add(egui::Label::new(tag).selectable(false));
                     }
-                    let job = message_job(&t, &data.message, inp.matcher, t.text.primary);
+                    let color = if data.continuation { t.text.secondary } else { t.text.primary };
+                    let job = message_job(&t, &data.message, inp.matcher, color);
                     ui.add(egui::Label::new(job).selectable(false).truncate());
                 }
                 field => {

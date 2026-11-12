@@ -1,8 +1,8 @@
 //! Named scenes, one per screen and state of docs/DESIGN.md (`strata --scene NAME`,
 //! `Driver::scene`, MCP `ui_scene`). The names are frozen (lead); the setups are the `ui` stream's.
 //!
-//! Scenes open a small JSON-lines fixture (built into the binary, written to a temp folder) and
-//! index it inline, so the first frame is complete and the same every time.
+//! Scenes open a small plain-text `.log` fixture (built into the binary, written to a temp folder)
+//! and index it inline, so the first frame is complete and the same every time.
 
 use std::path::PathBuf;
 
@@ -13,11 +13,11 @@ use crate::commands::user;
 use crate::doc::{Actor, FilterChip, labels, view_keys};
 use crate::views::req::keys;
 
-/// The fixture every scene opens (360 lines of a small service mesh's logs, `cargo xtask
-/// fixtures --size 64K --format jsonl --seed 6`).
-pub const FIXTURE: &[u8] = include_bytes!("../tests/fixtures/payments.jsonl");
+/// The fixture every scene opens (629 lines of a small service mesh's plain-text logs, stack
+/// traces included: `cargo xtask fixtures --size 64K --seed 6`).
+pub const FIXTURE: &[u8] = include_bytes!("../tests/fixtures/payments.log");
 /// Its file name.
-pub const FIXTURE_NAME: &str = "payments-api.jsonl";
+pub const FIXTURE_NAME: &str = "payments-api.log";
 
 /// Every scene name, in docs/DESIGN.md order.
 pub const NAMES: &[&str] =
@@ -65,11 +65,14 @@ fn open_fixture(s: &mut S, share: f64) -> Option<strata_core::FileId> {
     Some(id)
 }
 
-/// The main window: the fixture with an error line selected and a search running.
+/// The main window: the fixture with an error line (with a stack trace) selected and a search
+/// running.
 fn main_window(s: &mut S) -> Option<strata_core::FileId> {
     let id = open_fixture(s, 1.0)?;
-    user::select(s, id, 33);
-    s.set_view_value(view_keys::SEARCH, json!({"file": id.0, "query": "timeout", "regex": false, "case": false, "whole_word": false}));
+    user::select(s, id, 34);
+    // show the stack trace under the selected line too
+    s.set_view(view_keys::SCROLL_TO, &40u64);
+    s.set_view_value(view_keys::SEARCH, json!({"file": id.0, "query": "deadlock", "regex": false, "case": false, "whole_word": false}));
     Some(id)
 }
 

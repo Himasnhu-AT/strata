@@ -1,8 +1,11 @@
 #![allow(clippy::unwrap_used, clippy::expect_used, clippy::panic)]
-//! Every agent (MCP) command against a small deterministic fixture (`fixture.jsonl`, 16 JSON
-//! lines with a few secrets), with golden values: through a headless session (what `strata-cli
-//! exec` and `strata-cli mcp` run), through the real `strata-cli mcp` over stdio, and as a `.ui`
-//! script of an agent session in the window (`agent-session.ui`).
+//! Every agent (MCP) command against a small deterministic fixture (`fixture.log`: 16 plain-text
+//! entries, one with a 3-line stack trace, a few secrets), with golden values: through a headless
+//! session (what `strata-cli exec` and `strata-cli mcp` run), through the real `strata-cli mcp`
+//! over stdio, and as a `.ui` script of an agent session in the window (`agent-session.ui`).
+//!
+//! `fixture.jsonl` holds the same 16 entries as JSON lines: the `jsonl` tests at the end keep
+//! JSON support covered.
 
 use std::io::{BufRead, BufReader, Write};
 use std::path::PathBuf;
@@ -21,9 +24,17 @@ use strata_core::{FileId, RedactKind, Redaction};
 /// The secrets in the fixture: none may reach an agent while redaction is on.
 const SECRETS: &[&str] = &["ana@example.com", "abcdef0123456789abcdef", "hunter2", "AKIAIOSFODNN7EXAMPLE"];
 
-fn fixture() -> PathBuf {
-    let p = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests").join("mcp").join("fixture.jsonl");
+fn fixture_named(name: &str) -> PathBuf {
+    let p = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests").join("mcp").join(name);
     std::fs::canonicalize(&p).unwrap_or(p)
+}
+
+fn fixture() -> PathBuf {
+    fixture_named("fixture.log")
+}
+
+fn fixture_jsonl() -> PathBuf {
+    fixture_named("fixture.jsonl")
 }
 
 fn fixture_bytes() -> u64 {
@@ -47,15 +58,15 @@ fn err(h: &mut Headless<StrataDoc>, id: &str, p: Value) -> String {
     }
 }
 
-const L6: &str = r#"{"ts":"2026-11-12T14:01:10.000Z","level":"info","service":"api","msg":"login ok","user":"[redacted:email]"}"#;
-const L7: &str = r#"{"ts":"2026-11-12T14:01:15.000Z","level":"debug","service":"api","msg":"auth header Authorization: Bearer [redacted:bearer]"}"#;
-const L8: &str = r#"{"ts":"2026-11-12T14:01:20.000Z","level":"info","service":"payments","msg":"charge created","request_id":"r-4820","status":201}"#;
-const L10: &str =
-    r#"{"ts":"2026-11-12T14:02:07.118Z","level":"error","service":"payments","msg":"upstream timeout","request_id":"r-4821","status":502}"#;
-const L11: &str = r#"{"ts":"2026-11-12T14:02:07.200Z","level":"error","service":"payments","msg":"retry failed: upstream timeout","request_id":"r-4821","status":502}"#;
-const L12: &str = r#"{"ts":"2026-11-12T14:02:08.000Z","level":"info","service":"api","msg":"db login","password":"[redacted:secret-field]"}"#;
-const L14: &str =
-    r#"{"ts":"2026-11-12T14:03:00.000Z","level":"error","service":"api","msg":"timeout calling payments","request_id":"r-4822","status":504}"#;
+const L6: &str = "2026-11-12 14:01:10.000 INFO  [api] login ok user=[redacted:email]";
+const L7: &str = "2026-11-12 14:01:15.000 DEBUG [api] auth header Authorization: Bearer [redacted:bearer]";
+const L8: &str = "2026-11-12 14:01:20.000 INFO  [payments] charge created request_id=r-4820 status=201";
+const L10: &str = "2026-11-12 14:02:07.118 ERROR [payments] upstream timeout request_id=r-4821 status=502";
+/// The first line of L10's stack trace.
+const L11: &str = "java.net.SocketTimeoutException: upstream timeout";
+const L14: &str = "2026-11-12 14:02:07.200 ERROR [payments] retry failed: upstream timeout request_id=r-4821 status=502";
+const L15: &str = "2026-11-12 14:02:08.000 INFO  [api] db login password=[redacted:secret-field]";
+const L17: &str = "2026-11-12 14:03:00.000 ERROR [api] timeout calling payments request_id=r-4822 status=504";
 
 fn f(name: &str, value: &str) -> Value {
     json!({"name": name, "value": value})
@@ -68,14 +79,17 @@ fn log_open_and_log_files() {
     let path = fixture().display().to_string();
     let indexing = json!({"state": "complete", "done_bytes": bytes, "total_bytes": bytes, "error": null});
     let opened = run(&mut h, ids::LOG_OPEN, json!({"path": fixture()}));
-    assert_eq!(opened, json!({"file": 1, "path": path, "bytes": bytes, "format": "jsonl", "lines": 16, "following": false, "indexing": indexing}));
+    assert_eq!(
+        opened,
+        json!({"file": 1, "path": path, "bytes": bytes, "format": "timestamped", "lines": 19, "following": false, "indexing": indexing})
+    );
     // the same path again shows the same file
     assert_eq!(run(&mut h, ids::LOG_OPEN, json!({"path": fixture()}))["file"], 1);
     let files = run(&mut h, ids::LOG_FILES, json!({}));
     let span = json!({"from": "2026-11-12T14:00:00.000Z", "to": "2026-11-12T14:04:00.000Z"});
     assert_eq!(
         files,
-        json!({"files": [{"file": 1, "path": path, "format": "jsonl", "bytes": bytes, "lines": 16, "time_span": span,
+        json!({"files": [{"file": 1, "path": path, "format": "timestamped", "bytes": bytes, "lines": 19, "time_span": span,
             "following": false, "active": true, "indexing": indexing}], "omitted": 0})
     );
     assert!(err(&mut h, ids::LOG_OPEN, json!({"path": "/no/such/strata.log"})).contains("no such file"));
@@ -88,35 +102,38 @@ fn log_lines_and_log_around() {
     let lines = run(&mut h, ids::LOG_LINES, json!({"from": 6, "count": 3}));
     assert_eq!(
         lines,
-        json!({"file": 1, "total_lines": 16, "omitted": 0, "lines": [
-            {"line": 6, "time": "2026-11-12T14:01:10.000Z", "level": "info", "message": "login ok", "text": L6, "cut": false,
+        json!({"file": 1, "total_lines": 19, "omitted": 0, "lines": [
+            {"line": 6, "time": "2026-11-12T14:01:10.000Z", "level": "info", "message": "login ok user=[redacted:email]", "text": L6, "cut": false,
              "fields": [f("service", "api"), f("user", "[redacted:email]")]},
             {"line": 7, "time": "2026-11-12T14:01:15.000Z", "level": "debug", "message": "auth header Authorization: Bearer [redacted:bearer]",
              "text": L7, "cut": false, "fields": [f("service", "api")]},
-            {"line": 8, "time": "2026-11-12T14:01:20.000Z", "level": "info", "message": "charge created", "text": L8, "cut": false,
-             "fields": [f("service", "payments"), f("request_id", "r-4820"), f("status", "201")]},
+            {"line": 8, "time": "2026-11-12T14:01:20.000Z", "level": "info", "message": "charge created request_id=r-4820 status=201", "text": L8,
+             "cut": false, "fields": [f("service", "payments"), f("request_id", "r-4820"), f("status", "201")]},
         ]})
     );
     // past the end: what is there, and how many were left out
-    let tail = run(&mut h, ids::LOG_LINES, json!({"from": 15, "count": 5}));
+    let tail = run(&mut h, ids::LOG_LINES, json!({"from": 18, "count": 5}));
     assert_eq!((tail["lines"].as_array().unwrap().len(), &tail["omitted"]), (2, &json!(3)));
     // over the cap: refused by the parameter schema
     assert!(h.execute(ids::LOG_LINES, json!({"from": 1, "count": 501})).is_err());
 
-    let around = run(&mut h, ids::LOG_AROUND, json!({"line": 12, "before": 1, "after": 0}));
+    let around = run(&mut h, ids::LOG_AROUND, json!({"line": 15, "before": 1, "after": 0}));
     assert_eq!(
         around,
-        json!({"file": 1, "line": 12, "lines": [
-            {"line": 11, "time": "2026-11-12T14:02:07.200Z", "level": "error", "message": "retry failed: upstream timeout", "text": L11,
-             "cut": false, "fields": [f("service", "payments"), f("request_id", "r-4821"), f("status", "502")]},
-            {"line": 12, "time": "2026-11-12T14:02:08.000Z", "level": "info", "message": "db login", "text": L12, "cut": false,
-             "fields": [f("service", "api"), f("password", "[redacted:secret-field]")]},
+        json!({"file": 1, "line": 15, "lines": [
+            {"line": 14, "time": "2026-11-12T14:02:07.200Z", "level": "error", "message": "retry failed: upstream timeout request_id=r-4821 status=502",
+             "text": L14, "cut": false, "fields": [f("service", "payments"), f("request_id", "r-4821"), f("status", "502")]},
+            {"line": 15, "time": "2026-11-12T14:02:08.000Z", "level": "info", "message": "db login password=[redacted:secret-field]", "text": L15,
+             "cut": false, "fields": [f("service", "api"), f("password", "[redacted:secret-field]")]},
         ]})
     );
+    // a stack trace line: no time, no level, the whole line is the message
+    let trace = run(&mut h, ids::LOG_AROUND, json!({"line": 11, "before": 0, "after": 0}));
+    assert_eq!(trace["lines"], json!([{"line": 11, "time": null, "level": null, "message": L11, "text": L11, "cut": false, "fields": []}]));
     // defaults: 10 before and after, clipped to the file
     let a = run(&mut h, ids::LOG_AROUND, json!({"line": 1}));
     assert_eq!(a["lines"].as_array().unwrap().len(), 11);
-    assert!(err(&mut h, ids::LOG_AROUND, json!({"line": 17})).contains("line 17 is past the end (16 lines indexed)"));
+    assert!(err(&mut h, ids::LOG_AROUND, json!({"line": 20})).contains("line 20 is past the end (19 lines indexed)"));
 }
 
 #[test]
@@ -127,13 +144,13 @@ fn view_changes_bookmarks_notes_and_agent_undo() {
         let id = d.take_id();
         d.file_mut(FileId(1)).unwrap().bookmarks.push(Bookmark { id, line: 0, name: "mine".into(), by: Actor::User, ..Bookmark::default() });
     });
-    let hl = run(&mut h, ids::VIEW_HIGHLIGHT, json!({"lines": [11, 10, 10], "note": "the 502s"}));
+    let hl = run(&mut h, ids::VIEW_HIGHLIGHT, json!({"lines": [14, 10, 10], "note": "the 502s"}));
     assert_eq!(hl, json!({"file": 1, "highlight": 3, "lines": 2, "omitted": 0}));
     assert_eq!(h.session().view::<u64>(view_keys::SCROLL_TO), Some(9));
     let bm = run(&mut h, ids::BOOKMARK_ADD, json!({"line": 10, "name": "first 502", "note": "payments upstream timed out here"}));
     assert_eq!(bm, json!({"file": 1, "bookmark": 4, "line": 10, "name": "first 502"}));
-    let named = run(&mut h, ids::BOOKMARK_ADD, json!({"line": 14}));
-    assert_eq!(named["name"], "Line 14");
+    let named = run(&mut h, ids::BOOKMARK_ADD, json!({"line": 17}));
+    assert_eq!(named["name"], "Line 17");
     assert_eq!(run(&mut h, ids::AGENT_NOTE, json!({"text": "payments timed out"})), json!({"note": 6}));
     assert_eq!(run(&mut h, ids::VIEW_GOTO, json!({"line": 10})), json!({"file": 1, "line": 10}));
     assert_eq!(h.session().view::<u64>(view_keys::SELECTED_LINE), Some(9));
@@ -143,7 +160,7 @@ fn view_changes_bookmarks_notes_and_agent_undo() {
         json!({"file": 1, "omitted": 0, "bookmarks": [
             {"bookmark": 2, "line": 1, "name": "mine", "note": null, "color": "amber", "by": "user"},
             {"bookmark": 4, "line": 10, "name": "first 502", "note": "payments upstream timed out here", "color": "amber", "by": "agent"},
-            {"bookmark": 5, "line": 14, "name": "Line 14", "note": null, "color": "amber", "by": "agent"},
+            {"bookmark": 5, "line": 17, "name": "Line 17", "note": null, "color": "amber", "by": "agent"},
         ]})
     );
     // bad input is a clear error
@@ -193,7 +210,7 @@ fn the_timeline_lists_what_the_agent_did() {
     let rows: Vec<TimelineRow> = h.session().view(view_keys::AGENT_TIMELINE).unwrap();
     let got: Vec<(&str, &str, bool)> = rows.iter().map(|r| (r.command.as_str(), r.summary.as_str(), r.changed_view)).collect();
     let name = fixture().file_name().unwrap().to_string_lossy().into_owned();
-    let opened = format!("Opened {name} · 16 lines · JSON lines");
+    let opened = format!("Opened {name} · 19 lines · Timestamped text");
     assert_eq!(
         got,
         vec![
@@ -212,12 +229,13 @@ fn search_filters_histogram_stats_and_fields() {
     let hit = |line: u64, time: &str, text: &str| json!({"line": line, "time": time, "level": "error", "text": text, "cut": false});
     assert_eq!(
         run(&mut h, ids::LOG_SEARCH, json!({"query": "timeout", "limit": 2})),
-        json!({"file": 1, "total": 3, "omitted": 1, "complete": true, "matches": [
-            hit(10, "2026-11-12T14:02:07.118Z", L10), hit(11, "2026-11-12T14:02:07.200Z", L11)]})
+        json!({"file": 1, "total": 4, "omitted": 2, "complete": true, "matches": [
+            hit(10, "2026-11-12T14:02:07.118Z", L10),
+            {"line": 11, "time": null, "level": null, "text": L11, "cut": false}]})
     );
     assert_eq!(
         run(&mut h, ids::LOG_SEARCH, json!({"query": "TIMEOUT", "filter": "service = api"})),
-        json!({"file": 1, "total": 1, "omitted": 0, "complete": true, "matches": [hit(14, "2026-11-12T14:03:00.000Z", L14)]})
+        json!({"file": 1, "total": 1, "omitted": 0, "complete": true, "matches": [hit(17, "2026-11-12T14:03:00.000Z", L17)]})
     );
     assert_eq!(run(&mut h, ids::LOG_SEARCH, json!({"query": "TIMEOUT", "case": true}))["total"], 0);
     assert!(err(&mut h, ids::LOG_SEARCH, json!({"query": "(", "regex": true})).contains("bad search"));
@@ -235,12 +253,12 @@ fn search_filters_histogram_stats_and_fields() {
     assert_eq!(run(&mut h, ids::VIEW_FILTER, json!({"filter": "level >= warn"}))["visible"], 5);
     assert_eq!(run(&mut h, ids::VIEW_CLEAR_FILTERS, json!({})), json!({"file": 1, "removed": 2}));
     assert_eq!(run(&mut h, ids::VIEW_GOTO, json!({"time": "2026-11-12T14:02:00Z"})), json!({"file": 1, "line": 9}));
-    assert_eq!(run(&mut h, ids::VIEW_HIGHLIGHT, json!({"query": "upstream"})), json!({"file": 1, "highlight": 4, "lines": 3, "omitted": 0}));
+    assert_eq!(run(&mut h, ids::VIEW_HIGHLIGHT, json!({"query": "upstream"})), json!({"file": 1, "highlight": 4, "lines": 4, "omitted": 0}));
 
     let lv = |debug: u64, info: u64, warn: u64, error: u64, fatal: u64| json!({"trace": 0, "debug": debug, "info": info, "warn": warn, "error": error, "fatal": fatal, "none": 0});
     assert_eq!(
         run(&mut h, ids::LOG_HISTOGRAM, json!({"bucket": "1m"})),
-        json!({"file": 1, "bucket": "1m", "untimed": 0, "omitted": 0, "buckets": [
+        json!({"file": 1, "bucket": "1m", "untimed": 3, "omitted": 0, "buckets": [
             {"start": "2026-11-12T14:00:00.000Z", "levels": lv(1, 3, 0, 0, 0)},
             {"start": "2026-11-12T14:01:00.000Z", "levels": lv(1, 2, 1, 0, 0)},
             {"start": "2026-11-12T14:02:00.000Z", "levels": lv(0, 2, 1, 2, 0)},
@@ -252,7 +270,10 @@ fn search_filters_histogram_stats_and_fields() {
     assert!(err(&mut h, ids::LOG_HISTOGRAM, json!({"bucket": "soon"})).contains("not a time or duration"));
 
     let stats = run(&mut h, ids::LOG_STATS, json!({}));
-    assert_eq!((&stats["lines"], &stats["levels"], &stats["exact"]), (&json!(16), &lv(2, 8, 2, 3, 1), &json!(true)));
+    // the stack trace's 3 lines have no level
+    let mut levels = lv(2, 8, 2, 3, 1);
+    levels["none"] = json!(3);
+    assert_eq!((&stats["lines"], &stats["levels"], &stats["exact"]), (&json!(19), &levels, &json!(true)));
     assert_eq!(stats["time_span"], json!({"from": "2026-11-12T14:00:00.000Z", "to": "2026-11-12T14:04:00.000Z"}));
     assert_eq!(
         stats["top_fields"][0],
@@ -275,7 +296,7 @@ fn search_filters_histogram_stats_and_fields() {
 /// Params that make every read-only command return line text (or values) from the fixture.
 fn reads() -> Vec<(&'static str, Value)> {
     vec![
-        (ids::LOG_LINES, json!({"from": 1, "count": 16})),
+        (ids::LOG_LINES, json!({"from": 1, "count": 19})),
         (ids::LOG_AROUND, json!({"line": 8, "before": 10, "after": 10})),
         (ids::LOG_SEARCH, json!({"query": "login"})),
         (ids::LOG_SEARCH, json!({"query": "Bearer"})),
@@ -318,23 +339,25 @@ fn redaction_applies_to_every_command_that_returns_log_text() {
     let mut r = Redaction::default();
     r.set(RedactKind::Email, false);
     h.session_mut().set_view(keys::REDACTION, &r);
-    let out = run(&mut h, ids::LOG_LINES, json!({"from": 1, "count": 16})).to_string();
+    let out = run(&mut h, ids::LOG_LINES, json!({"from": 1, "count": 19})).to_string();
     assert!(out.contains("ana@example.com") && !out.contains("hunter2"), "{out}");
     // redaction off for the file (log.redaction): everything as written
     h.session_mut().edit("Redaction", |d| d.file_mut(FileId(1)).unwrap().redact = false);
-    let out = run(&mut h, ids::LOG_LINES, json!({"from": 1, "count": 16})).to_string();
+    let out = run(&mut h, ids::LOG_LINES, json!({"from": 1, "count": 19})).to_string();
     assert!(SECRETS.iter().all(|s| out.contains(s)), "{out}");
 }
 
 #[test]
 fn a_gz_log_opens_through_a_temporary_copy() {
     let dir = tempfile::tempdir().unwrap();
-    let gz = dir.path().join("app.jsonl.gz");
-    std::fs::write(&gz, flate2_like::encode(&std::fs::read(fixture()).unwrap())).unwrap();
-    let mut h = strata::app().headless();
-    let opened = run(&mut h, ids::LOG_OPEN, json!({"path": gz}));
-    assert_eq!((&opened["lines"], &opened["format"]), (&json!(16), &json!("jsonl")));
-    assert!(opened["path"].as_str().unwrap().ends_with("app.jsonl.gz"));
+    for (src, name, lines, format) in [(fixture(), "app.log.gz", 19, "timestamped"), (fixture_jsonl(), "app.jsonl.gz", 16, "jsonl")] {
+        let gz = dir.path().join(name);
+        std::fs::write(&gz, flate2_like::encode(&std::fs::read(src).unwrap())).unwrap();
+        let mut h = strata::app().headless();
+        let opened = run(&mut h, ids::LOG_OPEN, json!({"path": gz}));
+        assert_eq!((&opened["lines"], &opened["format"]), (&json!(lines), &json!(format)));
+        assert!(opened["path"].as_str().unwrap().ends_with(name));
+    }
 }
 
 /// A gzip stream with stored (uncompressed) deflate blocks: enough for a test, no dependency.
@@ -399,7 +422,7 @@ fn strata_cli_mcp_serves_the_agent_commands() {
     assert!(reply(1)["result"]["instructions"].as_str().unwrap_or_default().contains("Strata"), "{}", reply(1));
     let tools = reply(2).to_string();
     assert!(tools.contains("\"execute\"") && tools.contains("\"list_commands\""), "{tools}");
-    assert_eq!(text(3)["lines"], 16);
+    assert_eq!(text(3)["lines"], 19);
     let lines = text(4);
     assert_eq!(lines["lines"][0]["text"], L6);
     assert_eq!(lines["lines"][1]["text"], L7);
@@ -425,4 +448,29 @@ fn an_agent_session_in_the_window() {
     d.call("engine.execute", json!({"command": "app.undo", "params": {}})).unwrap();
     d.settle(60);
     assert_eq!(doc(&mut d)["bookmarks"].as_array().map(Vec::len), Some(1));
+}
+
+/// JSON lines stay supported: the same entries as `fixture.jsonl` read, search, filter and count
+/// the same way.
+#[test]
+fn jsonl_reads_searches_filters_and_counts() {
+    let mut h = strata::app().headless();
+    let opened = run(&mut h, ids::LOG_OPEN, json!({"path": fixture_jsonl()}));
+    assert_eq!((&opened["format"], &opened["lines"]), (&json!("jsonl"), &json!(16)));
+    let l6 = r#"{"ts":"2026-11-12T14:01:10.000Z","level":"info","service":"api","msg":"login ok","user":"[redacted:email]"}"#;
+    assert_eq!(
+        run(&mut h, ids::LOG_LINES, json!({"from": 6, "count": 1}))["lines"][0],
+        json!({"line": 6, "time": "2026-11-12T14:01:10.000Z", "level": "info", "message": "login ok", "text": l6, "cut": false,
+               "fields": [f("service", "api"), f("user", "[redacted:email]")]})
+    );
+    let l10 = r#"{"ts":"2026-11-12T14:02:07.118Z","level":"error","service":"payments","msg":"upstream timeout","request_id":"r-4821","status":502}"#;
+    let found = run(&mut h, ids::LOG_SEARCH, json!({"query": "timeout", "limit": 1}));
+    assert_eq!((&found["total"], &found["matches"][0]["line"], &found["matches"][0]["text"]), (&json!(3), &json!(10), &json!(l10)));
+    assert_eq!(run(&mut h, ids::VIEW_FILTER, json!({"filter": "service = payments"}))["visible"], 7);
+    assert_eq!(run(&mut h, ids::VIEW_FILTER, json!({"filter": "level >= warn"}))["visible"], 5);
+    let stats = run(&mut h, ids::LOG_STATS, json!({}));
+    let levels = json!({"trace": 0, "debug": 2, "info": 8, "warn": 2, "error": 3, "fatal": 1, "none": 0});
+    assert_eq!((&stats["lines"], &stats["levels"]), (&json!(16), &levels));
+    let out = run(&mut h, ids::LOG_LINES, json!({"from": 1, "count": 16})).to_string();
+    assert!(SECRETS.iter().all(|s| !out.contains(s)), "{out}");
 }

@@ -3,9 +3,10 @@
 //! c.x.Y - boom`, `2026-11-12 07:41:03,118 - name - WARNING - msg`, `1794469263.118 DEBUG x`.
 //!
 //! The level is the first token after the time, or the second or third when it is bracketed or
-//! uppercase (so `… Connection error occurred` is not an error). A `name:` token right after the
-//! level is the `logger` field. The message is the rest; `key=value` tokens in it are fields.
-//! Lines without a leading time (stack traces) are whole-line messages.
+//! uppercase (so `… Connection error occurred` is not an error). A `[name]` token right after the
+//! level is the `service` field (`2026-11-12 10:00:01.513 ERROR [payments] db timeout`), a
+//! `name:` token there the `logger` field. The message is the rest; `key=value` tokens in it are
+//! fields. Lines without a leading time (stack traces) are whole-line messages.
 
 use super::{FieldNames, FormatKind, Ids, Parser, at, cut, level_word, push_field, reset, scan_kv, sp, strip_word, whole};
 use crate::Parsed;
@@ -87,6 +88,18 @@ pub(crate) fn parse_line(line: &[u8], names: &FieldNames, out: &mut Parsed) -> b
     }
     let mut ids = Ids::new(names);
     if out.level.is_some() {
+        // `[payments] msg` → service `payments`.
+        let e = token_end(line, msg);
+        let tok = line.get(msg..e).unwrap_or_default();
+        if tok.len() >= 3 && tok.len() <= 66 && tok.starts_with(b"[") && tok.ends_with(b"]") {
+            let name = tok.get(1..tok.len() - 1).unwrap_or_default();
+            if name.iter().all(|&c| c.is_ascii_alphanumeric() || matches!(c, b'_' | b'.' | b'-' | b'/')) {
+                push_field(out, &mut ids, b"service", sp(msg + 1, e - 1));
+                msg = skip_seps(line, e);
+            }
+        }
+    }
+    if out.level.is_some() && out.fields.is_empty() {
         // `api: msg` → logger `api`.
         let e = token_end(line, msg);
         let tok = line.get(msg..e).unwrap_or_default();
@@ -128,14 +141,24 @@ mod tests {
                 "2026-11-12 07:41:03,118 ERROR [main] c.x.Y - boom id=7",
                 Some("2026-11-12T07:41:03.118Z"),
                 Some(Level::Error),
-                "[main] c.x.Y - boom id=7",
-                &[("id", "7")],
+                "c.x.Y - boom id=7",
+                &[("service", "main"), ("id", "7")],
             ),
+            (
+                "2026-11-12 10:00:01.513 ERROR [payments] db timeout after 5s order=8812 user=u-3301",
+                Some("2026-11-12T10:00:01.513Z"),
+                Some(Level::Error),
+                "db timeout after 5s order=8812 user=u-3301",
+                &[("service", "payments"), ("order", "8812"), ("user", "u-3301")],
+            ),
+            ("2026-11-12 10:00:01.513 INFO  [] x", Some("2026-11-12T10:00:01.513Z"), Some(Level::Info), "[] x", &[]),
+            ("2026-11-12 10:00:01.513 INFO  [a b] x", Some("2026-11-12T10:00:01.513Z"), Some(Level::Info), "[a b] x", &[]),
+            ("2026-11-12 10:00:01.513 WARN  [api]", Some("2026-11-12T10:00:01.513Z"), Some(Level::Warn), "", &[("service", "api")]),
             ("2026-11-12 07:41:03,118 - app.db - WARNING - slow", Some("2026-11-12T07:41:03.118Z"), Some(Level::Warn), "slow", &[]),
             ("2026-11-12T07:41:03Z [main] [ERROR] x", Some("2026-11-12T07:41:03.000Z"), Some(Level::Error), "x", &[]),
             ("2026-11-12T07:41:03Z Connection error occurred", Some("2026-11-12T07:41:03.000Z"), None, "Connection error occurred", &[]),
             ("1794469263.118 DEBUG x", Some("2026-11-12T07:41:03.118Z"), Some(Level::Debug), "x", &[]),
-            ("12-Nov-2026 07:41:03.118 SEVERE [main] boom", Some("2026-11-12T07:41:03.118Z"), Some(Level::Error), "[main] boom", &[]),
+            ("12-Nov-2026 07:41:03.118 SEVERE [main] boom", Some("2026-11-12T07:41:03.118Z"), Some(Level::Error), "boom", &[("service", "main")]),
             ("2026-11-12T07:41:03Z", Some("2026-11-12T07:41:03.000Z"), None, "", &[]),
             ("2026-11-12T07:41:03Z WARN", Some("2026-11-12T07:41:03.000Z"), Some(Level::Warn), "", &[]),
             ("2026-11-12T07:41:03Z warn: lower", Some("2026-11-12T07:41:03.000Z"), Some(Level::Warn), "lower", &[]),
@@ -151,5 +174,52 @@ mod tests {
             let want: Vec<(String, String)> = want.iter().map(|(a, b)| (a.to_string(), b.to_string())).collect();
             assert_eq!(fields(&n, b, &p), want, "{line}");
         }
+    }
+
+    #[test]
+    fn a_plain_log_with_a_stack_trace() {
+        let log = "2026-11-12 10:00:01.402 INFO  [payments] charge created order=8812 user=u-3301\n\
+                   2026-11-12 10:00:01.513 ERROR [payments] db timeout after 5s order=8812 user=u-3301\n\
+                   java.net.SocketTimeoutException: db timeout\n\
+                   \tat com.acme.payments.db.Pool.acquire(Pool.java:212)\n\
+                   \tat com.acme.payments.OrderService.charge(OrderService.java:88)\n\
+                   \t... 14 more\n\
+                   2026-11-12 10:00:02.004 WARN  [api] retrying upstream request_id=r-1\n\
+                   Traceback (most recent call last):\n\
+                   \x20 File \"/srv/api/client.py\", line 12, in call\n\
+                   TimeoutError: upstream timeout\n\
+                   2026-11-12 10:00:03.000 DEBUG [api] pool stats\n";
+        assert_eq!(super::super::detect(log.as_bytes()), FormatKind::Timestamped);
+        let n = FieldNames::default();
+        let got: Vec<(Option<String>, Option<Level>, Option<String>)> = log
+            .lines()
+            .map(|l| {
+                let p = TimestampedParser.parse(l.as_bytes(), &n);
+                let svc = p
+                    .fields
+                    .first()
+                    .filter(|(f, _)| n.name(*f).as_deref() == Some("service"))
+                    .map(|(_, s)| TimestampedParser.field_text(l.as_bytes(), *s));
+                (p.time.map(Timestamp::to_rfc3339), p.level, svc)
+            })
+            .collect();
+        let entry = |t: &str, l: Level, s: &str| (Some(t.to_string()), Some(l), Some(s.to_string()));
+        let cont = (None, None, None);
+        assert_eq!(
+            got,
+            vec![
+                entry("2026-11-12T10:00:01.402Z", Level::Info, "payments"),
+                entry("2026-11-12T10:00:01.513Z", Level::Error, "payments"),
+                cont.clone(),
+                cont.clone(),
+                cont.clone(),
+                cont.clone(),
+                entry("2026-11-12T10:00:02.004Z", Level::Warn, "api"),
+                cont.clone(),
+                cont.clone(),
+                cont.clone(),
+                entry("2026-11-12T10:00:03.000Z", Level::Debug, "api"),
+            ]
+        );
     }
 }

@@ -1,0 +1,19 @@
+2026-11-12 14:00:00.000 INFO  [api] server started port=8080
+2026-11-12 14:00:01.250 DEBUG [api] config loaded path=/etc/app.toml
+2026-11-12 14:00:05.000 INFO  [payments] connected to db host=db-1
+2026-11-12 14:00:30.000 INFO  [api] GET /health status=200
+2026-11-12 14:01:00.000 WARN  [payments] slow query ms=812
+2026-11-12 14:01:10.000 INFO  [api] login ok user=ana@example.com
+2026-11-12 14:01:15.000 DEBUG [api] auth header Authorization: Bearer abcdef0123456789abcdef
+2026-11-12 14:01:20.000 INFO  [payments] charge created request_id=r-4820 status=201
+2026-11-12 14:02:00.000 WARN  [payments] upstream slow request_id=r-4821 ms=2900
+2026-11-12 14:02:07.118 ERROR [payments] upstream timeout request_id=r-4821 status=502
+java.net.SocketTimeoutException: upstream timeout
+	at com.acme.payments.LedgerClient.send(LedgerClient.java:88)
+	... 12 more
+2026-11-12 14:02:07.200 ERROR [payments] retry failed: upstream timeout request_id=r-4821 status=502
+2026-11-12 14:02:08.000 INFO  [api] db login password=hunter2
+2026-11-12 14:02:30.000 INFO  [api] GET /health status=200
+2026-11-12 14:03:00.000 ERROR [api] timeout calling payments request_id=r-4822 status=504
+2026-11-12 14:03:05.000 INFO  [worker] job done key=AKIAIOSFODNN7EXAMPLE
+2026-11-12 14:04:00.000 FATAL [payments] giving up request_id=r-4823

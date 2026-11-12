@@ -322,9 +322,8 @@ pub struct Undone {
 
 const T0: &str = "2026-11-12T14:02:07.118Z";
 const T1: &str = "2026-11-12T15:30:00.000Z";
-const PATH: &str = "/var/log/payments/app.jsonl";
-const ERR_LINE: &str =
-    r#"{"ts":"2026-11-12T14:02:07.118Z","level":"error","service":"payments","msg":"upstream timeout","request_id":"r-4821","status":502}"#;
+const PATH: &str = "/var/log/payments/app.log";
+const ERR_LINE: &str = "2026-11-12 14:02:07.118 ERROR [payments] upstream timeout request_id=r-4821 status=502";
 
 fn indexing() -> Indexing {
     Indexing { state: "running".into(), done_bytes: 52_428_800, total_bytes: 104_857_600, error: None }
@@ -347,7 +346,7 @@ fn line_out(line: u64) -> LineOut {
         line,
         time: Some(T0.into()),
         level: Some("error".into()),
-        message: "upstream timeout".into(),
+        message: "upstream timeout request_id=r-4821 status=502".into(),
         text: ERR_LINE.into(),
         cut: false,
         fields: vec![
@@ -360,7 +359,7 @@ fn line_out(line: u64) -> LineOut {
 
 impl Open {
     pub fn example() -> Open {
-        Open { file: 1, path: PATH.into(), bytes: 104_857_600, format: "jsonl".into(), lines: 412_000, following: false, indexing: indexing() }
+        Open { file: 1, path: PATH.into(), bytes: 104_857_600, format: "timestamped".into(), lines: 412_000, following: false, indexing: indexing() }
     }
 }
 
@@ -369,7 +368,7 @@ impl Files {
         let f = FileInfo {
             file: 1,
             path: PATH.into(),
-            format: "jsonl".into(),
+            format: "timestamped".into(),
             bytes: 104_857_600,
             lines: 1_284_113,
             time_span: span(),

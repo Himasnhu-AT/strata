@@ -4,7 +4,7 @@
 exec log.open '{OPEN}'
 exec log.search '{"query": "timeout"}'
 exec log.around '{"line": 10, "before": 2, "after": 2}'
-exec view.highlight '{"lines": [10, 11], "note": "the 502s"}'
+exec view.highlight '{"lines": [10, 14], "note": "the 502s"}'
 exec bookmark.add '{"line": 10, "name": "first 502"}'
 exec agent.note '{"text": "payments timed out upstream at 14:02:07"}'
 wait id=strata.agent.undo

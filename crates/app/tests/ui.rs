@@ -104,8 +104,8 @@ fn scenes_show_their_screen() {
     let expect: &[(&str, &[&str])] = &[
         ("empty", &["strata.empty.open", "Drop a log file here"]),
         ("indexing", &["Indexing 38 %", "strata.indexing.stop"]),
-        ("main", &["360 lines", "Line 34", "2 matches", "Error 13", "strata.table"]),
-        ("agent", &["strata.agent", "Line 34"]),
+        ("main", &["629 lines", "Line 35", "1 of 8", "Error 14", "strata.table", "strata.detail.part.service", "5 more lines"]),
+        ("agent", &["strata.agent", "Line 35"]),
         ("settings", &["strata.settings", "Theme"]),
         ("no-matches", &["No lines match these filters", "service = billing", "strata.table.clear_filters"]),
         ("file-replaced", &["The file was replaced", "● following"]),
@@ -125,14 +125,23 @@ fn scenes_show_their_screen() {
 
 #[test]
 fn the_script_opens_searches_and_follows() {
-    let dir = tempfile::tempdir().unwrap();
-    let mut d = driver(dir.path(), false);
-    let script = std::fs::read_to_string("tests/scripts/open-search-follow.ui").unwrap();
-    d.run_ui(&script).unwrap_or_else(|e| panic!("{e}"));
+    for script in ["tests/scripts/open-search-follow.ui", "tests/scripts/open-search-follow-jsonl.ui"] {
+        let dir = tempfile::tempdir().unwrap();
+        let mut d = driver(dir.path(), false);
+        let script = std::fs::read_to_string(script).unwrap();
+        d.run_ui(&script).unwrap_or_else(|e| panic!("{e}"));
+    }
 }
 
 #[test]
 fn filters_levels_and_columns_change_the_table() {
+    // the plain-text fixture, and the JSON-lines one (the same events, without stack traces)
+    for (path, shown) in [("tests/fixtures/payments.log", "1 filter · 144 shown"), ("tests/fixtures/payments.jsonl", "1 filter · 89 shown")] {
+        filters_levels_and_columns(path, shown);
+    }
+}
+
+fn filters_levels_and_columns(path: &str, shown: &str) {
     let dir = tempfile::tempdir().unwrap();
     let mut d = driver(dir.path(), false);
     let exec = |d: &mut Driver<StrataDoc>, id: &str, p: Value| {
@@ -140,9 +149,9 @@ fn filters_levels_and_columns_change_the_table() {
         d.settle(60);
         r
     };
-    exec(&mut d, "log.open_dialog", json!({"path": "tests/fixtures/payments.jsonl"}));
+    exec(&mut d, "log.open_dialog", json!({"path": path}));
     exec(&mut d, "filter.level", json!({"level": "info", "on": false}));
-    assert!(tree(&mut d).contains("1 filter · 89 shown"), "{}", tree(&mut d));
+    assert!(tree(&mut d).contains(shown), "{path}: {}", tree(&mut d));
     exec(&mut d, "detail.filter_by_value", json!({"field": "service", "value": "auth"}));
     let t = tree(&mut d);
     assert!(t.contains("service = auth") && t.contains("2 filters"), "{t}");
@@ -166,7 +175,7 @@ fn following_an_unchanged_file_draws_nothing_and_new_lines_wake_it() {
     // the log in a folder of its own: the app's settings and autosave go elsewhere
     let logs = tempfile::tempdir().unwrap();
     let log = logs.path().join("live.log");
-    std::fs::copy("tests/fixtures/payments.jsonl", &log).unwrap();
+    std::fs::copy("tests/fixtures/payments.log", &log).unwrap();
     let mut d = driver(dir.path(), false);
     d.call("engine.execute", json!({"command": "log.open_dialog", "params": {"path": log.display().to_string(), "follow": true}})).unwrap();
     // let the watcher start and any startup work finish
@@ -186,13 +195,13 @@ fn following_an_unchanged_file_draws_nothing_and_new_lines_wake_it() {
     assert_eq!(ran, 0, "an idle window following an unchanged file ran {ran} frames ({before} before): {wakes0} -> {wakes1}");
     // an appended line wakes it and shows up
     let mut f = std::fs::OpenOptions::new().append(true).open(&log).unwrap();
-    writeln!(f, r#"{{"ts":"2026-11-12T00:00:09.000Z","level":"error","service":"api","msg":"appended"}}"#).unwrap();
+    writeln!(f, "2026-11-12 00:00:14.000 ERROR [api] appended request_id=r-00000001").unwrap();
     f.sync_all().unwrap();
     let start = Instant::now();
     let mut seen = false;
     while start.elapsed() < Duration::from_secs(10) {
         d.advance(0.1);
-        if tree(&mut d).contains("361 lines") {
+        if tree(&mut d).contains("630 lines") {
             seen = true;
             break;
         }

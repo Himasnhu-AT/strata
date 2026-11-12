@@ -3,8 +3,21 @@
 **A log viewer for huge files that you and your AI agent can read together.**
 
 Open a 5 GB log and start scrolling before it finishes indexing. Search with regex, filter by level,
-time or any parsed field, follow a live file, and jump from error to error. JSON lines, logfmt,
-syslog and plain text are detected and split into columns automatically.
+time or any parsed field, follow a live file, and jump from error to error. Ordinary text logs like
+
+```
+2026-11-12 10:00:01.513 ERROR [payments] db timeout after 5s order=8812 user=u-3301
+java.net.SocketTimeoutException: db timeout
+	at com.acme.payments.db.Pool.acquire(Pool.java:212)
+```
+
+are split into time, level, service, message and `key=value` fields automatically, with stack
+traces kept under their entry; JSON lines, logfmt, syslog and access logs are detected the same
+way, and `.gz` files open too. Strata only reads: your logs stay plain files you can open in any
+editor.
+
+Try it on a generated log: `cargo xtask fixtures --size 50M` writes a realistic plain-text `.log`
+(`--format jsonl|logfmt|syslog|access` for the others).
 
 Every action is a command, so an AI agent (Claude, Cursor, any MCP client) can drive Strata too: it
 runs searches, narrows the time range, highlights the lines that matter and leaves bookmarks, while

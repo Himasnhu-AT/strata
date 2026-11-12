@@ -32,14 +32,27 @@ Mockups: the "Strata — log viewer" design canvas (artboards Main, Agent, Palet
   (color, name, line), Saved filters, Recent. Folds, one Tab stop, type-ahead (ashlar sidebar).
 - **Histogram strip:** lines per bucket, errors stacked in red, warnings in yellow; the visible
   range drawn as a bracket; drag to select a time range; hover shows the bucket's time and counts.
-- **Log table:** line number, time, level, service (or the first parsed field), message. Rows of
-  error level get a faint red background as well as the word. Search matches are underlined in
-  amber; agent highlights get an amber left mark and a small "AI" tag. Columns resize, reorder,
-  hide (right-click the header).
-- **Detail pane:** the selected line pretty-printed; JSON as a folding tree; buttons Copy line,
-  Copy JSON, Filter by this value (on a field).
-- **Status bar:** "1,284,113 lines · 1.9 GB · JSON lines · 2 filters · following · 74 MB · built
-  with ashlar".
+- **Log table:** line number, time, level, service (or the first parsed field), message. For a plain
+  line like `2026-11-12 10:00:01.513 ERROR [payments] db timeout after 5s order=8812` the columns
+  come from the parsed line: the time, the level word, the bracketed `[service]`, the rest as the
+  message. Rows of error level get a faint red background as well as the word. Search matches are
+  underlined in amber; agent highlights get an amber left mark and a small "AI" tag. Columns
+  resize, reorder, hide (right-click the header).
+- **Multi-line entries (stack traces):** every physical line is a row (the line index, line
+  numbers, search and `log.lines` stay exact and cheap on huge files), and the lines after an
+  entry that have no time and no level are shown as its continuation: a thin guide in the time
+  column runs from the entry down the block and ends in a hook on its last line, the text is
+  dimmed with its tab indentation kept, and the block takes the entry's error tint. A level or
+  time filter hides nothing it can't judge: continuation lines have no level, so "errors only"
+  shows the error lines and not their traces (open the entry to see the trace).
+- **Detail pane:** for a plain (or logfmt, syslog …) line: the raw line as written, followed by its
+  stack trace when it has one ("5 more lines" in the header), and beside it the parsed parts as a
+  small table: time, level, service, message, then each `key=value` field. Clicking a part picks
+  it for "Filter by"; buttons Copy line and Filter by (service by default). A continuation line
+  shows itself and the line its entry starts on. For a JSON line: the object pretty-printed in its
+  own key order, with Copy line, Copy JSON and Filter by (click a field).
+- **Status bar:** "1,284,113 lines · 1.9 GB · Timestamped text · 2 filters · following · 74 MB ·
+  built with ashlar".
 
 ## Screens
 

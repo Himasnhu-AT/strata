@@ -1,0 +1,18 @@
+# Open the JSON-lines fixture, search it, step through the matches and follow the file.
+# Run from crates/app: `strata --headless --script tests/scripts/open-search-follow-jsonl.ui --snap out.png`.
+exec log.open_dialog '{"path": "tests/fixtures/payments.jsonl"}'
+wait --text "360 lines"
+assert exists id=strata.table
+assert text id=strata.status.format "JSON lines"
+exec search.run '{"query": "timeout"}'
+wait --text "2 matches"
+exec search.next '{}'
+wait --text "1 of 2"
+assert text id=strata.detail.title "Line 41"
+exec nav.next_error '{}'
+assert exists id=strata.detail.title
+press F
+wait --text "● following"
+assert exists id=strata.status.follow
+press F
+assert text id=strata.toolbar.follow "Follow"

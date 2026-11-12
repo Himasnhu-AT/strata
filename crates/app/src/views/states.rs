@@ -58,7 +58,7 @@ pub fn empty(ui: &mut egui::Ui, cx: &mut Cx<'_, StrataDoc>) {
                     egui::RichText::new("Drop a log file here").size(t.type_scale.title).color(t.text.primary),
                 );
                 ui.add_space(t.space.sm);
-                let body = "Any size. JSON lines, logfmt, syslog and plain text are detected automatically. .gz works too.";
+                let body = "Any size. Plain text logs, JSON lines, logfmt and syslog are detected automatically. .gz works too.";
                 label(ui, "strata.empty.body", body, egui::RichText::new(body).color(t.text.secondary));
                 ui.add_space(t.space.lg);
                 if Button::new("strata.empty.open", &format!("Open a file…  {}", fmt::keys("⌘⇧O")))

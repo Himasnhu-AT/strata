@@ -135,7 +135,9 @@ renders one.
 
 ## Test data
 
-`cargo xtask fixtures --size 100M --format jsonl [--seed 42] [--out PATH]` writes realistic,
-deterministic logs (`jsonl`, `logfmt`, `plain` with stack traces, `syslog` RFC 5424, `access`),
-with error bursts and a few secrets for redaction tests. Default path:
+`cargo xtask fixtures --size 100M [--format plain] [--seed 42] [--out PATH]` writes realistic,
+deterministic logs: `plain` by default (`2026-11-12 10:00:01.513 ERROR [payments] upstream timeout
+after 5s request_id=… status=504 latency_ms=…` in a `.log`, Java and Python stack traces after some
+errors), or `jsonl`, `logfmt`, `syslog` RFC 5424, `access`, with error bursts and a few secrets for
+redaction tests. Benchmarks that need JSON lines pass `--format jsonl`. Default path:
 `benches/fixtures/<format>-<bytes>-s<seed>.<ext>` (gitignored).

@@ -9,7 +9,8 @@ Development starts after ashlar 0.2 is on crates.io.
 ## 1. Who it is for
 
 - **Backend and platform engineers** reading service logs pulled from a server or a CI run: often
-  hundreds of MB to several GB, JSON lines or logfmt, and they need "what happened around 14:02".
+  hundreds of MB to several GB, plain timestamped text, JSON lines or logfmt, and they need "what
+  happened around 14:02".
 - **People debugging with an AI agent.** Today the agent greps the file from a terminal and pastes
   fragments; the person can't see what it looked at. In Strata they share one view.
 - **Desktop and mobile developers** reading crash logs, device logs and app logs (syslog, plain
@@ -34,9 +35,9 @@ Development starts after ashlar 0.2 is on crates.io.
 | Follow (tail) | Watches the file; appends new lines, keeps the view pinned to the bottom unless the user scrolled away. Detects truncation and rotation (file replaced) and says so. |
 | Search | Text and regex, case toggle, whole word. Runs as a job over the index with progress; results stream into a match list; next/previous with F3 / Shift+F3. |
 | Filters | By level, by time range, by any parsed field (`service = api`, `status >= 500`), and "lines matching / not matching". Filters stack; each is a chip that can be turned off. |
-| Formats | Auto-detected per file from the first 64 KB: JSON lines, logfmt, syslog (RFC 3164 and 5424), common timestamp-prefixed text (ISO 8601, `[2026-11-12 07:41:03.118]`, Apache/nginx access). Plain text is the fallback. |
+| Formats | Auto-detected per file from the first 64 KB. Plain timestamped text first: `2026-11-12 10:00:01.513 ERROR [payments] db timeout after 5s order=8812` (time, level, `[service]`, message, `key=value` fields; ISO 8601, `[2026-11-12 07:41:03.118]` and other common prefixes), with stack-trace lines kept as continuation lines of their entry. Also JSON lines, logfmt, syslog (RFC 3164 and 5424), Apache/nginx access. Unstructured plain text is the fallback. |
 | Columns | Parsed fields become columns: time, level and message always; others can be shown, hidden and reordered. |
-| Detail pane | The selected line, pretty-printed (JSON as a tree), with copy as text or JSON. |
+| Detail pane | The selected line: a plain line as written (with its stack trace) beside a table of its parsed parts; a JSON line pretty-printed. Copy line, Filter by a value (Copy JSON for JSON lines). |
 | Time histogram | A strip above the table: lines per time bucket, errors stacked in red. Drag to select a time range (becomes a filter). |
 | Jump to error | Next / previous error or warning, from the keyboard. |
 | Bookmarks | Named, colored, listed in the sidebar, saved per file. |
@@ -133,7 +134,7 @@ strata/
 | Document | `Session<StrataDoc>`: the document is the workspace (open files, filters, columns, bookmarks, highlights), not the log text. `s.edit(label, ...)` makes every change one undo step. Open `LogFile`s live beside it in `StrataDoc::live` (not saved). ashlar's built-in `file.*` commands open and save the workspace (`.strata`). |
 | Background work | ashlar jobs (`ashlar-jobs`): `Progress::steps`, `CancelToken`, results applied on the UI thread with `apply` as one undo step. Indexing, search, histogram, gz decompress are jobs. Jobs are started from views (`cx.jobs`): a command running on `Session` cannot spawn one in 0.2. |
 | The log table | `ashlar::ui::virtual_list::VirtualTable` (O(visible) per frame; `VirtualList::type_ahead`), `selection::Selection`. 0.2 caps a list at `virtual_list::MAX_ROWS` (10 M) rows and has no column reorder/hide: the ui stream windows bigger files |
-| Detail pane | `ashlar::ui::code_view::CodeView` with `.lang(Some("json"))` (ashlar-syntax underneath, no direct dependency) |
+| Detail pane | `ashlar::ui::code_view::CodeView`: the raw plain line (wrapped) beside a parts table; `.lang(Some("json"))` for JSON lines (ashlar-syntax underneath, no direct dependency) |
 | Sidebar | `ashlar::ui::sidebar` (sections for Files, Bookmarks, Saved filters) |
 | Toolbar, chips, histogram | `ashlar::ui::controls`, `ashlar::ui::overlay::Select`, custom painter for the histogram |
 | Files | `ashlar-fs`: recent files, settings, per-app folders; `App::accept_drops`, open from Finder |
@@ -178,7 +179,7 @@ Compared with: VS Code, Sublime Text, klogg, and macOS Console.app (where it can
 
 | Measure | Files |
 |---|---|
-| Time to first lines on screen | 100 MB, 1 GB, 5 GB JSON lines and plain text |
+| Time to first lines on screen | 100 MB, 1 GB, 5 GB plain text and JSON lines |
 | Time to fully open / index | same |
 | Memory (RSS and footprint) after open, after a search | same |
 | Regex search time, first match and all matches | 1 GB, 5 GB |

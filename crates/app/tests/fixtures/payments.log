@@ -1,0 +1,629 @@
+2026-11-12 00:00:00.030 INFO  [auth] DELETE /v1/users/17808 200 in 305 ms request_id=r-a31d6efe
+2026-11-12 00:00:00.059 INFO  [worker] connection opened request_id=r-bfa03020 status=200 latency_ms=126
+2026-11-12 00:00:00.084 INFO  [worker] user signed in user=u-7030 request_id=r-692242e6 status=304 latency_ms=127
+2026-11-12 00:00:00.085 WARN  [api] retrying upstream request_id=r-e1b156b6 status=429 latency_ms=60
+2026-11-12 00:00:00.093 INFO  [auth] cache miss request_id=r-6306ba53 status=304 latency_ms=395
+2026-11-12 00:00:00.125 INFO  [search] POST /v1/pay 200 in 305 ms request_id=r-0017d554
+2026-11-12 00:00:00.164 INFO  [auth] user signed in user=u-1484 request_id=r-f45c6f34 status=204 latency_ms=26
+2026-11-12 00:00:00.202 INFO  [api] user signed in user=u-5191 request_id=r-21253797 status=304 latency_ms=317
+2026-11-12 00:00:00.233 INFO  [search] order created order=9676 user=u-2676 amount=81.76 request_id=r-cf9f0e9c status=200 latency_ms=383
+2026-11-12 00:00:00.260 INFO  [payments] job finished request_id=r-16aa588c status=204 latency_ms=189
+2026-11-12 00:00:00.283 INFO  [api] order created order=8015 user=u-5015 amount=20.15 request_id=r-da4c376f status=200 latency_ms=102
+2026-11-12 00:00:00.318 INFO  [payments] order created order=9993 user=u-6993 amount=398.93 request_id=r-1723a519 status=204 latency_ms=227
+2026-11-12 00:00:00.354 INFO  [search] connection opened request_id=r-ab49ce1c status=304 latency_ms=197
+2026-11-12 00:00:00.372 INFO  [worker] user signed in user=u-6097 request_id=r-0bb14d89 status=200 latency_ms=40
+2026-11-12 00:00:00.384 INFO  [search] job finished request_id=r-7bc49185 status=201 latency_ms=53
+2026-11-12 00:00:00.385 INFO  [search] order created order=8751 user=u-5751 amount=356.51 request_id=r-9534c9ef status=304 latency_ms=388
+2026-11-12 00:00:00.403 INFO  [search] GET /v1/login 201 in 20 ms request_id=r-5cdf3862
+2026-11-12 00:00:00.407 DEBUG [api] pool stats request_id=r-2cc2bcbe status=204 latency_ms=126
+2026-11-12 00:00:00.437 DEBUG [auth] db query rows=304 ms=1 request_id=r-8f0cb3a0 status=200 latency_ms=121
+2026-11-12 00:00:00.471 INFO  [auth] cache miss request_id=r-ff07caf1 status=200 latency_ms=56
+2026-11-12 00:00:00.493 INFO  [auth] user signed in user=u-4898 request_id=r-ee21458a status=200 latency_ms=372
+2026-11-12 00:00:00.513 INFO  [auth] cache miss request_id=r-9f0a249c status=304 latency_ms=30
+2026-11-12 00:00:00.514 DEBUG [api] config reloaded request_id=r-7bcade0f status=204 latency_ms=364
+2026-11-12 00:00:00.533 INFO  [api] POST /v1/orders 304 in 312 ms request_id=r-1bd10914
+2026-11-12 00:00:00.566 INFO  [payments] order created order=8700 user=u-1700 amount=305.00 request_id=r-14d0eddc status=200 latency_ms=113
+2026-11-12 00:00:00.576 DEBUG [payments] pool stats request_id=r-26372696 status=200 latency_ms=347
+2026-11-12 00:00:00.592 INFO  [worker] connection opened request_id=r-3f074e79 status=304 latency_ms=236
+2026-11-12 00:00:00.626 INFO  [worker] job finished request_id=r-2d3cb50f status=204 latency_ms=20
+2026-11-12 00:00:00.656 INFO  [worker] job finished request_id=r-4fbaab0d status=304 latency_ms=368
+2026-11-12 00:00:00.666 INFO  [payments] order created order=9493 user=u-1493 amount=298.93 request_id=r-da555d25 status=201 latency_ms=114
+2026-11-12 00:00:00.688 INFO  [payments] PUT /v1/login 201 in 56 ms request_id=r-046c186e
+2026-11-12 00:00:00.692 INFO  [worker] job finished request_id=r-987b3fbc status=200 latency_ms=55
+2026-11-12 00:00:00.727 WARN  [auth] queue depth high depth=2774 request_id=r-27251782 status=200 latency_ms=45
+2026-11-12 00:00:00.731 ERROR [worker] connection refused request_id=r-403cca04 status=502 latency_ms=25625
+2026-11-12 00:00:00.742 ERROR [auth] deadlock detected request_id=r-ef5de17c status=503 latency_ms=12399
+java.sql.SQLTransactionRollbackException: deadlock detected
+	at com.acme.auth.db.OrderRepository.save(OrderRepository.java:74)
+	at com.acme.auth.OrderHandler.handle(OrderHandler.java:94)
+	at com.acme.platform.Router.dispatch(Router.java:141)
+	... 28 more
+2026-11-12 00:00:00.771 WARN  [worker] slow request GET /v1/orders/87719 took 296 ms request_id=r-85773b8f
+2026-11-12 00:00:00.810 ERROR [search] connection refused request_id=r-0074af1b status=503 latency_ms=6801
+2026-11-12 00:00:00.814 ERROR [worker] invalid signature request_id=r-1dc8daf6 status=504 latency_ms=14824
+2026-11-12 00:00:00.825 ERROR [api] connection refused request_id=r-ab4da669 status=504 latency_ms=16468
+2026-11-12 00:00:00.851 ERROR [auth] deadlock detected request_id=r-97165301 status=500 latency_ms=12549
+java.sql.SQLTransactionRollbackException: deadlock detected
+	at com.acme.auth.db.OrderRepository.save(OrderRepository.java:79)
+	at com.acme.auth.OrderHandler.handle(OrderHandler.java:99)
+	at com.acme.platform.Router.dispatch(Router.java:141)
+	... 21 more
+2026-11-12 00:00:00.859 ERROR [api] upstream timeout after 11s calling ledger request_id=r-96cda4f9 status=500 latency_ms=11642
+2026-11-12 00:00:00.893 WARN  [auth] deprecated header request_id=r-ee4d6e94 status=200 latency_ms=301
+2026-11-12 00:00:00.917 ERROR [worker] upstream timeout after 3s calling ledger request_id=r-40763691 status=503 latency_ms=3329
+2026-11-12 00:00:00.935 ERROR [auth] deadlock detected request_id=r-40854f30 status=503 latency_ms=16232
+java.sql.SQLTransactionRollbackException: deadlock detected
+	at com.acme.auth.db.OrderRepository.save(OrderRepository.java:83)
+	at com.acme.auth.OrderHandler.handle(OrderHandler.java:63)
+	at com.acme.platform.Router.dispatch(Router.java:141)
+	... 25 more
+2026-11-12 00:00:00.963 WARN  [payments] deprecated header request_id=r-5222ccdb status=200 latency_ms=175
+2026-11-12 00:00:00.967 INFO  [api] order created order=8330 user=u-4330 amount=335.30 request_id=r-5214170a status=204 latency_ms=162
+2026-11-12 00:00:00.975 INFO  [auth] order created order=9396 user=u-2396 amount=201.96 request_id=r-d1f5cec4 status=304 latency_ms=262
+2026-11-12 00:00:01.002 DEBUG [payments] span exported request_id=r-455b28b2 status=200 latency_ms=9
+2026-11-12 00:00:01.041 WARN  [auth] retrying upstream request_id=r-e4ea745e status=200 latency_ms=229
+2026-11-12 00:00:01.066 INFO  [search] user signed in user=u-1869 request_id=r-fdf282e5 status=200 latency_ms=98
+2026-11-12 00:00:01.085 INFO  [auth] POST /v1/login 304 in 382 ms request_id=r-4bd11fc7
+2026-11-12 00:00:01.107 DEBUG [payments] span exported request_id=r-9cf1a621 status=204 latency_ms=23
+2026-11-12 00:00:01.138 INFO  [worker] order created order=8829 user=u-8829 amount=34.29 request_id=r-f1c189fd status=200 latency_ms=340
+2026-11-12 00:00:01.143 INFO  [worker] connection opened request_id=r-a6bddc0b status=201 latency_ms=127
+2026-11-12 00:00:01.179 INFO  [api] cache hit request_id=r-e60c5c05 status=200 latency_ms=40
+2026-11-12 00:00:01.197 WARN  [search] deprecated header request_id=r-9a308ec6 status=200 latency_ms=86
+2026-11-12 00:00:01.201 DEBUG [worker] config reloaded request_id=r-0d9ae98b status=204 latency_ms=370
+2026-11-12 00:00:01.232 DEBUG [payments] span exported request_id=r-b9ff4792 status=304 latency_ms=291
+2026-11-12 00:00:01.270 INFO  [api] user signed in user=u-9003 request_id=r-2356209b status=204 latency_ms=275
+2026-11-12 00:00:01.284 INFO  [worker] job finished request_id=r-7c5042e2 status=204 latency_ms=395
+2026-11-12 00:00:01.313 DEBUG [worker] retry scheduled request_id=r-75646b1d status=200 latency_ms=130
+2026-11-12 00:00:01.332 INFO  [search] PUT /v1/pay 200 in 19 ms request_id=r-6d220ae0
+2026-11-12 00:00:01.344 INFO  [worker] connection opened request_id=r-46a2a4a8 status=304 latency_ms=330
+2026-11-12 00:00:01.368 INFO  [search] order created order=9535 user=u-2535 amount=340.35 request_id=r-7f3aa41f status=304 latency_ms=179
+2026-11-12 00:00:01.399 DEBUG [worker] retry scheduled request_id=r-afdd3dff status=200 latency_ms=64
+2026-11-12 00:00:01.424 INFO  [payments] connection opened request_id=r-4637f1e0 status=200 latency_ms=329
+2026-11-12 00:00:01.439 INFO  [payments] cache hit request_id=r-e3d4bffd status=200 latency_ms=153
+2026-11-12 00:00:01.441 INFO  [payments] job finished request_id=r-f6f7d297 status=200 latency_ms=259
+2026-11-12 00:00:01.445 WARN  [api] retrying upstream request_id=r-39e653b9 status=404 latency_ms=105
+2026-11-12 00:00:01.463 DEBUG [auth] db query rows=203 ms=1 request_id=r-ee4abdf7 status=201 latency_ms=1
+2026-11-12 00:00:01.495 INFO  [search] job finished request_id=r-23757f94 status=200 latency_ms=46
+2026-11-12 00:00:01.529 INFO  [auth] PUT /v1/users/19413 201 in 83 ms request_id=r-39389853
+2026-11-12 00:00:01.546 INFO  [payments] order created order=9086 user=u-1086 amount=291.86 request_id=r-bb34265e status=200 latency_ms=41
+2026-11-12 00:00:01.582 INFO  [payments] user signed in user=u-5441 request_id=r-88e5c491 status=304 latency_ms=198
+2026-11-12 00:00:01.587 DEBUG [api] pool stats request_id=r-91c777dd status=200 latency_ms=142
+2026-11-12 00:00:01.608 INFO  [worker] job finished request_id=r-8172eb54 status=304 latency_ms=245
+2026-11-12 00:00:01.640 INFO  [payments] job finished request_id=r-abe95daf status=200 latency_ms=331
+2026-11-12 00:00:01.677 DEBUG [api] db query rows=184 ms=5 request_id=r-be9db3a8 status=201 latency_ms=165
+2026-11-12 00:00:01.679 INFO  [auth] connection opened request_id=r-371a81e3 status=204 latency_ms=177
+2026-11-12 00:00:01.680 INFO  [auth] user signed in user=u-6340 request_id=r-4554c4ec status=204 latency_ms=108
+2026-11-12 00:00:01.716 DEBUG [api] span exported request_id=r-81bf82c2 status=304 latency_ms=326
+2026-11-12 00:00:01.717 INFO  [payments] order created order=9964 user=u-7964 amount=369.64 request_id=r-6aa3e54c status=200 latency_ms=141
+2026-11-12 00:00:01.728 DEBUG [payments] span exported request_id=r-f84c1e28 status=304 latency_ms=118
+2026-11-12 00:00:01.760 INFO  [payments] cache hit request_id=r-2bf7e443 status=200 latency_ms=343
+2026-11-12 00:00:01.781 INFO  [payments] order created order=9486 user=u-7486 amount=291.86 request_id=r-24ecdf7e status=201 latency_ms=31
+2026-11-12 00:00:01.816 INFO  [worker] connection opened request_id=r-218dd2a0 status=201 latency_ms=251
+2026-11-12 00:00:01.834 INFO  [auth] user signed in user=u-7938 request_id=r-6f9cefa2 status=200 latency_ms=184
+2026-11-12 00:00:01.867 INFO  [search] cache miss request_id=r-c3945687 status=201 latency_ms=301
+2026-11-12 00:00:01.893 INFO  [payments] cache hit request_id=r-db45de6c status=200 latency_ms=375
+2026-11-12 00:00:01.913 INFO  [auth] GET /healthz 304 in 312 ms request_id=r-7cf5c3e3
+2026-11-12 00:00:01.951 INFO  [auth] GET /v1/orders/73991 200 in 61 ms request_id=r-b8b64c48
+2026-11-12 00:00:01.952 INFO  [search] job finished request_id=r-9f4e01c1 status=304 latency_ms=189
+2026-11-12 00:00:01.959 INFO  [auth] connection opened request_id=r-01f450a3 status=200 latency_ms=219
+2026-11-12 00:00:01.995 INFO  [search] user signed in user=u-7819 request_id=r-0415ba53 status=200 latency_ms=237
+2026-11-12 00:00:02.026 INFO  [worker] order created order=9873 user=u-4873 amount=278.73 request_id=r-2b222491 status=200 latency_ms=198
+2026-11-12 00:00:02.061 INFO  [worker] job finished request_id=r-010b194c status=201 latency_ms=314
+2026-11-12 00:00:02.081 INFO  [auth] cache hit request_id=r-e2374652 status=200 latency_ms=153
+2026-11-12 00:00:02.117 INFO  [api] job finished request_id=r-8c526731 status=200 latency_ms=6
+2026-11-12 00:00:02.123 INFO  [api] cache miss request_id=r-e0fb490e status=200 latency_ms=156
+2026-11-12 00:00:02.142 DEBUG [worker] config reloaded request_id=r-fa90acca status=304 latency_ms=126
+2026-11-12 00:00:02.172 INFO  [auth] order created order=8813 user=u-7813 amount=18.13 request_id=r-a570ac6d status=200 latency_ms=179
+2026-11-12 00:00:02.189 INFO  [auth] order created order=8232 user=u-4232 amount=237.32 request_id=r-34bb5cd8 status=200 latency_ms=45
+2026-11-12 00:00:02.199 INFO  [worker] cache miss request_id=r-dde4b299 status=304 latency_ms=89
+2026-11-12 00:00:02.230 DEBUG [payments] span exported request_id=r-6479ae28 status=204 latency_ms=184
+2026-11-12 00:00:02.242 INFO  [search] connection opened request_id=r-bab33226 status=200 latency_ms=382
+2026-11-12 00:00:02.274 INFO  [auth] connection opened request_id=r-4eac1964 status=200 latency_ms=29
+2026-11-12 00:00:02.295 INFO  [search] job finished request_id=r-78f4fa3b status=204 latency_ms=33
+2026-11-12 00:00:02.332 INFO  [worker] connection opened request_id=r-150b41f5 status=200 latency_ms=156
+2026-11-12 00:00:02.337 INFO  [search] connection opened request_id=r-6010aa44 status=201 latency_ms=219
+2026-11-12 00:00:02.375 INFO  [worker] GET /v1/orders 200 in 360 ms request_id=r-c89a5f04
+2026-11-12 00:00:02.379 INFO  [search] order created order=8380 user=u-3380 amount=385.80 request_id=r-470854fc status=200 latency_ms=299
+2026-11-12 00:00:02.413 INFO  [payments] cache hit request_id=r-caa2864c status=200 latency_ms=338
+2026-11-12 00:00:02.427 WARN  [search] token near expiry request_id=r-e34b3901 status=429 latency_ms=286
+2026-11-12 00:00:02.428 INFO  [worker] cache hit request_id=r-cf39cba6 status=204 latency_ms=128
+2026-11-12 00:00:02.459 INFO  [worker] user signed in user=u-2645 request_id=r-0efec915 status=200 latency_ms=347
+2026-11-12 00:00:02.471 INFO  [auth] job finished request_id=r-f3770846 status=200 latency_ms=338
+2026-11-12 00:00:02.494 INFO  [auth] connection opened request_id=r-666e4ed2 status=204 latency_ms=13
+2026-11-12 00:00:02.522 INFO  [auth] job finished request_id=r-e975e441 status=200 latency_ms=84
+2026-11-12 00:00:02.552 INFO  [auth] order created order=8717 user=u-3717 amount=322.17 request_id=r-538ddf7d status=200 latency_ms=50
+2026-11-12 00:00:02.574 INFO  [search] GET /v1/users/32173 200 in 20 ms request_id=r-d102c898
+2026-11-12 00:00:02.606 DEBUG [payments] pool stats request_id=r-b5e85a3e status=201 latency_ms=167
+2026-11-12 00:00:02.613 INFO  [worker] user signed in user=u-6759 request_id=r-19c35167 status=200 latency_ms=170
+2026-11-12 00:00:02.630 INFO  [api] user signed in user=u-2827 request_id=r-e1f7b6f3 status=204 latency_ms=281
+2026-11-12 00:00:02.645 INFO  [api] user signed in user=u-8342 request_id=r-8ddefd7e status=201 latency_ms=319
+2026-11-12 00:00:02.660 INFO  [search] cache hit request_id=r-a976aa84 status=200 latency_ms=383
+2026-11-12 00:00:02.668 INFO  [search] cache miss request_id=r-04a0fa25 status=304 latency_ms=133
+2026-11-12 00:00:02.700 INFO  [api] cache hit request_id=r-ca614e4b status=304 latency_ms=189
+2026-11-12 00:00:02.723 INFO  [search] user signed in user=u-1489 request_id=r-10add809 status=204 latency_ms=133
+2026-11-12 00:00:02.735 INFO  [worker] cache hit request_id=r-0f04cf84 status=304 latency_ms=350
+2026-11-12 00:00:02.761 INFO  [api] GET /v1/pay 200 in 180 ms request_id=r-ffa1129d
+2026-11-12 00:00:02.769 INFO  [auth] job finished request_id=r-583c5ce4 status=200 latency_ms=271
+2026-11-12 00:00:02.779 INFO  [worker] GET /v1/search 200 in 93 ms request_id=r-349498cc
+2026-11-12 00:00:02.782 INFO  [api] job finished request_id=r-9fa967bd status=200 latency_ms=31
+2026-11-12 00:00:02.788 WARN  [search] slow request DELETE /v1/search took 237 ms request_id=r-47166091
+2026-11-12 00:00:02.790 INFO  [api] cache miss request_id=r-86de16f0 status=304 latency_ms=118
+2026-11-12 00:00:02.818 INFO  [api] connection opened request_id=r-3074c718 status=200 latency_ms=165
+2026-11-12 00:00:02.835 WARN  [worker] queue depth high depth=1416 request_id=r-ae9ed574 status=404 latency_ms=227
+2026-11-12 00:00:02.873 INFO  [payments] order created order=8453 user=u-4453 amount=58.53 request_id=r-2becb265 status=304 latency_ms=267
+2026-11-12 00:00:02.898 INFO  [auth] cache hit request_id=r-aed55dd4 status=200 latency_ms=368
+2026-11-12 00:00:02.934 INFO  [search] user signed in user=u-2047 request_id=r-3aed57d7 status=204 latency_ms=351
+2026-11-12 00:00:02.959 INFO  [search] cache hit request_id=r-33474c2b status=204 latency_ms=200
+2026-11-12 00:00:02.976 INFO  [worker] PUT /v1/pay 200 in 37 ms request_id=r-b7de3b68
+2026-11-12 00:00:03.004 INFO  [payments] cache miss request_id=r-65f66ee6 status=200 latency_ms=284
+2026-11-12 00:00:03.007 INFO  [search] POST /v1/orders 200 in 273 ms request_id=r-80935d65
+2026-11-12 00:00:03.009 INFO  [auth] cache miss request_id=r-efb5cb3c status=201 latency_ms=253
+2026-11-12 00:00:03.013 INFO  [payments] job finished request_id=r-4d8f650d status=200 latency_ms=39
+2026-11-12 00:00:03.030 INFO  [worker] cache hit request_id=r-9460a940 status=204 latency_ms=266
+2026-11-12 00:00:03.036 INFO  [api] order created order=8021 user=u-5021 amount=26.21 request_id=r-756901d5 status=200 latency_ms=2
+2026-11-12 00:00:03.038 INFO  [search] cache hit request_id=r-ee2aee27 status=201 latency_ms=12
+2026-11-12 00:00:03.070 INFO  [payments] cache miss request_id=r-9d94896d status=204 latency_ms=125
+2026-11-12 00:00:03.095 INFO  [api] cache hit request_id=r-ebf7b28c status=200 latency_ms=324
+2026-11-12 00:00:03.105 INFO  [search] GET /v1/login 201 in 20 ms request_id=r-226acc16
+2026-11-12 00:00:03.125 INFO  [worker] user signed in user=u-3201 request_id=r-d09cd969 status=200 latency_ms=320
+2026-11-12 00:00:03.153 INFO  [api] cache hit request_id=r-4d6cc512 status=200 latency_ms=268
+2026-11-12 00:00:03.165 INFO  [search] cache hit request_id=r-94dfc0c0 status=200 latency_ms=94
+2026-11-12 00:00:03.169 INFO  [api] job finished request_id=r-f74c3980 status=201 latency_ms=91
+2026-11-12 00:00:03.207 INFO  [worker] order created order=8496 user=u-2496 amount=101.96 request_id=r-25004c30 status=200 latency_ms=352
+2026-11-12 00:00:03.241 INFO  [auth] user signed in user=u-4604 request_id=r-bfb36ef4 status=200 latency_ms=236
+2026-11-12 00:00:03.272 INFO  [worker] connection opened request_id=r-433bc9f9 status=200 latency_ms=54
+2026-11-12 00:00:03.282 INFO  [auth] job finished request_id=r-757e8a63 status=200 latency_ms=391
+2026-11-12 00:00:03.307 INFO  [payments] user signed in user=u-2686 request_id=r-cf05cc46 status=200 latency_ms=63
+2026-11-12 00:00:03.332 DEBUG [api] pool stats request_id=r-67eb62d9 status=200 latency_ms=119
+2026-11-12 00:00:03.355 INFO  [worker] connection opened request_id=r-aa8280d3 status=304 latency_ms=329
+2026-11-12 00:00:03.363 DEBUG [search] db query rows=443 ms=34 request_id=r-39e3905f status=200 latency_ms=234
+2026-11-12 00:00:03.376 INFO  [payments] connection opened request_id=r-fcfaac81 status=204 latency_ms=355
+2026-11-12 00:00:03.397 INFO  [api] connection opened request_id=r-f8729707 status=200 latency_ms=83
+2026-11-12 00:00:03.424 INFO  [search] POST /v1/search 200 in 67 ms request_id=r-01c95886
+2026-11-12 00:00:03.449 INFO  [search] user signed in user=u-1466 request_id=r-0777c3fa status=201 latency_ms=171
+2026-11-12 00:00:03.482 INFO  [worker] order created order=9055 user=u-5055 amount=260.55 request_id=r-b540ae6f status=201 latency_ms=239
+2026-11-12 00:00:03.495 WARN  [api] queue depth high depth=3290 request_id=r-ff6350a6 status=404 latency_ms=221
+2026-11-12 00:00:03.510 INFO  [worker] job finished request_id=r-13a29b33 status=204 latency_ms=240
+2026-11-12 00:00:03.542 INFO  [worker] cache miss request_id=r-66fac705 status=200 latency_ms=201
+2026-11-12 00:00:03.566 INFO  [search] job finished request_id=r-7c79d800 status=200 latency_ms=46
+2026-11-12 00:00:03.596 WARN  [api] queue depth high depth=2753 request_id=r-e8a0d46d status=429 latency_ms=151
+2026-11-12 00:00:03.626 INFO  [api] cache miss request_id=r-77d2e39b status=201 latency_ms=13
+2026-11-12 00:00:03.642 INFO  [api] order created order=9392 user=u-6392 amount=197.92 request_id=r-58e19780 status=200 latency_ms=39
+2026-11-12 00:00:03.669 INFO  [api] user signed in user=u-5368 request_id=r-ed9f1740 status=201 latency_ms=256
+2026-11-12 00:00:03.693 INFO  [payments] cache miss request_id=r-8814d93d status=200 latency_ms=124
+2026-11-12 00:00:03.699 INFO  [api] connection opened request_id=r-35ddfc65 status=200 latency_ms=108
+2026-11-12 00:00:03.726 INFO  [payments] job finished request_id=r-733da58b status=200 latency_ms=45
+2026-11-12 00:00:03.728 INFO  [search] cache miss request_id=r-5eae4112 status=204 latency_ms=238
+2026-11-12 00:00:03.755 INFO  [auth] cache hit request_id=r-1038417f status=200 latency_ms=145
+2026-11-12 00:00:03.769 INFO  [auth] order created order=9740 user=u-2740 amount=145.40 request_id=r-5e44984c status=204 latency_ms=321
+2026-11-12 00:00:03.774 WARN  [search] token near expiry request_id=r-f0cc3bc3 status=200 latency_ms=358
+2026-11-12 00:00:03.799 WARN  [search] deprecated header request_id=r-8eb61659 status=200 latency_ms=351
+2026-11-12 00:00:03.825 INFO  [api] connection opened request_id=r-5b0b7f13 status=201 latency_ms=193
+2026-11-12 00:00:03.853 INFO  [worker] cache hit request_id=r-094e4504 status=200 latency_ms=254
+2026-11-12 00:00:03.873 INFO  [auth] user signed in user=u-2894 request_id=r-a8c5f626 status=200 latency_ms=121
+2026-11-12 00:00:03.884 INFO  [api] cache miss request_id=r-2e97505b status=204 latency_ms=197
+2026-11-12 00:00:03.904 INFO  [search] GET /v1/users/87311 200 in 344 ms request_id=r-bcc82d29
+2026-11-12 00:00:03.931 WARN  [api] deprecated header request_id=r-46890499 status=404 latency_ms=48
+2026-11-12 00:00:03.933 INFO  [search] connection opened request_id=r-b17bb29c status=200 latency_ms=6
+2026-11-12 00:00:03.959 INFO  [payments] job finished request_id=r-7450dab2 status=200 latency_ms=316
+2026-11-12 00:00:03.959 INFO  [search] cache hit request_id=r-77926edc status=200 latency_ms=237
+2026-11-12 00:00:03.971 INFO  [auth] order created order=8219 user=u-8219 amount=224.19 request_id=r-546cd3ab status=204 latency_ms=28
+2026-11-12 00:00:03.975 INFO  [search] cache miss request_id=r-1adfbb33 status=201 latency_ms=239
+2026-11-12 00:00:04.015 DEBUG [api] span exported request_id=r-7daea9d3 status=200 latency_ms=311
+2026-11-12 00:00:04.038 DEBUG [payments] db query rows=251 ms=7 request_id=r-c2b9d793 status=200 latency_ms=47
+2026-11-12 00:00:04.058 INFO  [worker] user signed in user=u-5275 request_id=r-b8c5d69b status=201 latency_ms=152
+2026-11-12 00:00:04.083 INFO  [api] connection opened request_id=r-3d2910d9 status=201 latency_ms=210
+2026-11-12 00:00:04.114 DEBUG [auth] config reloaded request_id=r-f0801406 status=201 latency_ms=34
+2026-11-12 00:00:04.147 INFO  [search] connection opened request_id=r-267150b8 status=201 latency_ms=380
+2026-11-12 00:00:04.162 INFO  [search] user signed in user=u-2137 request_id=r-1712f439 status=304 latency_ms=59
+2026-11-12 00:00:04.174 WARN  [api] queue depth high depth=1721 request_id=r-fa017bc5 status=404 latency_ms=386
+2026-11-12 00:00:04.205 DEBUG [payments] pool stats request_id=r-d8b689a4 status=200 latency_ms=273
+2026-11-12 00:00:04.226 INFO  [api] PUT /v1/pay 304 in 231 ms request_id=r-26feb245
+2026-11-12 00:00:04.255 DEBUG [auth] retry scheduled request_id=r-31afc451 status=200 latency_ms=132
+2026-11-12 00:00:04.294 INFO  [search] cache hit request_id=r-a94cad3e status=200 latency_ms=27
+2026-11-12 00:00:04.325 INFO  [api] cache hit request_id=r-84d7972c status=304 latency_ms=326
+2026-11-12 00:00:04.335 INFO  [auth] cache miss request_id=r-a5b8c0ea status=200 latency_ms=5
+2026-11-12 00:00:04.340 INFO  [api] GET /v1/search 200 in 186 ms request_id=r-12db058a
+2026-11-12 00:00:04.344 INFO  [payments] order created order=9138 user=u-7138 amount=343.38 request_id=r-8df70122 status=200 latency_ms=197
+2026-11-12 00:00:04.375 INFO  [payments] connection opened request_id=r-15e5015e status=200 latency_ms=335
+2026-11-12 00:00:04.411 INFO  [search] job finished request_id=r-36813703 status=201 latency_ms=147
+2026-11-12 00:00:04.442 INFO  [search] DELETE /v1/users/34827 200 in 293 ms request_id=r-e5d615bc
+2026-11-12 00:00:04.482 INFO  [auth] job finished request_id=r-a542a536 status=304 latency_ms=143
+2026-11-12 00:00:04.483 INFO  [search] user signed in user=u-5720 request_id=r-03037318 status=200 latency_ms=280
+2026-11-12 00:00:04.497 INFO  [worker] job finished request_id=r-af16b6c6 status=304 latency_ms=79
+2026-11-12 00:00:04.504 INFO  [search] job finished request_id=r-5819a76e status=200 latency_ms=324
+2026-11-12 00:00:04.529 INFO  [search] connection opened request_id=r-4ffbf680 status=204 latency_ms=159
+2026-11-12 00:00:04.538 INFO  [payments] job finished request_id=r-c2c3df1f status=204 latency_ms=217
+2026-11-12 00:00:04.554 INFO  [worker] cache miss request_id=r-c1e27a40 status=200 latency_ms=369
+2026-11-12 00:00:04.582 INFO  [worker] order created order=8787 user=u-4787 amount=392.87 request_id=r-9f758b93 status=304 latency_ms=384
+2026-11-12 00:00:04.620 INFO  [search] order created order=9603 user=u-6603 amount=8.03 request_id=r-b053e2f3 status=201 latency_ms=244
+2026-11-12 00:00:04.637 INFO  [worker] order created order=9080 user=u-2080 amount=285.80 request_id=r-b30f18e8 status=200 latency_ms=271
+2026-11-12 00:00:04.658 INFO  [auth] cache hit request_id=r-fb56d03d status=200 latency_ms=320
+2026-11-12 00:00:04.693 INFO  [payments] connection opened request_id=r-6cfdc5c8 status=200 latency_ms=179
+2026-11-12 00:00:04.701 DEBUG [search] db query rows=211 ms=18 request_id=r-8d12c997 status=200 latency_ms=138
+2026-11-12 00:00:04.714 INFO  [api] job finished request_id=r-2e43518e status=201 latency_ms=179
+2026-11-12 00:00:04.727 INFO  [search] job finished request_id=r-75798ff9 status=200 latency_ms=135
+2026-11-12 00:00:04.735 INFO  [api] connection opened request_id=r-1f9033b9 status=200 latency_ms=147
+2026-11-12 00:00:04.750 INFO  [api] cache hit request_id=r-b1f2c71d status=304 latency_ms=237
+2026-11-12 00:00:04.786 INFO  [auth] order created order=8869 user=u-6869 amount=74.69 request_id=r-898c81d5 status=201 latency_ms=226
+2026-11-12 00:00:04.797 INFO  [auth] cache hit request_id=r-568451da status=201 latency_ms=143
+2026-11-12 00:00:04.809 INFO  [api] user signed in user=u-5251 request_id=r-fe5aeedb status=204 latency_ms=41
+2026-11-12 00:00:04.813 INFO  [payments] job finished request_id=r-f60da938 status=204 latency_ms=263
+2026-11-12 00:00:04.852 INFO  [worker] user signed in user=u-3904 request_id=r-178ccab8 status=200 latency_ms=379
+2026-11-12 00:00:04.877 DEBUG [api] db query rows=400 ms=3 request_id=r-96d9e734 status=304 latency_ms=3
+2026-11-12 00:00:04.906 INFO  [api] user signed in user=u-8652 request_id=r-49627694 status=200 latency_ms=59
+2026-11-12 00:00:04.921 INFO  [payments] job finished request_id=r-27b701ed status=201 latency_ms=226
+2026-11-12 00:00:04.945 WARN  [worker] deprecated header request_id=r-9c1a4baf status=429 latency_ms=118
+2026-11-12 00:00:04.978 INFO  [auth] cache hit request_id=r-ba89fec6 status=200 latency_ms=350
+2026-11-12 00:00:04.999 INFO  [auth] order created order=9872 user=u-5872 amount=277.72 request_id=r-d4b8f7e0 status=200 latency_ms=140
+2026-11-12 00:00:05.008 INFO  [search] user signed in user=u-9119 request_id=r-30b7cdb7 status=201 latency_ms=154
+2026-11-12 00:00:05.020 INFO  [api] user signed in user=u-5326 request_id=r-13fcac76 status=200 latency_ms=43
+2026-11-12 00:00:05.031 INFO  [search] DELETE /v1/orders 201 in 197 ms request_id=r-5bb62435
+2026-11-12 00:00:05.033 INFO  [auth] connection opened request_id=r-14e4782b status=200 latency_ms=362
+2026-11-12 00:00:05.055 INFO  [worker] user signed in user=u-5092 request_id=r-373a5e3c status=200 latency_ms=229
+2026-11-12 00:00:05.073 INFO  [search] user signed in user=u-8263 request_id=r-76391c37 status=201 latency_ms=243
+2026-11-12 00:00:05.099 INFO  [payments] cache miss request_id=r-68280169 status=200 latency_ms=398
+2026-11-12 00:00:05.134 INFO  [api] GET /v1/pay 200 in 128 ms request_id=r-eeed05f3
+2026-11-12 00:00:05.151 WARN  [payments] queue depth high depth=1533 request_id=r-0dfd40e9 status=404 latency_ms=97
+2026-11-12 00:00:05.178 INFO  [api] cache hit request_id=r-c755ad72 status=200 latency_ms=122
+2026-11-12 00:00:05.203 INFO  [payments] POST /v1/search 201 in 189 ms request_id=r-d389dd56
+2026-11-12 00:00:05.211 WARN  [auth] slow request POST /v1/search took 99 ms request_id=r-f5c1588a
+2026-11-12 00:00:05.239 DEBUG [auth] db query rows=145 ms=0 request_id=r-1e3f5f4d status=200 latency_ms=0
+2026-11-12 00:00:05.250 INFO  [api] cache miss request_id=r-7d8f437f status=201 latency_ms=314
+2026-11-12 00:00:05.286 WARN  [api] deprecated header request_id=r-ca6fd2ec status=429 latency_ms=21
+2026-11-12 00:00:05.294 INFO  [auth] user signed in user=u-1055 request_id=r-44da9a5f status=304 latency_ms=105
+2026-11-12 00:00:05.328 WARN  [search] token near expiry request_id=r-14a91da6 status=200 latency_ms=325
+2026-11-12 00:00:05.329 DEBUG [search] config reloaded request_id=r-39989280 status=200 latency_ms=161
+2026-11-12 00:00:05.357 INFO  [auth] connection opened request_id=r-3cd1a500 status=304 latency_ms=339
+2026-11-12 00:00:05.360 INFO  [auth] GET /v1/login 304 in 310 ms request_id=r-c5443ac2
+2026-11-12 00:00:05.376 INFO  [api] job finished request_id=r-ab8e3107 status=200 latency_ms=182
+2026-11-12 00:00:05.383 INFO  [search] connection opened request_id=r-60a91a59 status=200 latency_ms=258
+2026-11-12 00:00:05.414 DEBUG [api] span exported request_id=r-bf8e7d52 status=200 latency_ms=100
+2026-11-12 00:00:05.442 WARN  [auth] retrying upstream request_id=r-16c4fdae status=200 latency_ms=194
+2026-11-12 00:00:05.449 DEBUG [worker] db query rows=421 ms=35 request_id=r-feb3d16d status=304 latency_ms=35
+2026-11-12 00:00:05.463 DEBUG [auth] config reloaded request_id=r-8bac132e status=304 latency_ms=377
+2026-11-12 00:00:05.488 INFO  [payments] GET /v1/login 304 in 223 ms request_id=r-fd071bf4
+2026-11-12 00:00:05.496 INFO  [api] order created order=9724 user=u-5724 amount=129.24 request_id=r-7ba71ddc status=200 latency_ms=185
+2026-11-12 00:00:05.498 DEBUG [search] config reloaded request_id=r-ed7714fe status=200 latency_ms=104
+2026-11-12 00:00:05.520 INFO  [auth] job finished request_id=r-f789a3d5 status=200 latency_ms=109
+2026-11-12 00:00:05.543 INFO  [auth] job finished request_id=r-02a8d9d5 status=204 latency_ms=345
+2026-11-12 00:00:05.568 INFO  [payments] user signed in user=u-9532 request_id=r-a5d725b4 status=200 latency_ms=197
+2026-11-12 00:00:05.584 INFO  [worker] order created order=8710 user=u-9710 amount=315.10 request_id=r-8fd55c66 status=200 latency_ms=37
+2026-11-12 00:00:05.610 INFO  [api] order created order=9564 user=u-5564 amount=369.64 request_id=r-60d4a8bc status=204 latency_ms=281
+2026-11-12 00:00:05.637 DEBUG [payments] pool stats request_id=r-9250d5e9 status=200 latency_ms=156
+2026-11-12 00:00:05.653 INFO  [api] connection opened request_id=r-ca9213bb status=200 latency_ms=76
+2026-11-12 00:00:05.672 INFO  [worker] connection opened request_id=r-8d1056f8 status=201 latency_ms=252
+2026-11-12 00:00:05.681 INFO  [search] connection opened request_id=r-1ce4b895 status=200 latency_ms=31
+2026-11-12 00:00:05.710 DEBUG [search] retry scheduled request_id=r-3419ff34 status=204 latency_ms=335
+2026-11-12 00:00:05.731 INFO  [worker] POST /v1/pay 304 in 271 ms request_id=r-39c41f5f
+2026-11-12 00:00:05.770 WARN  [worker] queue depth high depth=511 request_id=r-c4d2b80b status=429 latency_ms=370
+2026-11-12 00:00:05.797 INFO  [payments] user signed in user=u-3755 request_id=r-1f1224c3 status=200 latency_ms=364
+2026-11-12 00:00:05.835 INFO  [auth] connection opened request_id=r-e79b7f0c status=201 latency_ms=346
+2026-11-12 00:00:05.869 INFO  [auth] GET /v1/orders/56205 204 in 70 ms request_id=r-a82a76ca
+2026-11-12 00:00:05.899 INFO  [search] order created order=9468 user=u-9468 amount=273.68 request_id=r-75796acc status=304 latency_ms=203
+2026-11-12 00:00:05.903 WARN  [worker] slow request GET /v1/orders/51737 took 209 ms request_id=r-65139ce5
+2026-11-12 00:00:05.905 INFO  [api] connection opened request_id=r-592a65f8 status=204 latency_ms=278
+2026-11-12 00:00:05.910 DEBUG [search] span exported request_id=r-0a395bd7 status=200 latency_ms=253
+2026-11-12 00:00:05.944 INFO  [search] user signed in user=u-8328 request_id=r-c396b6d8 status=304 latency_ms=215
+2026-11-12 00:00:05.976 INFO  [api] GET /healthz 304 in 63 ms request_id=r-1a64ec8c
+2026-11-12 00:00:06.013 INFO  [api] connection opened request_id=r-0f9226be status=204 latency_ms=265
+2026-11-12 00:00:06.053 INFO  [search] job finished request_id=r-33c10530 status=304 latency_ms=201 auth=user1531@example.com
+2026-11-12 00:00:06.073 INFO  [worker] job finished request_id=r-df5f538d status=200 latency_ms=78
+2026-11-12 00:00:06.103 INFO  [api] user signed in user=u-7582 request_id=r-fe6b95de status=200 latency_ms=389
+2026-11-12 00:00:06.128 INFO  [worker] cache miss request_id=r-02bc9ce8 status=200 latency_ms=335
+2026-11-12 00:00:06.144 INFO  [payments] cache miss request_id=r-0f3df696 status=201 latency_ms=240
+2026-11-12 00:00:06.161 INFO  [api] user signed in user=u-4476 request_id=r-14c75bc4 status=201 latency_ms=23
+2026-11-12 00:00:06.192 INFO  [worker] cache hit request_id=r-8b3c7e6a status=200 latency_ms=209
+2026-11-12 00:00:06.204 DEBUG [search] retry scheduled request_id=r-1e5d843d status=204 latency_ms=237
+2026-11-12 00:00:06.241 INFO  [api] job finished request_id=r-041bebb3 status=304 latency_ms=238
+2026-11-12 00:00:06.246 WARN  [api] slow request GET /v1/pay took 299 ms request_id=r-acef591a
+2026-11-12 00:00:06.286 DEBUG [payments] config reloaded request_id=r-97617f30 status=201 latency_ms=397
+2026-11-12 00:00:06.322 INFO  [payments] cache miss request_id=r-70bc4d5c status=200 latency_ms=301
+2026-11-12 00:00:06.362 INFO  [payments] order created order=9413 user=u-9413 amount=218.13 request_id=r-4929c205 status=204 latency_ms=293
+2026-11-12 00:00:06.398 INFO  [worker] cache miss request_id=r-2aa169ef status=200 latency_ms=313
+2026-11-12 00:00:06.427 INFO  [auth] order created order=8858 user=u-5858 amount=63.58 request_id=r-4c1d26aa status=204 latency_ms=344
+2026-11-12 00:00:06.433 INFO  [auth] job finished request_id=r-9c98ab6c status=204 latency_ms=366
+2026-11-12 00:00:06.468 INFO  [worker] cache miss request_id=r-be44eb47 status=204 latency_ms=110
+2026-11-12 00:00:06.497 INFO  [auth] cache miss request_id=r-3fe8f50b status=200 latency_ms=250
+2026-11-12 00:00:06.526 INFO  [payments] cache miss request_id=r-9ee1b69d status=200 latency_ms=273
+2026-11-12 00:00:06.541 INFO  [api] GET /v1/pay 200 in 267 ms request_id=r-a40166e8
+2026-11-12 00:00:06.548 ERROR [payments] deadlock detected request_id=r-eba51267 status=500 latency_ms=25124
+2026-11-12 00:00:06.575 WARN  [payments] token near expiry request_id=r-30b14379 status=429 latency_ms=263
+2026-11-12 00:00:06.609 ERROR [search] payment declined request_id=r-4925c8bc status=500 latency_ms=7591
+Traceback (most recent call last):
+  File "/srv/search/app/handlers.py", line 96, in handle
+    result = self.client.call(request, timeout=30)
+  File "/srv/search/app/client.py", line 58, in call
+    raise RuntimeError(msg)
+RuntimeError: payment declined
+2026-11-12 00:00:06.624 WARN  [worker] queue depth high depth=2633 request_id=r-8c8905b5 status=404 latency_ms=139
+2026-11-12 00:00:06.640 ERROR [payments] deadlock detected request_id=r-a8b1eba7 status=504 latency_ms=17925
+2026-11-12 00:00:06.669 ERROR [api] invalid signature request_id=r-75f0257d status=503 latency_ms=19368
+2026-11-12 00:00:06.699 WARN  [auth] slow request PUT /v1/orders took 41 ms request_id=r-93bf0dc7
+2026-11-12 00:00:06.729 WARN  [search] token near expiry request_id=r-c04cf006 status=429 latency_ms=153
+2026-11-12 00:00:06.766 INFO  [api] connection opened request_id=r-94482228 status=201 latency_ms=286
+2026-11-12 00:00:06.796 INFO  [search] connection opened request_id=r-d0e65f5f status=200 latency_ms=79
+2026-11-12 00:00:06.800 INFO  [auth] connection opened request_id=r-4fd676fc status=200 latency_ms=68
+2026-11-12 00:00:06.801 INFO  [payments] user signed in user=u-1693 request_id=r-05c79825 status=204 latency_ms=37
+2026-11-12 00:00:06.837 DEBUG [auth] db query rows=331 ms=13 request_id=r-c4992aeb status=304 latency_ms=333
+2026-11-12 00:00:06.871 WARN  [auth] token near expiry request_id=r-35746669 status=200 latency_ms=389
+2026-11-12 00:00:06.878 INFO  [worker] connection opened request_id=r-f5648fda status=200 latency_ms=307
+2026-11-12 00:00:06.913 INFO  [search] connection opened request_id=r-0cf48386 status=304 latency_ms=192
+2026-11-12 00:00:06.952 INFO  [search] connection opened request_id=r-048861c8 status=200 latency_ms=364
+2026-11-12 00:00:06.971 INFO  [worker] order created order=8033 user=u-5033 amount=38.33 request_id=r-4f16c401 status=304 latency_ms=254
+2026-11-12 00:00:06.984 INFO  [search] connection opened request_id=r-d4f08985 status=304 latency_ms=210
+2026-11-12 00:00:07.006 INFO  [api] POST /v1/pay 304 in 133 ms request_id=r-58b17ebc
+2026-11-12 00:00:07.010 INFO  [auth] user signed in user=u-6723 request_id=r-34bc3983 status=200 latency_ms=185
+2026-11-12 00:00:07.020 INFO  [auth] cache miss request_id=r-5eacecb4 status=304 latency_ms=282
+2026-11-12 00:00:07.047 INFO  [search] cache miss request_id=r-ce104dc9 status=200 latency_ms=67
+2026-11-12 00:00:07.066 INFO  [api] GET /v1/orders 200 in 209 ms request_id=r-36a69b3c
+2026-11-12 00:00:07.090 DEBUG [auth] db query rows=12 ms=28 request_id=r-b40cae9c status=304 latency_ms=108
+2026-11-12 00:00:07.093 INFO  [auth] cache hit request_id=r-75c5088d status=200 latency_ms=262
+2026-11-12 00:00:07.117 INFO  [payments] user signed in user=u-8931 request_id=r-95889bab status=304 latency_ms=368
+2026-11-12 00:00:07.119 INFO  [worker] order created order=9644 user=u-3644 amount=49.44 request_id=r-fb72ff2c status=200 latency_ms=335
+2026-11-12 00:00:07.158 INFO  [payments] DELETE /v1/orders 204 in 259 ms request_id=r-2d2ab8bb
+2026-11-12 00:00:07.178 INFO  [auth] connection opened request_id=r-97b292ac status=200 latency_ms=204
+2026-11-12 00:00:07.183 DEBUG [search] pool stats request_id=r-28b44917 status=201 latency_ms=264
+2026-11-12 00:00:07.200 DEBUG [worker] db query rows=326 ms=36 request_id=r-eb8a9ca2 status=204 latency_ms=356
+2026-11-12 00:00:07.230 INFO  [search] connection opened request_id=r-7c6abb7a status=200 latency_ms=72
+2026-11-12 00:00:07.242 INFO  [payments] connection opened request_id=r-d1eff74e status=304 latency_ms=175
+2026-11-12 00:00:07.244 DEBUG [worker] config reloaded request_id=r-c984d990 status=204 latency_ms=334
+2026-11-12 00:00:07.244 WARN  [payments] slow request GET /v1/pay took 214 ms request_id=r-fec7078c
+2026-11-12 00:00:07.250 INFO  [payments] job finished request_id=r-00586d30 status=200 latency_ms=110
+2026-11-12 00:00:07.276 INFO  [auth] connection opened request_id=r-b88c1561 status=304 latency_ms=309
+2026-11-12 00:00:07.299 INFO  [api] connection opened request_id=r-3405160f status=201 latency_ms=199
+2026-11-12 00:00:07.304 INFO  [worker] cache hit request_id=r-5bc387a9 status=201 latency_ms=89
+2026-11-12 00:00:07.332 INFO  [worker] order created order=9654 user=u-2654 amount=59.54 request_id=r-1ee7d456 status=204 latency_ms=328
+2026-11-12 00:00:07.339 INFO  [payments] connection opened request_id=r-8cb4e9f0 status=200 latency_ms=176
+2026-11-12 00:00:07.369 DEBUG [api] config reloaded request_id=r-057eda7c status=304 latency_ms=44
+2026-11-12 00:00:07.393 INFO  [worker] connection opened request_id=r-4376a6e8 status=204 latency_ms=219
+2026-11-12 00:00:07.415 INFO  [api] cache hit request_id=r-66576130 status=304 latency_ms=113
+2026-11-12 00:00:07.455 INFO  [payments] user signed in user=u-7406 request_id=r-76478446 status=204 latency_ms=346
+2026-11-12 00:00:07.472 INFO  [payments] cache miss request_id=r-3548c619 status=201 latency_ms=363
+2026-11-12 00:00:07.482 INFO  [worker] cache hit request_id=r-1dc54e55 status=200 latency_ms=246
+2026-11-12 00:00:07.491 DEBUG [payments] db query rows=43 ms=17 request_id=r-28b63bf7 status=204 latency_ms=57
+2026-11-12 00:00:07.527 INFO  [api] cache hit request_id=r-ac4ddc2e status=200 latency_ms=56
+2026-11-12 00:00:07.564 DEBUG [auth] span exported request_id=r-9d227544 status=204 latency_ms=42
+2026-11-12 00:00:07.585 INFO  [auth] cache miss request_id=r-a16686bc status=200 latency_ms=128
+2026-11-12 00:00:07.590 INFO  [search] cache miss request_id=r-973836cc status=200 latency_ms=386
+2026-11-12 00:00:07.609 INFO  [api] cache hit request_id=r-f30e69ce status=200 latency_ms=62
+2026-11-12 00:00:07.630 INFO  [auth] cache hit request_id=r-bd23fe78 status=304 latency_ms=47
+2026-11-12 00:00:07.648 INFO  [payments] job finished request_id=r-71532ed6 status=200 latency_ms=366
+2026-11-12 00:00:07.687 INFO  [worker] user signed in user=u-6846 request_id=r-7a9a3e4e status=304 latency_ms=196
+2026-11-12 00:00:07.713 INFO  [auth] connection opened request_id=r-0d800b48 status=200 latency_ms=106
+2026-11-12 00:00:07.732 DEBUG [search] pool stats request_id=r-f0ef2842 status=201 latency_ms=85
+2026-11-12 00:00:07.749 INFO  [api] connection opened request_id=r-2b0850ad status=200 latency_ms=111
+2026-11-12 00:00:07.778 INFO  [worker] order created order=8315 user=u-7315 amount=320.15 request_id=r-d51569ab status=304 latency_ms=103
+2026-11-12 00:00:07.802 INFO  [search] connection opened request_id=r-c62a8a59 status=304 latency_ms=43
+2026-11-12 00:00:07.813 DEBUG [api] config reloaded request_id=r-bbcfbd7c status=204 latency_ms=361
+2026-11-12 00:00:07.838 INFO  [auth] user signed in user=u-2994 request_id=r-8ef4968a status=200 latency_ms=207
+2026-11-12 00:00:07.871 INFO  [payments] user signed in user=u-5414 request_id=r-e585d586 status=201 latency_ms=326
+2026-11-12 00:00:07.880 INFO  [api] PUT /healthz 200 in 47 ms request_id=r-1886ee8c
+2026-11-12 00:00:07.918 INFO  [search] cache miss request_id=r-0a05dd2e status=304 latency_ms=56
+2026-11-12 00:00:07.948 INFO  [auth] connection opened request_id=r-fb7ac607 status=201 latency_ms=227
+2026-11-12 00:00:07.988 INFO  [search] cache hit request_id=r-1c77dd63 status=304 latency_ms=132
+2026-11-12 00:00:08.006 DEBUG [payments] config reloaded request_id=r-a35053f8 status=200 latency_ms=94
+2026-11-12 00:00:08.013 INFO  [search] GET /healthz 204 in 170 ms request_id=r-c88c83f5
+2026-11-12 00:00:08.026 INFO  [search] DELETE /healthz 200 in 263 ms request_id=r-107e1b09
+2026-11-12 00:00:08.059 INFO  [search] order created order=9787 user=u-8787 amount=192.87 request_id=r-bc93f79b status=204 latency_ms=118
+2026-11-12 00:00:08.071 INFO  [search] order created order=9967 user=u-5967 amount=372.67 request_id=r-d0b4199f status=200 latency_ms=266
+2026-11-12 00:00:08.076 WARN  [search] queue depth high depth=2949 request_id=r-b85648b1 status=429 latency_ms=304
+2026-11-12 00:00:08.077 INFO  [auth] cache miss request_id=r-900094e2 status=201 latency_ms=369
+2026-11-12 00:00:08.104 DEBUG [payments] config reloaded request_id=r-6708e392 status=304 latency_ms=186
+2026-11-12 00:00:08.127 INFO  [search] job finished request_id=r-63f52a44 status=204 latency_ms=8
+2026-11-12 00:00:08.160 INFO  [worker] cache miss request_id=r-86ade088 status=201 latency_ms=4
+2026-11-12 00:00:08.163 INFO  [api] cache hit request_id=r-785b1798 status=201 latency_ms=3
+2026-11-12 00:00:08.168 INFO  [auth] job finished request_id=r-44c1e1d3 status=201 latency_ms=395
+2026-11-12 00:00:08.185 INFO  [api] order created order=9956 user=u-7956 amount=361.56 request_id=r-147d1dd4 status=200 latency_ms=399
+2026-11-12 00:00:08.196 INFO  [payments] cache miss request_id=r-a3c240f6 status=304 latency_ms=6
+2026-11-12 00:00:08.206 INFO  [payments] order created order=9558 user=u-9558 amount=363.58 request_id=r-e8111ca6 status=304 latency_ms=65
+2026-11-12 00:00:08.207 INFO  [api] cache miss request_id=r-313f9881 status=201 latency_ms=286
+2026-11-12 00:00:08.213 INFO  [auth] order created order=8302 user=u-8302 amount=307.02 request_id=r-b727b32e status=201 latency_ms=79
+2026-11-12 00:00:08.248 INFO  [worker] job finished request_id=r-fa668651 status=200 latency_ms=161
+2026-11-12 00:00:08.285 INFO  [search] cache miss request_id=r-d1c70134 status=200 latency_ms=295
+2026-11-12 00:00:08.291 INFO  [auth] job finished request_id=r-4b4509f5 status=201 latency_ms=132
+2026-11-12 00:00:08.291 INFO  [worker] cache hit request_id=r-ee0e3db7 status=200 latency_ms=355
+2026-11-12 00:00:08.308 INFO  [api] job finished request_id=r-1593e003 status=200 latency_ms=341
+2026-11-12 00:00:08.310 INFO  [payments] connection opened request_id=r-641af3ab status=200 latency_ms=296
+2026-11-12 00:00:08.328 INFO  [payments] connection opened request_id=r-846a440c status=200 latency_ms=311
+2026-11-12 00:00:08.337 INFO  [worker] job finished request_id=r-ddcc66b1 status=200 latency_ms=392
+2026-11-12 00:00:08.377 INFO  [api] cache miss request_id=r-d7f72eb4 status=204 latency_ms=250
+2026-11-12 00:00:08.412 WARN  [search] retrying upstream request_id=r-ff95c7a1 status=404 latency_ms=371
+2026-11-12 00:00:08.449 INFO  [search] GET /v1/search 200 in 372 ms request_id=r-4527c66f
+2026-11-12 00:00:08.467 INFO  [payments] cache hit request_id=r-5da4ec9e status=204 latency_ms=0
+2026-11-12 00:00:08.488 INFO  [worker] job finished request_id=r-d5e6d6b8 status=200 latency_ms=306
+2026-11-12 00:00:08.526 INFO  [payments] order created order=8987 user=u-9987 amount=192.87 request_id=r-f627caeb status=200 latency_ms=359
+2026-11-12 00:00:08.561 INFO  [api] DELETE /v1/login 200 in 261 ms request_id=r-ad57a67b
+2026-11-12 00:00:08.570 INFO  [search] job finished request_id=r-ad689c22 status=204 latency_ms=39
+2026-11-12 00:00:08.604 INFO  [worker] job finished request_id=r-a84880fa status=201 latency_ms=18
+2026-11-12 00:00:08.625 INFO  [payments] job finished request_id=r-ec9ee5f8 status=204 latency_ms=283
+2026-11-12 00:00:08.651 INFO  [search] order created order=9479 user=u-6479 amount=284.79 request_id=r-e157a507 status=304 latency_ms=354
+2026-11-12 00:00:08.688 INFO  [search] order created order=9898 user=u-9898 amount=303.98 request_id=r-21bd731a status=204 latency_ms=193
+2026-11-12 00:00:08.700 INFO  [api] cache hit request_id=r-a899afce status=200 latency_ms=196
+2026-11-12 00:00:08.717 INFO  [search] user signed in user=u-3492 request_id=r-5f153594 status=200 latency_ms=100
+2026-11-12 00:00:08.744 INFO  [payments] cache hit request_id=r-48a319a7 status=304 latency_ms=251
+2026-11-12 00:00:08.783 INFO  [auth] user signed in user=u-4386 request_id=r-595158da status=204 latency_ms=354
+2026-11-12 00:00:08.803 INFO  [search] cache miss request_id=r-5964bc6a status=200 latency_ms=311
+2026-11-12 00:00:08.824 INFO  [api] cache miss request_id=r-648154cd status=304 latency_ms=140
+2026-11-12 00:00:08.837 INFO  [search] job finished request_id=r-f1dd0542 status=201 latency_ms=254
+2026-11-12 00:00:08.852 DEBUG [payments] config reloaded request_id=r-e78f0d27 status=201 latency_ms=74
+2026-11-12 00:00:08.872 DEBUG [worker] span exported request_id=r-f097ea14 status=201 latency_ms=257
+2026-11-12 00:00:08.896 INFO  [api] connection opened request_id=r-72051400 status=201 latency_ms=256
+2026-11-12 00:00:08.919 INFO  [payments] user signed in user=u-5359 request_id=r-6ff7abd7 status=201 latency_ms=9
+2026-11-12 00:00:08.935 INFO  [api] PUT /v1/login 304 in 378 ms request_id=r-72c61490
+2026-11-12 00:00:08.973 INFO  [api] GET /v1/login 304 in 192 ms request_id=r-1a8cd3d2
+2026-11-12 00:00:08.975 INFO  [worker] GET /v1/orders 304 in 368 ms request_id=r-269ef331
+2026-11-12 00:00:08.996 DEBUG [auth] db query rows=159 ms=3 request_id=r-a91b049f status=201 latency_ms=203
+2026-11-12 00:00:09.020 INFO  [api] connection opened request_id=r-8ae3e876 status=200 latency_ms=70
+2026-11-12 00:00:09.036 INFO  [search] POST /v1/search 304 in 221 ms request_id=r-92ddd00d
+2026-11-12 00:00:09.065 INFO  [api] user signed in user=u-7344 request_id=r-940a4278 status=204 latency_ms=74
+2026-11-12 00:00:09.083 INFO  [api] job finished request_id=r-2179a030 status=201 latency_ms=351
+2026-11-12 00:00:09.084 INFO  [api] cache miss request_id=r-932bd9ea status=200 latency_ms=250
+2026-11-12 00:00:09.085 WARN  [api] slow request POST /v1/login took 1 ms request_id=r-95dc8c4d
+2026-11-12 00:00:09.120 INFO  [search] order created order=9205 user=u-4205 amount=10.05 request_id=r-3d9c4bd5 status=200 latency_ms=20
+2026-11-12 00:00:09.134 INFO  [auth] user signed in user=u-6870 request_id=r-2605d6c6 status=200 latency_ms=116
+2026-11-12 00:00:09.151 INFO  [api] order created order=9422 user=u-1422 amount=227.22 request_id=r-e5777dae status=200 latency_ms=35
+2026-11-12 00:00:09.159 INFO  [payments] user signed in user=u-1581 request_id=r-c90999ad status=201 latency_ms=387
+2026-11-12 00:00:09.184 INFO  [worker] cache hit request_id=r-8f6b7c30 status=204 latency_ms=187
+2026-11-12 00:00:09.196 INFO  [search] user signed in user=u-2024 request_id=r-6151fc90 status=304 latency_ms=3
+2026-11-12 00:00:09.233 INFO  [auth] cache hit request_id=r-c17ac6e0 status=201 latency_ms=326
+2026-11-12 00:00:09.237 DEBUG [search] pool stats request_id=r-96163b78 status=200 latency_ms=271
+2026-11-12 00:00:09.265 INFO  [payments] cache miss request_id=r-46aac85e status=200 latency_ms=266
+2026-11-12 00:00:09.265 INFO  [worker] connection opened request_id=r-39bbe8dc status=200 latency_ms=193
+2026-11-12 00:00:09.305 INFO  [payments] cache miss request_id=r-62fb149b status=200 latency_ms=246
+2026-11-12 00:00:09.312 INFO  [payments] user signed in user=u-3278 request_id=r-dee0918e status=200 latency_ms=152
+2026-11-12 00:00:09.341 INFO  [worker] order created order=9099 user=u-8099 amount=304.99 request_id=r-4d77877b status=200 latency_ms=19
+2026-11-12 00:00:09.375 INFO  [payments] GET /v1/pay 304 in 227 ms request_id=r-0bdee78f
+2026-11-12 00:00:09.410 INFO  [payments] GET /v1/pay 200 in 372 ms request_id=r-ef440b94
+2026-11-12 00:00:09.444 ERROR [worker] upstream timeout after 25s calling ledger request_id=r-b1d0c2c7 status=502 latency_ms=25442
+2026-11-12 00:00:09.477 INFO  [api] cache miss request_id=r-30049b53 status=200 latency_ms=258
+2026-11-12 00:00:09.482 INFO  [search] order created order=8346 user=u-9346 amount=351.46 request_id=r-9b7fb6ca status=201 latency_ms=362
+2026-11-12 00:00:09.507 INFO  [worker] cache hit request_id=r-b3cb82d2 status=200 latency_ms=362
+2026-11-12 00:00:09.520 INFO  [payments] job finished request_id=r-22d217b4 status=204 latency_ms=103
+2026-11-12 00:00:09.535 INFO  [worker] GET /v1/pay 200 in 279 ms request_id=r-4f23d0c2
+2026-11-12 00:00:09.558 INFO  [api] cache miss request_id=r-4d4595f1 status=204 latency_ms=388
+2026-11-12 00:00:09.587 INFO  [auth] job finished request_id=r-097bf349 status=200 latency_ms=163
+2026-11-12 00:00:09.591 INFO  [api] order created order=9861 user=u-8861 amount=266.61 request_id=r-2b6c1635 status=200 latency_ms=81
+2026-11-12 00:00:09.611 INFO  [auth] order created order=9002 user=u-7002 amount=207.02 request_id=r-2bc7ee7a status=204 latency_ms=95
+2026-11-12 00:00:09.612 INFO  [payments] order created order=8190 user=u-4190 amount=195.90 request_id=r-c5ccff0e status=200 latency_ms=87
+2026-11-12 00:00:09.614 INFO  [payments] cache hit request_id=r-933bd1df status=200 latency_ms=81
+2026-11-12 00:00:09.649 INFO  [auth] GET /healthz 200 in 227 ms request_id=r-f801ec3f
+2026-11-12 00:00:09.685 INFO  [search] cache miss request_id=r-88622288 status=200 latency_ms=239
+2026-11-12 00:00:09.715 INFO  [search] order created order=8445 user=u-1445 amount=50.45 request_id=r-a0b8e77d status=200 latency_ms=160
+2026-11-12 00:00:09.751 DEBUG [search] pool stats request_id=r-9a0a8fab status=200 latency_ms=266
+2026-11-12 00:00:09.761 INFO  [auth] order created order=9564 user=u-3564 amount=369.64 request_id=r-81c5759c status=204 latency_ms=197
+2026-11-12 00:00:09.790 INFO  [api] cache miss request_id=r-0357f8ca status=201 latency_ms=80
+2026-11-12 00:00:09.792 INFO  [search] order created order=9231 user=u-4231 amount=36.31 request_id=r-ac6d77bf status=204 latency_ms=198
+2026-11-12 00:00:09.826 INFO  [payments] user signed in user=u-4185 request_id=r-5c2a2649 status=204 latency_ms=89
+2026-11-12 00:00:09.848 INFO  [payments] DELETE /v1/orders/89266 201 in 334 ms request_id=r-9a1e0709
+2026-11-12 00:00:09.863 INFO  [auth] cache miss request_id=r-78b0111d status=304 latency_ms=193
+2026-11-12 00:00:09.900 INFO  [api] order created order=8618 user=u-3618 amount=223.18 request_id=r-c968ccea status=304 latency_ms=218
+2026-11-12 00:00:09.934 INFO  [worker] order created order=8147 user=u-5147 amount=152.47 request_id=r-97c60963 status=201 latency_ms=24
+2026-11-12 00:00:09.938 INFO  [api] order created order=8841 user=u-4841 amount=46.41 request_id=r-9c7f7d49 status=204 latency_ms=221
+2026-11-12 00:00:09.940 INFO  [worker] connection opened request_id=r-1c036003 status=304 latency_ms=62
+2026-11-12 00:00:09.959 INFO  [auth] POST /v1/orders/93241 200 in 328 ms request_id=r-fb827483
+2026-11-12 00:00:09.977 INFO  [worker] order created order=9006 user=u-1006 amount=211.06 request_id=r-6fdbba1e status=200 latency_ms=38
+2026-11-12 00:00:09.980 INFO  [payments] job finished request_id=r-78a5a3af status=200 latency_ms=122
+2026-11-12 00:00:10.007 DEBUG [search] span exported request_id=r-cbf982ac status=200 latency_ms=173
+2026-11-12 00:00:10.009 INFO  [api] connection opened request_id=r-d880fa76 status=204 latency_ms=25
+2026-11-12 00:00:10.030 INFO  [auth] order created order=9299 user=u-7299 amount=104.99 request_id=r-23f93f93 status=204 latency_ms=188
+2026-11-12 00:00:10.045 INFO  [worker] user signed in user=u-2846 request_id=r-59297f86 status=200 latency_ms=317
+2026-11-12 00:00:10.060 INFO  [worker] cache hit request_id=r-9ffacc41 status=201 latency_ms=372
+2026-11-12 00:00:10.071 INFO  [search] cache hit request_id=r-b1dd0146 status=304 latency_ms=4
+2026-11-12 00:00:10.104 INFO  [search] cache hit request_id=r-bb80a0ac status=204 latency_ms=286
+2026-11-12 00:00:10.121 DEBUG [api] retry scheduled request_id=r-86af4e99 status=200 latency_ms=253
+2026-11-12 00:00:10.127 INFO  [search] cache miss request_id=r-5ef5b1f3 status=201 latency_ms=187
+2026-11-12 00:00:10.139 INFO  [search] connection opened request_id=r-075f4384 status=200 latency_ms=384
+2026-11-12 00:00:10.152 DEBUG [search] retry scheduled request_id=r-66662638 status=200 latency_ms=387
+2026-11-12 00:00:10.182 INFO  [search] job finished request_id=r-612f925f status=201 latency_ms=19
+2026-11-12 00:00:10.185 INFO  [payments] connection opened request_id=r-77197cae status=204 latency_ms=9
+2026-11-12 00:00:10.204 DEBUG [worker] span exported request_id=r-f1fb0ca0 status=304 latency_ms=47
+2026-11-12 00:00:10.244 INFO  [search] order created order=8416 user=u-3416 amount=21.16 request_id=r-4e9de430 status=201 latency_ms=117
+2026-11-12 00:00:10.255 INFO  [auth] cache hit request_id=r-31c45d22 status=200 latency_ms=16
+2026-11-12 00:00:10.289 INFO  [api] DELETE /v1/login 204 in 342 ms request_id=r-fe4a387d
+2026-11-12 00:00:10.321 INFO  [worker] order created order=8653 user=u-3653 amount=258.53 request_id=r-0511404d status=204 latency_ms=85
+2026-11-12 00:00:10.352 INFO  [worker] cache miss request_id=r-aaa73769 status=200 latency_ms=144
+2026-11-12 00:00:10.370 INFO  [payments] order created order=8645 user=u-5645 amount=250.45 request_id=r-058d2705 status=200 latency_ms=38
+2026-11-12 00:00:10.392 INFO  [api] user signed in user=u-2906 request_id=r-561ed7d2 status=304 latency_ms=370
+2026-11-12 00:00:10.409 INFO  [api] connection opened request_id=r-503a2ab1 status=200 latency_ms=145
+2026-11-12 00:00:10.433 INFO  [auth] cache miss request_id=r-505b051a status=200 latency_ms=384
+2026-11-12 00:00:10.455 WARN  [search] queue depth high depth=525 request_id=r-f8f8a239 status=429 latency_ms=206
+2026-11-12 00:00:10.478 INFO  [payments] PUT /v1/orders 204 in 207 ms request_id=r-25ae794b
+2026-11-12 00:00:10.511 INFO  [api] order created order=8894 user=u-6894 amount=99.94 request_id=r-b3da8e1e status=200 latency_ms=94
+2026-11-12 00:00:10.549 WARN  [worker] queue depth high depth=2159 request_id=r-684a447b status=404 latency_ms=335
+2026-11-12 00:00:10.580 INFO  [api] job finished request_id=r-6579e4c7 status=201 latency_ms=357
+2026-11-12 00:00:10.600 INFO  [api] connection opened request_id=r-ab9a44c7 status=204 latency_ms=138
+2026-11-12 00:00:10.618 INFO  [payments] user signed in user=u-9318 request_id=r-1a88f93e status=304 latency_ms=44
+2026-11-12 00:00:10.656 INFO  [payments] cache hit request_id=r-d3a7dc76 status=204 latency_ms=262
+2026-11-12 00:00:10.691 DEBUG [worker] span exported request_id=r-26aea55e status=304 latency_ms=232
+2026-11-12 00:00:10.702 INFO  [auth] user signed in user=u-3960 request_id=r-650c7410 status=204 latency_ms=95
+2026-11-12 00:00:10.724 INFO  [search] job finished request_id=r-621fc9f1 status=200 latency_ms=246
+2026-11-12 00:00:10.745 INFO  [worker] order created order=9525 user=u-1525 amount=330.25 request_id=r-979002d5 status=200 latency_ms=204
+2026-11-12 00:00:10.758 INFO  [worker] connection opened request_id=r-dbbe0f6e status=304 latency_ms=196
+2026-11-12 00:00:10.762 INFO  [worker] user signed in user=u-5662 request_id=r-2b31f29e status=204 latency_ms=86
+2026-11-12 00:00:10.792 INFO  [search] job finished request_id=r-ec0067d3 status=204 latency_ms=375
+2026-11-12 00:00:10.828 INFO  [auth] cache miss request_id=r-3c9582b0 status=200 latency_ms=33
+2026-11-12 00:00:10.841 DEBUG [worker] pool stats request_id=r-d70e3665 status=204 latency_ms=271
+2026-11-12 00:00:10.865 INFO  [worker] order created order=8416 user=u-8416 amount=21.16 request_id=r-8b3b31e0 status=200 latency_ms=86
+2026-11-12 00:00:10.881 DEBUG [payments] retry scheduled request_id=r-e8812267 status=200 latency_ms=64
+2026-11-12 00:00:10.884 INFO  [worker] GET /v1/pay 201 in 240 ms request_id=r-ae0be5d0
+2026-11-12 00:00:10.912 INFO  [auth] GET /v1/pay 200 in 250 ms request_id=r-449a07ce
+2026-11-12 00:00:10.923 INFO  [api] order created order=8216 user=u-2216 amount=221.16 request_id=r-7cc9ed18 status=200 latency_ms=380
+2026-11-12 00:00:10.945 INFO  [payments] cache hit request_id=r-72211d95 status=200 latency_ms=41
+2026-11-12 00:00:10.969 INFO  [auth] order created order=8356 user=u-8356 amount=361.56 request_id=r-8349e634 status=201 latency_ms=55
+2026-11-12 00:00:11.003 INFO  [search] user signed in user=u-2402 request_id=r-49046f4a status=204 latency_ms=283
+2026-11-12 00:00:11.028 INFO  [worker] cache miss request_id=r-539d8de7 status=304 latency_ms=206
+2026-11-12 00:00:11.050 INFO  [auth] GET /v1/orders 201 in 256 ms request_id=r-54c41539
+2026-11-12 00:00:11.077 INFO  [api] cache miss request_id=r-a7c94a48 status=304 latency_ms=143
+2026-11-12 00:00:11.115 INFO  [api] cache miss request_id=r-f0093aa2 status=201 latency_ms=265
+2026-11-12 00:00:11.146 INFO  [worker] connection opened request_id=r-20d13cba status=204 latency_ms=217
+2026-11-12 00:00:11.151 INFO  [api] cache hit request_id=r-70b92571 status=304 latency_ms=352
+2026-11-12 00:00:11.161 INFO  [payments] job finished request_id=r-14af6345 status=200 latency_ms=149
+2026-11-12 00:00:11.178 INFO  [payments] cache hit request_id=r-80ee5826 status=304 latency_ms=94
+2026-11-12 00:00:11.216 DEBUG [payments] pool stats request_id=r-d2626688 status=201 latency_ms=384
+2026-11-12 00:00:11.237 INFO  [api] order created order=8972 user=u-6972 amount=177.72 request_id=r-7276238c status=304 latency_ms=177
+2026-11-12 00:00:11.269 INFO  [api] POST /v1/search 304 in 133 ms request_id=r-b0137919
+2026-11-12 00:00:11.308 INFO  [search] connection opened request_id=r-56ebc90c status=200 latency_ms=57
+2026-11-12 00:00:11.320 INFO  [api] cache miss request_id=r-461fcd41 status=200 latency_ms=60
+2026-11-12 00:00:11.335 INFO  [worker] cache miss request_id=r-78c2a250 status=200 latency_ms=350
+2026-11-12 00:00:11.342 INFO  [worker] cache miss request_id=r-8674e997 status=200 latency_ms=372
+2026-11-12 00:00:11.366 INFO  [search] PUT /v1/orders 304 in 258 ms request_id=r-5656ab31
+2026-11-12 00:00:11.373 INFO  [search] cache miss request_id=r-0f910280 status=201 latency_ms=177
+2026-11-12 00:00:11.406 INFO  [worker] order created order=9096 user=u-7096 amount=301.96 request_id=r-a6513218 status=304 latency_ms=63
+2026-11-12 00:00:11.416 INFO  [api] user signed in user=u-2444 request_id=r-f4e653d4 status=201 latency_ms=224
+2026-11-12 00:00:11.442 INFO  [auth] job finished request_id=r-4baa597d status=204 latency_ms=315
+2026-11-12 00:00:11.456 INFO  [worker] order created order=9619 user=u-6619 amount=24.19 request_id=r-19ed3383 status=304 latency_ms=294
+2026-11-12 00:00:11.470 INFO  [auth] job finished request_id=r-b22cd038 status=200 latency_ms=347
+2026-11-12 00:00:11.473 DEBUG [payments] pool stats request_id=r-ceebb7b6 status=204 latency_ms=230
+2026-11-12 00:00:11.496 INFO  [auth] cache miss request_id=r-6509a362 status=304 latency_ms=303
+2026-11-12 00:00:11.500 INFO  [payments] order created order=8743 user=u-8743 amount=348.43 request_id=r-f050f247 status=304 latency_ms=356
+2026-11-12 00:00:11.514 INFO  [worker] connection opened request_id=r-fc0d9a91 status=200 latency_ms=273
+2026-11-12 00:00:11.549 INFO  [search] job finished request_id=r-de032b19 status=201 latency_ms=350
+2026-11-12 00:00:11.562 INFO  [payments] user signed in user=u-4055 request_id=r-a064c2e7 status=204 latency_ms=65
+2026-11-12 00:00:11.584 INFO  [auth] user signed in user=u-4206 request_id=r-1d3b1c96 status=204 latency_ms=209
+2026-11-12 00:00:11.596 INFO  [auth] connection opened request_id=r-594e8735 status=204 latency_ms=342
+2026-11-12 00:00:11.633 INFO  [api] user signed in user=u-8202 request_id=r-458d1a42 status=200 latency_ms=187
+2026-11-12 00:00:11.664 DEBUG [search] db query rows=82 ms=1 request_id=r-2c6dd57e status=200 latency_ms=321
+2026-11-12 00:00:11.702 INFO  [worker] connection opened request_id=r-b81aeaba status=200 latency_ms=36
+2026-11-12 00:00:11.713 INFO  [worker] cache hit request_id=r-b729775b status=204 latency_ms=170
+2026-11-12 00:00:11.735 INFO  [search] DELETE /v1/login 204 in 308 ms request_id=r-24c5e2c7
+2026-11-12 00:00:11.775 INFO  [auth] cache miss request_id=r-b5c9da3b status=304 latency_ms=399
+2026-11-12 00:00:11.779 INFO  [search] order created order=9878 user=u-1878 amount=283.78 request_id=r-2a821bd6 status=200 latency_ms=215
+2026-11-12 00:00:11.802 INFO  [search] connection opened request_id=r-901d14a7 status=200 latency_ms=321
+2026-11-12 00:00:11.808 INFO  [worker] cache hit request_id=r-c31a893f status=200 latency_ms=72
+2026-11-12 00:00:11.840 INFO  [worker] user signed in user=u-2829 request_id=r-daded9c5 status=304 latency_ms=98
+2026-11-12 00:00:11.857 INFO  [api] job finished request_id=r-79fd59c3 status=201 latency_ms=345
+2026-11-12 00:00:11.893 INFO  [payments] order created order=8840 user=u-4840 amount=45.40 request_id=r-4bea7608 status=201 latency_ms=270
+2026-11-12 00:00:11.925 INFO  [search] job finished request_id=r-a34e8635 status=200 latency_ms=300
+2026-11-12 00:00:11.955 INFO  [worker] job finished request_id=r-fff64114 status=200 latency_ms=12
+2026-11-12 00:00:11.977 INFO  [auth] cache miss request_id=r-553bded3 status=200 latency_ms=151
+2026-11-12 00:00:11.989 INFO  [search] order created order=8273 user=u-6273 amount=278.73 request_id=r-3fa3d801 status=304 latency_ms=279
+2026-11-12 00:00:12.002 INFO  [payments] order created order=8292 user=u-2292 amount=297.92 request_id=r-6a7c8874 status=304 latency_ms=128
+2026-11-12 00:00:12.004 INFO  [api] cache miss request_id=r-8dd54831 status=200 latency_ms=47
+2026-11-12 00:00:12.011 INFO  [search] order created order=9096 user=u-6096 amount=301.96 request_id=r-d61519d8 status=200 latency_ms=245
+2026-11-12 00:00:12.024 INFO  [auth] job finished request_id=r-9ccf64fa status=200 latency_ms=392
+2026-11-12 00:00:12.025 DEBUG [payments] config reloaded request_id=r-c63992fa status=204 latency_ms=68
+2026-11-12 00:00:12.062 INFO  [payments] user signed in user=u-1728 request_id=r-cc9a0460 status=200 latency_ms=260
+2026-11-12 00:00:12.076 INFO  [api] user signed in user=u-8395 request_id=r-655a8623 status=304 latency_ms=344
+2026-11-12 00:00:12.084 WARN  [payments] deprecated header request_id=r-3ec8a08c status=200 latency_ms=315
+2026-11-12 00:00:12.094 INFO  [api] order created order=9072 user=u-8072 amount=277.72 request_id=r-2c8785a0 status=200 latency_ms=105
+2026-11-12 00:00:12.124 INFO  [search] cache hit request_id=r-e3c2b62e status=304 latency_ms=138
+2026-11-12 00:00:12.124 DEBUG [payments] retry scheduled request_id=r-96abe858 status=201 latency_ms=253
+2026-11-12 00:00:12.159 INFO  [search] cache hit request_id=r-46b67a9b status=200 latency_ms=46
+2026-11-12 00:00:12.164 WARN  [api] slow request GET /v1/orders took 69 ms request_id=r-7e41e152
+2026-11-12 00:00:12.182 INFO  [payments] job finished request_id=r-4fd7ce7a status=201 latency_ms=191
+2026-11-12 00:00:12.220 INFO  [payments] connection opened request_id=r-a68a9162 status=200 latency_ms=138
+2026-11-12 00:00:12.253 INFO  [payments] cache hit request_id=r-9368a939 status=204 latency_ms=367
+2026-11-12 00:00:12.260 INFO  [auth] cache hit request_id=r-3d70dcf0 status=204 latency_ms=374
+2026-11-12 00:00:12.285 INFO  [auth] job finished request_id=r-3faa88ef status=200 latency_ms=50
+2026-11-12 00:00:12.304 INFO  [worker] cache hit request_id=r-7556a4ab status=200 latency_ms=332
+2026-11-12 00:00:12.335 INFO  [worker] cache miss request_id=r-4699cd97 status=200 latency_ms=376
+2026-11-12 00:00:12.342 INFO  [auth] user signed in user=u-1155 request_id=r-8447295b status=204 latency_ms=278
+2026-11-12 00:00:12.360 INFO  [worker] GET /v1/search 200 in 176 ms request_id=r-6ca4b4d6
+2026-11-12 00:00:12.386 INFO  [payments] cache miss request_id=r-2258f981 status=201 latency_ms=387
+2026-11-12 00:00:12.418 DEBUG [payments] config reloaded request_id=r-8528c8c7 status=204 latency_ms=315
+2026-11-12 00:00:12.454 INFO  [auth] GET /v1/search 201 in 375 ms request_id=r-3cb5298f
+2026-11-12 00:00:12.458 DEBUG [worker] config reloaded request_id=r-4c2ea5a2 status=200 latency_ms=34
+2026-11-12 00:00:12.461 INFO  [worker] job finished request_id=r-b2a3ca71 status=200 latency_ms=183
+2026-11-12 00:00:12.470 WARN  [payments] deprecated header request_id=r-0b90ce7c status=404 latency_ms=305
+2026-11-12 00:00:12.471 INFO  [auth] order created order=8017 user=u-5017 amount=22.17 request_id=r-8a15f201 status=200 latency_ms=110

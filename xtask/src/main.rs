@@ -1,7 +1,7 @@
 //! `cargo xtask <task>`: the repo's gates and tools.
 //!
 //! - `ci`: fmt check, clippy `-D warnings` on every target, then the tests (`--no-fail-fast`).
-//! - `fixtures [--size 100M] [--format jsonl|logfmt|plain|syslog|access] [--seed N] [--out PATH]`:
+//! - `fixtures [--size 100M] [--format plain|jsonl|logfmt|syslog|access] [--seed N] [--out PATH]`:
 //!   write a realistic log file, the same bytes for the same arguments (see `fixtures.rs`).
 
 use std::path::{Path, PathBuf};
@@ -36,7 +36,7 @@ fn main() -> ExitCode {
     let result = match args.first().map(String::as_str) {
         Some("ci") => ci(),
         Some("fixtures") => fixtures::main(args.get(1..).unwrap_or_default()),
-        _ => Err("usage: cargo xtask ci | fixtures [--size 100M] [--format jsonl|logfmt|plain|syslog|access] [--seed N] [--out PATH]".into()),
+        _ => Err("usage: cargo xtask ci | fixtures [--size 100M] [--format plain|jsonl|logfmt|syslog|access] [--seed N] [--out PATH]".into()),
     };
     match result {
         Ok(()) => ExitCode::SUCCESS,

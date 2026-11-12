@@ -3,7 +3,7 @@
 //!
 //! Lines look like a small service mesh's logs: five services, levels mostly info with some debug,
 //! warnings and rare errors in bursts, request ids, latencies, HTTP statuses, a stack trace now and
-//! then (plain format), and a few secrets for the redaction tests (bearer tokens, emails, AWS key
+//! then (plain format, the default), and a few secrets for the redaction tests (bearer tokens, emails, AWS key
 //! ids). Times start at 2026-11-12T00:00:00Z and advance 0–40 ms a line.
 
 use std::fmt::Write as _;
@@ -137,18 +137,7 @@ fn write_line(out: &mut String, f: Fmt, e: &Event, seq: u64) {
             }
             out.push('\n');
         }
-        Fmt::Plain => {
-            let t = ts.replace('T', " ").trim_end_matches('Z').to_string();
-            let _ = write!(out, "[{t}] {:<5} {}: {} (request r-{:08x}, {} ms)", e.level.to_uppercase(), e.service, e.msg, e.request, e.latency_ms);
-            if let Some(s) = &e.secret {
-                let _ = write!(out, " auth={s}");
-            }
-            out.push('\n');
-            if e.trace {
-                let _ = writeln!(out, "Traceback (most recent call last):\n  File \"{}/handler.py\", line {}, in handle", e.service, 10 + seq % 300);
-                let _ = writeln!(out, "    resp = client.call(req, timeout=30)\nTimeoutError: {}", e.msg);
-            }
-        }
+        Fmt::Plain => plain_line(out, e, seq),
         Fmt::Syslog => {
             let pri = match e.level {
                 "error" => 11,
@@ -172,6 +161,85 @@ fn write_line(out: &mut String, f: Fmt, e: &Event, seq: u64) {
                 e.latency_ms
             );
         }
+    }
+}
+
+/// A plain text line as a person would read and write it: `2026-11-12 10:00:01.513 ERROR
+/// [payments] upstream timeout after 5s request_id=r-0000beef status=504 latency_ms=5012`, and
+/// after some errors a stack trace (Java for the JVM services, Python for the others) whose lines
+/// have no time of their own. Extra variety comes from the event's request id and `seq`, not the
+/// generator, so the other formats' bytes do not depend on this one.
+fn plain_line(out: &mut String, e: &Event, seq: u64) {
+    let ts = e.time.to_rfc3339();
+    let t = ts.get(..23).unwrap_or(&ts).replace('T', " ");
+    let _ = write!(out, "{t} {:<5} [{}] ", e.level.to_uppercase(), e.service);
+    let user = format!("u-{}", 1000 + e.request % 9000);
+    let http = matches!(e.msg, "request handled" | "slow request");
+    match e.msg {
+        "request handled" => {
+            let _ = write!(out, "{} {} {} in {} ms", e.method, e.path, e.status, e.latency_ms);
+        }
+        "user signed in" => {
+            let _ = write!(out, "user signed in user={user}");
+        }
+        "order created" => {
+            let _ = write!(out, "order created order={} user={user} amount={}.{:02}", 8000 + e.request % 2000, 5 + e.request % 400, e.request % 100);
+        }
+        "slow request" => {
+            let _ = write!(out, "slow request {} {} took {} ms", e.method, e.path, e.latency_ms);
+        }
+        "upstream timeout" => {
+            let _ = write!(out, "upstream timeout after {}s calling ledger", e.latency_ms / 1000);
+        }
+        "db query" => {
+            let _ = write!(out, "db query rows={} ms={}", e.request % 500, e.latency_ms % 40);
+        }
+        "queue depth high" => {
+            let _ = write!(out, "queue depth high depth={}", 500 + e.request % 4000);
+        }
+        msg => out.push_str(msg),
+    }
+    let _ = write!(out, " request_id=r-{:08x}", e.request);
+    if !http {
+        let _ = write!(out, " status={} latency_ms={}", e.status, e.latency_ms);
+    }
+    if let Some(s) = &e.secret {
+        let _ = if s.contains(' ') { write!(out, " auth=\"{s}\"") } else { write!(out, " auth={s}") };
+    }
+    out.push('\n');
+    if !e.trace {
+        return;
+    }
+    let line = 40 + (seq % 260);
+    if matches!(e.service, "search" | "worker") {
+        let err = match e.msg {
+            "upstream timeout" => "TimeoutError",
+            "connection refused" => "ConnectionRefusedError",
+            "deadlock detected" => "psycopg.errors.DeadlockDetected",
+            _ => "RuntimeError",
+        };
+        let _ = writeln!(out, "Traceback (most recent call last):");
+        let _ = writeln!(
+            out,
+            "  File \"/srv/{0}/app/handlers.py\", line {line}, in handle\n    result = self.client.call(request, timeout=30)",
+            e.service
+        );
+        let _ = writeln!(out, "  File \"/srv/{0}/app/client.py\", line {1}, in call\n    raise {err}(msg)", e.service, 12 + seq % 90);
+        let _ = writeln!(out, "{err}: {}", e.msg);
+    } else {
+        let (class, frame) = match e.msg {
+            "upstream timeout" => ("java.net.SocketTimeoutException", "http.LedgerClient.send"),
+            "connection refused" => ("java.net.ConnectException", "http.LedgerClient.connect"),
+            "payment declined" => ("com.acme.payments.DeclinedException", "card.Authorizer.authorize"),
+            "deadlock detected" => ("java.sql.SQLTransactionRollbackException", "db.OrderRepository.save"),
+            _ => ("java.security.SignatureException", "auth.TokenVerifier.verify"),
+        };
+        let file = frame.rsplit('.').nth(1).unwrap_or("Main");
+        let _ = writeln!(out, "{class}: {}", e.msg);
+        let _ = writeln!(out, "\tat com.acme.{}.{frame}({file}.java:{line})", e.service);
+        let _ = writeln!(out, "\tat com.acme.{0}.OrderHandler.handle(OrderHandler.java:{1})", e.service, 60 + seq % 40);
+        let _ = writeln!(out, "\tat com.acme.platform.Router.dispatch(Router.java:141)");
+        let _ = writeln!(out, "\t... {} more", 18 + seq % 12);
     }
 }
 
@@ -216,7 +284,7 @@ fn generate(f: Fmt, size: u64, seed: u64, out: &mut dyn Write) -> Result<u64, St
 }
 
 pub fn main(args: &[String]) -> Result<(), String> {
-    let (mut size, mut fmt, mut seed, mut out) = (100u64 << 20, Fmt::Jsonl, 42u64, None::<PathBuf>);
+    let (mut size, mut fmt, mut seed, mut out) = (100u64 << 20, Fmt::Plain, 42u64, None::<PathBuf>);
     let mut it = args.iter();
     while let Some(a) = it.next() {
         let mut val = || it.next().cloned().ok_or_else(|| format!("{a} needs a value"));
@@ -231,7 +299,7 @@ pub fn main(args: &[String]) -> Result<(), String> {
                     "plain" => Fmt::Plain,
                     "syslog" => Fmt::Syslog,
                     "access" => Fmt::Access,
-                    other => return Err(format!("unknown format `{other}` (jsonl, logfmt, plain, syslog, access)")),
+                    other => return Err(format!("unknown format `{other}` (plain, jsonl, logfmt, syslog, access)")),
                 }
             }
             other => return Err(format!("unknown argument `{other}`")),

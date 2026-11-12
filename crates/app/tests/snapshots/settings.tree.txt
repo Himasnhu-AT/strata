@@ -6,57 +6,68 @@
 - menu "Bookmarks" [id=menu.5]
 - menu "Agent" [id=menu.6]
 - status "Status bar" [id=strata.status]
-  - status "360 lines" [id=strata.status.lines]
+  - status "629 lines" [id=strata.status.lines]
   - status "64 KB" [id=strata.status.size]
-  - status "JSON lines" [id=strata.status.format]
+  - status "Timestamped text" [id=strata.status.format]
   - status "built with ashlar" [id=strata.status.ashlar]
-- searchbox "Search  ⌘F" [id=strata.toolbar.search] [value="timeout"]
+- searchbox "Search  ⌘F" [id=strata.toolbar.search] [value="deadlock"]
 - button "Clear search" [id=strata.toolbar.search.clear]
 - checkbox "Regular expression" [id=strata.toolbar.regex] [unchecked]
 - checkbox "Match case" [id=strata.toolbar.case] [unchecked]
 - checkbox "Whole word" [id=strata.toolbar.word] [unchecked]
-- status "2 matches" [id=strata.toolbar.matches]
-- checkbox "Error 13" [id=strata.toolbar.level.error] [value="13"] [checked]
-- checkbox "Warn 32" [id=strata.toolbar.level.warn] [value="32"] [checked]
-- checkbox "Info 271" [id=strata.toolbar.level.info] [value="271"] [checked]
-- checkbox "Debug 44" [id=strata.toolbar.level.debug] [value="44"] [checked]
+- status "1 of 8" [id=strata.toolbar.matches]
+- checkbox "Error 14" [id=strata.toolbar.level.error] [value="14"] [checked]
+- checkbox "Warn 40" [id=strata.toolbar.level.warn] [value="40"] [checked]
+- checkbox "Info 485" [id=strata.toolbar.level.info] [value="485"] [checked]
+- checkbox "Debug 69" [id=strata.toolbar.level.debug] [value="69"] [checked]
 - textbox "Filter" [id=strata.toolbar.filter_field] [value=""]
 - checkbox "Follow" [id=strata.toolbar.follow] [unchecked]
-- list "Files, bookmarks and filters" [id=strata.sidebar] [value="payments-api.jsonl"]
+- list "Files, bookmarks and filters" [id=strata.sidebar] [value="payments-api.log"]
   - button "Files" [id=strata.sidebar.section.0] [value="1"] [selected]
-  - listitem "payments-api.jsonl" [id=strata.sidebar.section.0.item.0] [value="64 KB"] [selected]
+  - listitem "payments-api.log" [id=strata.sidebar.section.0.item.0] [value="64 KB"] [selected]
   - button "Bookmarks" [id=strata.sidebar.section.1] [value="0"] [selected]
   - button "Saved filters" [id=strata.sidebar.section.2] [value="0"] [selected]
   - button "Recent" [id=strata.sidebar.section.3] [value="0"] [selected]
-- generic "Lines over time: 121 buckets, 360 lines; drag to choose a time range" [id=strata.histogram]
-- label "Line 34" [id=strata.detail.title]
-- label "00:00:00.731 · error · worker" [id=strata.detail.summary]
+- generic "Lines over time: 121 buckets, 608 lines; drag to choose a time range" [id=strata.histogram]
+- label "Line 35" [id=strata.detail.title]
+- label "00:00:00.742 · error · auth · 5 more lines" [id=strata.detail.summary]
 - button "Filter by service" [id=strata.detail.filter]
-- button "Copy JSON" [id=strata.detail.copy_json]
 - button "Copy line" [id=strata.detail.copy_line]
-- document [id=strata.detail.json]
-  - label "{"
-    - label "{" [id=strata.detail.json.line.1]
-  - label "  /"ts/": /"2026-11-12T00:00:00.731Z/","
-  - label "  /"level/": /"error/","
-    - label "  /"level/": /"error/"," [id=strata.detail.json.line.3]
-  - label "  /"service/": /"worker/","
-    - label "  /"service/": /"worker/"," [id=strata.detail.json.line.4]
-  - label "  /"msg/": /"connection refused/","
-    - label "  /"msg/": /"connection refused/"," [id=strata.detail.json.line.5]
-  - label "  /"request_id/": /"r-403cca04/","
-    - label "  /"request_id/": /"r-403cca04/"," [id=strata.detail.json.line.6]
-  - label "  /"method/": /"GET/","
-    - label "  /"method/": /"GET/"," [id=strata.detail.json.line.7]
-  - label "  /"path/": /"/v1/login/","
-    - label "  /"path/": /"/v1/login/"," [id=strata.detail.json.line.8]
-  - label "  /"status/": 502,"
-    - label "  /"status/": 502," [id=strata.detail.json.line.9]
-  - label "  /"latency_ms/": 25625"
-    - label "  /"latency_ms/": 25625" [id=strata.detail.json.line.10]
-  - label "}"
-    - label "}" [id=strata.detail.json.line.11]
-  - scrollbar
+- document [id=strata.detail.raw]
+  - label "2026-11-12 00:00:00.742 ERROR [auth] deadlock detected request_id=r-ef5de17c sta…"
+    - label "2026-11-12 00:00:00.742 ERROR [auth] deadlock detected request_id=r-ef5de17c sta…" [id=strata.detail.raw.line.1]
+  - label "java.sql.SQLTransactionRollbackException: deadlock detected"
+    - label "java.sql.SQLTransactionRollbackException: deadlock detected" [id=strata.detail.raw.line.2]
+  - label "    at com.acme.auth.db.OrderRepository.save(OrderRepository.java:74)"
+    - label "    at com.acme.auth.db.OrderRepository.save(OrderRepository.java:74)" [id=strata.detail.raw.line.3]
+  - label "    at com.acme.auth.OrderHandler.handle(OrderHandler.java:94)"
+    - label "    at com.acme.auth.OrderHandler.handle(OrderHandler.java:94)" [id=strata.detail.raw.line.4]
+  - label "    at com.acme.platform.Router.dispatch(Router.java:141)"
+    - label "    at com.acme.platform.Router.dispatch(Router.java:141)" [id=strata.detail.raw.line.5]
+  - label "    ... 28 more"
+    - label "    ... 28 more" [id=strata.detail.raw.line.6]
+- label "time: 2026-11-12T00:00:00.742Z" [id=strata.detail.part.time]
+  - label "time"
+  - label "2026-11-12T00:00:00.742Z"
+- label "level"
+- label "error"
+- label "level: error" [id=strata.detail.part.level]
+- label "service"
+- label "auth"
+- label "service: auth" [id=strata.detail.part.service]
+- label "message: deadlock detected request_id=r-ef5de17c status=503 latency_ms=12399" [id=strata.detail.part.message]
+  - label "message"
+  - label "deadlock detected request_id=r-ef5de17c status=503 latency_ms=12399"
+- label "request_id"
+- label "r-ef5de17c"
+- label "request_id: r-ef5de17c" [id=strata.detail.part.request_id]
+- label "status"
+- label "503"
+- label "status: 503" [id=strata.detail.part.status]
+- label "latency_ms"
+- label "12399"
+- label "latency_ms: 12399" [id=strata.detail.part.latency_ms]
+- scrollbar
 - generic
 - table "Log lines" [id=strata.table]
   - row [offscreen]
@@ -70,106 +81,29 @@
     - group
     - columnheader "Message" [id=strata.table.header.4]
     - group
-  - row "Line 19, debug, 00:00:00.437, db query" [offscreen]
+  - row "Line 26, debug, 00:00:00.576, pool stats request_id=r-26372696 status=200 latenc…" [offscreen]
     - cell [offscreen]
-      - label "19" [offscreen]
+      - label "26" [offscreen]
     - cell [offscreen]
-      - label "00:00:00.437" [offscreen]
+      - label "00:00:00.576" [offscreen]
     - cell [offscreen]
       - label "debug" [offscreen]
     - cell [offscreen]
-      - label "auth" [offscreen]
+      - label "payments" [offscreen]
     - cell [offscreen]
-      - label "db query" [offscreen]
-  - row "Line 20, info, 00:00:00.471, cache miss" [offscreen]
+      - label "pool stats request_id=r-26372696 status=200 latency_ms=347" [offscreen]
+  - row "Line 27, info, 00:00:00.592, connection opened request_id=r-3f074e79 status=304 …" [offscreen]
     - cell [offscreen]
-      - label "20" [offscreen]
+      - label "27" [offscreen]
     - cell [offscreen]
-      - label "00:00:00.471" [offscreen]
+      - label "00:00:00.592" [offscreen]
     - cell [offscreen]
       - label "info" [offscreen]
     - cell [offscreen]
-      - label "auth" [offscreen]
+      - label "worker" [offscreen]
     - cell [offscreen]
-      - label "cache miss" [offscreen]
-  - listitem "Line 21, info, 00:00:00.493, user signed in" [id=strata.table.row.20]
-    - cell
-      - label "21"
-    - cell
-      - label "00:00:00.493"
-    - cell
-      - label "info"
-    - cell
-      - label "auth"
-    - cell
-      - label "user signed in"
-  - listitem "Line 22, info, 00:00:00.513, cache miss" [id=strata.table.row.21]
-    - cell
-      - label "22"
-    - cell
-      - label "00:00:00.513"
-    - cell
-      - label "info"
-    - cell
-      - label "auth"
-    - cell
-      - label "cache miss"
-  - listitem "Line 23, debug, 00:00:00.514, config reloaded" [id=strata.table.row.22]
-    - cell
-      - label "23"
-    - cell
-      - label "00:00:00.514"
-    - cell
-      - label "debug"
-    - cell
-      - label "api"
-    - cell
-      - label "config reloaded"
-  - listitem "Line 24, info, 00:00:00.533, request handled" [id=strata.table.row.23]
-    - cell
-      - label "24"
-    - cell
-      - label "00:00:00.533"
-    - cell
-      - label "info"
-    - cell
-      - label "api"
-    - cell
-      - label "request handled"
-  - listitem "Line 25, info, 00:00:00.566, order created" [id=strata.table.row.24]
-    - cell
-      - label "25"
-    - cell
-      - label "00:00:00.566"
-    - cell
-      - label "info"
-    - cell
-      - label "payments"
-    - cell
-      - label "order created"
-  - listitem "Line 26, debug, 00:00:00.576, pool stats" [id=strata.table.row.25]
-    - cell
-      - label "26"
-    - cell
-      - label "00:00:00.576"
-    - cell
-      - label "debug"
-    - cell
-      - label "payments"
-    - cell
-      - label "pool stats"
-  - listitem "Line 27, info, 00:00:00.592, connection opened" [id=strata.table.row.26]
-    - cell
-      - label "27"
-    - cell
-      - label "00:00:00.592"
-    - cell
-      - label "info"
-    - cell
-      - label "worker"
-    - cell
-      - label "connection opened"
-  - listitem "Line 28, info, 00:00:00.626, job finished" [id=strata.table.row.27]
+      - label "connection opened request_id=r-3f074e79 status=304 latency_ms=236" [offscreen]
+  - listitem "Line 28, info, 00:00:00.626, job finished request_id=r-2d3cb50f status=204 laten…" [id=strata.table.row.27]
     - cell
       - label "28"
     - cell
@@ -179,8 +113,8 @@
     - cell
       - label "worker"
     - cell
-      - label "job finished"
-  - listitem "Line 29, info, 00:00:00.656, job finished" [id=strata.table.row.28]
+      - label "job finished request_id=r-2d3cb50f status=204 latency_ms=20"
+  - listitem "Line 29, info, 00:00:00.656, job finished request_id=r-4fbaab0d status=304 laten…" [id=strata.table.row.28]
     - cell
       - label "29"
     - cell
@@ -190,8 +124,8 @@
     - cell
       - label "worker"
     - cell
-      - label "job finished"
-  - listitem "Line 30, info, 00:00:00.666, order created" [id=strata.table.row.29]
+      - label "job finished request_id=r-4fbaab0d status=304 latency_ms=368"
+  - listitem "Line 30, info, 00:00:00.666, order created order=9493 user=u-1493 amount=298.93 …" [id=strata.table.row.29]
     - cell
       - label "30"
     - cell
@@ -201,8 +135,8 @@
     - cell
       - label "payments"
     - cell
-      - label "order created"
-  - listitem "Line 31, info, 00:00:00.688, request handled" [id=strata.table.row.30]
+      - label "order created order=9493 user=u-1493 amount=298.93 request_id=r-da555d25 status=…"
+  - listitem "Line 31, info, 00:00:00.688, PUT /v1/login 201 in 56 ms request_id=r-046c186e" [id=strata.table.row.30]
     - cell
       - label "31"
     - cell
@@ -212,8 +146,8 @@
     - cell
       - label "payments"
     - cell
-      - label "request handled"
-  - listitem "Line 32, info, 00:00:00.692, job finished" [id=strata.table.row.31]
+      - label "PUT /v1/login 201 in 56 ms request_id=r-046c186e"
+  - listitem "Line 32, info, 00:00:00.692, job finished request_id=r-987b3fbc status=200 laten…" [id=strata.table.row.31]
     - cell
       - label "32"
     - cell
@@ -223,8 +157,8 @@
     - cell
       - label "worker"
     - cell
-      - label "job finished"
-  - listitem "Line 33, warn, 00:00:00.727, queue depth high" [id=strata.table.row.32]
+      - label "job finished request_id=r-987b3fbc status=200 latency_ms=55"
+  - listitem "Line 33, warn, 00:00:00.727, queue depth high depth=2774 request_id=r-27251782 s…" [id=strata.table.row.32]
     - cell
       - label "33"
     - cell
@@ -234,8 +168,8 @@
     - cell
       - label "auth"
     - cell
-      - label "queue depth high"
-  - listitem "Line 34, error, 00:00:00.731, connection refused" [id=strata.table.row.33] [selected]
+      - label "queue depth high depth=2774 request_id=r-27251782 status=200 latency_ms=45"
+  - listitem "Line 34, error, 00:00:00.731, connection refused request_id=r-403cca04 status=50…" [id=strata.table.row.33]
     - cell
       - label "34"
     - cell
@@ -245,32 +179,72 @@
     - cell
       - label "worker"
     - cell
-      - label "connection refused"
-  - row "Line 35, error, 00:00:00.742, deadlock detected" [offscreen]
+      - label "connection refused request_id=r-403cca04 status=502 latency_ms=25625"
+  - listitem "Line 35, error, 00:00:00.742, deadlock detected request_id=r-ef5de17c status=503…" [id=strata.table.row.34] [selected]
+    - cell
+      - label "35"
+    - cell
+      - label "00:00:00.742"
+    - cell
+      - label "error"
+    - cell
+      - label "auth"
+    - cell
+      - label "deadlock detected request_id=r-ef5de17c status=503 latency_ms=12399"
+  - listitem "Line 36, continued, java.sql.SQLTransactionRollbackException: deadlock detected" [id=strata.table.row.35]
+    - cell
+      - label "36"
     - cell [offscreen]
-      - label "35" [offscreen]
     - cell [offscreen]
-      - label "00:00:00.742" [offscreen]
     - cell [offscreen]
-      - label "error" [offscreen]
+    - cell
+      - label "java.sql.SQLTransactionRollbackException: deadlock detected"
+  - listitem "Line 37, continued,     at com.acme.auth.db.OrderRepository.save(OrderRepository…" [id=strata.table.row.36]
+    - cell
+      - label "37"
     - cell [offscreen]
-      - label "auth" [offscreen]
     - cell [offscreen]
-      - label "deadlock detected" [offscreen]
-  - row "Line 36, warn, 00:00:00.771, slow request" [offscreen]
     - cell [offscreen]
-      - label "36" [offscreen]
+    - cell
+      - label "    at com.acme.auth.db.OrderRepository.save(OrderRepository.java:74)"
+  - listitem "Line 38, continued,     at com.acme.auth.OrderHandler.handle(OrderHandler.java:9…" [id=strata.table.row.37]
+    - cell
+      - label "38"
     - cell [offscreen]
-      - label "00:00:00.771" [offscreen]
     - cell [offscreen]
-      - label "warn" [offscreen]
     - cell [offscreen]
-      - label "worker" [offscreen]
+    - cell
+      - label "    at com.acme.auth.OrderHandler.handle(OrderHandler.java:94)"
+  - listitem "Line 39, continued,     at com.acme.platform.Router.dispatch(Router.java:141)" [id=strata.table.row.38]
+    - cell
+      - label "39"
     - cell [offscreen]
-      - label "slow request" [offscreen]
-  - row "Line 37, error, 00:00:00.810, connection refused" [offscreen]
     - cell [offscreen]
-      - label "37" [offscreen]
+    - cell [offscreen]
+    - cell
+      - label "    at com.acme.platform.Router.dispatch(Router.java:141)"
+  - listitem "Line 40, continued,     ... 28 more" [id=strata.table.row.39]
+    - cell
+      - label "40"
+    - cell [offscreen]
+    - cell [offscreen]
+    - cell [offscreen]
+    - cell
+      - label "    ... 28 more"
+  - listitem "Line 41, warn, 00:00:00.771, slow request GET /v1/orders/87719 took 296 ms reque…" [id=strata.table.row.40]
+    - cell
+      - label "41"
+    - cell
+      - label "00:00:00.771"
+    - cell
+      - label "warn"
+    - cell
+      - label "worker"
+    - cell
+      - label "slow request GET /v1/orders/87719 took 296 ms request_id=r-85773b8f"
+  - row "Line 42, error, 00:00:00.810, connection refused request_id=r-0074af1b status=50…" [offscreen]
+    - cell [offscreen]
+      - label "42" [offscreen]
     - cell [offscreen]
       - label "00:00:00.810" [offscreen]
     - cell [offscreen]
@@ -278,8 +252,29 @@
     - cell [offscreen]
       - label "search" [offscreen]
     - cell [offscreen]
-      - label "connection refused" [offscreen]
-    - label "  /"ts/": /"2026-11-12T00:00:00.731Z/"," [id=strata.detail.json.line.2]
+      - label "connection refused request_id=r-0074af1b status=503 latency_ms=6801" [offscreen]
+  - row "Line 43, error, 00:00:00.814, invalid signature request_id=r-1dc8daf6 status=504…" [offscreen]
+    - cell [offscreen]
+      - label "43" [offscreen]
+    - cell [offscreen]
+      - label "00:00:00.814" [offscreen]
+    - cell [offscreen]
+      - label "error" [offscreen]
+    - cell [offscreen]
+      - label "worker" [offscreen]
+    - cell [offscreen]
+      - label "invalid signature request_id=r-1dc8daf6 status=504 latency_ms=14824" [offscreen]
+  - row "Line 44, error, 00:00:00.825, connection refused request_id=r-ab4da669 status=50…" [offscreen]
+    - cell [offscreen]
+      - label "44" [offscreen]
+    - cell [offscreen]
+      - label "00:00:00.825" [offscreen]
+    - cell [offscreen]
+      - label "error" [offscreen]
+    - cell [offscreen]
+      - label "api" [offscreen]
+    - cell [offscreen]
+      - label "connection refused request_id=r-ab4da669 status=504 latency_ms=16468" [offscreen]
   - scrollbar
   - dialog "Settings"
     - dialog "Settings" [id=strata.settings]
