@@ -1,0 +1,32 @@
+[package]
+name = "strata"
+description = "A log viewer for huge files that you and your AI agent can read together"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[lib]
+name = "strata"
+path = "src/lib.rs"
+
+[[bin]]
+name = "strata"
+path = "src/main.rs"
+
+[[bin]]
+name = "strata-cli"
+path = "src/bin/strata-cli.rs"
+
+[dependencies]
+ashlar = { workspace = true }
+strata-core = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }

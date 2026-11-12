@@ -1,0 +1,20 @@
+{
+  "bucket": "1m",
+  "buckets": [
+    {
+      "levels": {
+        "debug": 120400,
+        "error": 5420,
+        "fatal": 0,
+        "info": 1120013,
+        "none": 80,
+        "trace": 0,
+        "warn": 38200
+      },
+      "start": "2026-11-12T14:00:00.000Z"
+    }
+  ],
+  "file": 1,
+  "omitted": 0,
+  "untimed": 80
+}

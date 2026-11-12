@@ -1,0 +1,22 @@
+{
+  "fields": [
+    {
+      "distinct": 14,
+      "lines": 1200000,
+      "name": "status",
+      "type": "number",
+      "values": [
+        {
+          "count": 1100000,
+          "value": "200"
+        },
+        {
+          "count": 5100,
+          "value": "502"
+        }
+      ]
+    }
+  ],
+  "file": 1,
+  "omitted": 0
+}

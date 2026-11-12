@@ -1,0 +1,6 @@
+# The toolchain for development and CI (the same as ashlar's), so a new stable release never
+# changes the result of `cargo xtask ci` by itself. Bump it on purpose, in its own commit.
+[toolchain]
+channel = "1.99.1"
+components = ["rustfmt", "clippy"]
+profile = "minimal"

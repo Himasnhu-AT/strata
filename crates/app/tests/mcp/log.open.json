@@ -1,0 +1,14 @@
+{
+  "bytes": 104857600,
+  "file": 1,
+  "following": false,
+  "format": "jsonl",
+  "indexing": {
+    "done_bytes": 52428800,
+    "error": null,
+    "state": "running",
+    "total_bytes": 104857600
+  },
+  "lines": 412000,
+  "path": "/var/log/payments/app.jsonl"
+}

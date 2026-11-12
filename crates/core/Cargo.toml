@@ -1,0 +1,31 @@
+[package]
+name = "strata-core"
+description = "Strata's headless core: file index, formats, search, filters, histogram, redaction"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+# The workspace lints, except `unsafe_code`: `deny` instead of `forbid`, so the one module that
+# maps files (`mmap.rs`) can `#![allow(unsafe_code)]` with a `// SAFETY:` comment on every block.
+# Keep this list in sync with `[workspace.lints]` in the root Cargo.toml.
+[lints.rust]
+unsafe_code = "deny"
+
+[lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+unimplemented = "deny"
+todo = "deny"
+unreachable = "deny"
+dbg_macro = "warn"
+too_many_arguments = "allow"
+type_complexity = "allow"
+
+[dependencies]
+serde = { workspace = true }
+
+[dev-dependencies]
+serde_json = { workspace = true }

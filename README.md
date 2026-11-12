@@ -18,5 +18,6 @@ window does no work.
 
 - [Plan](docs/PLAN.md): features, MCP commands, architecture, benchmarks, milestones
 - [Design](docs/DESIGN.md): screens, interactions, keyboard map
+- [Contracts](docs/contracts.md): the frozen command, type and MCP contracts the streams build on
 
 License: to be decided before the first release (BSD-3-Clause, like ashlar, is the default choice).

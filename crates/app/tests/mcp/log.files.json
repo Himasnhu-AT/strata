@@ -1,0 +1,40 @@
+{
+  "files": [
+    {
+      "active": true,
+      "bytes": 104857600,
+      "file": 1,
+      "following": true,
+      "format": "jsonl",
+      "indexing": {
+        "done_bytes": 104857600,
+        "error": null,
+        "state": "complete",
+        "total_bytes": 104857600
+      },
+      "lines": 1284113,
+      "path": "/var/log/payments/app.jsonl",
+      "time_span": {
+        "from": "2026-11-12T00:00:00.004Z",
+        "to": "2026-11-12T15:30:00.000Z"
+      }
+    },
+    {
+      "active": false,
+      "bytes": 0,
+      "file": 2,
+      "following": false,
+      "format": "plain",
+      "indexing": {
+        "done_bytes": 0,
+        "error": "/var/log/secure.log: permission denied",
+        "state": "failed",
+        "total_bytes": 0
+      },
+      "lines": 0,
+      "path": "/var/log/secure.log",
+      "time_span": null
+    }
+  ],
+  "omitted": 0
+}

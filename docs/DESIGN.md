@@ -43,12 +43,12 @@ Mockups: the "Strata — log viewer" design canvas (artboards Main, Agent, Palet
 
 ## Screens
 
-1. **Open / empty:** a drop target, "Open a file" (Cmd+O), recent files, and a line on the agent:
+1. **Open / empty:** a drop target, "Open a file" (Cmd+Shift+O), recent files, and a line on the agent:
    "Connect an AI agent in Settings ▸ AI". While indexing a big file: the table already shows the
    first lines; the status bar shows "Indexing 38 % · 1.9 of 5.0 GB · Esc to stop".
 2. **Main:** as laid out above.
 3. **Agent panel open:** the right panel with the agent's timeline, notes and Undo.
-4. **Command palette:** Cmd+K, every command with its shortcut, fuzzy search.
+4. **Command palette:** Cmd+K (or ashlar's Cmd+Shift+P), every command with its shortcut, fuzzy search.
 5. **Settings:** General, Formats (custom formats later), Redaction patterns, AI (MCP on/off,
    install for Claude/Cursor, "Allow the agent to change the view").
 
@@ -56,7 +56,7 @@ Mockups: the "Strata — log viewer" design canvas (artboards Main, Agent, Palet
 
 | Keys | Action |
 |---|---|
-| Cmd+O / Cmd+W | open / close file |
+| Cmd+Shift+O / Cmd+W | open / close log file (Cmd+O / Cmd+S open and save the workspace: ashlar's built-ins) |
 | Cmd+F, Enter / Shift+Enter, F3 | search, next / previous match |
 | Cmd+L | focus the filter bar |
 | E / Shift+E | next / previous error |
@@ -66,6 +66,7 @@ Mockups: the "Strata — log viewer" design canvas (artboards Main, Agent, Palet
 | B / Cmd+B | add bookmark / show bookmarks |
 | Space | toggle the detail pane |
 | Cmd+K | command palette |
+| Cmd+, | settings |
 | Cmd+Z / Cmd+Shift+Z | undo / redo (filters, bookmarks, highlights, agent changes) |
 | Cmd+Shift+A | toggle the agent panel |
 

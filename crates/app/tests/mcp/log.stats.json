@@ -1,0 +1,35 @@
+{
+  "bytes": 104857600,
+  "exact": true,
+  "file": 1,
+  "levels": {
+    "debug": 120400,
+    "error": 5420,
+    "fatal": 0,
+    "info": 1120013,
+    "none": 80,
+    "trace": 0,
+    "warn": 38200
+  },
+  "lines": 1284113,
+  "time_span": {
+    "from": "2026-11-12T00:00:00.004Z",
+    "to": "2026-11-12T15:30:00.000Z"
+  },
+  "top_fields": [
+    {
+      "lines": 1284000,
+      "name": "service",
+      "values": [
+        {
+          "count": 700000,
+          "value": "api"
+        },
+        {
+          "count": 400000,
+          "value": "payments"
+        }
+      ]
+    }
+  ]
+}

@@ -62,22 +62,26 @@ Strata's MCP server (ashlar's `<app>-cli mcp`, or the running window's control p
 `--connect`) exposes these commands. Read-only commands never change what the user sees.
 Commands that do change the view are recorded in the agent panel and undoable.
 
+`file` defaults to the active file in every command (so shortcuts and single-file sessions work
+with `{}`); lines are 1-based; times are RFC 3339 (UTC when no zone). The frozen result shapes are
+`crates/app/src/results.rs` and the golden files in `crates/app/tests/mcp/` (docs/contracts.md).
+
 | Command | Params | Result | Changes the view? |
 |---|---|---|---|
 | `log.open` | `path`, `follow?` | file id, size, detected format, line count so far, indexing state | yes (opens a tab) |
 | `log.files` | — | open files with id, path, format, lines, time span | no |
-| `log.stats` | `file`, `range?` | lines, bytes, time span, counts per level, top fields and values | no |
-| `log.search` | `file`, `query`, `regex?`, `case?`, `limit?` (default 50, max 500), `filter?` | matches: line number, time, level, text (redacted, cut to 2 KB) and the total count | no |
+| `log.stats` | `file`, `range?` (`{"from"?: time, "to"?: time}`) | lines, bytes, time span, counts per level, top fields and values | no |
+| `log.search` | `file`, `query`, `regex?`, `case?`, `whole_word?`, `limit?` (default 50, max 500), `filter?` | matches: line number, time, level, text (redacted, cut to 2 KB) and the total count | no |
 | `log.lines` | `file`, `from`, `count` (max 500) | lines with parsed fields (redacted) | no |
 | `log.around` | `file`, `line`, `before?`, `after?` (max 200 each) | the context lines | no |
-| `log.histogram` | `file`, `bucket?` (auto), `filter?` | buckets with counts per level | no |
+| `log.histogram` | `file`, `bucket?` (`auto` or a duration: `30s`, `5m`), `filter?` | buckets with counts per level | no |
 | `log.fields` | `file` | parsed field names, types and the 20 most common values each | no |
 | `log.first` | `file`, `filter` | the first line matching a filter (e.g. first `level = error` after a time) | no |
 | `view.filter` | `file`, `filter` (same grammar as the filter bar) | the visible line count | yes |
 | `view.clear_filters` | `file` | — | yes |
 | `view.goto` | `file`, `line` or `time` | — | yes (scrolls) |
-| `view.highlight` | `file`, `lines` or `query`, `note?` | highlight id | yes |
-| `bookmark.add` | `file`, `line`, `name`, `note?` | bookmark id | yes |
+| `view.highlight` | `file`, `lines` (array of line numbers) or `query`, `note?` | highlight id | yes |
+| `bookmark.add` | `file`, `line?` (default: selected), `name?` (default `Line <n>`), `note?` | bookmark id | yes |
 | `bookmark.list` | `file` | bookmarks | no |
 | `agent.note` | `text` | — | yes (a note in the agent panel: the agent's summary for the person) |
 | `agent.undo` | — | — | yes (undoes every agent change since the person last acted) |
@@ -125,27 +129,28 @@ strata/
 
 | Need | ashlar piece |
 |---|---|
-| App shell, menus, palette, shortcuts, crash guard, autosave of state | `ashlar::app::App<D>` with commands (`cmd!`, `query!`, `CommandSpec`) |
-| Document | `Session<StrataDoc>`: the document is the workspace (open files, filters, columns, bookmarks, highlights), not the log text. `s.edit(label, ...)` makes every change one undo step. |
-| Background work | ashlar jobs (`ashlar-jobs`): `Progress::steps`, `CancelToken`, results applied on the UI thread with `apply` as one undo step. Indexing, search, histogram, gz decompress are jobs. |
-| The log table | `ashlar::ui::virtual_list` / `VirtualTable` (O(visible) per frame), `selection::Selection`, `type_ahead` |
-| Detail pane | `ashlar::ui::code_view::CodeView` with JSON highlighting from `ashlar-syntax` |
+| App shell, menus, palette, shortcuts, crash guard, autosave of state | `ashlar::app::App<D>` with commands (`CommandSpec::new` with the id constants and `.query()` for read-only ones; `cmd!` / `query!` need literal ids) |
+| Document | `Session<StrataDoc>`: the document is the workspace (open files, filters, columns, bookmarks, highlights), not the log text. `s.edit(label, ...)` makes every change one undo step. Open `LogFile`s live beside it in `StrataDoc::live` (not saved). ashlar's built-in `file.*` commands open and save the workspace (`.strata`). |
+| Background work | ashlar jobs (`ashlar-jobs`): `Progress::steps`, `CancelToken`, results applied on the UI thread with `apply` as one undo step. Indexing, search, histogram, gz decompress are jobs. Jobs are started from views (`cx.jobs`): a command running on `Session` cannot spawn one in 0.2. |
+| The log table | `ashlar::ui::virtual_list::VirtualTable` (O(visible) per frame; `VirtualList::type_ahead`), `selection::Selection`. 0.2 caps a list at `virtual_list::MAX_ROWS` (10 M) rows and has no column reorder/hide: the ui stream windows bigger files |
+| Detail pane | `ashlar::ui::code_view::CodeView` with `.lang(Some("json"))` (ashlar-syntax underneath, no direct dependency) |
 | Sidebar | `ashlar::ui::sidebar` (sections for Files, Bookmarks, Saved filters) |
-| Toolbar, chips, histogram | `ashlar::ui::controls`, `overlay::Select`, custom painter for the histogram |
+| Toolbar, chips, histogram | `ashlar::ui::controls`, `ashlar::ui::overlay::Select`, custom painter for the histogram |
 | Files | `ashlar-fs`: recent files, settings, per-app folders; `App::accept_drops`, open from Finder |
 | Native | `ashlar-native`: file dialogs, menu bar, notifications for "error appeared while following" |
-| Agent control | the command registry exposed by `App::cli()` → `mcp`, and the control port; `ashlar-agents` for Settings ▸ AI |
+| Agent control | the command registry exposed by `App::cli()` → `mcp`, and the control port; `ashlar-agents` (its own crate, not re-exported by `ashlar-rs`) for Settings ▸ AI |
 | Testing | `--headless --snap/--tree`, `.ui` scripts, `Driver::assert_snapshot`, named scenes (`App::scene`) for every screen |
-| Telemetry | `ashlar-trace`, off by default |
+| Telemetry | the `ashlar-rs` `telemetry` feature (`App::telemetry`), off by default |
 
 ### Data model (strata-core)
 
-- `LogFile { id, path, len, mmap, format, index: LineIndex, follow: Option<Watcher> }`
+- `LogFile` (shared as `Arc<LogFile>`, `&self` methods): id, path, map, format, `LineIndex`, field names; `Watcher` for follow
 - `LineIndex`: line start offsets in chunks of 64 K lines (`Vec<u64>` per chunk; about 8 bytes a
   line, 400 MB for 50 M lines, so chunks past a budget are stored compressed as deltas, 2–3 bytes a
   line), plus per chunk: min/max timestamp and level counts, which make histogram, time filters and
   "first error after T" skip whole chunks.
-- `Parsed { time: Option<i64>, level: Option<Level>, fields: SmallVec<(FieldId, Span)>, message: Span }`
+- `Parsed { time: Option<Timestamp>, level: Option<Level>, fields: Vec<(FieldId, Span)>, message: Span }`
+  (`Timestamp` = µs since the epoch, UTC)
   parsed lazily for visible lines and cached by line number (LRU).
 - `Filter`: a small expression tree (field comparisons, text/regex, time range, not/and/or) with a
   text form shared by the filter bar, the CLI and MCP.
@@ -208,8 +213,8 @@ so streams rarely touch the same files.
 Nothing else starts until these are merged to `main`:
 
 1. **Command contract:** every command id and its params from section 3, plus the user-only
-   commands (`file.open`, `file.close`, `search.next`, `view.toggle_column`…), in
-   `crates/app/src/commands/ids.rs` as constants with `Param` lists and stub handlers that return
+   commands (`log.open_dialog`, `log.close`, `search.next`, `view.toggle_column`…; `file.*` ids
+   are ashlar's workspace built-ins), in `crates/app/src/commands/ids.rs` as constants with `Param` lists and stub handlers that return
    `CommandError::failed(id, "not yet")`.
 2. **Core types:** `strata-core` public types (`LogFile`, `LineIndex` API, `Parsed`, `Level`,
    `Filter` and its text grammar, `Match`, `Histogram`, `Redaction`) with signatures and doc

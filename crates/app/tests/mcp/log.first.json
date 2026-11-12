@@ -1,0 +1,27 @@
+{
+  "complete": true,
+  "file": 1,
+  "filter": "level >= error and time >= \"2026-11-12T14:00:00.000Z\"",
+  "line": {
+    "cut": false,
+    "fields": [
+      {
+        "name": "service",
+        "value": "payments"
+      },
+      {
+        "name": "request_id",
+        "value": "r-4821"
+      },
+      {
+        "name": "status",
+        "value": "502"
+      }
+    ],
+    "level": "error",
+    "line": 48213,
+    "message": "upstream timeout",
+    "text": "{\"ts\":\"2026-11-12T14:02:07.118Z\",\"level\":\"error\",\"service\":\"payments\",\"msg\":\"upstream timeout\",\"request_id\":\"r-4821\",\"status\":502}",
+    "time": "2026-11-12T14:02:07.118Z"
+  }
+}
