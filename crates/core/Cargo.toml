@@ -52,3 +52,9 @@ harness = false
 [[bench]]
 name = "index"
 harness = false
+
+# Search throughput on `cargo xtask fixtures` output: `cargo bench -p strata-core --bench search`
+# (STRATA_FIXTURE=path to pick a file).
+[[bench]]
+name = "search"
+harness = false
