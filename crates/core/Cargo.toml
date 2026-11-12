@@ -25,7 +25,15 @@ too_many_arguments = "allow"
 type_complexity = "allow"
 
 [dependencies]
+memchr = "2"
+regex = { version = "1", default-features = false, features = ["std", "perf", "unicode"] }
 serde = { workspace = true }
 
 [dev-dependencies]
+proptest = { version = "1", default-features = false, features = ["std"] }
 serde_json = { workspace = true }
+
+# Parse and redaction throughput on `cargo xtask fixtures` output: `cargo bench -p strata-core --bench formats`.
+[[bench]]
+name = "formats"
+harness = false
