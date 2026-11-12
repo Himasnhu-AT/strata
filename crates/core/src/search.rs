@@ -266,6 +266,11 @@ pub trait LineSource: Sync {
     /// Split one line (already cut to [`MAX_LINE_BYTES`]).
     fn parse_line(&self, line: &[u8]) -> Parsed;
 
+    /// Split one line, interning field names in `names` instead of the shared table. Workers
+    /// pass a table of their own: the shared one is a lock every parse takes once per field, and
+    /// with many threads that lock (not parsing) becomes the limit.
+    fn parse_with(&self, line: &[u8], names: &FieldNames) -> Parsed;
+
     /// The field names [`LineSource::parse_line`] interns.
     fn field_names(&self) -> &FieldNames;
 
@@ -294,6 +299,10 @@ impl LineSource for LogFile {
 
     fn parse_line(&self, line: &[u8]) -> Parsed {
         self.parse(line)
+    }
+
+    fn parse_with(&self, line: &[u8], names: &FieldNames) -> Parsed {
+        formats::parser(self.format()).parse(line, names)
     }
 
     fn field_names(&self) -> &FieldNames {
@@ -429,6 +438,10 @@ impl LineSource for MemoryLog {
 
     fn parse_line(&self, line: &[u8]) -> Parsed {
         self.parser.parse(line, &self.names)
+    }
+
+    fn parse_with(&self, line: &[u8], names: &FieldNames) -> Parsed {
+        self.parser.parse(line, names)
     }
 
     fn field_names(&self) -> &FieldNames {
@@ -631,13 +644,13 @@ pub(crate) struct Hits {
 /// How often (in lines taken) a scan checks the stop flag.
 const STOP_EVERY: u64 = 1024;
 
-/// Whether line `number` (bytes `line`) passes `filter`.
-pub(crate) fn passes<S: LineSource>(src: &S, filter: &CompiledFilter, line: &[u8], number: LineNo) -> bool {
+/// Whether line `number` (bytes `line`) passes `filter`; `names` is the worker's own table.
+pub(crate) fn passes<S: LineSource>(src: &S, filter: &CompiledFilter, line: &[u8], number: LineNo, names: &FieldNames) -> bool {
     let cut = cut_line(line);
     if filter.needs_parse() {
-        filter.matches(cut, &src.parse_line(cut), src.field_names(), number)
+        filter.matches(cut, &src.parse_with(cut, names), names, number)
     } else {
-        filter.matches(cut, &Parsed::default(), src.field_names(), number)
+        filter.matches(cut, &Parsed::default(), names, number)
     }
 }
 
@@ -649,11 +662,12 @@ pub(crate) fn scan<S: LineSource>(src: &S, job: &Job, matcher: &Matcher, filter:
         return Hits { scanned: n, complete: true, ..Hits::default() };
     }
     let first = job.lines.start;
+    let names = FieldNames::default();
     src.with_lines(job.lines.start, job.lines.end, |buf| {
         let mut hits = Hits { complete: true, ..Hits::default() };
         // Returns false to stop the scan.
         let take = |idx: u64, line: &[u8], hits: &mut Hits| -> bool {
-            if filter.is_some_and(|f| !passes(src, f, line, first + idx)) {
+            if filter.is_some_and(|f| !passes(src, f, line, first + idx, &names)) {
                 return true;
             }
             hits.matched += 1;

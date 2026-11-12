@@ -107,9 +107,10 @@ fn span_by_scanning<S: LineSource>(src: &S, jobs: &[Job], cancel: &dyn Fn() -> b
         |i, _| {
             let job = jobs.get(i)?;
             let mut part: Option<(Timestamp, Timestamp)> = None;
+            let names = crate::FieldNames::default();
             src.with_lines(job.lines.start, job.lines.end, |buf| {
                 for_each_line(buf, job.lines.end - job.lines.start, |_, line| {
-                    if let Some(t) = src.parse_line(cut_line(line)).time {
+                    if let Some(t) = src.parse_with(cut_line(line), &names).time {
                         part = Some(part.map_or((t, t), |(a, b)| (a.min(t), b.max(t))));
                     }
                     true
@@ -196,11 +197,12 @@ pub fn histogram_in<S: LineSource>(src: &S, width: Option<i64>, filter: Option<&
             }
             let mut part = Part::default();
             let mut local = vec![LevelCounts::default(); n];
+            let names = crate::FieldNames::default();
             src.with_lines(job.lines.start, job.lines.end, |buf| {
                 for_each_line(buf, job.lines.end - job.lines.start, |idx, line| {
                     let cut = cut_line(line);
-                    let parsed = src.parse_line(cut);
-                    if filter.as_ref().is_some_and(|f| !f.matches(cut, &parsed, src.field_names(), job.lines.start + idx)) {
+                    let parsed = src.parse_with(cut, &names);
+                    if filter.as_ref().is_some_and(|f| !f.matches(cut, &parsed, &names, job.lines.start + idx)) {
                         return true;
                     }
                     match parsed.time.filter(|_| n > 0) {

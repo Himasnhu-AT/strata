@@ -1,5 +1,6 @@
-//! Search throughput on a `cargo xtask fixtures` file: MB/s per query (best of 3, after a warm-up
-//! run), the whole file in memory, all cores.
+//! Search throughput on a `cargo xtask fixtures` file opened through `LogFile` (memory-mapped,
+//! indexed first): MB/s per query, best of 3 after a warm-up run, so the page cache is warm. All
+//! cores unless the row says `1 thread`.
 //!
 //! ```text
 //! cargo xtask fixtures --size 1G --format jsonl
@@ -13,8 +14,8 @@
 use std::path::{Path, PathBuf};
 use std::time::Instant;
 
-use strata_core::search::{MemoryLog, count_in, search_in};
-use strata_core::{Filter, FormatKind, Query, never_cancel};
+use strata_core::search::{count_in, search_in};
+use strata_core::{FileId, Filter, LogFile, Query, never_cancel};
 
 fn fixture() -> Option<PathBuf> {
     if let Ok(p) = std::env::var("STRATA_FIXTURE") {
@@ -47,9 +48,11 @@ fn main() {
         eprintln!("no fixture: run `cargo xtask fixtures --size 1G --format jsonl` (or set STRATA_FIXTURE)");
         return;
     };
-    let bytes = std::fs::read(&path).expect("read fixture");
-    let mb = bytes.len() as f64 / 1e6;
-    let log = MemoryLog::new(bytes, FormatKind::JsonLines);
+    let log = LogFile::open(FileId(1), &path).expect("open fixture");
+    let t = Instant::now();
+    log.index_all(64 << 20, &never_cancel, &mut |_, _| {}).expect("index");
+    let mb = log.len() as f64 / 1e6;
+    println!("indexed {} lines in {:.0} ms ({})", log.lines(), t.elapsed().as_secs_f64() * 1e3, log.format().as_str());
     println!("{} ({mb:.0} MB, {} threads)", path.display(), std::thread::available_parallelism().map_or(1, |n| n.get()));
 
     let q = |text: &str, regex: bool, case_sensitive: bool, whole_word: bool| Query { text: text.into(), regex, case_sensitive, whole_word };
@@ -94,9 +97,37 @@ fn main() {
         });
         println!("{name:<32} {:>8.0} MB/s  {n:>9} lines  {:>7.1} ms", mb / secs, secs * 1e3);
     }
-    for text in ["error", "level >= warn", "status >= 500 and service = api"] {
-        let f = Filter::parse(text).unwrap();
-        let (secs, n) = best_of(3, || count_in(&log, &f, &never_cancel).unwrap());
-        println!("{:<32} {:>8.0} MB/s  {n:>9} lines  {:>7.1} ms", format!("count `{text}`"), mb / secs, secs * 1e3);
+    {
+        let f = Filter::parse("level >= warn and status >= 500").unwrap();
+        let all = strata_core::Matcher::all();
+        let (secs, n) = best_of(1, || {
+            let mut total = 0;
+            for start in (0..lines).step_by(chunk as usize) {
+                total += search_in(&log, &all, Some(&f), Some(start..start + chunk), true, &never_cancel, &mut |_| true).unwrap().matched;
+            }
+            total
+        });
+        println!("{:<32} {:>8.0} MB/s  {n:>9} lines  {:>7.1} ms", "1 thread: field filter", mb / secs, secs * 1e3);
     }
+    let filters = ["error", "level >= warn", "level >= warn and status >= 500", "status >= 500 and service = api"];
+    for summarized in [false, true] {
+        if summarized {
+            let t = Instant::now();
+            for c in 0..log.with_index(|ix| ix.chunks()) {
+                log.summarize_chunk(c, &never_cancel).expect("summarize");
+            }
+            println!("summarized every chunk in {:.0} ms (1 thread)", t.elapsed().as_secs_f64() * 1e3);
+        }
+        for text in filters {
+            let f = Filter::parse(text).unwrap();
+            let (secs, n) = best_of(3, || count_in(&log, &f, &never_cancel).unwrap());
+            println!("{:<32} {:>8.0} MB/s  {n:>9} lines  {:>7.1} ms", format!("count `{text}`"), mb / secs, secs * 1e3);
+        }
+    }
+    for (name, f) in [("histogram auto", None), ("histogram `level >= warn`", Some(Filter::parse("level >= warn").unwrap()))] {
+        let (secs, n) = best_of(3, || strata_core::histogram::histogram(&log, None, f.as_ref(), &never_cancel).unwrap().buckets.len() as u64);
+        println!("{name:<32} {:>8.0} MB/s  {n:>9} bkts   {:>7.1} ms", mb / secs, secs * 1e3);
+    }
+    let (secs, n) = best_of(1, || strata_core::stats::stats(&log, None, None, 10, 5, &never_cancel).unwrap().fields.len() as u64);
+    println!("{:<32} {:>8.0} MB/s  {n:>9} flds   {:>7.1} ms", "stats", mb / secs, secs * 1e3);
 }

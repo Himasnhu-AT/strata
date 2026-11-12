@@ -8,7 +8,7 @@ use serde::{Deserialize, Serialize};
 use crate::filter::parse_time_value;
 use crate::limits::{FIELDS_MAX, cut};
 use crate::search::{LineSource, cut_line, for_each_line, jobs, run_parallel};
-use crate::{FieldId, LevelCounts, LogFile, Result, Timestamp};
+use crate::{FieldId, FieldNames, LevelCounts, LogFile, Result, Timestamp};
 
 /// Files with at most this many lines have every line's fields counted; bigger ones are sampled
 /// (the first lines of every chunk, about this many in all) and say `exact: false`. Line, level
@@ -108,7 +108,7 @@ pub fn stats_in<S: LineSource>(
         last_time: part.hi,
         levels: part.levels,
         exact: !part.sampled,
-        fields: summaries(src, part.fields, top_fields, top_values),
+        fields: summaries(part.fields, top_fields, top_values),
     })
 }
 
@@ -120,7 +120,7 @@ pub fn fields(file: &LogFile, top_values: usize, cancel: &dyn Fn() -> bool) -> R
 /// [`fields`] over any [`LineSource`] (at most [`FIELDS_MAX`], most lines first).
 pub fn fields_in<S: LineSource>(src: &S, top_values: usize, cancel: &dyn Fn() -> bool) -> Result<Vec<FieldSummary>> {
     let part = collect(src, None, cancel)?;
-    Ok(summaries(src, part.fields, FIELDS_MAX, top_values))
+    Ok(summaries(part.fields, FIELDS_MAX, top_values))
 }
 
 /// One field's counts.
@@ -198,7 +198,8 @@ struct Part {
     levels: LevelCounts,
     lo: Option<Timestamp>,
     hi: Option<Timestamp>,
-    fields: HashMap<FieldId, Acc>,
+    /// By field name (each worker interns names in its own table).
+    fields: HashMap<String, Acc>,
     sampled: bool,
 }
 
@@ -217,11 +218,11 @@ impl Part {
         if let Some(t) = other.hi {
             self.time(t);
         }
-        for (id, acc) in other.fields {
-            if let Some(a) = self.fields.get_mut(&id) {
+        for (name, acc) in other.fields {
+            if let Some(a) = self.fields.get_mut(&name) {
                 a.merge(acc);
             } else if self.fields.len() < FIELDS_CAP {
-                self.fields.insert(id, acc);
+                self.fields.insert(name, acc);
             }
         }
         self.sampled |= other.sampled;
@@ -259,6 +260,8 @@ fn collect<S: LineSource>(src: &S, range: Option<(Option<Timestamp>, Option<Time
                 part.hi = s.max_time;
             }
             let mut seen: Vec<FieldId> = Vec::new();
+            let names = FieldNames::default();
+            let mut local: HashMap<FieldId, Acc> = HashMap::new();
             src.with_lines(job.lines.start, job.lines.end, |buf| {
                 for_each_line(buf, job.lines.end - job.lines.start, |idx, line| {
                     let with_fields = idx < sample;
@@ -267,7 +270,7 @@ fn collect<S: LineSource>(src: &S, range: Option<(Option<Timestamp>, Option<Time
                         return false;
                     }
                     let line = cut_line(line);
-                    let parsed = src.parse_line(line);
+                    let parsed = src.parse_with(line, &names);
                     if whole.is_none() {
                         if !in_range(parsed.time) {
                             return true;
@@ -288,14 +291,15 @@ fn collect<S: LineSource>(src: &S, range: Option<(Option<Timestamp>, Option<Time
                             continue;
                         }
                         seen.push(*id);
-                        if part.fields.len() >= FIELDS_CAP && !part.fields.contains_key(id) {
+                        if local.len() >= FIELDS_CAP && !local.contains_key(id) {
                             continue;
                         }
-                        part.fields.entry(*id).or_default().add(&src.field_text(line, *span));
+                        local.entry(*id).or_default().add(&src.field_text(line, *span));
                     }
                     true
                 })
             });
+            part.fields = local.into_iter().filter_map(|(id, acc)| Some((names.name(id)?, acc))).collect();
             part
         },
         cancel,
@@ -308,9 +312,8 @@ fn collect<S: LineSource>(src: &S, range: Option<(Option<Timestamp>, Option<Time
 }
 
 /// The `top_fields` fields with the most lines, each with its `top_values` most common values.
-fn summaries<S: LineSource>(src: &S, fields: HashMap<FieldId, Acc>, top_fields: usize, top_values: usize) -> Vec<FieldSummary> {
-    let names = src.field_names();
-    let mut out: Vec<FieldSummary> = fields.into_iter().filter_map(|(id, acc)| Some(acc.summary(names.name(id)?, top_values))).collect();
+fn summaries(fields: HashMap<String, Acc>, top_fields: usize, top_values: usize) -> Vec<FieldSummary> {
+    let mut out: Vec<FieldSummary> = fields.into_iter().map(|(name, acc)| acc.summary(name, top_values)).collect();
     out.sort_unstable_by(|a, b| b.lines.cmp(&a.lines).then_with(|| a.name.cmp(&b.name)));
     out.truncate(top_fields);
     out

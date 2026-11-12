@@ -43,13 +43,12 @@ use std::borrow::Cow;
 use std::cell::RefCell;
 use std::cmp::Ordering;
 use std::rc::Rc;
-use std::sync::OnceLock;
 
 use serde::{Deserialize, Serialize};
 
 use crate::index::ChunkSummary;
 use crate::search::{Matcher, Query, build_regex};
-use crate::{Error, FieldId, FieldNames, Level, Parsed, Result, Timestamp};
+use crate::{Error, FieldNames, Level, Parsed, Result, Timestamp};
 
 /// Longest filter text, in bytes.
 pub const FILTER_MAX_BYTES: usize = 64 * 1024;
@@ -1005,8 +1004,8 @@ enum Key {
     Time,
     Message,
     Line,
-    /// A field name and its id once a line has had it.
-    Named(String, OnceLock<FieldId>),
+    /// A field name, looked up in the table the line was parsed with (ids differ per table).
+    Named(String),
 }
 
 #[derive(Clone, Debug)]
@@ -1044,7 +1043,7 @@ fn compile(f: &Filter) -> Result<Node> {
                 Field::Time => Key::Time,
                 Field::Message => Key::Message,
                 Field::Line => Key::Line,
-                Field::Named(n) => Key::Named(n.clone(), OnceLock::new()),
+                Field::Named(n) => Key::Named(n.clone()),
             };
             let value = match (op, value) {
                 (CmpOp::Contains, v) => Value::Find(Box::new(Query::text(v.text()).compile().map_err(query_error)?)),
@@ -1127,15 +1126,7 @@ fn eval_cmp(c: &CmpNode, line: &[u8], parsed: &Parsed, names: &FieldNames, numbe
         Key::Time => parsed.time.map(|t| Cow::Owned(t.to_rfc3339().into_bytes())),
         Key::Line => Some(Cow::Owned(number.saturating_add(1).to_string().into_bytes())),
         Key::Message => parsed.message.slice(line).map(Cow::Borrowed),
-        Key::Named(name, id) => {
-            let id = match id.get() {
-                Some(id) => Some(*id),
-                None => names.id(name).inspect(|found| {
-                    let _ = id.set(*found);
-                }),
-            };
-            id.and_then(|id| parsed.field(id)).and_then(|s| s.slice(line)).map(Cow::Borrowed)
-        }
+        Key::Named(name) => names.id(name).and_then(|id| parsed.field(id)).and_then(|s| s.slice(line)).map(Cow::Borrowed),
     };
     let Some(v) = text else { return missing };
     match &c.value {
