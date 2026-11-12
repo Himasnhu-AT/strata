@@ -1,0 +1,17 @@
+# An agent session in the window: the agent opens a log, searches, highlights and bookmarks what
+# it found and leaves a note; the person sees it in the agent panel and undoes it in one step.
+# `{OPEN}` is replaced with the log.open params of the fixture by tests/mcp/main.rs.
+exec log.open '{OPEN}'
+exec log.search '{"query": "timeout"}'
+exec log.around '{"line": 10, "before": 2, "after": 2}'
+exec view.highlight '{"lines": [10, 11], "note": "the 502s"}'
+exec bookmark.add '{"line": 10, "name": "first 502"}'
+exec agent.note '{"text": "payments timed out upstream at 14:02:07"}'
+wait id=strata.agent.undo
+assert text id=strata.agent.title "via MCP · agent"
+assert text id=strata.agent.undo "Undo agent changes (3)"
+assert enabled id=strata.agent.undo
+assert exists id=strata.agent.row.0
+click id=strata.agent.undo
+wait --text "Undo agent changes"
+assert disabled id=strata.agent.undo

@@ -24,6 +24,7 @@ path = "src/bin/strata-cli.rs"
 
 [dependencies]
 ashlar = { workspace = true }
+ashlar-agents = { workspace = true }
 strata-core = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }

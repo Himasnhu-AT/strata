@@ -1,0 +1,16 @@
+{"ts":"2026-11-12T14:00:00.000Z","level":"info","service":"api","msg":"server started","port":8080}
+{"ts":"2026-11-12T14:00:01.250Z","level":"debug","service":"api","msg":"config loaded","path":"/etc/app.toml"}
+{"ts":"2026-11-12T14:00:05.000Z","level":"info","service":"payments","msg":"connected to db","host":"db-1"}
+{"ts":"2026-11-12T14:00:30.000Z","level":"info","service":"api","msg":"GET /health 200","status":200}
+{"ts":"2026-11-12T14:01:00.000Z","level":"warn","service":"payments","msg":"slow query","ms":812}
+{"ts":"2026-11-12T14:01:10.000Z","level":"info","service":"api","msg":"login ok","user":"ana@example.com"}
+{"ts":"2026-11-12T14:01:15.000Z","level":"debug","service":"api","msg":"auth header Authorization: Bearer abcdef0123456789abcdef"}
+{"ts":"2026-11-12T14:01:20.000Z","level":"info","service":"payments","msg":"charge created","request_id":"r-4820","status":201}
+{"ts":"2026-11-12T14:02:00.000Z","level":"warn","service":"payments","msg":"upstream slow","request_id":"r-4821","ms":2900}
+{"ts":"2026-11-12T14:02:07.118Z","level":"error","service":"payments","msg":"upstream timeout","request_id":"r-4821","status":502}
+{"ts":"2026-11-12T14:02:07.200Z","level":"error","service":"payments","msg":"retry failed: upstream timeout","request_id":"r-4821","status":502}
+{"ts":"2026-11-12T14:02:08.000Z","level":"info","service":"api","msg":"db login","password":"hunter2"}
+{"ts":"2026-11-12T14:02:30.000Z","level":"info","service":"api","msg":"GET /health 200","status":200}
+{"ts":"2026-11-12T14:03:00.000Z","level":"error","service":"api","msg":"timeout calling payments","request_id":"r-4822","status":504}
+{"ts":"2026-11-12T14:03:05.000Z","level":"info","service":"worker","msg":"job done","key":"AKIAIOSFODNN7EXAMPLE"}
+{"ts":"2026-11-12T14:04:00.000Z","level":"fatal","service":"payments","msg":"giving up","request_id":"r-4823"}

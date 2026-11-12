@@ -13,6 +13,8 @@ repository = "https://github.com/Himasnhu-AT/strata"
 strata-core = { path = "crates/core", version = "0.1.0" }
 # published as `ashlar-rs`; imported as `ashlar`
 ashlar = { version = "0.2", package = "ashlar-rs" }
+# Settings ▸ AI: install the MCP server into coding agents (not re-exported by ashlar-rs)
+ashlar-agents = "0.2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 tempfile = "3"

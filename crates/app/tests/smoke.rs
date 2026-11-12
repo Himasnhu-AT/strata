@@ -29,15 +29,15 @@ fn the_window_shows_the_empty_state() {
 }
 
 #[test]
-fn every_command_is_registered_and_stubs_say_not_yet() {
+fn every_command_is_registered_and_answers() {
     let dir = tempfile::tempdir().unwrap();
     let mut d = driver(dir.path());
     let listed = d.call("engine.commands", json!({})).unwrap().to_string();
     for id in ids::AGENT.iter().chain(ids::USER) {
         assert!(listed.contains(&format!("\"{id}\"")), "{id} not listed");
     }
-    let err = d.call("engine.execute", json!({"command": ids::LOG_FILES, "params": {}})).unwrap_err();
-    assert!(err.to_string().contains("not yet"), "{err}");
+    let files = d.call("engine.execute", json!({"command": ids::LOG_FILES, "params": {}})).unwrap();
+    assert_eq!(files["result"].get("files").or(files.get("files")), Some(&json!([])), "{files}");
 }
 
 #[test]
