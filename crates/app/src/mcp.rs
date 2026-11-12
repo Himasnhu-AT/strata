@@ -100,8 +100,7 @@ impl Deadline {
 }
 
 /// Index more of `file` until it is complete or `deadline` passes (and pick up appended bytes
-/// when it is followed), then summarize the chunks that are full (or all, once complete) so
-/// filters and the histogram can skip them.
+/// when it is followed), then [`summarize`] the chunks.
 pub fn catch_up(file: &LogFile, follow: bool, deadline: Deadline) {
     if follow {
         let _ = file.refresh();
@@ -120,6 +119,13 @@ pub fn catch_up(file: &LogFile, follow: bool, deadline: Deadline) {
             _ => break,
         }
     }
+    summarize(file, deadline);
+}
+
+/// Fill in the summaries (time span, level counts) of the chunks that are full, or of all once
+/// the file is indexed, until `deadline`: filters, `log.first` and the histogram skip chunks by
+/// them, and only `LogFile::summarize_chunk` fills them.
+pub fn summarize(file: &LogFile, deadline: Deadline) {
     let complete = is_complete(file);
     let chunks = file.with_index(|ix| ix.chunks());
     for i in 0..chunks {

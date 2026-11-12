@@ -11,7 +11,7 @@ Contracts (M0) are on `wt/contracts`; read docs/contracts.md before starting. St
 | formats agent | formats | .claude/worktrees/formats · wt/formats | merged to main | STR-FMT.1 |
 | claude (search) | search | .claude/worktrees/search · wt/search | done; rebased on main, integrated with index + formats | STR-SRCH.1, STR-SRCH.2 |
 | | ui | .claude/worktrees/ui · wt/ui | | |
-| claude | agent | .claude/worktrees/agent · wt/agent | done; ready to merge (after search) | STR-AGT.1 every MCP command, redaction, agent.undo, agent panel, Settings ▸ AI, tests |
+| claude | agent | .claude/worktrees/agent · wt/agent | done; rebased on main (search merged), ready to merge | STR-AGT.1 every MCP command, redaction, agent.undo, agent panel, Settings ▸ AI, tests; STR-AGT.2 search golden values on, chunk summaries on open |
 | | bench | .claude/worktrees/bench · wt/bench | | |
 
 ## Log (append one line: time · from → to · what)

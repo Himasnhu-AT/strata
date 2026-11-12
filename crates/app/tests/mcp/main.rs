@@ -3,10 +3,6 @@
 //! lines with a few secrets), with golden values: through a headless session (what `strata-cli
 //! exec` and `strata-cli mcp` run), through the real `strata-cli mcp` over stdio, and as a `.ui`
 //! script of an agent session in the window (`agent-session.ui`).
-//!
-//! The commands built on the `search` stream (search, filters, histogram, stats, fields) check
-//! their golden values once that stream is merged ([`search_ready`]); until then its stubs return
-//! empty results and only the shapes are checked (`tests/mcp_shapes.rs`).
 
 use std::io::{BufRead, BufReader, Write};
 use std::path::PathBuf;
@@ -32,11 +28,6 @@ fn fixture() -> PathBuf {
 
 fn fixture_bytes() -> u64 {
     std::fs::metadata(fixture()).unwrap().len()
-}
-
-/// Whether the `search` stream is merged (its stubs reject every filter).
-fn search_ready() -> bool {
-    strata_core::Filter::parse("level = error").is_ok()
 }
 
 fn open() -> Headless<StrataDoc> {
@@ -218,12 +209,6 @@ fn the_timeline_lists_what_the_agent_did() {
 #[test]
 fn search_filters_histogram_stats_and_fields() {
     let mut h = open();
-    if !search_ready() {
-        eprintln!("the search stream is not merged yet: golden values skipped");
-        let s = run(&mut h, ids::LOG_SEARCH, json!({"query": "timeout"}));
-        assert_eq!(s["matches"], json!([]));
-        return;
-    }
     let hit = |line: u64, time: &str, text: &str| json!({"line": line, "time": time, "level": "error", "text": text, "cut": false});
     assert_eq!(
         run(&mut h, ids::LOG_SEARCH, json!({"query": "timeout", "limit": 2})),
@@ -318,8 +303,6 @@ fn redaction_applies_to_every_command_that_returns_log_text() {
     for (id, p) in reads() {
         let out = match h.execute(id, p.clone()) {
             Ok(v) => v.to_string(),
-            // filters are the search stream's: its stubs refuse them until it is merged
-            Err(_) if !search_ready() => continue,
             Err(e) => panic!("{id} {p}: {e}"),
         };
         for secret in SECRETS {
@@ -330,9 +313,7 @@ fn redaction_applies_to_every_command_that_returns_log_text() {
     for kind in ["email", "bearer", "secret-field"] {
         assert!(seen.contains(&format!("[redacted:{kind}]")), "{kind}");
     }
-    if search_ready() {
-        assert!(seen.contains("[redacted:aws-key]"));
-    }
+    assert!(seen.contains("[redacted:aws-key]"));
     // per-kind settings (Settings ▸ AI): email off sends emails, the rest stays redacted
     let mut r = Redaction::default();
     r.set(RedactKind::Email, false);

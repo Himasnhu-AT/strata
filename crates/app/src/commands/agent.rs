@@ -279,6 +279,7 @@ pub fn log_open(s: &mut S, p: &Value) -> R {
             let lf = Arc::new(open_log(fid, &path).map_err(|e| core(id, e))?);
             if s.is_windowed() {
                 let _ = lf.index_more(mcp::OPEN_WINDOWED_BYTES);
+                mcp::summarize(&lf, Deadline::after(mcp::budget(s)));
             } else {
                 mcp::catch_up(&lf, follow, Deadline::after(mcp::budget(s)));
             }
