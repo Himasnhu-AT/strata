@@ -61,7 +61,12 @@ pub fn empty(ui: &mut egui::Ui, cx: &mut Cx<'_, StrataDoc>) {
                 let body = "Any size. JSON lines, logfmt, syslog and plain text are detected automatically. .gz works too.";
                 label(ui, "strata.empty.body", body, egui::RichText::new(body).color(t.text.secondary));
                 ui.add_space(t.space.lg);
-                if Button::new("strata.empty.open", "Open a file…  ⌘⇧O").variant(Variant::Primary).size(Size::Lg).show(ui).clicked() {
+                if Button::new("strata.empty.open", &format!("Open a file…  {}", fmt::keys("⌘⇧O")))
+                    .variant(Variant::Primary)
+                    .size(Size::Lg)
+                    .show(ui)
+                    .clicked()
+                {
                     cx.dispatch(ids::LOG_OPEN_DIALOG, json!({}));
                 }
             });
@@ -119,7 +124,7 @@ pub fn indexing_bar(ui: &mut egui::Ui, cx: &mut Cx<'_, StrataDoc>, file: u64, fr
     let t = cx.tokens();
     egui::Frame::new().fill(theme::tint(t.accent, 18)).inner_margin(egui::Margin::symmetric(16, 10)).show(ui, |ui| {
         ui.horizontal(|ui| {
-            let pct = format!("Indexing {:.0} %", (frac * 100.0).floor().clamp(0.0, 100.0));
+            let pct = format!("Indexing {:.0} %", (frac * 100.0).round().clamp(0.0, 100.0));
             label(ui, "strata.indexing.title", &pct, egui::RichText::new(&pct).strong().color(t.text.primary));
             let more = format!(
                 "{} of {} · {} lines so far · you can scroll and search the indexed part",
@@ -203,7 +208,8 @@ pub fn unreadable_dialog(ctx: &egui::Context, path: &str, reason: &str) -> bool 
         let r = ui.label(egui::RichText::new(reason).color(t.text.primary));
         automation::register(ui, &r, "strata.unreadable.reason", reason, Role::Label);
         ui.add_space(t.space.sm);
-        let r = ui.label(egui::RichText::new(&shown).monospace().color(t.text.secondary));
+        // one line, cut at the end: the full path is the tooltip
+        let r = ui.add(egui::Label::new(egui::RichText::new(&shown).monospace().color(t.text.secondary)).truncate()).on_hover_text(&shown);
         automation::register(ui, &r, "strata.unreadable.path", &shown, Role::Label);
     });
     matches!(out, Some(DialogOutcome::Button(_) | DialogOutcome::Dismissed))

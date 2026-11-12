@@ -23,9 +23,13 @@ pub const FIXTURE_NAME: &str = "payments-api.jsonl";
 pub const NAMES: &[&str] =
     &["empty", "indexing", "main", "agent", "palette", "settings", "no-matches", "file-replaced", "unreadable", "agent-disconnected"];
 
-/// The folder scene files are written to.
+/// The folder scene files are written to: `/tmp/strata-scenes` on Unix (the same on every
+/// machine, so snapshots that show a path match), else the temp folder.
 pub fn fixture_dir() -> PathBuf {
-    std::env::temp_dir().join("strata-scenes")
+    let tmp = if cfg!(unix) && std::path::Path::new("/tmp").is_dir() { PathBuf::from("/tmp") } else { std::env::temp_dir() };
+    let dir = tmp.join("strata-scenes");
+    std::fs::create_dir_all(&dir).ok();
+    std::fs::canonicalize(&dir).unwrap_or(dir)
 }
 
 /// Write `bytes` as `name` in the scene folder (once) and return its path.
@@ -108,7 +112,7 @@ pub fn setup(name: &'static str) -> impl Fn(&mut S) + Send + Sync + 'static {
                 }
             }
             "unreadable" => {
-                let bytes: Vec<u8> = (0u8..=255).cycle().take(4096).collect();
+                let bytes: Vec<u8> = (0u32..4096).map(|i| if i % 3 == 0 { (i % 251) as u8 } else { 0 }).collect();
                 if let Some(path) = fixture("core-dump.bin", &bytes)
                     && let Err(e) = user::open_path(s, &path, false)
                 {

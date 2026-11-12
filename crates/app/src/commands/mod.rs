@@ -20,11 +20,6 @@ pub type S = Session<StrataDoc>;
 /// A command's result.
 pub type R = Result<Value, CommandError>;
 
-/// The stub body: `CommandError::failed(id, "not yet")`.
-pub(crate) fn not_yet(id: &str) -> R {
-    Err(CommandError::failed(id, "not yet"))
-}
-
 fn spec(id: &'static str, label: &'static str, run: ashlar::command::Run<S>, params: &'static [Param]) -> CommandSpec<S> {
     CommandSpec::new(id, label, run).params(Params::Static(params))
 }
@@ -72,6 +67,10 @@ pub fn commands() -> Vec<CommandSpec<S>> {
         spec(VIEW_TOGGLE_COLUMN, "Show or Hide Column", user::view_toggle_column, VIEW_TOGGLE_COLUMN_PARAMS).enabled(user::has_file),
         spec(VIEW_MOVE_COLUMN, "Move Column", user::view_move_column, VIEW_MOVE_COLUMN_PARAMS).enabled(user::has_file),
         spec(VIEW_RESIZE_COLUMN, "Resize Column", user::view_resize_column, VIEW_RESIZE_COLUMN_PARAMS).enabled(user::has_file),
+        spec(BOOKMARK_HERE, "Bookmark This Line", user::bookmark_here, BOOKMARK_HERE_PARAMS)
+            .menu(&["Bookmarks"])
+            .shortcut("B")
+            .enabled(user::has_selection),
         spec(BOOKMARK_REMOVE, "Remove Bookmark", user::bookmark_remove, BOOKMARK_REMOVE_PARAMS).enabled(user::has_file),
         spec(BOOKMARK_RENAME, "Rename Bookmark", user::bookmark_rename, BOOKMARK_RENAME_PARAMS).enabled(user::has_file),
         spec(HIGHLIGHT_REMOVE, "Remove Highlight", user::highlight_remove, HIGHLIGHT_REMOVE_PARAMS).enabled(user::has_file),
@@ -98,10 +97,7 @@ pub fn commands() -> Vec<CommandSpec<S>> {
             .enabled(agent::can_change_view),
         spec(VIEW_GOTO, "Go to Line or Time", agent::view_goto, VIEW_GOTO_PARAMS).enabled(agent::can_change_view),
         spec(VIEW_HIGHLIGHT, "Highlight Lines", agent::view_highlight, VIEW_HIGHLIGHT_PARAMS).enabled(agent::can_change_view),
-        spec(BOOKMARK_ADD, "Add Bookmark", agent::bookmark_add, BOOKMARK_ADD_PARAMS)
-            .menu(&["Bookmarks"])
-            .shortcut("B")
-            .enabled(agent::can_change_view),
+        spec(BOOKMARK_ADD, "Add Bookmark", agent::bookmark_add, BOOKMARK_ADD_PARAMS).menu(&["Bookmarks"]).enabled(agent::can_change_view),
         spec(BOOKMARK_LIST, "List Bookmarks", agent::bookmark_list, BOOKMARK_LIST_PARAMS).query(),
         spec(AGENT_NOTE, "Agent Note", agent::agent_note, AGENT_NOTE_PARAMS).enabled(agent::can_change_view),
         spec(AGENT_UNDO, "Undo Agent Changes", agent::agent_undo, AGENT_UNDO_PARAMS).menu(&["Agent"]).enabled(agent::has_agent_changes),

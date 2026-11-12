@@ -35,8 +35,8 @@ use crate::doc::{StrataDoc, view_keys};
 use live::{FileRt, SearchSpec};
 use req::{Request, Target, keys};
 
-/// Settings key mirroring "Allow the agent to change the view".
-const ALLOW_SETTING: &str = "agent_allow_changes";
+/// Settings key of "Allow the agent to change the view" (the agent stream's).
+const ALLOW_SETTING: &str = crate::mcp::settings_keys::ALLOW_CHANGES;
 
 /// What the view keeps between frames.
 #[derive(Default)]
@@ -53,7 +53,6 @@ struct Window {
     matcher: Option<(SearchSpec, Option<Matcher>)>,
     title: Option<(String, bool, u64)>,
     memory: Option<(std::time::Instant, u64)>,
-    allow_synced: bool,
 }
 
 /// Whether a real window (not the headless driver) is there to own a native dialog.
@@ -105,16 +104,10 @@ impl Window {
         self.dialogs(cx, &doc, active);
     }
 
-    /// Load "Allow the agent to change the view" from Settings once; save it when it changes.
+    /// Settings ▸ AI into view state (once, `agent_panel::sync`); "Allow the agent to change the
+    /// view" back into Settings when a command changes it.
     fn sync_settings(&mut self, cx: &mut Cx<'_, StrataDoc>) {
-        if !self.allow_synced {
-            self.allow_synced = true;
-            if cx.view::<bool>(view_keys::AGENT_ALLOW_CHANGES).is_none()
-                && let Some(on) = cx.settings.get::<bool>(ALLOW_SETTING)
-            {
-                cx.set_view(view_keys::AGENT_ALLOW_CHANGES, &on);
-            }
-        }
+        crate::agent_panel::sync(cx);
         if let Some(on) = cx.view::<bool>(view_keys::AGENT_ALLOW_CHANGES)
             && cx.settings.get::<bool>(ALLOW_SETTING) != Some(on)
         {
@@ -361,7 +354,7 @@ impl Window {
         // the agent panel (the agent stream draws its inside)
         if cx.view_or(view_keys::AGENT_PANEL_OPEN, false) {
             egui::Panel::right("strata.agent.panel")
-                .exact_size(theme::AGENT_WIDTH)
+                .exact_size(crate::agent_panel::WIDTH)
                 .resizable(false)
                 .frame(egui::Frame::new().fill(t.surface.panel).inner_margin(egui::Margin::same(12)))
                 .show(ui, |ui| crate::agent_panel::show(ui, cx));

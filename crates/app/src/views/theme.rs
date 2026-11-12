@@ -38,7 +38,6 @@ pub const TOOLBAR_HEIGHT: f32 = 44.0;
 pub const SIDEBAR_WIDTH: f32 = 240.0;
 pub const HISTOGRAM_HEIGHT: f32 = 56.0;
 pub const DETAIL_HEIGHT: f32 = 220.0;
-pub const AGENT_WIDTH: f32 = 360.0;
 
 /// The dark set: the design's palette in ashlar's slots.
 pub fn dark() -> Tokens {

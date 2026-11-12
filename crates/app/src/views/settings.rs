@@ -2,8 +2,7 @@
 //! results hide) and AI (MCP and "Allow the agent to change the view"). A modal dialog; the
 //! section is `view_keys::SETTINGS`.
 //!
-//! The AI section is the `agent` stream's (`agent_panel::settings_ai` after it merges); until
-//! then it shows the switch and how to connect.
+//! The AI section is the `agent` stream's (`agent_panel::settings_ai`).
 
 use ashlar::prelude::*;
 use ashlar::ui::automation::{self, Role};
@@ -25,7 +24,6 @@ pub fn show(cx: &mut Cx<'_, StrataDoc>, file: Option<&OpenFile>, detected: Optio
     let buttons = [DialogButton::new("Done").default()];
     let ctx = cx.ctx().clone();
     let mut actions: Vec<(&'static str, Value)> = Vec::new();
-    let allow = cx.view_or(view_keys::AGENT_ALLOW_CHANGES, true);
     let theme = cx.settings.get::<String>("theme").unwrap_or_else(|| "system".into());
     let out = Dialog::new("strata.settings", "Settings", &buttons).width(520.0).show(&ctx, |ui| {
         let t = ashlar::ui::tokens::current(ui.ctx());
@@ -69,22 +67,8 @@ pub fn show(cx: &mut Cx<'_, StrataDoc>, file: Option<&OpenFile>, detected: Optio
                 automation::register(ui, &r, "strata.settings.redaction.kinds", &kinds.join(", "), Role::Label);
                 ui.label(egui::RichText::new("The window always shows the real text; only agent results are redacted.").color(t.text.secondary));
             }
-            "ai" => {
-                let mut on = allow;
-                if Switch::new("strata.settings.allow_changes", "Allow the agent to change the view", &mut on).show(ui).changed() {
-                    actions.push((ids::AGENT_ALLOW_CHANGES, json!({"on": on})));
-                }
-                ui.label(
-                    egui::RichText::new(
-                        "Off: agents can still read (search, lines, stats), but filters, highlights, bookmarks and notes are refused.",
-                    )
-                    .color(t.text.secondary),
-                );
-                ui.add_space(t.space.md);
-                ui.label("Connect Claude, Cursor or another MCP client with:");
-                let r = ui.label(egui::RichText::new("strata-cli mcp").monospace().color(t.accent));
-                automation::register(ui, &r, "strata.settings.mcp_command", "strata-cli mcp", Role::Label);
-            }
+            // the agent stream's section: MCP, clients, "Allow the agent to change the view"
+            "ai" => crate::agent_panel::settings_ai(ui, cx),
             _ => {
                 ui.label("Theme");
                 let modes = ["System", "Dark", "Light"];

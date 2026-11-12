@@ -35,7 +35,7 @@ pub fn show(ui: &mut egui::Ui, cx: &mut Cx<'_, StrataDoc>, s: &StatusIn) {
         ui,
         |ui| {
             if let Some((frac, done, total)) = s.indexing {
-                let pct = (frac * 100.0).floor().clamp(0.0, 100.0);
+                let pct = (frac * 100.0).round().clamp(0.0, 100.0);
                 item(
                     ui,
                     "strata.status.indexing",

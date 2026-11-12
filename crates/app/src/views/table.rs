@@ -457,11 +457,12 @@ fn window_bar(ui: &mut egui::Ui, cx: &mut Cx<'_, StrataDoc>, st: &mut TableState
     egui::Frame::new().fill(theme::tint(t.accent, 18)).inner_margin(egui::Margin::symmetric(t.space.xl as i8, t.space.sm as i8)).show(ui, |ui| {
         ui.horizontal(|ui| {
             let text = format!(
-                "Lines {}–{} of {} · the table holds {} rows at a time; Go to line (⌘G) moves it",
+                "Lines {}–{} of {} · the table holds {} rows at a time; Go to line ({}) moves it",
                 fmt::thousands(start + 1),
                 fmt::thousands(start + len as u64),
                 fmt::thousands(total),
-                fmt::thousands(MAX_ROWS as u64)
+                fmt::thousands(MAX_ROWS as u64),
+                fmt::keys("⌘G")
             );
             let r = ui.label(egui::RichText::new(&text).color(t.text.primary));
             automation::register(ui, &r, "strata.table.window", &text, Role::Label);

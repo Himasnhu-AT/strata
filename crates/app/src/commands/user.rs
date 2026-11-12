@@ -16,7 +16,7 @@ use strata_core::filter::{CmpOp, Field, Literal};
 use strata_core::{FileId, Filter, Level, LogFile, Timestamp};
 
 use super::{R, S, ids};
-use crate::doc::{Actor, Column, FilterChip, OpenFile, SavedFilter, default_columns, labels, view_keys};
+use crate::doc::{Actor, Bookmark, BookmarkColor, Column, FilterChip, OpenFile, SavedFilter, default_columns, labels, view_keys};
 use crate::views::req::{self, Request, Target};
 
 // ---------------------------------------------------------------------------------------------
@@ -109,7 +109,9 @@ fn is_gzip_file(path: &Path) -> bool {
 /// window starts. A `.gz` file is decompressed by that job first. Fails for a missing,
 /// unreadable or binary file, with the reason. The `agent` stream's `log.open` can call this.
 pub fn open_path(s: &mut S, path: &Path, follow: bool) -> Result<FileId, CommandError> {
+    // the same spelling `log.open` uses, so a file is open once whichever way it came
     let path: PathBuf = std::path::absolute(path).unwrap_or_else(|_| path.to_path_buf());
+    let path = std::fs::canonicalize(&path).unwrap_or(path);
     if let Some(f) = s.doc().files.iter().find(|f| f.path == path) {
         let id = f.id;
         s.set_view(view_keys::ACTIVE_FILE, &id.0);
@@ -174,10 +176,13 @@ pub fn columns_of(f: &OpenFile) -> Vec<Column> {
     if f.columns.is_empty() { default_columns() } else { f.columns.clone() }
 }
 
-/// Every document change the person makes: one undo step. (After the agent stream merges, this
-/// also calls `commands::agent::person_acted`, so `agent.undo` reverts only agent changes.)
+/// Every document change the person makes: one undo step that also tells the agent stream the
+/// person acted (`agent.undo` then reverts only agent changes made after it).
 fn edit<T>(s: &mut S, label: &str, f: impl FnOnce(&mut crate::doc::StrataDoc) -> T) -> T {
-    s.edit(label, f)
+    s.edit(label, |d| {
+        super::agent::person_acted(d);
+        f(d)
+    })
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -638,6 +643,7 @@ pub fn view_resize_column(s: &mut S, p: &Value) -> R {
     let width = p.get("width").and_then(Value::as_f64).map(|w| w.clamp(16.0, 4000.0) as f32);
     let merge = format!("column-{}-{key}", file.0);
     s.edit_merged(labels::RESIZE_COLUMN, &merge, |d| {
+        super::agent::person_acted(d);
         if let Some(f) = d.file_mut(file) {
             let mut cols = columns_of(f);
             match cols.iter_mut().find(|c| c.key == key) {
@@ -653,6 +659,25 @@ pub fn view_resize_column(s: &mut S, p: &Value) -> R {
 // ---------------------------------------------------------------------------------------------
 // Bookmarks and highlights
 // ---------------------------------------------------------------------------------------------
+
+/// Bookmark the selected line (label `ADD_BOOKMARK`, by the person).
+pub fn bookmark_here(s: &mut S, p: &Value) -> R {
+    let file = file_arg(s, p, ids::BOOKMARK_HERE)?;
+    let line = selected_line(s, file).ok_or_else(|| CommandError::failed(ids::BOOKMARK_HERE, "no line is selected"))?;
+    if let Some(b) = s.doc().file(file).and_then(|f| f.bookmarks.iter().find(|b| b.line == line)) {
+        return Ok(json!({"file": file.0, "bookmark": b.id, "line": line + 1, "name": b.name}));
+    }
+    let name = str_arg(p, "name").map(str::trim).filter(|n| !n.is_empty()).map_or_else(|| format!("Line {}", line + 1), str::to_string);
+    let id = edit(s, labels::ADD_BOOKMARK, |d| {
+        let id = d.take_id();
+        if let Some(f) = d.file_mut(file) {
+            f.bookmarks.push(Bookmark { id, line, name: name.clone(), note: None, color: BookmarkColor::Amber, by: Actor::User });
+            f.bookmarks.sort_by_key(|b| b.line);
+        }
+        id
+    });
+    Ok(json!({"file": file.0, "bookmark": id, "line": line + 1, "name": name}))
+}
 
 /// Remove a bookmark (label `REMOVE_BOOKMARK`).
 pub fn bookmark_remove(s: &mut S, p: &Value) -> R {

@@ -43,7 +43,9 @@ item in another stream's file? Ask that stream; it adds it (additive).
   durations `<int><ms|s|m|h|d>`; `filter` is the filter grammar below.
 - ashlar's built-ins stay: `file.new/open/save/save_as/revert` work on the **workspace** (a
   `.strata` file), `app.undo/redo`, `app.palette` (`Mod+Shift+P`). Opening a log is
-  `log.open_dialog` (`Mod+Shift+O`) or `log.open {path}`.
+  `log.open_dialog` (`Mod+Shift+O`; with `{path}` it opens that file without asking) or
+  `log.open {path}`. B is `bookmark.here` (the person's bookmark of the selected line); agents
+  use `bookmark.add`.
 
 ## 2. Core types (`crates/core/src/`)
 

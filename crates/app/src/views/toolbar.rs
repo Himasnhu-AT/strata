@@ -115,7 +115,12 @@ pub fn show(ui: &mut egui::Ui, cx: &mut Cx<'_, StrataDoc>, st: &mut ToolbarState
         ui.spacing_mut().item_spacing.x = t.space.md;
         ui.add_space(t.space.lg);
         // search
-        let search = SearchField::new("strata.toolbar.search", &mut st.query).hint("Search  ⌘F").label("Search").width(260.0).height(30.0).show(ui);
+        let search = SearchField::new("strata.toolbar.search", &mut st.query)
+            .hint(&format!("Search  {}", fmt::keys("⌘F")))
+            .label("Search")
+            .width(260.0)
+            .height(30.0)
+            .show(ui);
         if focus.as_deref() == Some("search") {
             SearchField::focus(ui, "strata.toolbar.search");
             cx.set_view(view_keys::FOCUS, &Value::Null);
@@ -205,7 +210,7 @@ pub fn show(ui: &mut egui::Ui, cx: &mut Cx<'_, StrataDoc>, st: &mut ToolbarState
         let fr = ui.add(
             egui::TextEdit::singleline(&mut st.filter)
                 .id(edit_id)
-                .hint_text("Filter  ⌘L")
+                .hint_text(format!("Filter  {}", fmt::keys("⌘L")))
                 .font(egui::FontId::monospace(t.type_scale.mono))
                 .desired_width(170.0)
                 .margin(egui::Margin::symmetric(8, 6)),

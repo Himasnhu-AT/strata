@@ -1,0 +1,300 @@
+- menu "File" [id=menu.0]
+- menu "Edit" [id=menu.1]
+- menu "View" [id=menu.2]
+- menu "Search" [id=menu.3]
+- menu "Go" [id=menu.4]
+- menu "Bookmarks" [id=menu.5]
+- menu "Agent" [id=menu.6]
+- status "Status bar" [id=strata.status]
+  - status "360 lines" [id=strata.status.lines]
+  - status "64 KB" [id=strata.status.size]
+  - status "JSON lines" [id=strata.status.format]
+  - status "built with ashlar" [id=strata.status.ashlar]
+- searchbox "Search  ⌘F" [id=strata.toolbar.search] [value="timeout"]
+- button "Clear search" [id=strata.toolbar.search.clear]
+- checkbox "Regular expression" [id=strata.toolbar.regex] [unchecked]
+- checkbox "Match case" [id=strata.toolbar.case] [unchecked]
+- checkbox "Whole word" [id=strata.toolbar.word] [unchecked]
+- status "2 matches" [id=strata.toolbar.matches]
+- checkbox "Error 13" [id=strata.toolbar.level.error] [value="13"] [checked]
+- checkbox "Warn 32" [id=strata.toolbar.level.warn] [value="32"] [checked]
+- checkbox "Info 271" [id=strata.toolbar.level.info] [value="271"] [checked]
+- checkbox "Debug 44" [id=strata.toolbar.level.debug] [value="44"] [checked]
+- textbox "Filter" [id=strata.toolbar.filter_field] [value=""]
+- checkbox "Follow" [id=strata.toolbar.follow] [unchecked]
+- list "Files, bookmarks and filters" [id=strata.sidebar] [value="payments-api.jsonl"]
+  - button "Files" [id=strata.sidebar.section.0] [value="1"] [selected]
+  - listitem "payments-api.jsonl" [id=strata.sidebar.section.0.item.0] [value="64 KB"] [selected]
+  - button "Bookmarks" [id=strata.sidebar.section.1] [value="0"] [selected]
+  - button "Saved filters" [id=strata.sidebar.section.2] [value="0"] [selected]
+  - button "Recent" [id=strata.sidebar.section.3] [value="0"] [selected]
+- generic "Lines over time: 121 buckets, 360 lines; drag to choose a time range" [id=strata.histogram]
+- label "Line 34" [id=strata.detail.title]
+- label "00:00:00.731 · error · worker" [id=strata.detail.summary]
+- button "Filter by service" [id=strata.detail.filter]
+- button "Copy JSON" [id=strata.detail.copy_json]
+- button "Copy line" [id=strata.detail.copy_line]
+- document [id=strata.detail.json]
+  - label "{"
+    - label "{" [id=strata.detail.json.line.1]
+  - label "  /"ts/": /"2026-11-12T00:00:00.731Z/","
+  - label "  /"level/": /"error/","
+    - label "  /"level/": /"error/"," [id=strata.detail.json.line.3]
+  - label "  /"service/": /"worker/","
+    - label "  /"service/": /"worker/"," [id=strata.detail.json.line.4]
+  - label "  /"msg/": /"connection refused/","
+    - label "  /"msg/": /"connection refused/"," [id=strata.detail.json.line.5]
+  - label "  /"request_id/": /"r-403cca04/","
+    - label "  /"request_id/": /"r-403cca04/"," [id=strata.detail.json.line.6]
+  - label "  /"method/": /"GET/","
+    - label "  /"method/": /"GET/"," [id=strata.detail.json.line.7]
+  - label "  /"path/": /"/v1/login/","
+    - label "  /"path/": /"/v1/login/"," [id=strata.detail.json.line.8]
+  - label "  /"status/": 502,"
+    - label "  /"status/": 502," [id=strata.detail.json.line.9]
+  - label "  /"latency_ms/": 25625"
+    - label "  /"latency_ms/": 25625" [id=strata.detail.json.line.10]
+  - label "}"
+    - label "}" [id=strata.detail.json.line.11]
+  - scrollbar
+- generic
+- table "Log lines" [id=strata.table]
+  - row [offscreen]
+    - columnheader "Line" [id=strata.table.header.0]
+    - group
+    - columnheader "Time" [id=strata.table.header.1]
+    - group
+    - columnheader "Level" [id=strata.table.header.2]
+    - group
+    - columnheader "service" [id=strata.table.header.3]
+    - group
+    - columnheader "Message" [id=strata.table.header.4]
+    - group
+  - row "Line 19, debug, 00:00:00.437, db query" [offscreen]
+    - cell [offscreen]
+      - label "19" [offscreen]
+    - cell [offscreen]
+      - label "00:00:00.437" [offscreen]
+    - cell [offscreen]
+      - label "debug" [offscreen]
+    - cell [offscreen]
+      - label "auth" [offscreen]
+    - cell [offscreen]
+      - label "db query" [offscreen]
+  - row "Line 20, info, 00:00:00.471, cache miss" [offscreen]
+    - cell [offscreen]
+      - label "20" [offscreen]
+    - cell [offscreen]
+      - label "00:00:00.471" [offscreen]
+    - cell [offscreen]
+      - label "info" [offscreen]
+    - cell [offscreen]
+      - label "auth" [offscreen]
+    - cell [offscreen]
+      - label "cache miss" [offscreen]
+  - listitem "Line 21, info, 00:00:00.493, user signed in" [id=strata.table.row.20]
+    - cell
+      - label "21"
+    - cell
+      - label "00:00:00.493"
+    - cell
+      - label "info"
+    - cell
+      - label "auth"
+    - cell
+      - label "user signed in"
+  - listitem "Line 22, info, 00:00:00.513, cache miss" [id=strata.table.row.21]
+    - cell
+      - label "22"
+    - cell
+      - label "00:00:00.513"
+    - cell
+      - label "info"
+    - cell
+      - label "auth"
+    - cell
+      - label "cache miss"
+  - listitem "Line 23, debug, 00:00:00.514, config reloaded" [id=strata.table.row.22]
+    - cell
+      - label "23"
+    - cell
+      - label "00:00:00.514"
+    - cell
+      - label "debug"
+    - cell
+      - label "api"
+    - cell
+      - label "config reloaded"
+  - listitem "Line 24, info, 00:00:00.533, request handled" [id=strata.table.row.23]
+    - cell
+      - label "24"
+    - cell
+      - label "00:00:00.533"
+    - cell
+      - label "info"
+    - cell
+      - label "api"
+    - cell
+      - label "request handled"
+  - listitem "Line 25, info, 00:00:00.566, order created" [id=strata.table.row.24]
+    - cell
+      - label "25"
+    - cell
+      - label "00:00:00.566"
+    - cell
+      - label "info"
+    - cell
+      - label "payments"
+    - cell
+      - label "order created"
+  - listitem "Line 26, debug, 00:00:00.576, pool stats" [id=strata.table.row.25]
+    - cell
+      - label "26"
+    - cell
+      - label "00:00:00.576"
+    - cell
+      - label "debug"
+    - cell
+      - label "payments"
+    - cell
+      - label "pool stats"
+  - listitem "Line 27, info, 00:00:00.592, connection opened" [id=strata.table.row.26]
+    - cell
+      - label "27"
+    - cell
+      - label "00:00:00.592"
+    - cell
+      - label "info"
+    - cell
+      - label "worker"
+    - cell
+      - label "connection opened"
+  - listitem "Line 28, info, 00:00:00.626, job finished" [id=strata.table.row.27]
+    - cell
+      - label "28"
+    - cell
+      - label "00:00:00.626"
+    - cell
+      - label "info"
+    - cell
+      - label "worker"
+    - cell
+      - label "job finished"
+  - listitem "Line 29, info, 00:00:00.656, job finished" [id=strata.table.row.28]
+    - cell
+      - label "29"
+    - cell
+      - label "00:00:00.656"
+    - cell
+      - label "info"
+    - cell
+      - label "worker"
+    - cell
+      - label "job finished"
+  - listitem "Line 30, info, 00:00:00.666, order created" [id=strata.table.row.29]
+    - cell
+      - label "30"
+    - cell
+      - label "00:00:00.666"
+    - cell
+      - label "info"
+    - cell
+      - label "payments"
+    - cell
+      - label "order created"
+  - listitem "Line 31, info, 00:00:00.688, request handled" [id=strata.table.row.30]
+    - cell
+      - label "31"
+    - cell
+      - label "00:00:00.688"
+    - cell
+      - label "info"
+    - cell
+      - label "payments"
+    - cell
+      - label "request handled"
+  - listitem "Line 32, info, 00:00:00.692, job finished" [id=strata.table.row.31]
+    - cell
+      - label "32"
+    - cell
+      - label "00:00:00.692"
+    - cell
+      - label "info"
+    - cell
+      - label "worker"
+    - cell
+      - label "job finished"
+  - listitem "Line 33, warn, 00:00:00.727, queue depth high" [id=strata.table.row.32]
+    - cell
+      - label "33"
+    - cell
+      - label "00:00:00.727"
+    - cell
+      - label "warn"
+    - cell
+      - label "auth"
+    - cell
+      - label "queue depth high"
+  - listitem "Line 34, error, 00:00:00.731, connection refused" [id=strata.table.row.33] [selected]
+    - cell
+      - label "34"
+    - cell
+      - label "00:00:00.731"
+    - cell
+      - label "error"
+    - cell
+      - label "worker"
+    - cell
+      - label "connection refused"
+  - row "Line 35, error, 00:00:00.742, deadlock detected" [offscreen]
+    - cell [offscreen]
+      - label "35" [offscreen]
+    - cell [offscreen]
+      - label "00:00:00.742" [offscreen]
+    - cell [offscreen]
+      - label "error" [offscreen]
+    - cell [offscreen]
+      - label "auth" [offscreen]
+    - cell [offscreen]
+      - label "deadlock detected" [offscreen]
+  - row "Line 36, warn, 00:00:00.771, slow request" [offscreen]
+    - cell [offscreen]
+      - label "36" [offscreen]
+    - cell [offscreen]
+      - label "00:00:00.771" [offscreen]
+    - cell [offscreen]
+      - label "warn" [offscreen]
+    - cell [offscreen]
+      - label "worker" [offscreen]
+    - cell [offscreen]
+      - label "slow request" [offscreen]
+  - row "Line 37, error, 00:00:00.810, connection refused" [offscreen]
+    - cell [offscreen]
+      - label "37" [offscreen]
+    - cell [offscreen]
+      - label "00:00:00.810" [offscreen]
+    - cell [offscreen]
+      - label "error" [offscreen]
+    - cell [offscreen]
+      - label "search" [offscreen]
+    - cell [offscreen]
+      - label "connection refused" [offscreen]
+    - label "  /"ts/": /"2026-11-12T00:00:00.731Z/"," [id=strata.detail.json.line.2]
+  - scrollbar
+- dialog "Command palette" [id=palette]
+  - searchbox "Type a command" [id=palette.search] [value=""] [focused]
+  - list [id=palette.results]
+    - listitem "New" [id=palette.results.row.0] [selected]
+    - listitem "Open…" [id=palette.results.row.1]
+    - listitem "Save" [id=palette.results.row.2]
+    - listitem "Save As…" [id=palette.results.row.3]
+    - listitem "Quit" [id=palette.results.row.4]
+    - listitem "Undo" [id=palette.results.row.5]
+    - listitem "Open Log…" [id=palette.results.row.6]
+    - listitem "Close Log" [id=palette.results.row.7]
+    - listitem "Reload Log" [id=palette.results.row.8]
+    - listitem "Set Format…" [id=palette.results.row.9]
+    - listitem "Find…" [offscreen]
+    - listitem "Search" [offscreen]
+    - listitem "Next Match" [offscreen]
+    - scrollbar

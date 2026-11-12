@@ -560,7 +560,19 @@ impl FileRt {
         let input = (Arc::clone(file), Arc::clone(&self.derived), filter);
         self.hist_job = Some(job.spawn(input, |(file, derived, filter), p| {
             let cancel = || p.is_cancelled();
-            if let Ok(h) = strata_core::histogram::histogram(&file, None, filter.as_ref(), &cancel) {
+            // about 120 buckets over the file's span, down to 1 ms (the core's `auto` stops at 1 s)
+            let span = file.with_index(|ix| {
+                let (mut lo, mut hi) = (i64::MAX, i64::MIN);
+                for c in (0..ix.chunks()).filter_map(|i| ix.chunk(i)) {
+                    if let (Some(a), Some(b)) = (c.min_time, c.max_time) {
+                        lo = lo.min(a.0);
+                        hi = hi.max(b.0);
+                    }
+                }
+                hi.checked_sub(lo).filter(|s| *s >= 0)
+            });
+            let width = span.map(|s| (s / strata_core::limits::HISTOGRAM_AUTO as i64).max(1000));
+            if let Ok(h) = strata_core::histogram::histogram(&file, width, filter.as_ref(), &cancel) {
                 lock(&derived).hist = Some(h);
             }
             done_apply()

@@ -71,6 +71,23 @@ pub fn tilde(path: &std::path::Path) -> String {
     shown
 }
 
+/// A shortcut written the Mac way (`⌘⇧O`) as this platform writes it (`Ctrl+Shift+O`).
+pub fn keys(mac: &str) -> String {
+    if cfg!(target_os = "macos") {
+        return mac.to_string();
+    }
+    let mut out = String::new();
+    for c in mac.chars() {
+        match c {
+            '⌘' => out.push_str("Ctrl+"),
+            '⇧' => out.push_str("Shift+"),
+            '⌥' => out.push_str("Alt+"),
+            other => out.push(other),
+        }
+    }
+    out
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

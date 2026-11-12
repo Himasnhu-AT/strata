@@ -236,6 +236,11 @@ pub const VIEW_RESIZE_COLUMN: &str = "view.resize_column";
 pub const VIEW_RESIZE_COLUMN_PARAMS: &[Param] =
     &[FILE, Param::string("column").required(), Param::float_in("width", 0.0, 4000.0).about("points; absent: automatic")];
 
+/// Bookmark the selected line (the B key): the person's own `bookmark.add`, so the agent panel
+/// never counts it as the agent's. (Added by the ui stream.)
+pub const BOOKMARK_HERE: &str = "bookmark.here";
+pub const BOOKMARK_HERE_PARAMS: &[Param] = &[FILE, Param::string("name").about("default: `Line <n>`")];
+
 pub const BOOKMARK_REMOVE: &str = "bookmark.remove";
 pub const BOOKMARK_REMOVE_PARAMS: &[Param] = &[FILE, Param::int_in("id", 1, MAX).required()];
 
@@ -293,6 +298,7 @@ pub const USER: &[&str] = &[
     VIEW_TOGGLE_COLUMN,
     VIEW_MOVE_COLUMN,
     VIEW_RESIZE_COLUMN,
+    BOOKMARK_HERE,
     BOOKMARK_REMOVE,
     BOOKMARK_RENAME,
     HIGHLIGHT_REMOVE,

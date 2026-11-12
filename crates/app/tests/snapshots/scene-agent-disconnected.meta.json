@@ -1,0 +1,7 @@
+{
+  "adapter": "Apple M5 Pro",
+  "backend": "Metal",
+  "height": 800,
+  "scale": 1.0,
+  "width": 1280
+}
