@@ -1,0 +1,445 @@
+{
+  "apps": [
+    {
+      "app": "Strata (same outside method)",
+      "files": [
+        {
+          "error": null,
+          "file": "jsonl 100M",
+          "idle_cpu_percent": 1.7,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 220.172,
+            "median": 218.5,
+            "min": 215.609,
+            "n": 5,
+            "samples": [
+              218.5,
+              219.031,
+              220.172,
+              215.609,
+              218.406
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 220.172,
+            "median": 218.5,
+            "min": 215.609,
+            "n": 5,
+            "samples": [
+              218.5,
+              219.063,
+              220.172,
+              215.609,
+              218.406
+            ]
+          },
+          "runs_with_window_on_screen": 5,
+          "settled_ms": {
+            "max": 1570.999,
+            "median": 266.182,
+            "min": 242.81,
+            "n": 5,
+            "samples": [
+              584.935,
+              1570.999,
+              257.422,
+              266.182,
+              242.81
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 28.507,
+            "median": 21.688,
+            "min": 15.654,
+            "n": 5,
+            "samples": [
+              15.654,
+              21.688,
+              22.765,
+              28.507,
+              19.809
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "plain 100M",
+          "idle_cpu_percent": 5.433,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 222.547,
+            "median": 221.563,
+            "min": 218.813,
+            "n": 5,
+            "samples": [
+              220.891,
+              222.172,
+              222.547,
+              218.813,
+              221.563
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 222.547,
+            "median": 221.563,
+            "min": 218.813,
+            "n": 5,
+            "samples": [
+              220.906,
+              222.172,
+              222.547,
+              218.813,
+              221.563
+            ]
+          },
+          "runs_with_window_on_screen": 5,
+          "settled_ms": {
+            "max": 925.493,
+            "median": 355.385,
+            "min": 306.132,
+            "n": 5,
+            "samples": [
+              415.036,
+              324.282,
+              925.493,
+              355.385,
+              306.132
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 29.932,
+            "median": 25.845,
+            "min": 16.784,
+            "n": 5,
+            "samples": [
+              20.508,
+              26.181,
+              25.845,
+              29.932,
+              16.784
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "jsonl 1G",
+          "idle_cpu_percent": 6.667,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 1153.844,
+            "median": 1153.234,
+            "min": 127.203,
+            "n": 5,
+            "samples": [
+              127.203,
+              1153.844,
+              1146.25,
+              1153.234,
+              1153.703
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 1153.844,
+            "median": 1153.234,
+            "min": 198.047,
+            "n": 5,
+            "samples": [
+              198.047,
+              1153.844,
+              1150.656,
+              1153.234,
+              1153.703
+            ]
+          },
+          "runs_with_window_on_screen": 4,
+          "settled_ms": {
+            "max": 4509.183,
+            "median": 2040.31,
+            "min": 1979.865,
+            "n": 5,
+            "samples": [
+              4509.183,
+              2651.188,
+              2027.894,
+              2040.31,
+              1979.865
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 29.226,
+            "median": 26.848,
+            "min": 16.816,
+            "n": 5,
+            "samples": [
+              16.816,
+              28.335,
+              21.126,
+              29.226,
+              26.848
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "plain 1G",
+          "idle_cpu_percent": 0.0,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 761.828,
+            "median": 761.219,
+            "min": 756.625,
+            "n": 5,
+            "samples": [
+              761.609,
+              761.828,
+              756.625,
+              761.219,
+              756.766
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 761.828,
+            "median": 761.219,
+            "min": 761.047,
+            "n": 5,
+            "samples": [
+              761.656,
+              761.828,
+              761.047,
+              761.219,
+              761.172
+            ]
+          },
+          "runs_with_window_on_screen": 5,
+          "settled_ms": {
+            "max": 3354.442,
+            "median": 2293.414,
+            "min": 2257.715,
+            "n": 5,
+            "samples": [
+              3354.442,
+              2293.414,
+              2294.96,
+              2257.715,
+              2289.949
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 22.214,
+            "median": 21.642,
+            "min": 12.187,
+            "n": 5,
+            "samples": [
+              12.187,
+              21.642,
+              17.115,
+              22.214,
+              21.871
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "jsonl 5G",
+          "idle_cpu_percent": 0.0,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 1544.594,
+            "median": 1539.25,
+            "min": 175.109,
+            "n": 5,
+            "samples": [
+              1539.172,
+              175.109,
+              1539.25,
+              1544.594,
+              1543.859
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 1544.594,
+            "median": 1539.25,
+            "min": 238.422,
+            "n": 5,
+            "samples": [
+              1539.172,
+              238.422,
+              1539.25,
+              1544.594,
+              1543.859
+            ]
+          },
+          "runs_with_window_on_screen": 5,
+          "settled_ms": {
+            "max": 16306.593,
+            "median": 10839.752,
+            "min": 9672.023,
+            "n": 5,
+            "samples": [
+              16306.593,
+              11885.633,
+              10839.752,
+              9848.202,
+              9672.023
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 24.388,
+            "median": 21.171,
+            "min": 13.465,
+            "n": 5,
+            "samples": [
+              22.69,
+              17.738,
+              13.465,
+              21.171,
+              24.388
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "plain 5G",
+          "idle_cpu_percent": 0.0,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 877.125,
+            "median": 873.969,
+            "min": 872.953,
+            "n": 5,
+            "samples": [
+              873.266,
+              872.953,
+              874.641,
+              877.125,
+              873.969
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 877.125,
+            "median": 873.969,
+            "min": 872.953,
+            "n": 5,
+            "samples": [
+              873.266,
+              872.953,
+              874.641,
+              877.125,
+              873.969
+            ]
+          },
+          "runs_with_window_on_screen": 5,
+          "settled_ms": {
+            "max": 18860.106,
+            "median": 11819.458,
+            "min": 11340.633,
+            "n": 5,
+            "samples": [
+              18860.106,
+              11819.458,
+              11340.633,
+              12316.077,
+              11373.957
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 28.9,
+            "median": 23.121,
+            "min": 19.706,
+            "n": 5,
+            "samples": [
+              21.903,
+              28.9,
+              23.121,
+              19.706,
+              25.312
+            ]
+          }
+        }
+      ],
+      "installed": true,
+      "key": "strata",
+      "launch_error": null,
+      "launch_runs_with_window_on_screen": 0,
+      "launch_to_window_ms": {
+        "max": 213.184,
+        "median": 203.883,
+        "min": 193.391,
+        "n": 5,
+        "samples": [
+          203.883,
+          193.391,
+          213.184,
+          202.987,
+          212.466
+        ]
+      },
+      "load_before": {
+        "loadavg": "{ 4.59 5.65 6.68 }",
+        "memgate": "available 19.68 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16424] pid 32141   rss      5 MB  peak      5 MB    976ms  cargo run --quiet --release -p xtask -- bench --only apps --apps strata --sizes 100M,1G,5G --out target/bench/full-app-strata.json"
+      },
+      "version": "0.1.0"
+    }
+  ],
+  "date": "2026-11-12",
+  "fixtures": [
+    {
+      "bytes": 104857711,
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-104857600-s42.jsonl",
+      "size": "100M"
+    },
+    {
+      "bytes": 104857659,
+      "format": "plain",
+      "path": "benches/fixtures/plain-104857600-s42.log",
+      "size": "100M"
+    },
+    {
+      "bytes": 1073741874,
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-1073741824-s42.jsonl",
+      "size": "1G"
+    },
+    {
+      "bytes": 1073741842,
+      "format": "plain",
+      "path": "benches/fixtures/plain-1073741824-s42.log",
+      "size": "1G"
+    },
+    {
+      "bytes": 5368709259,
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-5368709120-s42.jsonl",
+      "size": "5G"
+    },
+    {
+      "bytes": 5368709153,
+      "format": "plain",
+      "path": "benches/fixtures/plain-5368709120-s42.log",
+      "size": "5G"
+    }
+  ],
+  "git": "2a05e8c",
+  "load_after": {
+    "loadavg": "{ 4.05 4.95 5.96 }",
+    "memgate": "available 19.44 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16424] pid 32141   rss      6 MB  peak     44 MB    7m40s  cargo run --quiet --release -p xtask -- bench --only apps --apps strata --sizes 100M,1G,5G --out target/bench/full-app-strata.json"
+  },
+  "load_before": {
+    "loadavg": "{ 4.59 5.65 6.68 }",
+    "memgate": "available 19.68 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16424] pid 32141   rss      4 MB  peak      4 MB    907ms  cargo run --quiet --release -p xtask -- bench --only apps --apps strata --sizes 100M,1G,5G --out target/bench/full-app-strata.json"
+  },
+  "machine": {
+    "arch": "aarch64",
+    "cores": 15,
+    "cpu": "Apple M5 Pro",
+    "memory_gb": 24.0,
+    "model": "Mac17,9",
+    "os": "macOS 26.6.2 (25G83)"
+  },
+  "mode": "full",
+  "runs": 9,
+  "schema": 1,
+  "started_unix": 1794484037
+}

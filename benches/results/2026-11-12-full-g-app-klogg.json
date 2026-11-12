@@ -1,0 +1,1295 @@
+{
+  "apps": [
+    {
+      "app": "klogg",
+      "files": [
+        {
+          "error": null,
+          "file": "plain 100M",
+          "idle_cpu_percent": 0.033,
+          "idle_secs": 30,
+          "proof": [
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 1,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-100M-klogg-1.png",
+              "title": "plain-104857600-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22411
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 2,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-100M-klogg-2.png",
+              "title": "plain-104857600-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22430
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 3,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-100M-klogg-3.png",
+              "title": "plain-104857600-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22447
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 4,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-100M-klogg-4.png",
+              "title": "plain-104857600-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22465
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 5,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-100M-klogg-5.png",
+              "title": "plain-104857600-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22484
+            }
+          ],
+          "rss_after_open_mb": {
+            "max": 219.141,
+            "median": 214.598,
+            "min": 208.262,
+            "n": 5,
+            "samples": [
+              208.262,
+              212.879,
+              219.141,
+              214.598,
+              217.551
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 219.141,
+            "median": 214.598,
+            "min": 208.262,
+            "n": 5,
+            "samples": [
+              208.262,
+              212.879,
+              219.141,
+              214.598,
+              217.551
+            ]
+          },
+          "runs_with_window_on_screen": 0,
+          "settled_ms": {
+            "max": 1361.582,
+            "median": 1114.733,
+            "min": 865.651,
+            "n": 5,
+            "samples": [
+              1114.733,
+              1212.316,
+              1036.212,
+              1361.582,
+              865.651
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 505.639,
+            "median": 437.766,
+            "min": 405.409,
+            "n": 5,
+            "samples": [
+              447.352,
+              505.639,
+              405.409,
+              429.933,
+              437.766
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "plain 1G",
+          "idle_cpu_percent": 0.067,
+          "idle_secs": 30,
+          "proof": [
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 1,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-1G-klogg-1.png",
+              "title": "plain-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22501
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 2,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-1G-klogg-2.png",
+              "title": "plain-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22518
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 3,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-1G-klogg-3.png",
+              "title": "plain-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22535
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 4,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-1G-klogg-4.png",
+              "title": "plain-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22552
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 5,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-1G-klogg-5.png",
+              "title": "plain-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22569
+            }
+          ],
+          "rss_after_open_mb": {
+            "max": 305.484,
+            "median": 301.488,
+            "min": 292.426,
+            "n": 5,
+            "samples": [
+              305.484,
+              301.488,
+              292.426,
+              301.777,
+              293.277
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 316.883,
+            "median": 301.777,
+            "min": 292.426,
+            "n": 5,
+            "samples": [
+              305.484,
+              316.883,
+              292.426,
+              301.777,
+              293.277
+            ]
+          },
+          "runs_with_window_on_screen": 0,
+          "settled_ms": {
+            "max": 1981.355,
+            "median": 1264.695,
+            "min": 890.464,
+            "n": 5,
+            "samples": [
+              890.464,
+              1264.695,
+              1205.326,
+              1628.107,
+              1981.355
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 453.094,
+            "median": 421.483,
+            "min": 412.452,
+            "n": 5,
+            "samples": [
+              415.362,
+              453.094,
+              412.452,
+              421.483,
+              428.937
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "plain 5G",
+          "idle_cpu_percent": 0.067,
+          "idle_secs": 30,
+          "proof": [
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 1,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-5G-klogg-1.png",
+              "title": "plain-5368709120-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22586
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 2,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-5G-klogg-2.png",
+              "title": "plain-5368709120-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22603
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 3,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-5G-klogg-3.png",
+              "title": "plain-5368709120-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22620
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 4,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-5G-klogg-4.png",
+              "title": "plain-5368709120-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22642
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 5,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-5G-klogg-5.png",
+              "title": "plain-5368709120-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22661
+            }
+          ],
+          "rss_after_open_mb": {
+            "max": 389.793,
+            "median": 381.516,
+            "min": 361.863,
+            "n": 5,
+            "samples": [
+              361.863,
+              374.457,
+              381.516,
+              383.48,
+              389.793
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 389.793,
+            "median": 381.516,
+            "min": 361.863,
+            "n": 5,
+            "samples": [
+              361.863,
+              374.457,
+              381.516,
+              383.48,
+              389.793
+            ]
+          },
+          "runs_with_window_on_screen": 0,
+          "settled_ms": {
+            "max": 3323.067,
+            "median": 2510.788,
+            "min": 2226.661,
+            "n": 5,
+            "samples": [
+              2245.751,
+              2226.661,
+              3323.067,
+              2523.655,
+              2510.788
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 477.235,
+            "median": 433.975,
+            "min": 410.069,
+            "n": 5,
+            "samples": [
+              433.975,
+              477.235,
+              424.191,
+              441.726,
+              410.069
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "jsonl 100M",
+          "idle_cpu_percent": 11.8,
+          "idle_secs": 30,
+          "proof": [
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 1,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/jsonl-100M-klogg-1.png",
+              "title": "jsonl-104857600-s42.jsonl - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22680
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 2,
+              "screen_locked": false,
+              "shot": null,
+              "title": "jsonl-104857600-s42.jsonl - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22716
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 3,
+              "screen_locked": false,
+              "shot": null,
+              "title": "jsonl-104857600-s42.jsonl - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22748
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 4,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/jsonl-100M-klogg-4.png",
+              "title": "jsonl-104857600-s42.jsonl - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22767
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 5,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/jsonl-100M-klogg-5.png",
+              "title": "jsonl-104857600-s42.jsonl - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22808
+            }
+          ],
+          "rss_after_open_mb": {
+            "max": 214.359,
+            "median": 209.996,
+            "min": 207.398,
+            "n": 5,
+            "samples": [
+              209.996,
+              214.359,
+              208.129,
+              214.168,
+              207.398
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 214.359,
+            "median": 209.996,
+            "min": 207.398,
+            "n": 5,
+            "samples": [
+              209.996,
+              214.359,
+              208.129,
+              214.168,
+              207.398
+            ]
+          },
+          "runs_with_window_on_screen": 0,
+          "settled_ms": {
+            "max": 2754.37,
+            "median": 1239.835,
+            "min": 1105.305,
+            "n": 5,
+            "samples": [
+              2754.37,
+              1227.245,
+              1641.644,
+              1239.835,
+              1105.305
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 491.131,
+            "median": 451.244,
+            "min": 403.821,
+            "n": 5,
+            "samples": [
+              435.143,
+              491.131,
+              463.807,
+              451.244,
+              403.821
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "jsonl 1G",
+          "idle_cpu_percent": 0.033,
+          "idle_secs": 30,
+          "proof": [
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 1,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/jsonl-1G-klogg-1.png",
+              "title": "jsonl-1073741824-s42.jsonl - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22825
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 2,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/jsonl-1G-klogg-2.png",
+              "title": "jsonl-1073741824-s42.jsonl - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22842
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 3,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/jsonl-1G-klogg-3.png",
+              "title": "jsonl-1073741824-s42.jsonl - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22859
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 4,
+              "screen_locked": false,
+              "shot": null,
+              "title": "jsonl-1073741824-s42.jsonl - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22876
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 5,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/jsonl-1G-klogg-5.png",
+              "title": "jsonl-1073741824-s42.jsonl - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22918
+            }
+          ],
+          "rss_after_open_mb": {
+            "max": 310.066,
+            "median": 302.809,
+            "min": 295.34,
+            "n": 5,
+            "samples": [
+              302.809,
+              295.34,
+              296.434,
+              310.066,
+              303.297
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 310.066,
+            "median": 302.809,
+            "min": 295.34,
+            "n": 5,
+            "samples": [
+              302.809,
+              295.34,
+              296.434,
+              310.066,
+              303.297
+            ]
+          },
+          "runs_with_window_on_screen": 0,
+          "settled_ms": {
+            "max": 2626.969,
+            "median": 1657.201,
+            "min": 886.843,
+            "n": 5,
+            "samples": [
+              2626.969,
+              1657.201,
+              1180.915,
+              2464.768,
+              886.843
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 488.156,
+            "median": 450.555,
+            "min": 416.688,
+            "n": 5,
+            "samples": [
+              443.754,
+              481.206,
+              450.555,
+              488.156,
+              416.688
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "jsonl 5G",
+          "idle_cpu_percent": 0.067,
+          "idle_secs": 30,
+          "proof": [
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 1,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/jsonl-5G-klogg-1.png",
+              "title": "jsonl-5368709120-s42.jsonl - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22948
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 2,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/jsonl-5G-klogg-2.png",
+              "title": "jsonl-5368709120-s42.jsonl - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22965
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 3,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/jsonl-5G-klogg-3.png",
+              "title": "jsonl-5368709120-s42.jsonl - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22982
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 4,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/jsonl-5G-klogg-4.png",
+              "title": "jsonl-5368709120-s42.jsonl - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 22999
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 5,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/jsonl-5G-klogg-5.png",
+              "title": "jsonl-5368709120-s42.jsonl - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23016
+            }
+          ],
+          "rss_after_open_mb": {
+            "max": 612.754,
+            "median": 588.258,
+            "min": 517.391,
+            "n": 5,
+            "samples": [
+              517.391,
+              612.754,
+              588.258,
+              585.199,
+              593.051
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 612.754,
+            "median": 589.063,
+            "min": 554.688,
+            "n": 5,
+            "samples": [
+              554.688,
+              612.754,
+              589.063,
+              585.199,
+              593.051
+            ]
+          },
+          "runs_with_window_on_screen": 0,
+          "settled_ms": {
+            "max": 4417.724,
+            "median": 1986.738,
+            "min": 1659.148,
+            "n": 5,
+            "samples": [
+              4417.724,
+              1704.497,
+              4376.013,
+              1659.148,
+              1986.738
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 492.258,
+            "median": 440.427,
+            "min": 415.593,
+            "n": 5,
+            "samples": [
+              415.593,
+              492.258,
+              440.427,
+              479.179,
+              437.604
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "logfmt 1G",
+          "idle_cpu_percent": 0.033,
+          "idle_secs": 30,
+          "proof": [
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 1,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/logfmt-1G-klogg-1.png",
+              "title": "logfmt-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23033
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 2,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/logfmt-1G-klogg-2.png",
+              "title": "logfmt-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23050
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 3,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/logfmt-1G-klogg-3.png",
+              "title": "logfmt-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23067
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 4,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/logfmt-1G-klogg-4.png",
+              "title": "logfmt-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23084
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 5,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/logfmt-1G-klogg-5.png",
+              "title": "logfmt-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23103
+            }
+          ],
+          "rss_after_open_mb": {
+            "max": 376.18,
+            "median": 332.859,
+            "min": 177.477,
+            "n": 5,
+            "samples": [
+              332.859,
+              243.66,
+              177.477,
+              376.18,
+              340.527
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 376.18,
+            "median": 340.527,
+            "min": 332.859,
+            "n": 5,
+            "samples": [
+              332.859,
+              333.055,
+              346.934,
+              376.18,
+              340.527
+            ]
+          },
+          "runs_with_window_on_screen": 0,
+          "settled_ms": {
+            "max": 5078.379,
+            "median": 1661.014,
+            "min": 1188.611,
+            "n": 5,
+            "samples": [
+              1188.611,
+              5078.379,
+              1661.014,
+              2294.254,
+              1468.665
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 471.203,
+            "median": 425.997,
+            "min": 418.159,
+            "n": 5,
+            "samples": [
+              418.159,
+              471.203,
+              441.915,
+              425.115,
+              425.997
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "syslog 1G",
+          "idle_cpu_percent": 0.2,
+          "idle_secs": 30,
+          "proof": [
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 1,
+              "screen_locked": false,
+              "shot": null,
+              "title": "syslog-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23125
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 2,
+              "screen_locked": false,
+              "shot": null,
+              "title": "syslog-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23202
+            },
+            {
+              "height": 777,
+              "on_screen": false,
+              "run": 3,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/syslog-1G-klogg-3.png",
+              "title": "syslog-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23232
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 4,
+              "screen_locked": false,
+              "shot": null,
+              "title": "syslog-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23258
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 5,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/syslog-1G-klogg-5.png",
+              "title": "syslog-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23300
+            }
+          ],
+          "rss_after_open_mb": {
+            "max": 320.945,
+            "median": 296.363,
+            "min": 291.039,
+            "n": 5,
+            "samples": [
+              304.609,
+              291.039,
+              294.805,
+              320.945,
+              296.363
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 320.945,
+            "median": 296.363,
+            "min": 291.039,
+            "n": 5,
+            "samples": [
+              304.609,
+              291.039,
+              294.871,
+              320.945,
+              296.363
+            ]
+          },
+          "runs_with_window_on_screen": 0,
+          "settled_ms": {
+            "max": 2462.895,
+            "median": 1330.313,
+            "min": 877.027,
+            "n": 5,
+            "samples": [
+              1294.2,
+              877.027,
+              2462.895,
+              1451.1,
+              1330.313
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 508.071,
+            "median": 454.37,
+            "min": 438.497,
+            "n": 5,
+            "samples": [
+              448.516,
+              500.707,
+              438.497,
+              454.37,
+              508.071
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "access 1G",
+          "idle_cpu_percent": 0.2,
+          "idle_secs": 30,
+          "proof": [
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 1,
+              "screen_locked": false,
+              "shot": null,
+              "title": "access-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23342
+            },
+            {
+              "height": 777,
+              "on_screen": false,
+              "run": 2,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/access-1G-klogg-2.png",
+              "title": "access-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23387
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 3,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/access-1G-klogg-3.png",
+              "title": "access-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23417
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 4,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/access-1G-klogg-4.png",
+              "title": "access-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23462
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 5,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/access-1G-klogg-5.png",
+              "title": "access-1073741824-s42.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23493
+            }
+          ],
+          "rss_after_open_mb": {
+            "max": 288.492,
+            "median": 274.66,
+            "min": 270.938,
+            "n": 5,
+            "samples": [
+              274.66,
+              270.938,
+              274.098,
+              288.492,
+              287.191
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 288.492,
+            "median": 274.66,
+            "min": 270.938,
+            "n": 5,
+            "samples": [
+              274.66,
+              270.938,
+              274.098,
+              288.492,
+              287.191
+            ]
+          },
+          "runs_with_window_on_screen": 0,
+          "settled_ms": {
+            "max": 1651.332,
+            "median": 1291.597,
+            "min": 964.836,
+            "n": 5,
+            "samples": [
+              1303.779,
+              1651.332,
+              1291.597,
+              964.836,
+              1210.505
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 512.067,
+            "median": 464.38,
+            "min": 426.813,
+            "n": 5,
+            "samples": [
+              464.38,
+              512.067,
+              426.813,
+              452.05,
+              503.114
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "macos 1G",
+          "idle_cpu_percent": 0.1,
+          "idle_secs": 30,
+          "proof": [
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 1,
+              "screen_locked": false,
+              "shot": null,
+              "title": "macos-install-1073741824.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23510
+            },
+            {
+              "height": 777,
+              "on_screen": false,
+              "run": 2,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/macos-1G-klogg-2.png",
+              "title": "macos-install-1073741824.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23542
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 3,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/macos-1G-klogg-3.png",
+              "title": "klogg_clipboard.ruXnvj - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23572
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 4,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/macos-1G-klogg-4.png",
+              "title": "macos-install-1073741824.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23604
+            },
+            {
+              "height": 777,
+              "on_screen": true,
+              "run": 5,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/macos-1G-klogg-5.png",
+              "title": "macos-install-1073741824.log - klogg (build 22.06.0.1289)",
+              "waited_for_unlock_s": 0,
+              "width": 1372,
+              "window": 23637
+            }
+          ],
+          "rss_after_open_mb": {
+            "max": 315.324,
+            "median": 298.965,
+            "min": 295.203,
+            "n": 5,
+            "samples": [
+              298.965,
+              295.203,
+              312.469,
+              315.324,
+              297.629
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 315.324,
+            "median": 298.965,
+            "min": 295.203,
+            "n": 5,
+            "samples": [
+              298.965,
+              295.203,
+              312.469,
+              315.324,
+              297.629
+            ]
+          },
+          "runs_with_window_on_screen": 0,
+          "settled_ms": {
+            "max": 1381.101,
+            "median": 1309.794,
+            "min": 870.211,
+            "n": 5,
+            "samples": [
+              1309.794,
+              1377.698,
+              870.211,
+              990.581,
+              1381.101
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 516.255,
+            "median": 453.555,
+            "min": 431.051,
+            "n": 5,
+            "samples": [
+              439.6,
+              516.255,
+              431.051,
+              453.555,
+              482.325
+            ]
+          }
+        }
+      ],
+      "installed": true,
+      "key": "klogg",
+      "launch_error": null,
+      "launch_runs_with_window_on_screen": 0,
+      "launch_to_window_ms": {
+        "max": 420.836,
+        "median": 378.027,
+        "min": 367.535,
+        "n": 5,
+        "samples": [
+          385.407,
+          367.535,
+          375.863,
+          420.836,
+          378.027
+        ]
+      },
+      "load_before": {
+        "loadavg": "{ 3.01 2.51 3.19 }",
+        "memgate": "available 18.00 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16487] pid 37885   rss      5 MB  peak    358 MB     3.6s  cargo run --quiet --release -p xtask -- bench --only apps --apps klogg --files plain:100M,plain:1G,plain:5G,jsonl:100M,jsonl:1G,jsonl:5G,logfmt:1G,syslog:1G,access:1G,macos:1G --out target/bench/full-g-app-klogg.json"
+      },
+      "version": "22.06"
+    }
+  ],
+  "date": "2026-11-12",
+  "fixtures": [
+    {
+      "bytes": 104857659,
+      "detected": "timestamped",
+      "format": "plain",
+      "path": "benches/fixtures/plain-104857600-s42.log",
+      "size": "100M",
+      "source": null
+    },
+    {
+      "bytes": 1073741842,
+      "detected": "timestamped",
+      "format": "plain",
+      "path": "benches/fixtures/plain-1073741824-s42.log",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 5368709153,
+      "detected": "timestamped",
+      "format": "plain",
+      "path": "benches/fixtures/plain-5368709120-s42.log",
+      "size": "5G",
+      "source": null
+    },
+    {
+      "bytes": 104857711,
+      "detected": "jsonl",
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-104857600-s42.jsonl",
+      "size": "100M",
+      "source": null
+    },
+    {
+      "bytes": 1073741874,
+      "detected": "jsonl",
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-1073741824-s42.jsonl",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 5368709259,
+      "detected": "jsonl",
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-5368709120-s42.jsonl",
+      "size": "5G",
+      "source": null
+    },
+    {
+      "bytes": 1073741946,
+      "detected": "logfmt",
+      "format": "logfmt",
+      "path": "benches/fixtures/logfmt-1073741824-s42.log",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 1073741824,
+      "detected": "syslog",
+      "format": "syslog",
+      "path": "benches/fixtures/syslog-1073741824-s42.log",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 1073741901,
+      "detected": "access",
+      "format": "access",
+      "path": "benches/fixtures/access-1073741824-s42.log",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 1073741917,
+      "detected": "timestamped",
+      "format": "macos",
+      "path": "benches/fixtures/macos-install-1073741824.log",
+      "size": "1G",
+      "source": "/var/log/install.log (24929621 bytes), repeated"
+    }
+  ],
+  "git": "f3788ff",
+  "load_after": {
+    "loadavg": "{ 4.80 4.30 3.79 }",
+    "memgate": "available 17.76 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16487] pid 37885   rss      6 MB  peak    358 MB   10m08s  cargo run --quiet --release -p xtask -- bench --only apps --apps klogg --files plain:100M,plain:1G,plain:5G,jsonl:100M,jsonl:1G,jsonl:5G,logfmt:1G,syslog:1G,access:1G,macos:1G --out target/bench/full-g-app-klogg.json"
+  },
+  "load_before": {
+    "loadavg": "{ 3.01 2.51 3.19 }",
+    "memgate": "available 18.00 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16487] pid 37885   rss      4 MB  peak    358 MB     3.5s  cargo run --quiet --release -p xtask -- bench --only apps --apps klogg --files plain:100M,plain:1G,plain:5G,jsonl:100M,jsonl:1G,jsonl:5G,logfmt:1G,syslog:1G,access:1G,macos:1G --out target/bench/full-g-app-klogg.json"
+  },
+  "machine": {
+    "arch": "aarch64",
+    "cores": 15,
+    "cpu": "Apple M5 Pro",
+    "memory_gb": 24.0,
+    "model": "Mac17,9",
+    "os": "macOS 26.6.2 (25G83)"
+  },
+  "mode": "full",
+  "runs": 9,
+  "schema": 1,
+  "started_unix": 1794493906
+}

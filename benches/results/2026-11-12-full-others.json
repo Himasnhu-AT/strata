@@ -1,0 +1,1151 @@
+{
+  "date": "2026-11-12",
+  "fixtures": [
+    {
+      "bytes": 104857659,
+      "detected": "timestamped",
+      "format": "plain",
+      "path": "benches/fixtures/plain-104857600-s42.log",
+      "size": "100M",
+      "source": null
+    },
+    {
+      "bytes": 104857711,
+      "detected": "jsonl",
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-104857600-s42.jsonl",
+      "size": "100M",
+      "source": null
+    },
+    {
+      "bytes": 1073741842,
+      "detected": "timestamped",
+      "format": "plain",
+      "path": "benches/fixtures/plain-1073741824-s42.log",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 1073741874,
+      "detected": "jsonl",
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-1073741824-s42.jsonl",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 5368709153,
+      "detected": "timestamped",
+      "format": "plain",
+      "path": "benches/fixtures/plain-5368709120-s42.log",
+      "size": "5G",
+      "source": null
+    },
+    {
+      "bytes": 5368709259,
+      "detected": "jsonl",
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-5368709120-s42.jsonl",
+      "size": "5G",
+      "source": null
+    }
+  ],
+  "git": "2a05e8c",
+  "load_after": {
+    "loadavg": "{ 6.38 5.70 5.33 }",
+    "memgate": "available 19.20 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16453] pid 48858   rss      6 MB  peak      6 MB   15m14s  cargo run --quiet --release -p xtask -- bench --only others --sizes 100M,1G,5G --out target/bench/full-others.json"
+  },
+  "load_before": {
+    "loadavg": "{ 2.92 3.94 4.83 }",
+    "memgate": "available 18.96 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16453] pid 48858   rss      4 MB  peak      4 MB    531ms  cargo run --quiet --release -p xtask -- bench --only others --sizes 100M,1G,5G --out target/bench/full-others.json"
+  },
+  "machine": {
+    "arch": "aarch64",
+    "cores": 15,
+    "cpu": "Apple M5 Pro",
+    "memory_gb": 24.0,
+    "model": "Mac17,9",
+    "os": "macOS 26.6.2 (25G83)"
+  },
+  "mode": "full",
+  "others": {
+    "cli": [
+      {
+        "file": "plain 100M",
+        "results": {
+          "grep_field": {
+            "command": "/usr/bin/grep -c -E \\] ERROR  /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/plain-104857600-s42.log",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 9,
+              "samples": [
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453
+              ]
+            },
+            "output": "7034",
+            "wall_ms": {
+              "max": 697.106,
+              "median": 601.349,
+              "min": 498.412,
+              "n": 9,
+              "samples": [
+                551.097,
+                674.792,
+                537.484,
+                498.412,
+                697.106,
+                601.349,
+                690.319,
+                645.762,
+                575.174
+              ]
+            }
+          },
+          "grep_literal": {
+            "command": "/usr/bin/grep -c -i -F timeout /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/plain-104857600-s42.log",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 9,
+              "samples": [
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453
+              ]
+            },
+            "output": "6151",
+            "wall_ms": {
+              "max": 1421.783,
+              "median": 1298.015,
+              "min": 1188.657,
+              "n": 9,
+              "samples": [
+                1188.657,
+                1292.086,
+                1394.153,
+                1325.384,
+                1219.479,
+                1378.408,
+                1298.015,
+                1249.674,
+                1421.783
+              ]
+            }
+          },
+          "grep_regex": {
+            "command": "/usr/bin/grep -c -E r-[0-9a-f]{6}ff /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/plain-104857600-s42.log",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 9,
+              "samples": [
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453
+              ]
+            },
+            "output": "4870",
+            "wall_ms": {
+              "max": 645.436,
+              "median": 542.629,
+              "min": 490.273,
+              "n": 9,
+              "samples": [
+                635.088,
+                542.629,
+                522.804,
+                522.689,
+                525.808,
+                594.255,
+                596.632,
+                645.436,
+                490.273
+              ]
+            }
+          },
+          "rg": {
+            "installed": false,
+            "would_run": "rg -c -i -F timeout FILE; rg -c 'r-[0-9a-f]{6}ff' FILE; rg -c '\\] ERROR ' FILE"
+          },
+          "wc_l": {
+            "command": "/usr/bin/wc -l /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/plain-104857600-s42.log",
+            "max_rss_mb": {
+              "max": 2.484,
+              "median": 2.484,
+              "min": 2.484,
+              "n": 9,
+              "samples": [
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484
+              ]
+            },
+            "output": "1281863 /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/plain-104857600-s42.log",
+            "wall_ms": {
+              "max": 77.986,
+              "median": 70.975,
+              "min": 60.959,
+              "n": 9,
+              "samples": [
+                77.986,
+                70.666,
+                70.975,
+                60.959,
+                75.618,
+                70.952,
+                76.66,
+                65.53,
+                71.789
+              ]
+            }
+          }
+        }
+      },
+      {
+        "file": "jsonl 100M",
+        "results": {
+          "grep_field": {
+            "command": "/usr/bin/grep -c -E \"status\":5[0-9][0-9] /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/jsonl-104857600-s42.jsonl",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 9,
+              "samples": [
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453
+              ]
+            },
+            "output": "3109",
+            "wall_ms": {
+              "max": 974.729,
+              "median": 786.271,
+              "min": 701.959,
+              "n": 9,
+              "samples": [
+                701.959,
+                944.545,
+                821.458,
+                723.289,
+                715.689,
+                786.271,
+                769.839,
+                864.224,
+                974.729
+              ]
+            }
+          },
+          "grep_literal": {
+            "command": "/usr/bin/grep -c -i -F timeout /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/jsonl-104857600-s42.jsonl",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 9,
+              "samples": [
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453
+              ]
+            },
+            "output": "651",
+            "wall_ms": {
+              "max": 1440.576,
+              "median": 1348.236,
+              "min": 1261.657,
+              "n": 9,
+              "samples": [
+                1261.657,
+                1291.539,
+                1296.377,
+                1333.156,
+                1436.037,
+                1424.402,
+                1440.576,
+                1425.89,
+                1348.236
+              ]
+            }
+          },
+          "grep_regex": {
+            "command": "/usr/bin/grep -c -E r-[0-9a-f]{6}ff /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/jsonl-104857600-s42.jsonl",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 9,
+              "samples": [
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453
+              ]
+            },
+            "output": "2254",
+            "wall_ms": {
+              "max": 684.747,
+              "median": 573.526,
+              "min": 524.298,
+              "n": 9,
+              "samples": [
+                524.298,
+                620.197,
+                573.526,
+                574.993,
+                563.294,
+                624.327,
+                545.782,
+                684.747,
+                560.405
+              ]
+            }
+          },
+          "rg": {
+            "installed": false,
+            "would_run": "rg -c -i -F timeout FILE; rg -c 'r-[0-9a-f]{6}ff' FILE; rg -c '\"status\":5[0-9][0-9]' FILE"
+          },
+          "wc_l": {
+            "command": "/usr/bin/wc -l /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/jsonl-104857600-s42.jsonl",
+            "max_rss_mb": {
+              "max": 2.484,
+              "median": 2.484,
+              "min": 2.484,
+              "n": 9,
+              "samples": [
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484
+              ]
+            },
+            "output": "577336 /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/jsonl-104857600-s42.jsonl",
+            "wall_ms": {
+              "max": 82.823,
+              "median": 73.135,
+              "min": 61.525,
+              "n": 9,
+              "samples": [
+                76.337,
+                76.498,
+                68.831,
+                71.038,
+                75.572,
+                61.525,
+                82.823,
+                73.135,
+                70.402
+              ]
+            }
+          }
+        }
+      },
+      {
+        "file": "plain 1G",
+        "results": {
+          "grep_field": {
+            "command": "/usr/bin/grep -c -E \\] ERROR  /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/plain-1073741824-s42.log",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 9,
+              "samples": [
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453
+              ]
+            },
+            "output": "74073",
+            "wall_ms": {
+              "max": 5507.98,
+              "median": 5295.56,
+              "min": 5123.757,
+              "n": 9,
+              "samples": [
+                5174.039,
+                5295.56,
+                5477.02,
+                5286.379,
+                5460.554,
+                5418.576,
+                5178.823,
+                5507.98,
+                5123.757
+              ]
+            }
+          },
+          "grep_literal": {
+            "command": "/usr/bin/grep -c -i -F timeout /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/plain-1073741824-s42.log",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 9,
+              "samples": [
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453
+              ]
+            },
+            "output": "64288",
+            "wall_ms": {
+              "max": 14529.47,
+              "median": 12540.798,
+              "min": 12347.897,
+              "n": 9,
+              "samples": [
+                12502.22,
+                12540.798,
+                12376.982,
+                12546.433,
+                14529.47,
+                13109.09,
+                12533.641,
+                12347.897,
+                12576.45
+              ]
+            }
+          },
+          "grep_regex": {
+            "command": "/usr/bin/grep -c -E r-[0-9a-f]{6}ff /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/plain-1073741824-s42.log",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 9,
+              "samples": [
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453
+              ]
+            },
+            "output": "50518",
+            "wall_ms": {
+              "max": 5638.151,
+              "median": 5296.347,
+              "min": 5087.195,
+              "n": 9,
+              "samples": [
+                5087.195,
+                5544.178,
+                5272.384,
+                5162.997,
+                5296.347,
+                5265.059,
+                5638.151,
+                5507.527,
+                5311.957
+              ]
+            }
+          },
+          "rg": {
+            "installed": false,
+            "would_run": "rg -c -i -F timeout FILE; rg -c 'r-[0-9a-f]{6}ff' FILE; rg -c '\\] ERROR ' FILE"
+          },
+          "wc_l": {
+            "command": "/usr/bin/wc -l /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/plain-1073741824-s42.log",
+            "max_rss_mb": {
+              "max": 2.484,
+              "median": 2.484,
+              "min": 2.484,
+              "n": 9,
+              "samples": [
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484
+              ]
+            },
+            "output": "13126934 /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/plain-1073741824-s42.log",
+            "wall_ms": {
+              "max": 760.403,
+              "median": 659.227,
+              "min": 586.158,
+              "n": 9,
+              "samples": [
+                696.348,
+                659.227,
+                760.403,
+                604.006,
+                620.3,
+                640.268,
+                586.158,
+                748.691,
+                742.472
+              ]
+            }
+          }
+        }
+      },
+      {
+        "file": "jsonl 1G",
+        "results": {
+          "grep_field": {
+            "command": "/usr/bin/grep -c -E \"status\":5[0-9][0-9] /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/jsonl-1073741824-s42.jsonl",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 9,
+              "samples": [
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453
+              ]
+            },
+            "output": "33083",
+            "wall_ms": {
+              "max": 7230.343,
+              "median": 6769.816,
+              "min": 6593.495,
+              "n": 9,
+              "samples": [
+                6617.386,
+                6982.766,
+                6638.62,
+                7230.343,
+                6999.323,
+                6639.661,
+                6769.816,
+                6593.495,
+                7110.721
+              ]
+            }
+          },
+          "grep_literal": {
+            "command": "/usr/bin/grep -c -i -F timeout /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/jsonl-1073741824-s42.jsonl",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.438,
+              "n": 9,
+              "samples": [
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.438,
+                1.453,
+                1.453
+              ]
+            },
+            "output": "6594",
+            "wall_ms": {
+              "max": 13703.515,
+              "median": 13423.014,
+              "min": 13176.857,
+              "n": 9,
+              "samples": [
+                13448.816,
+                13208.234,
+                13579.683,
+                13537.106,
+                13703.515,
+                13414.797,
+                13423.014,
+                13321.433,
+                13176.857
+              ]
+            }
+          },
+          "grep_regex": {
+            "command": "/usr/bin/grep -c -E r-[0-9a-f]{6}ff /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/jsonl-1073741824-s42.jsonl",
+            "max_rss_mb": {
+              "max": 1.859,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 9,
+              "samples": [
+                1.453,
+                1.453,
+                1.453,
+                1.453,
+                1.859,
+                1.453,
+                1.453,
+                1.453,
+                1.453
+              ]
+            },
+            "output": "22988",
+            "wall_ms": {
+              "max": 6396.439,
+              "median": 5518.699,
+              "min": 5250.552,
+              "n": 9,
+              "samples": [
+                5288.759,
+                5297.581,
+                6396.439,
+                5518.699,
+                6174.112,
+                5250.552,
+                5525.642,
+                5304.389,
+                5600.696
+              ]
+            }
+          },
+          "rg": {
+            "installed": false,
+            "would_run": "rg -c -i -F timeout FILE; rg -c 'r-[0-9a-f]{6}ff' FILE; rg -c '\"status\":5[0-9][0-9]' FILE"
+          },
+          "wc_l": {
+            "command": "/usr/bin/wc -l /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/jsonl-1073741824-s42.jsonl",
+            "max_rss_mb": {
+              "max": 2.484,
+              "median": 2.484,
+              "min": 2.484,
+              "n": 9,
+              "samples": [
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484,
+                2.484
+              ]
+            },
+            "output": "5912063 /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/jsonl-1073741824-s42.jsonl",
+            "wall_ms": {
+              "max": 790.979,
+              "median": 682.665,
+              "min": 613.535,
+              "n": 9,
+              "samples": [
+                613.535,
+                684.158,
+                640.466,
+                670.926,
+                790.979,
+                682.665,
+                685.133,
+                745.258,
+                671.824
+              ]
+            }
+          }
+        }
+      },
+      {
+        "file": "plain 5G",
+        "results": {
+          "grep_field": {
+            "command": "/usr/bin/grep -c -E \\] ERROR  /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/plain-5368709120-s42.log",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 1,
+              "samples": [
+                1.453
+              ]
+            },
+            "output": "370509",
+            "wall_ms": {
+              "max": 26393.45,
+              "median": 26393.45,
+              "min": 26393.45,
+              "n": 1,
+              "samples": [
+                26393.45
+              ]
+            }
+          },
+          "grep_literal": {
+            "command": "/usr/bin/grep -c -i -F timeout /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/plain-5368709120-s42.log",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 1,
+              "samples": [
+                1.453
+              ]
+            },
+            "output": "321778",
+            "wall_ms": {
+              "max": 62136.365,
+              "median": 62136.365,
+              "min": 62136.365,
+              "n": 1,
+              "samples": [
+                62136.365
+              ]
+            }
+          },
+          "grep_regex": {
+            "command": "/usr/bin/grep -c -E r-[0-9a-f]{6}ff /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/plain-5368709120-s42.log",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 1,
+              "samples": [
+                1.453
+              ]
+            },
+            "output": "252693",
+            "wall_ms": {
+              "max": 26440.984,
+              "median": 26440.984,
+              "min": 26440.984,
+              "n": 1,
+              "samples": [
+                26440.984
+              ]
+            }
+          },
+          "rg": {
+            "installed": false,
+            "would_run": "rg -c -i -F timeout FILE; rg -c 'r-[0-9a-f]{6}ff' FILE; rg -c '\\] ERROR ' FILE"
+          },
+          "wc_l": {
+            "command": "/usr/bin/wc -l /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/plain-5368709120-s42.log",
+            "max_rss_mb": {
+              "max": 2.484,
+              "median": 2.484,
+              "min": 2.484,
+              "n": 1,
+              "samples": [
+                2.484
+              ]
+            },
+            "output": "65634951 /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/plain-5368709120-s42.log",
+            "wall_ms": {
+              "max": 3757.663,
+              "median": 3757.663,
+              "min": 3757.663,
+              "n": 1,
+              "samples": [
+                3757.663
+              ]
+            }
+          }
+        }
+      },
+      {
+        "file": "jsonl 5G",
+        "results": {
+          "grep_field": {
+            "command": "/usr/bin/grep -c -E \"status\":5[0-9][0-9] /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/jsonl-5368709120-s42.jsonl",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 1,
+              "samples": [
+                1.453
+              ]
+            },
+            "output": "168962",
+            "wall_ms": {
+              "max": 32757.726,
+              "median": 32757.726,
+              "min": 32757.726,
+              "n": 1,
+              "samples": [
+                32757.726
+              ]
+            }
+          },
+          "grep_literal": {
+            "command": "/usr/bin/grep -c -i -F timeout /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/jsonl-5368709120-s42.jsonl",
+            "max_rss_mb": {
+              "max": 1.438,
+              "median": 1.438,
+              "min": 1.438,
+              "n": 1,
+              "samples": [
+                1.438
+              ]
+            },
+            "output": "33823",
+            "wall_ms": {
+              "max": 65715.72,
+              "median": 65715.72,
+              "min": 65715.72,
+              "n": 1,
+              "samples": [
+                65715.72
+              ]
+            }
+          },
+          "grep_regex": {
+            "command": "/usr/bin/grep -c -E r-[0-9a-f]{6}ff /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/jsonl-5368709120-s42.jsonl",
+            "max_rss_mb": {
+              "max": 1.453,
+              "median": 1.453,
+              "min": 1.453,
+              "n": 1,
+              "samples": [
+                1.453
+              ]
+            },
+            "output": "114782",
+            "wall_ms": {
+              "max": 27301.71,
+              "median": 27301.71,
+              "min": 27301.71,
+              "n": 1,
+              "samples": [
+                27301.71
+              ]
+            }
+          },
+          "rg": {
+            "installed": false,
+            "would_run": "rg -c -i -F timeout FILE; rg -c 'r-[0-9a-f]{6}ff' FILE; rg -c '\"status\":5[0-9][0-9]' FILE"
+          },
+          "wc_l": {
+            "command": "/usr/bin/wc -l /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/jsonl-5368709120-s42.jsonl",
+            "max_rss_mb": {
+              "max": 2.484,
+              "median": 2.484,
+              "min": 2.484,
+              "n": 1,
+              "samples": [
+                2.484
+              ]
+            },
+            "output": "29559608 /Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/benches/fixtures/jsonl-5368709120-s42.jsonl",
+            "wall_ms": {
+              "max": 3222.968,
+              "median": 3222.968,
+              "min": 3222.968,
+              "n": 1,
+              "samples": [
+                3222.968
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "less": [
+      {
+        "end_after_g_ms": {
+          "max": 11.843,
+          "median": 4.783,
+          "min": 4.704,
+          "n": 9,
+          "samples": [
+            11.843,
+            4.778,
+            4.783,
+            4.76,
+            4.737,
+            5.13,
+            6.647,
+            4.704,
+            5.153
+          ]
+        },
+        "file": "plain 100M",
+        "first_screen_ms": {
+          "max": 11.612,
+          "median": 4.531,
+          "min": 4.455,
+          "n": 9,
+          "samples": [
+            11.612,
+            4.527,
+            4.531,
+            4.526,
+            4.485,
+            4.876,
+            6.389,
+            4.455,
+            4.904
+          ]
+        },
+        "version": "less 668 (POSIX regular expressions)"
+      },
+      {
+        "end_after_g_ms": {
+          "max": 5.367,
+          "median": 4.979,
+          "min": 4.688,
+          "n": 9,
+          "samples": [
+            4.688,
+            4.696,
+            4.901,
+            5.205,
+            4.979,
+            5.126,
+            5.282,
+            5.367,
+            4.833
+          ]
+        },
+        "file": "jsonl 100M",
+        "first_screen_ms": {
+          "max": 5.125,
+          "median": 4.71,
+          "min": 4.417,
+          "n": 9,
+          "samples": [
+            4.417,
+            4.443,
+            4.646,
+            4.93,
+            4.71,
+            4.877,
+            5.034,
+            5.125,
+            4.581
+          ]
+        },
+        "version": "less 668 (POSIX regular expressions)"
+      },
+      {
+        "end_after_g_ms": {
+          "max": 6.574,
+          "median": 5.12,
+          "min": 4.528,
+          "n": 9,
+          "samples": [
+            4.528,
+            5.247,
+            5.109,
+            5.12,
+            5.195,
+            4.809,
+            6.574,
+            6.057,
+            5.106
+          ]
+        },
+        "file": "plain 1G",
+        "first_screen_ms": {
+          "max": 6.309,
+          "median": 4.861,
+          "min": 4.256,
+          "n": 9,
+          "samples": [
+            4.256,
+            4.984,
+            4.835,
+            4.861,
+            4.95,
+            4.579,
+            6.309,
+            5.805,
+            4.844
+          ]
+        },
+        "version": "less 668 (POSIX regular expressions)"
+      },
+      {
+        "end_after_g_ms": {
+          "max": 6.926,
+          "median": 5.247,
+          "min": 4.801,
+          "n": 9,
+          "samples": [
+            4.869,
+            4.801,
+            6.324,
+            4.953,
+            5.489,
+            5.644,
+            6.926,
+            4.948,
+            5.247
+          ]
+        },
+        "file": "jsonl 1G",
+        "first_screen_ms": {
+          "max": 6.648,
+          "median": 4.976,
+          "min": 4.514,
+          "n": 9,
+          "samples": [
+            4.596,
+            4.514,
+            6.05,
+            4.678,
+            5.205,
+            5.373,
+            6.648,
+            4.696,
+            4.976
+          ]
+        },
+        "version": "less 668 (POSIX regular expressions)"
+      },
+      {
+        "end_after_g_ms": {
+          "max": 6.359,
+          "median": 5.262,
+          "min": 4.492,
+          "n": 9,
+          "samples": [
+            4.492,
+            5.187,
+            5.866,
+            5.23,
+            5.262,
+            5.293,
+            6.359,
+            5.302,
+            5.228
+          ]
+        },
+        "file": "plain 5G",
+        "first_screen_ms": {
+          "max": 6.084,
+          "median": 5.006,
+          "min": 4.244,
+          "n": 9,
+          "samples": [
+            4.244,
+            4.934,
+            5.613,
+            4.966,
+            5.006,
+            5.049,
+            6.084,
+            5.052,
+            4.98
+          ]
+        },
+        "version": "less 668 (POSIX regular expressions)"
+      },
+      {
+        "end_after_g_ms": {
+          "max": 6.245,
+          "median": 5.331,
+          "min": 4.872,
+          "n": 9,
+          "samples": [
+            4.872,
+            6.245,
+            5.113,
+            5.1,
+            5.331,
+            6.094,
+            5.409,
+            5.324,
+            5.699
+          ]
+        },
+        "file": "jsonl 5G",
+        "first_screen_ms": {
+          "max": 5.98,
+          "median": 5.064,
+          "min": 4.608,
+          "n": 9,
+          "samples": [
+            4.608,
+            5.98,
+            4.844,
+            4.834,
+            5.059,
+            5.812,
+            5.147,
+            5.064,
+            5.421
+          ]
+        },
+        "version": "less 668 (POSIX regular expressions)"
+      }
+    ],
+    "method": "CLI: wall time of the process and /usr/bin/time -l's maximum RSS, after one unmeasured run (page cache warm); default locale. less: a pseudo-terminal from script(1); ms until the file's first line is written, and after G until its last line is.",
+    "versions": {
+      "grep": "grep (BSD grep, GNU compatible) 2.6.0-FreeBSD",
+      "rg": null
+    }
+  },
+  "runs": 9,
+  "schema": 1,
+  "started_unix": 1794485955
+}

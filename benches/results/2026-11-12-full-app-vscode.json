@@ -1,0 +1,457 @@
+{
+  "apps": [
+    {
+      "app": "Visual Studio Code",
+      "files": [
+        {
+          "error": null,
+          "file": "plain 100M",
+          "idle_cpu_percent": 6.3,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 2447.578,
+            "median": 2377.531,
+            "min": 2347.828,
+            "n": 5,
+            "samples": [
+              2377.047,
+              2407.688,
+              2347.828,
+              2377.531,
+              2447.578
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 2495.75,
+            "median": 2439.234,
+            "min": 2412.391,
+            "n": 5,
+            "samples": [
+              2412.391,
+              2444.219,
+              2439.234,
+              2418.844,
+              2495.75
+            ]
+          },
+          "runs_with_window_on_screen": 5,
+          "settled_ms": {
+            "max": 9044.411,
+            "median": 7918.47,
+            "min": 4480.52,
+            "n": 5,
+            "samples": [
+              4480.52,
+              4774.135,
+              7918.47,
+              8411.104,
+              9044.411
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 1139.508,
+            "median": 1116.65,
+            "min": 1102.22,
+            "n": 5,
+            "samples": [
+              1102.22,
+              1139.508,
+              1114.082,
+              1124.057,
+              1116.65
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "jsonl 100M",
+          "idle_cpu_percent": 3.333,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 2415.641,
+            "median": 2351.484,
+            "min": 2329.047,
+            "n": 5,
+            "samples": [
+              2351.484,
+              2336.422,
+              2329.047,
+              2374.031,
+              2415.641
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 2450.094,
+            "median": 2423.297,
+            "min": 2345.281,
+            "n": 5,
+            "samples": [
+              2423.297,
+              2391.656,
+              2345.281,
+              2429.172,
+              2450.094
+            ]
+          },
+          "runs_with_window_on_screen": 5,
+          "settled_ms": {
+            "max": 10161.774,
+            "median": 8964.239,
+            "min": 4671.102,
+            "n": 5,
+            "samples": [
+              8964.239,
+              8126.209,
+              9996.085,
+              10161.774,
+              4671.102
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 1176.022,
+            "median": 1117.842,
+            "min": 1098.139,
+            "n": 5,
+            "samples": [
+              1138.133,
+              1176.022,
+              1105.816,
+              1117.842,
+              1098.139
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "plain 1G",
+          "idle_cpu_percent": 23.967,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 3825.656,
+            "median": 3401.922,
+            "min": 2209.109,
+            "n": 5,
+            "samples": [
+              2209.109,
+              3825.656,
+              3450.094,
+              3401.922,
+              3338.656
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 3884.781,
+            "median": 3457.875,
+            "min": 2256.5,
+            "n": 5,
+            "samples": [
+              2256.5,
+              3836.031,
+              3884.781,
+              3457.875,
+              3388.328
+            ]
+          },
+          "runs_with_window_on_screen": 5,
+          "settled_ms": {
+            "max": 11047.186,
+            "median": 8668.251,
+            "min": 8442.978,
+            "n": 5,
+            "samples": [
+              8476.236,
+              8442.978,
+              8668.251,
+              10465.815,
+              11047.186
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 1126.475,
+            "median": 1111.794,
+            "min": 1084.245,
+            "n": 5,
+            "samples": [
+              1084.245,
+              1105.799,
+              1126.475,
+              1121.144,
+              1111.794
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "jsonl 1G",
+          "idle_cpu_percent": 5.267,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 3407.156,
+            "median": 3293.109,
+            "min": 3228.891,
+            "n": 5,
+            "samples": [
+              3370.672,
+              3407.156,
+              3288.188,
+              3293.109,
+              3228.891
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 3830.234,
+            "median": 3655.203,
+            "min": 3417.734,
+            "n": 5,
+            "samples": [
+              3759.891,
+              3483.172,
+              3417.734,
+              3830.234,
+              3655.203
+            ]
+          },
+          "runs_with_window_on_screen": 5,
+          "settled_ms": {
+            "max": 15290.003,
+            "median": 7931.858,
+            "min": 7453.215,
+            "n": 5,
+            "samples": [
+              7931.858,
+              7453.215,
+              7781.976,
+              11057.674,
+              15290.003
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 1176.529,
+            "median": 1129.481,
+            "min": 1106.046,
+            "n": 5,
+            "samples": [
+              1129.481,
+              1109.921,
+              1106.046,
+              1139.297,
+              1176.529
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "plain 5G",
+          "idle_cpu_percent": 5.933,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 6883.359,
+            "median": 6269.672,
+            "min": 4327.719,
+            "n": 5,
+            "samples": [
+              4327.719,
+              5449.672,
+              6883.359,
+              6409.844,
+              6269.672
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 7103.0,
+            "median": 6718.375,
+            "min": 4727.531,
+            "n": 5,
+            "samples": [
+              4727.531,
+              5774.875,
+              7103.0,
+              6718.375,
+              6803.594
+            ]
+          },
+          "runs_with_window_on_screen": 5,
+          "settled_ms": {
+            "max": 19912.943,
+            "median": 18691.29,
+            "min": 17352.222,
+            "n": 5,
+            "samples": [
+              17998.102,
+              19912.943,
+              17352.222,
+              19760.083,
+              18691.29
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 1162.923,
+            "median": 1141.831,
+            "min": 1130.196,
+            "n": 5,
+            "samples": [
+              1130.196,
+              1141.831,
+              1162.923,
+              1138.533,
+              1158.698
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "jsonl 5G",
+          "idle_cpu_percent": 5.367,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 6387.813,
+            "median": 6038.828,
+            "min": 5637.344,
+            "n": 5,
+            "samples": [
+              5788.328,
+              6038.828,
+              5637.344,
+              6106.766,
+              6387.813
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 6991.719,
+            "median": 6930.391,
+            "min": 6226.719,
+            "n": 5,
+            "samples": [
+              6226.719,
+              6930.391,
+              6937.766,
+              6875.641,
+              6991.719
+            ]
+          },
+          "runs_with_window_on_screen": 5,
+          "settled_ms": {
+            "max": 17565.626,
+            "median": 13996.194,
+            "min": 13183.163,
+            "n": 5,
+            "samples": [
+              16332.687,
+              13996.194,
+              13183.163,
+              17565.626,
+              13492.431
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 1167.469,
+            "median": 1161.207,
+            "min": 1118.35,
+            "n": 5,
+            "samples": [
+              1165.286,
+              1161.207,
+              1118.35,
+              1118.381,
+              1167.469
+            ]
+          }
+        }
+      ],
+      "installed": true,
+      "key": "vscode",
+      "launch_error": null,
+      "launch_runs_with_window_on_screen": 0,
+      "launch_to_window_ms": {
+        "max": 484.658,
+        "median": 468.7,
+        "min": 441.776,
+        "n": 5,
+        "samples": [
+          484.658,
+          468.7,
+          468.656,
+          481.346,
+          441.776
+        ]
+      },
+      "load_before": {
+        "loadavg": "{ 2.19 2.88 3.79 }",
+        "memgate": "available 18.00 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16457] pid 44644   rss      5 MB  peak    316 MB     3.1s  cargo run --quiet --release -p xtask -- bench --only apps --apps vscode --sizes 100M,1G,5G --out target/bench/full-app-vscode.json"
+      },
+      "version": "1.146.0"
+    }
+  ],
+  "date": "2026-11-12",
+  "fixtures": [
+    {
+      "bytes": 104857659,
+      "detected": "timestamped",
+      "format": "plain",
+      "path": "benches/fixtures/plain-104857600-s42.log",
+      "size": "100M",
+      "source": null
+    },
+    {
+      "bytes": 104857711,
+      "detected": "jsonl",
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-104857600-s42.jsonl",
+      "size": "100M",
+      "source": null
+    },
+    {
+      "bytes": 1073741842,
+      "detected": "timestamped",
+      "format": "plain",
+      "path": "benches/fixtures/plain-1073741824-s42.log",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 1073741874,
+      "detected": "jsonl",
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-1073741824-s42.jsonl",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 5368709153,
+      "detected": "timestamped",
+      "format": "plain",
+      "path": "benches/fixtures/plain-5368709120-s42.log",
+      "size": "5G",
+      "source": null
+    },
+    {
+      "bytes": 5368709259,
+      "detected": "jsonl",
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-5368709120-s42.jsonl",
+      "size": "5G",
+      "source": null
+    }
+  ],
+  "git": "2a05e8c",
+  "load_after": {
+    "loadavg": "{ 4.82 4.27 3.95 }",
+    "memgate": "available 17.04 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16457] pid 44644   rss      5 MB  peak    316 MB   12m04s  cargo run --quiet --release -p xtask -- bench --only apps --apps vscode --sizes 100M,1G,5G --out target/bench/full-app-vscode.json"
+  },
+  "load_before": {
+    "loadavg": "{ 2.19 2.88 3.79 }",
+    "memgate": "available 18.00 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16457] pid 44644   rss      4 MB  peak    316 MB     3.0s  cargo run --quiet --release -p xtask -- bench --only apps --apps vscode --sizes 100M,1G,5G --out target/bench/full-app-vscode.json"
+  },
+  "machine": {
+    "arch": "aarch64",
+    "cores": 15,
+    "cpu": "Apple M5 Pro",
+    "memory_gb": 24.0,
+    "model": "Mac17,9",
+    "os": "macOS 26.6.2 (25G83)"
+  },
+  "mode": "full",
+  "runs": 9,
+  "schema": 1,
+  "started_unix": 1794487972
+}

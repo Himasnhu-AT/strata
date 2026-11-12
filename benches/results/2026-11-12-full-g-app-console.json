@@ -1,0 +1,250 @@
+{
+ "apps": [
+  {
+   "app": "Console.app",
+   "files": [
+    {
+     "error": null,
+     "file": "plain 100M",
+     "idle_cpu_percent": null,
+     "idle_secs": 30,
+     "proof": [
+      {
+       "height": 500,
+       "on_screen": true,
+       "run": 2,
+       "screen_locked": false,
+       "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-100M-console-2.png",
+       "title": "plain-104857600-s42.log",
+       "waited_for_unlock_s": 0,
+       "width": 650,
+       "window": 23778
+      },
+      {
+       "height": 500,
+       "on_screen": true,
+       "run": 3,
+       "screen_locked": false,
+       "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-100M-console-3.png",
+       "title": "plain-104857600-s42.log",
+       "waited_for_unlock_s": 0,
+       "width": 650,
+       "window": 23803
+      },
+      {
+       "height": 500,
+       "on_screen": true,
+       "run": 4,
+       "screen_locked": false,
+       "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-100M-console-4.png",
+       "title": "plain-104857600-s42.log",
+       "waited_for_unlock_s": 0,
+       "width": 650,
+       "window": 23817
+      },
+      {
+       "height": 500,
+       "on_screen": true,
+       "run": 5,
+       "screen_locked": false,
+       "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-100M-console-5.png",
+       "title": "plain-104857600-s42.log",
+       "waited_for_unlock_s": 0,
+       "width": 650,
+       "window": 23831
+      }
+     ],
+     "rss_after_open_mb": {
+      "median": 782.929,
+      "min": 782.688,
+      "max": 783.141,
+      "n": 4,
+      "samples": [
+       782.688,
+       783.141,
+       782.984,
+       782.875
+      ]
+     },
+     "rss_peak_mb": {
+      "median": 782.929,
+      "min": 782.688,
+      "max": 783.156,
+      "n": 4,
+      "samples": [
+       782.688,
+       783.156,
+       782.984,
+       782.875
+      ]
+     },
+     "runs_with_window_on_screen": 0,
+     "settled_ms": {
+      "median": 1218.3,
+      "min": 987.915,
+      "max": 1822.069,
+      "n": 4,
+      "samples": [
+       1068.369,
+       987.915,
+       1822.069,
+       1368.231
+      ]
+     },
+     "window_with_file_ms": {
+      "median": 260.571,
+      "min": 251.233,
+      "max": 280.604,
+      "n": 4,
+      "samples": [
+       251.233,
+       257.633,
+       280.604,
+       263.509
+      ]
+     },
+     "note": "run 1 dropped: the perf stream's cargo xtask ci overlapped it (20:11:52, about 25 s)"
+    },
+    {
+     "error": "stopped after 6.1 s: RSS passed 8 GB",
+     "file": "plain 1G",
+     "idle_cpu_percent": null,
+     "idle_secs": 30,
+     "proof": [],
+     "rss_after_open_mb": null,
+     "rss_peak_mb": null,
+     "runs_with_window_on_screen": 0,
+     "settled_ms": null,
+     "window_with_file_ms": null
+    }
+   ],
+   "installed": true,
+   "key": "console",
+   "launch_error": null,
+   "launch_runs_with_window_on_screen": 0,
+   "launch_to_window_ms": {
+    "max": 257.256,
+    "median": 242.551,
+    "min": 227.464,
+    "n": 5,
+    "samples": [
+     227.464,
+     240.665,
+     257.256,
+     242.551,
+     242.577
+    ]
+   },
+   "load_before": {
+    "loadavg": "{ 4.90 4.33 3.80 }",
+    "memgate": "available 17.52 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) \u00b7 2 of 2 slots in use\nrunning:\n  [16488] pid 36158   rss    327 MB  peak    327 MB     1.0s  cargo xtask ci --no-wait\n  [16489] pid 36174   rss      5 MB  peak      5 MB    989ms  cargo run --quiet --release -p xtask -- bench --only apps --apps console --files plain:100M,plain:1G,plain:5G,jsonl:100M,jsonl:1G,jsonl:5G,logfmt:1G,syslog:1G,access:1G,macos:1G --out target/bench/full-g-app-console.json"
+   },
+   "version": "1.1",
+   "launch_note": "the launch runs fell in the same 25 s overlap with another job's cargo xtask ci"
+  }
+ ],
+ "date": "2026-11-12",
+ "fixtures": [
+  {
+   "bytes": 104857659,
+   "detected": "timestamped",
+   "format": "plain",
+   "path": "benches/fixtures/plain-104857600-s42.log",
+   "size": "100M",
+   "source": null
+  },
+  {
+   "bytes": 1073741842,
+   "detected": "timestamped",
+   "format": "plain",
+   "path": "benches/fixtures/plain-1073741824-s42.log",
+   "size": "1G",
+   "source": null
+  },
+  {
+   "bytes": 5368709153,
+   "detected": "timestamped",
+   "format": "plain",
+   "path": "benches/fixtures/plain-5368709120-s42.log",
+   "size": "5G",
+   "source": null
+  },
+  {
+   "bytes": 104857711,
+   "detected": "jsonl",
+   "format": "jsonl",
+   "path": "benches/fixtures/jsonl-104857600-s42.jsonl",
+   "size": "100M",
+   "source": null
+  },
+  {
+   "bytes": 1073741874,
+   "detected": "jsonl",
+   "format": "jsonl",
+   "path": "benches/fixtures/jsonl-1073741824-s42.jsonl",
+   "size": "1G",
+   "source": null
+  },
+  {
+   "bytes": 5368709259,
+   "detected": "jsonl",
+   "format": "jsonl",
+   "path": "benches/fixtures/jsonl-5368709120-s42.jsonl",
+   "size": "5G",
+   "source": null
+  },
+  {
+   "bytes": 1073741946,
+   "detected": "logfmt",
+   "format": "logfmt",
+   "path": "benches/fixtures/logfmt-1073741824-s42.log",
+   "size": "1G",
+   "source": null
+  },
+  {
+   "bytes": 1073741824,
+   "detected": "syslog",
+   "format": "syslog",
+   "path": "benches/fixtures/syslog-1073741824-s42.log",
+   "size": "1G",
+   "source": null
+  },
+  {
+   "bytes": 1073741901,
+   "detected": "access",
+   "format": "access",
+   "path": "benches/fixtures/access-1073741824-s42.log",
+   "size": "1G",
+   "source": null
+  },
+  {
+   "bytes": 1073741917,
+   "detected": "timestamped",
+   "format": "macos",
+   "path": "benches/fixtures/macos-install-1073741824.log",
+   "size": "1G",
+   "source": "/var/log/install.log (24929621 bytes), repeated"
+  }
+ ],
+ "git": "f3788ff",
+ "load_after": {
+  "loadavg": "{ 7.98 5.33 4.22 }",
+  "memgate": "available 17.52 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) \u00b7 1 of 2 slots in use\nrunning:\n  [16489] pid 36174   rss      5 MB  peak     44 MB    1m18s  cargo run --quiet --release -p xtask -- bench --only apps --apps console --files plain:100M,plain:1G,plain:5G,jsonl:100M,jsonl:1G,jsonl:5G,logfmt:1G,syslog:1G,access:1G,macos:1G --out target/bench/full-g-app-console.json"
+ },
+ "load_before": {
+  "loadavg": "{ 4.90 4.33 3.80 }",
+  "memgate": "available 17.52 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) \u00b7 2 of 2 slots in use\nrunning:\n  [16488] pid 36158   rss    311 MB  peak    311 MB    958ms  cargo xtask ci --no-wait\n  [16489] pid 36174   rss      4 MB  peak      4 MB    906ms  cargo run --quiet --release -p xtask -- bench --only apps --apps console --files plain:100M,plain:1G,plain:5G,jsonl:100M,jsonl:1G,jsonl:5G,logfmt:1G,syslog:1G,access:1G,macos:1G --out target/bench/full-g-app-console.json"
+ },
+ "machine": {
+  "arch": "aarch64",
+  "cores": 15,
+  "cpu": "Apple M5 Pro",
+  "memory_gb": 24.0,
+  "model": "Mac17,9",
+  "os": "macOS 26.6.2 (25G83)"
+ },
+ "mode": "full",
+ "runs": 9,
+ "schema": 1,
+ "started_unix": 1794494513
+}

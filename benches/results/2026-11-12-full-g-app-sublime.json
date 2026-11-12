@@ -1,0 +1,379 @@
+{
+  "apps": [
+    {
+      "app": "Sublime Text",
+      "files": [
+        {
+          "error": null,
+          "file": "plain 100M",
+          "idle_cpu_percent": 0.067,
+          "idle_secs": 30,
+          "proof": [
+            {
+              "height": 633,
+              "on_screen": true,
+              "run": 1,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-100M-sublime-1.png",
+              "title": "plain-104857600-s42.log",
+              "waited_for_unlock_s": 0,
+              "width": 800,
+              "window": 23995
+            },
+            {
+              "height": 633,
+              "on_screen": true,
+              "run": 2,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-100M-sublime-2.png",
+              "title": "plain-104857600-s42.log",
+              "waited_for_unlock_s": 0,
+              "width": 800,
+              "window": 24037
+            },
+            {
+              "height": 633,
+              "on_screen": true,
+              "run": 3,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-100M-sublime-3.png",
+              "title": "plain-104857600-s42.log",
+              "waited_for_unlock_s": 0,
+              "width": 800,
+              "window": 24057
+            },
+            {
+              "height": 633,
+              "on_screen": true,
+              "run": 4,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-100M-sublime-4.png",
+              "title": "plain-104857600-s42.log",
+              "waited_for_unlock_s": 0,
+              "width": 800,
+              "window": 24077
+            },
+            {
+              "height": 633,
+              "on_screen": true,
+              "run": 5,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-100M-sublime-5.png",
+              "title": "plain-104857600-s42.log",
+              "waited_for_unlock_s": 0,
+              "width": 800,
+              "window": 24097
+            }
+          ],
+          "rss_after_open_mb": {
+            "max": 595.516,
+            "median": 594.234,
+            "min": 593.875,
+            "n": 5,
+            "samples": [
+              593.875,
+              594.234,
+              595.516,
+              594.234,
+              594.938
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 595.516,
+            "median": 594.234,
+            "min": 593.875,
+            "n": 5,
+            "samples": [
+              593.875,
+              594.234,
+              595.516,
+              594.234,
+              594.938
+            ]
+          },
+          "runs_with_window_on_screen": 0,
+          "settled_ms": {
+            "max": 2633.309,
+            "median": 2416.282,
+            "min": 2340.778,
+            "n": 5,
+            "samples": [
+              2340.778,
+              2633.309,
+              2448.167,
+              2355.495,
+              2416.282
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 601.334,
+            "median": 591.822,
+            "min": 486.213,
+            "n": 5,
+            "samples": [
+              486.213,
+              598.012,
+              601.334,
+              557.246,
+              591.822
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "plain 1G",
+          "idle_cpu_percent": 0.033,
+          "idle_secs": 30,
+          "proof": [
+            {
+              "height": 633,
+              "on_screen": true,
+              "run": 1,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-1G-sublime-1.png",
+              "title": "plain-1073741824-s42.log",
+              "waited_for_unlock_s": 0,
+              "width": 800,
+              "window": 24117
+            },
+            {
+              "height": 633,
+              "on_screen": true,
+              "run": 2,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-1G-sublime-2.png",
+              "title": "plain-1073741824-s42.log",
+              "waited_for_unlock_s": 0,
+              "width": 800,
+              "window": 24153
+            },
+            {
+              "height": 633,
+              "on_screen": true,
+              "run": 3,
+              "screen_locked": false,
+              "shot": "/Users/himanshu/codes/synthai/strata/.claude/worktrees/bench/target/bench/shots/plain-1G-sublime-3.png",
+              "title": "plain-1073741824-s42.log",
+              "waited_for_unlock_s": 0,
+              "width": 800,
+              "window": 24195
+            },
+            {
+              "height": 633,
+              "on_screen": true,
+              "run": 4,
+              "screen_locked": false,
+              "shot": null,
+              "title": "plain-1073741824-s42.log",
+              "waited_for_unlock_s": 0,
+              "width": 800,
+              "window": 24228
+            },
+            {
+              "height": 633,
+              "on_screen": true,
+              "run": 5,
+              "screen_locked": false,
+              "shot": null,
+              "title": "plain-1073741824-s42.log",
+              "waited_for_unlock_s": 0,
+              "width": 800,
+              "window": 24283
+            }
+          ],
+          "rss_after_open_mb": {
+            "max": 3901.875,
+            "median": 3897.016,
+            "min": 3896.906,
+            "n": 5,
+            "samples": [
+              3898.625,
+              3896.938,
+              3897.016,
+              3896.906,
+              3901.875
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 3901.875,
+            "median": 3897.047,
+            "min": 3896.906,
+            "n": 5,
+            "samples": [
+              3898.625,
+              3896.938,
+              3897.047,
+              3896.906,
+              3901.875
+            ]
+          },
+          "runs_with_window_on_screen": 0,
+          "settled_ms": {
+            "max": 20769.525,
+            "median": 20641.525,
+            "min": 20547.583,
+            "n": 5,
+            "samples": [
+              20547.583,
+              20618.29,
+              20641.525,
+              20769.525,
+              20736.722
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 596.182,
+            "median": 571.765,
+            "min": 549.556,
+            "n": 5,
+            "samples": [
+              571.765,
+              596.182,
+              593.104,
+              549.556,
+              567.093
+            ]
+          }
+        },
+        {
+          "error": "stopped after 80.3 s: RSS passed 8 GB",
+          "file": "plain 5G",
+          "idle_cpu_percent": null,
+          "idle_secs": 30,
+          "proof": [],
+          "rss_after_open_mb": null,
+          "rss_peak_mb": null,
+          "runs_with_window_on_screen": 0,
+          "settled_ms": null,
+          "window_with_file_ms": null
+        }
+      ],
+      "installed": true,
+      "key": "sublime",
+      "launch_error": null,
+      "launch_runs_with_window_on_screen": 0,
+      "launch_to_window_ms": {
+        "max": 493.585,
+        "median": 479.681,
+        "min": 450.946,
+        "n": 5,
+        "samples": [
+          479.681,
+          486.695,
+          453.494,
+          493.585,
+          450.946
+        ]
+      },
+      "load_before": {
+        "loadavg": "{ 7.98 5.33 4.22 }",
+        "memgate": "available 17.52 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16490] pid 53676   rss      5 MB  peak      5 MB    602ms  cargo run --quiet --release -p xtask -- bench --only apps --apps sublime --files plain:100M,plain:1G,plain:5G,jsonl:100M,jsonl:1G,jsonl:5G,logfmt:1G,syslog:1G,access:1G,macos:1G --out target/bench/full-g-app-sublime.json"
+      },
+      "version": "Build 4215"
+    }
+  ],
+  "date": "2026-11-12",
+  "fixtures": [
+    {
+      "bytes": 104857659,
+      "detected": "timestamped",
+      "format": "plain",
+      "path": "benches/fixtures/plain-104857600-s42.log",
+      "size": "100M",
+      "source": null
+    },
+    {
+      "bytes": 1073741842,
+      "detected": "timestamped",
+      "format": "plain",
+      "path": "benches/fixtures/plain-1073741824-s42.log",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 5368709153,
+      "detected": "timestamped",
+      "format": "plain",
+      "path": "benches/fixtures/plain-5368709120-s42.log",
+      "size": "5G",
+      "source": null
+    },
+    {
+      "bytes": 104857711,
+      "detected": "jsonl",
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-104857600-s42.jsonl",
+      "size": "100M",
+      "source": null
+    },
+    {
+      "bytes": 1073741874,
+      "detected": "jsonl",
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-1073741824-s42.jsonl",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 5368709259,
+      "detected": "jsonl",
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-5368709120-s42.jsonl",
+      "size": "5G",
+      "source": null
+    },
+    {
+      "bytes": 1073741946,
+      "detected": "logfmt",
+      "format": "logfmt",
+      "path": "benches/fixtures/logfmt-1073741824-s42.log",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 1073741824,
+      "detected": "syslog",
+      "format": "syslog",
+      "path": "benches/fixtures/syslog-1073741824-s42.log",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 1073741901,
+      "detected": "access",
+      "format": "access",
+      "path": "benches/fixtures/access-1073741824-s42.log",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 1073741917,
+      "detected": "timestamped",
+      "format": "macos",
+      "path": "benches/fixtures/macos-install-1073741824.log",
+      "size": "1G",
+      "source": "/var/log/install.log (24929621 bytes), repeated"
+    }
+  ],
+  "git": "f3788ff",
+  "load_after": {
+    "loadavg": "{ 6.22 5.57 4.85 }",
+    "memgate": "available 12.48 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16490] pid 53676   rss      5 MB  peak     56 MB    9m46s  cargo run --quiet --release -p xtask -- bench --only apps --apps sublime --files plain:100M,plain:1G,plain:5G,jsonl:100M,jsonl:1G,jsonl:5G,logfmt:1G,syslog:1G,access:1G,macos:1G --out target/bench/full-g-app-sublime.json"
+  },
+  "load_before": {
+    "loadavg": "{ 7.98 5.33 4.22 }",
+    "memgate": "available 17.52 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16490] pid 53676   rss      4 MB  peak      4 MB    517ms  cargo run --quiet --release -p xtask -- bench --only apps --apps sublime --files plain:100M,plain:1G,plain:5G,jsonl:100M,jsonl:1G,jsonl:5G,logfmt:1G,syslog:1G,access:1G,macos:1G --out target/bench/full-g-app-sublime.json"
+  },
+  "machine": {
+    "arch": "aarch64",
+    "cores": 15,
+    "cpu": "Apple M5 Pro",
+    "memory_gb": 24.0,
+    "model": "Mac17,9",
+    "os": "macOS 26.6.2 (25G83)"
+  },
+  "mode": "full",
+  "runs": 9,
+  "schema": 1,
+  "started_unix": 1794494591
+}

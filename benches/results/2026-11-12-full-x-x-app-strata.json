@@ -1,0 +1,323 @@
+{
+  "apps": [
+    {
+      "app": "Strata (same outside method)",
+      "files": [
+        {
+          "error": null,
+          "file": "logfmt 1G",
+          "idle_cpu_percent": 0.167,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 1155.953,
+            "median": 1155.891,
+            "min": 1151.922,
+            "n": 5,
+            "samples": [
+              1155.953,
+              1155.922,
+              1152.0,
+              1155.891,
+              1151.922
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 1156.359,
+            "median": 1155.953,
+            "min": 1155.891,
+            "n": 5,
+            "samples": [
+              1155.953,
+              1155.922,
+              1156.359,
+              1155.891,
+              1156.297
+            ]
+          },
+          "runs_with_window_on_screen": 5,
+          "settled_ms": {
+            "max": 3468.726,
+            "median": 2438.627,
+            "min": 2362.786,
+            "n": 5,
+            "samples": [
+              3468.726,
+              2438.627,
+              2585.001,
+              2362.786,
+              2387.414
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 22.949,
+            "median": 18.506,
+            "min": 14.013,
+            "n": 5,
+            "samples": [
+              14.013,
+              22.112,
+              17.232,
+              18.506,
+              22.949
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "syslog 1G",
+          "idle_cpu_percent": 0.0,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 815.969,
+            "median": 815.844,
+            "min": 811.578,
+            "n": 5,
+            "samples": [
+              815.938,
+              815.969,
+              812.219,
+              815.844,
+              811.578
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 816.609,
+            "median": 815.969,
+            "min": 815.844,
+            "n": 5,
+            "samples": [
+              815.938,
+              815.969,
+              816.609,
+              815.844,
+              815.984
+            ]
+          },
+          "runs_with_window_on_screen": 5,
+          "settled_ms": {
+            "max": 5417.392,
+            "median": 2306.289,
+            "min": 2214.408,
+            "n": 5,
+            "samples": [
+              5417.392,
+              2428.519,
+              2214.408,
+              2284.509,
+              2306.289
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 32.815,
+            "median": 22.065,
+            "min": 19.763,
+            "n": 5,
+            "samples": [
+              20.671,
+              25.951,
+              22.065,
+              32.815,
+              19.763
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "access 1G",
+          "idle_cpu_percent": 0.267,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 959.109,
+            "median": 957.594,
+            "min": 953.047,
+            "n": 5,
+            "samples": [
+              957.594,
+              959.109,
+              953.422,
+              958.188,
+              953.047
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 959.109,
+            "median": 958.188,
+            "min": 957.453,
+            "n": 5,
+            "samples": [
+              957.594,
+              959.109,
+              958.406,
+              958.188,
+              957.453
+            ]
+          },
+          "runs_with_window_on_screen": 5,
+          "settled_ms": {
+            "max": 3627.899,
+            "median": 2456.295,
+            "min": 2418.023,
+            "n": 5,
+            "samples": [
+              3627.899,
+              2456.295,
+              2418.023,
+              2446.541,
+              2463.46
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 28.764,
+            "median": 21.277,
+            "min": 17.874,
+            "n": 5,
+            "samples": [
+              28.764,
+              18.424,
+              21.277,
+              23.341,
+              17.874
+            ]
+          }
+        },
+        {
+          "error": null,
+          "file": "macos 1G",
+          "idle_cpu_percent": 0.033,
+          "idle_secs": 30,
+          "rss_after_open_mb": {
+            "max": 1160.203,
+            "median": 1159.734,
+            "min": 1159.672,
+            "n": 5,
+            "samples": [
+              1160.203,
+              1159.984,
+              1159.734,
+              1159.688,
+              1159.672
+            ]
+          },
+          "rss_peak_mb": {
+            "max": 1160.203,
+            "median": 1159.734,
+            "min": 1159.672,
+            "n": 5,
+            "samples": [
+              1160.203,
+              1159.984,
+              1159.734,
+              1159.688,
+              1159.672
+            ]
+          },
+          "runs_with_window_on_screen": 5,
+          "settled_ms": {
+            "max": 2767.072,
+            "median": 1959.014,
+            "min": 1718.47,
+            "n": 5,
+            "samples": [
+              2767.072,
+              1718.47,
+              1816.591,
+              1988.156,
+              1959.014
+            ]
+          },
+          "window_with_file_ms": {
+            "max": 31.001,
+            "median": 23.637,
+            "min": 20.015,
+            "n": 5,
+            "samples": [
+              23.637,
+              20.015,
+              24.161,
+              31.001,
+              21.966
+            ]
+          }
+        }
+      ],
+      "installed": true,
+      "key": "strata",
+      "launch_error": null,
+      "launch_runs_with_window_on_screen": 0,
+      "launch_to_window_ms": {
+        "max": 198.252,
+        "median": 190.327,
+        "min": 181.045,
+        "n": 5,
+        "samples": [
+          186.27,
+          198.252,
+          195.067,
+          190.327,
+          181.045
+        ]
+      },
+      "load_before": {
+        "loadavg": "{ 4.47 4.84 4.39 }",
+        "memgate": "available 17.28 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16469] pid 25714   rss      5 MB  peak      5 MB    732ms  cargo run --quiet --release -p xtask -- bench --only apps --apps strata --files logfmt:1G,syslog:1G,access:1G,macos:1G --out target/bench/full-x-x-app-strata.json"
+      },
+      "version": "0.1.0"
+    }
+  ],
+  "date": "2026-11-12",
+  "fixtures": [
+    {
+      "bytes": 1073741946,
+      "detected": "logfmt",
+      "format": "logfmt",
+      "path": "benches/fixtures/logfmt-1073741824-s42.log",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 1073741824,
+      "detected": "syslog",
+      "format": "syslog",
+      "path": "benches/fixtures/syslog-1073741824-s42.log",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 1073741901,
+      "detected": "access",
+      "format": "access",
+      "path": "benches/fixtures/access-1073741824-s42.log",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 1073741917,
+      "detected": "timestamped",
+      "format": "macos",
+      "path": "benches/fixtures/macos-install-1073741824.log",
+      "size": "1G",
+      "source": "/var/log/install.log (24927468 bytes), repeated"
+    }
+  ],
+  "git": "f3788ff",
+  "load_after": {
+    "loadavg": "{ 3.10 4.69 4.54 }",
+    "memgate": "available 17.04 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16469] pid 25714   rss      6 MB  peak     47 MB    4m19s  cargo run --quiet --release -p xtask -- bench --only apps --apps strata --files logfmt:1G,syslog:1G,access:1G,macos:1G --out target/bench/full-x-x-app-strata.json"
+  },
+  "load_before": {
+    "loadavg": "{ 4.47 4.84 4.39 }",
+    "memgate": "available 17.28 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16469] pid 25714   rss      4 MB  peak      4 MB    665ms  cargo run --quiet --release -p xtask -- bench --only apps --apps strata --files logfmt:1G,syslog:1G,access:1G,macos:1G --out target/bench/full-x-x-app-strata.json"
+  },
+  "machine": {
+    "arch": "aarch64",
+    "cores": 15,
+    "cpu": "Apple M5 Pro",
+    "memory_gb": 24.0,
+    "model": "Mac17,9",
+    "os": "macOS 26.6.2 (25G83)"
+  },
+  "mode": "full",
+  "runs": 9,
+  "schema": 1,
+  "started_unix": 1794489241
+}

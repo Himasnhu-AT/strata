@@ -1,0 +1,909 @@
+{
+  "date": "2026-11-12",
+  "fixtures": [
+    {
+      "bytes": 1073741874,
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-1073741824-s42.jsonl",
+      "size": "1G"
+    },
+    {
+      "bytes": 1073741842,
+      "format": "plain",
+      "path": "benches/fixtures/plain-1073741824-s42.log",
+      "size": "1G"
+    }
+  ],
+  "git": "2a05e8c",
+  "load_after": {
+    "loadavg": "{ 4.59 5.65 6.68 }",
+    "memgate": "available 19.68 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16423] pid 28217   rss     43 MB  peak   1.19 GB    5m38s  cargo run --quiet --release -p xtask -- bench --only strata --sizes 1G --no-small --out target/bench/full-strata-1G.json"
+  },
+  "load_before": {
+    "loadavg": "{ 4.33 5.43 6.99 }",
+    "memgate": "available 19.92 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16423] pid 28217   rss      4 MB  peak    308 MB     3.4s  cargo run --quiet --release -p xtask -- bench --only strata --sizes 1G --no-small --out target/bench/full-strata-1G.json"
+  },
+  "machine": {
+    "arch": "aarch64",
+    "cores": 15,
+    "cpu": "Apple M5 Pro",
+    "memory_gb": 24.0,
+    "model": "Mac17,9",
+    "os": "macOS 26.6.2 (25G83)"
+  },
+  "mode": "full",
+  "runs": 9,
+  "schema": 1,
+  "started_unix": 1794483701,
+  "strata": {
+    "binary": {
+      "method": "file size of target/<profile>/strata; stripped = `strip -o` of the release binary; release-small = opt-level s, fat LTO, 1 codegen unit, strip (ashlar's profile, passed with --config)",
+      "release_bytes": 23966112,
+      "release_small_bytes": null,
+      "release_stripped_bytes": 19145312
+    },
+    "core": [
+      {
+        "file": "jsonl 1G",
+        "index_gb_per_s": {
+          "max": 9.609,
+          "median": 9.47,
+          "min": 7.36,
+          "n": 9,
+          "samples": [
+            7.36,
+            9.404,
+            9.609,
+            9.47,
+            9.495,
+            9.392,
+            9.387,
+            9.484,
+            9.508
+          ]
+        },
+        "open_and_index_ms": {
+          "max": 145.892,
+          "median": 113.381,
+          "min": 111.741,
+          "n": 9,
+          "samples": [
+            145.892,
+            114.179,
+            111.741,
+            113.381,
+            113.09,
+            114.32,
+            114.391,
+            113.22,
+            112.931
+          ]
+        },
+        "summaries_gb_per_s": {
+          "max": 0.637,
+          "median": 0.629,
+          "min": 0.626,
+          "n": 9,
+          "samples": [
+            0.637,
+            0.637,
+            0.631,
+            0.628,
+            0.631,
+            0.627,
+            0.629,
+            0.628,
+            0.626
+          ]
+        },
+        "summaries_ms": {
+          "max": 1714.837,
+          "median": 1705.874,
+          "min": 1684.433,
+          "n": 9,
+          "samples": [
+            1685.639,
+            1684.433,
+            1700.417,
+            1709.104,
+            1702.859,
+            1712.524,
+            1705.874,
+            1708.987,
+            1714.837
+          ]
+        }
+      },
+      {
+        "file": "plain 1G",
+        "index_gb_per_s": {
+          "max": 6.473,
+          "median": 6.345,
+          "min": 5.269,
+          "n": 9,
+          "samples": [
+            5.269,
+            6.345,
+            6.13,
+            6.281,
+            6.407,
+            6.473,
+            6.167,
+            6.374,
+            6.434
+          ]
+        },
+        "open_and_index_ms": {
+          "max": 203.769,
+          "median": 169.214,
+          "min": 165.891,
+          "n": 9,
+          "samples": [
+            203.769,
+            169.214,
+            175.152,
+            170.949,
+            167.58,
+            165.891,
+            174.111,
+            168.445,
+            166.894
+          ]
+        },
+        "summaries_gb_per_s": {
+          "max": 0.559,
+          "median": 0.552,
+          "min": 0.535,
+          "n": 9,
+          "samples": [
+            0.548,
+            0.535,
+            0.539,
+            0.552,
+            0.554,
+            0.539,
+            0.552,
+            0.559,
+            0.558
+          ]
+        },
+        "summaries_ms": {
+          "max": 2007.748,
+          "median": 1945.592,
+          "min": 1921.512,
+          "n": 9,
+          "samples": [
+            1959.747,
+            2007.748,
+            1991.051,
+            1945.592,
+            1936.577,
+            1990.349,
+            1944.204,
+            1921.512,
+            1923.905
+          ]
+        }
+      }
+    ],
+    "files": [
+      {
+        "bytes": 1073741874.0,
+        "format": "jsonl",
+        "lines": 5912063,
+        "memory": {
+          "footprint_after_open_mb": {
+            "max": 228.205,
+            "median": 227.611,
+            "min": 114.377,
+            "n": 9,
+            "samples": [
+              114.377,
+              116.877,
+              227.814,
+              227.611,
+              228.127,
+              227.314,
+              228.205,
+              227.58,
+              227.705
+            ]
+          },
+          "peak_footprint_after_searches_mb": {
+            "max": 247.658,
+            "median": 231.517,
+            "min": 119.314,
+            "n": 9,
+            "samples": [
+              119.314,
+              238.579,
+              246.252,
+              246.424,
+              247.658,
+              231.377,
+              231.517,
+              230.861,
+              231.47
+            ]
+          },
+          "rss_after_open_mb": {
+            "max": 1164.0,
+            "median": 1163.297,
+            "min": 1161.859,
+            "n": 9,
+            "samples": [
+              1161.859,
+              1163.469,
+              1163.656,
+              1163.219,
+              1163.75,
+              1163.25,
+              1164.0,
+              1163.188,
+              1163.297
+            ]
+          },
+          "rss_after_searches_mb": {
+            "max": 1167.531,
+            "median": 1167.125,
+            "min": 1165.578,
+            "n": 9,
+            "samples": [
+              1165.578,
+              1167.313,
+              1166.906,
+              1166.594,
+              1167.125,
+              1167.391,
+              1167.531,
+              1166.906,
+              1167.5
+            ]
+          }
+        },
+        "open": {
+          "first_lines_ms": {
+            "max": 68.563,
+            "median": 49.772,
+            "min": 7.942,
+            "n": 9,
+            "samples": [
+              45.746,
+              14.416,
+              68.563,
+              7.942,
+              55.957,
+              56.942,
+              57.454,
+              49.421,
+              49.772
+            ]
+          },
+          "index_job_gb_per_s": {
+            "max": 0.593,
+            "median": 0.579,
+            "min": 0.377,
+            "n": 9,
+            "samples": [
+              0.377,
+              0.581,
+              0.579,
+              0.58,
+              0.583,
+              0.577,
+              0.564,
+              0.593,
+              0.573
+            ]
+          },
+          "index_job_ms": {
+            "max": 2850.578,
+            "median": 1855.037,
+            "min": 1810.194,
+            "n": 9,
+            "samples": [
+              2850.578,
+              1847.241,
+              1855.037,
+              1850.28,
+              1842.083,
+              1860.76,
+              1904.862,
+              1810.194,
+              1872.64
+            ]
+          },
+          "indexed_ms": {
+            "max": 2879.694,
+            "median": 1897.648,
+            "min": 1838.129,
+            "n": 9,
+            "samples": [
+              2879.694,
+              1838.129,
+              1907.912,
+              1851.452,
+              1881.991,
+              1901.052,
+              1938.238,
+              1845.27,
+              1897.648
+            ]
+          },
+          "lines_indexed_at_first_lines": {
+            "max": 230933.0,
+            "median": 92361.0,
+            "min": 46183.0,
+            "n": 9,
+            "samples": [
+              46183.0,
+              230933.0,
+              92361.0,
+              230933.0,
+              138554.0,
+              92361.0,
+              92361.0,
+              92361.0,
+              92361.0
+            ]
+          }
+        },
+        "search": {
+          "field": {
+            "count": 33083,
+            "job_ms": {
+              "max": 1930.581,
+              "median": 1858.985,
+              "min": 1801.002,
+              "n": 9,
+              "samples": [
+                1858.985,
+                1930.581,
+                1845.867,
+                1863.608,
+                1819.648,
+                1912.804,
+                1875.444,
+                1801.002,
+                1858.335
+              ]
+            },
+            "mb_per_s": {
+              "max": 596.191,
+              "median": 577.596,
+              "min": 556.176,
+              "n": 9,
+              "samples": [
+                577.596,
+                556.176,
+                581.701,
+                576.163,
+                590.082,
+                561.344,
+                572.527,
+                596.191,
+                577.798
+              ]
+            },
+            "query": "status >= 500"
+          },
+          "literal": {
+            "count": 6594,
+            "job_ms": {
+              "max": 32.397,
+              "median": 21.674,
+              "min": 16.59,
+              "n": 9,
+              "samples": [
+                17.189,
+                16.59,
+                18.926,
+                23.557,
+                23.455,
+                32.397,
+                23.604,
+                19.882,
+                21.674
+              ]
+            },
+            "mb_per_s": {
+              "max": 64722.559,
+              "median": 49541.407,
+              "min": 33142.952,
+              "n": 9,
+              "samples": [
+                62468.017,
+                64722.559,
+                56733.318,
+                45580.263,
+                45779.619,
+                33142.952,
+                45489.748,
+                54005.048,
+                49541.407
+              ]
+            },
+            "query": "timeout"
+          },
+          "regex": {
+            "count": 22988,
+            "job_ms": {
+              "max": 41.004,
+              "median": 40.007,
+              "min": 24.476,
+              "n": 9,
+              "samples": [
+                24.476,
+                26.216,
+                33.117,
+                40.561,
+                40.497,
+                41.004,
+                40.395,
+                32.507,
+                40.007
+              ]
+            },
+            "mb_per_s": {
+              "max": 43869.248,
+              "median": 26838.934,
+              "min": 26186.378,
+              "n": 9,
+              "samples": [
+                43869.248,
+                40957.893,
+                32422.231,
+                26472.436,
+                26513.945,
+                26186.378,
+                26581.25,
+                33031.012,
+                26838.934
+              ]
+            },
+            "query": "r-[0-9a-f]{6}ff"
+          }
+        },
+        "size": "1G"
+      },
+      {
+        "bytes": 1073741842.0,
+        "format": "plain",
+        "lines": 13126934,
+        "memory": {
+          "footprint_after_open_mb": {
+            "max": 244.33,
+            "median": 243.674,
+            "min": 243.205,
+            "n": 9,
+            "samples": [
+              243.908,
+              244.33,
+              243.345,
+              244.095,
+              243.549,
+              243.252,
+              243.939,
+              243.674,
+              243.205
+            ]
+          },
+          "peak_footprint_after_searches_mb": {
+            "max": 254.095,
+            "median": 253.267,
+            "min": 252.955,
+            "n": 9,
+            "samples": [
+              253.236,
+              253.877,
+              253.189,
+              254.095,
+              253.736,
+              253.611,
+              253.267,
+              252.955,
+              253.033
+            ]
+          },
+          "rss_after_open_mb": {
+            "max": 772.203,
+            "median": 771.516,
+            "min": 771.094,
+            "n": 9,
+            "samples": [
+              772.016,
+              772.203,
+              771.188,
+              771.969,
+              771.516,
+              771.094,
+              771.766,
+              771.516,
+              771.391
+            ]
+          },
+          "rss_after_searches_mb": {
+            "max": 1187.766,
+            "median": 1187.094,
+            "min": 1186.828,
+            "n": 9,
+            "samples": [
+              1187.094,
+              1187.656,
+              1186.844,
+              1187.766,
+              1186.984,
+              1187.328,
+              1187.0,
+              1186.828,
+              1187.141
+            ]
+          }
+        },
+        "open": {
+          "first_lines_ms": {
+            "max": 59.597,
+            "median": 47.987,
+            "min": 45.203,
+            "n": 9,
+            "samples": [
+              59.597,
+              47.987,
+              50.765,
+              50.085,
+              45.203,
+              45.47,
+              46.121,
+              53.398,
+              47.147
+            ]
+          },
+          "index_job_gb_per_s": {
+            "max": 0.507,
+            "median": 0.498,
+            "min": 0.353,
+            "n": 9,
+            "samples": [
+              0.353,
+              0.488,
+              0.496,
+              0.504,
+              0.505,
+              0.5,
+              0.507,
+              0.498,
+              0.489
+            ]
+          },
+          "index_job_ms": {
+            "max": 3041.204,
+            "median": 2158.057,
+            "min": 2117.039,
+            "n": 9,
+            "samples": [
+              3041.204,
+              2199.047,
+              2164.514,
+              2131.464,
+              2126.921,
+              2147.263,
+              2117.039,
+              2158.057,
+              2194.015
+            ]
+          },
+          "indexed_ms": {
+            "max": 3037.666,
+            "median": 2182.875,
+            "min": 2127.87,
+            "n": 9,
+            "samples": [
+              3037.666,
+              2223.345,
+              2198.354,
+              2164.009,
+              2127.87,
+              2175.145,
+              2146.991,
+              2182.875,
+              2216.144
+            ]
+          },
+          "lines_indexed_at_first_lines": {
+            "max": 410162.0,
+            "median": 204996.0,
+            "min": 204996.0,
+            "n": 9,
+            "samples": [
+              204996.0,
+              204996.0,
+              204996.0,
+              204996.0,
+              410162.0,
+              204996.0,
+              204996.0,
+              204996.0,
+              204996.0
+            ]
+          }
+        },
+        "search": {
+          "field": {
+            "count": 74073,
+            "job_ms": {
+              "max": 2102.66,
+              "median": 2042.773,
+              "min": 2011.939,
+              "n": 9,
+              "samples": [
+                2024.486,
+                2102.66,
+                2099.006,
+                2013.937,
+                2011.939,
+                2025.503,
+                2042.773,
+                2101.176,
+                2045.41
+              ]
+            },
+            "mb_per_s": {
+              "max": 533.685,
+              "median": 525.63,
+              "min": 510.659,
+              "n": 9,
+              "samples": [
+                530.377,
+                510.659,
+                511.548,
+                533.156,
+                533.685,
+                530.111,
+                525.63,
+                511.019,
+                524.952
+              ]
+            },
+            "query": "level = error"
+          },
+          "literal": {
+            "count": 64288,
+            "job_ms": {
+              "max": 33.611,
+              "median": 29.235,
+              "min": 22.946,
+              "n": 9,
+              "samples": [
+                22.946,
+                30.549,
+                33.611,
+                29.235,
+                31.226,
+                31.906,
+                29.133,
+                23.747,
+                23.714
+              ]
+            },
+            "mb_per_s": {
+              "max": 46793.528,
+              "median": 36727.539,
+              "min": 31946.619,
+              "n": 9,
+              "samples": [
+                46793.528,
+                35148.471,
+                31946.619,
+                36727.539,
+                34386.56,
+                33653.07,
+                36856.813,
+                45215.736,
+                45278.022
+              ]
+            },
+            "query": "timeout"
+          },
+          "regex": {
+            "count": 50518,
+            "job_ms": {
+              "max": 62.926,
+              "median": 57.839,
+              "min": 56.647,
+              "n": 9,
+              "samples": [
+                57.743,
+                56.647,
+                57.111,
+                60.464,
+                62.926,
+                57.925,
+                57.379,
+                58.069,
+                57.839
+              ]
+            },
+            "mb_per_s": {
+              "max": 18955.131,
+              "median": 18564.296,
+              "min": 17063.632,
+              "n": 9,
+              "samples": [
+                18595.294,
+                18955.131,
+                18800.84,
+                17758.513,
+                17063.632,
+                18536.733,
+                18713.082,
+                18490.833,
+                18564.296
+              ]
+            },
+            "query": "r-[0-9a-f]{6}ff"
+          }
+        },
+        "size": "1G"
+      }
+    ],
+    "idle": {
+      "empty": {
+        "cpu_percent": 0.353,
+        "frames": 108,
+        "frames_by_reason": {
+          "control": 1,
+          "input": 108
+        },
+        "frames_excluding_probe": 107,
+        "process_cpu_s": 0.2119,
+        "seconds": 60
+      },
+      "file": "jsonl 1G",
+      "following": {
+        "cpu_percent": 0.02,
+        "frames": 3,
+        "frames_by_reason": {
+          "autosave": 2,
+          "control": 1
+        },
+        "frames_excluding_probe": 2,
+        "process_cpu_s": 0.0118,
+        "seconds": 60
+      },
+      "method": "app.stats before and after the idle period: frames drawn (minus the one the second app.stats request wakes), wake reasons, and process CPU time of all threads (watcher included)"
+    },
+    "launch": {
+      "cold_ish": {
+        "launch_to_present_ms": {
+          "max": 197.545,
+          "median": 178.088,
+          "min": 158.894,
+          "n": 5,
+          "samples": [
+            186.452,
+            158.894,
+            197.545,
+            178.088,
+            174.187
+          ]
+        },
+        "spawn_to_ready_ms": {
+          "max": 898.698,
+          "median": 838.742,
+          "min": 826.637,
+          "n": 5,
+          "samples": [
+            838.742,
+            826.637,
+            858.779,
+            898.698,
+            834.905
+          ]
+        }
+      },
+      "idle_empty_window": {
+        "after_s": 2,
+        "footprint_mb": {
+          "max": 106.735,
+          "median": 98.798,
+          "min": 86.798,
+          "n": 9,
+          "samples": [
+            99.188,
+            86.798,
+            106.735,
+            98.423,
+            99.048,
+            98.704,
+            98.704,
+            98.798,
+            98.829
+          ]
+        },
+        "rss_mb": {
+          "max": 123.984,
+          "median": 121.094,
+          "min": 116.219,
+          "n": 9,
+          "samples": [
+            121.094,
+            123.984,
+            122.547,
+            116.219,
+            121.313,
+            121.016,
+            121.063,
+            121.031,
+            121.109
+          ]
+        }
+      },
+      "method": "launch_to_present: the app's own figure (first line of run() to the first presented frame, STRATA_READY_FILE). spawn_to_ready: process spawn to the ready file, so exec, dyld and main count too. warm: same binary and HOME as an unmeasured first launch. cold-ish: the binary copied to a new path and an empty HOME each run (first-run work of a new binary: code-signature checks, dyld and Metal shader caches miss); the disk cache is warm (no purge without root). The window opens in front, as for a person.",
+      "warm": {
+        "launch_to_present_ms": {
+          "max": 191.259,
+          "median": 156.365,
+          "min": 146.97,
+          "n": 9,
+          "samples": [
+            147.588,
+            191.259,
+            156.365,
+            188.647,
+            184.375,
+            146.97,
+            147.085,
+            181.02,
+            148.406
+          ]
+        },
+        "spawn_to_ready_ms": {
+          "max": 204.38,
+          "median": 170.483,
+          "min": 156.86,
+          "n": 9,
+          "samples": [
+            156.86,
+            204.38,
+            170.483,
+            202.247,
+            198.215,
+            161.242,
+            159.069,
+            194.365,
+            161.195
+          ]
+        }
+      }
+    },
+    "method": "A new process with an empty HOME per run. first_lines: log.open_dialog sent → ui.wait reply for the first table row's element (answered on the frame that drew it). indexed: until log.files reports the file complete (polled every 2 ms). index_job: the app's own seconds for its open + index jobs (line index and per-chunk time/level summaries). search job_ms: the app's seconds for the search or filter job over the whole indexed file (count = the toolbar's match counter or the status bar's shown lines). Memory: macOS physical footprint from app.stats and RSS from ps; peak = the OS's lifetime peak footprint.",
+    "scroll": {
+      "file": "jsonl 1G",
+      "jump": {
+        "dy_pt": 20000.0,
+        "frame_cpu_max_ms": 3.98575,
+        "frame_cpu_p50_ms": 2.070167,
+        "frame_cpu_p95_ms": 2.650708,
+        "frames": 361,
+        "painted_frames": 362,
+        "steps": 120,
+        "ui_p50_ms": 1.2169590000000001,
+        "ui_p95_ms": 1.516625,
+        "wall_ms": 3018.398166
+      },
+      "method": "ui.scroll over the table (a wheel event at its center, one per request, reversing halfway); app.stats reset before each kind, then frame_cpu (eframe's whole-frame CPU on the UI thread, painting included) and ui (the runtime's view code) percentiles over the frames of the scroll",
+      "wheel": {
+        "dy_pt": 36.0,
+        "frame_cpu_max_ms": 5.141083,
+        "frame_cpu_p50_ms": 1.473748,
+        "frame_cpu_p95_ms": 1.8702910000000001,
+        "frames": 1441,
+        "painted_frames": 1024,
+        "steps": 480,
+        "ui_p50_ms": 0.572625,
+        "ui_p95_ms": 0.832666,
+        "wall_ms": 12455.356167
+      }
+    }
+  }
+}

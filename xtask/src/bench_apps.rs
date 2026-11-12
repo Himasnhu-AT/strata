@@ -40,7 +40,7 @@ function run(argv) {
     const list = ObjC.deepUnwrap(ObjC.castRefToObject($.CGWindowListCopyWindowInfo($.kCGWindowListOptionAll | $.kCGWindowListExcludeDesktopElements, 0))) || [];
     for (const w of list) {
       if (w.kCGWindowLayer === 0 && String(w.kCGWindowOwnerName || '') === owner && String(w.kCGWindowName || '').indexOf(needle) >= 0 && String(w.kCGWindowName || '') !== '') {
-        return String(Date.now()) + ' ' + (w.kCGWindowIsOnscreen ? 'on' : 'off') + ' ' + String(w.kCGWindowName || '');
+        return String(Date.now()) + ' ' + (w.kCGWindowIsOnscreen ? 'on' : 'off') + ' ' + String(w.kCGWindowNumber) + ' ' + String(w.kCGWindowName || '');
       }
     }
     delay(0.005);
@@ -48,6 +48,73 @@ function run(argv) {
   return 'timeout';
 }
 "#;
+
+/// `id N`: the window's title, size and on-screen state as JSON. `lock`: whether the screen is
+/// locked (`CGSSessionScreenIsLocked`).
+const INFO_JS: &str = r#"ObjC.import('CoreGraphics');
+function run(argv) {
+  if (argv[0] === 'lock') {
+    const d = ObjC.deepUnwrap(ObjC.castRefToObject($.CGSessionCopyCurrentDictionary())) || {};
+    return d.CGSSessionScreenIsLocked ? 'locked' : 'unlocked';
+  }
+  const id = Number(argv[1]);
+  const list = ObjC.deepUnwrap(ObjC.castRefToObject($.CGWindowListCopyWindowInfo($.kCGWindowListOptionAll, 0))) || [];
+  for (const w of list) {
+    if (w.kCGWindowNumber === id) {
+      return JSON.stringify({title: String(w.kCGWindowName || ''), width: w.kCGWindowBounds.Width, height: w.kCGWindowBounds.Height, on_screen: !!w.kCGWindowIsOnscreen});
+    }
+  }
+  return '{}';
+}
+"#;
+
+fn info_js(dir: &Path) -> PathBuf {
+    dir.join("info.js")
+}
+
+/// Whether the screen is locked now (`None`: cannot tell).
+fn screen_locked(dir: &Path) -> Option<bool> {
+    output("osascript", &["-l", "JavaScript", &info_js(dir).display().to_string(), "lock"]).map(|s| s == "locked")
+}
+
+/// Wait while the screen is locked (up to 30 min): the seconds waited.
+fn wait_unlocked(dir: &Path) -> u64 {
+    let mut waited = 0;
+    while screen_locked(dir) == Some(true) && waited < 1800 {
+        if waited == 0 {
+            eprintln!("bench: the screen is locked; waiting");
+        }
+        std::thread::sleep(Duration::from_secs(10));
+        waited += 10;
+    }
+    waited
+}
+
+/// The proof of one run: the app's window captured when it settled.
+fn shoot(app: &App, dir: &Path, window: u64, path: &Path) -> Value {
+    // bring it to the front first, so the capture shows what a person would see
+    if let Some(name) = app.quit_name {
+        let _ = Command::new("osascript").args(["-e", &format!("tell application \"{name}\" to activate")]).output();
+        std::thread::sleep(Duration::from_millis(1500));
+    }
+    let info: Value = output("osascript", &["-l", "JavaScript", &info_js(dir).display().to_string(), "id", &window.to_string()])
+        .and_then(|t| serde_json::from_str(&t).ok())
+        .unwrap_or(Value::Null);
+    if let Some(d) = path.parent() {
+        let _ = std::fs::create_dir_all(d);
+    }
+    let ok =
+        Command::new("screencapture").args(["-x", "-o", "-l", &window.to_string()]).arg(path).status().is_ok_and(|s| s.success()) && path.exists();
+    json!({
+        "shot": if ok { Some(path.display().to_string()) } else { None },
+        "window": window,
+        "title": info["title"],
+        "width": info["width"],
+        "height": info["height"],
+        "on_screen": info["on_screen"],
+        "screen_locked": screen_locked(dir),
+    })
+}
 
 const LOW_MEMORY_LEVEL: u64 = 12;
 const MAX_RSS_MB: f64 = 8192.0;
@@ -153,8 +220,10 @@ fn apps(strata_bundle: Option<PathBuf>) -> Vec<App> {
         processes: vec!["klogg.app/Contents/MacOS/klogg".into()],
         // started directly, its window stays off screen (never activated): open it as Finder does
         launch: Box::new(|file, _| {
+            // `-n`: a new session; without it klogg reopens every file of the last one (and a
+            // file handed over as an Apple event does not count as "a file was passed")
             let mut c = Command::new("/usr/bin/open");
-            c.args(["-n", "-a", "klogg"]).args(file);
+            c.args(["-n", "-a", "klogg", "--args", "-n"]).args(file);
             c
         }),
         quit_name: Some("klogg"),
@@ -169,7 +238,9 @@ fn apps(strata_bundle: Option<PathBuf>) -> Vec<App> {
         processes: vec!["Sublime Text.app/".into()],
         launch: Box::new(|file, _| {
             let mut c = Command::new("/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl");
-            c.arg("-n").args(file);
+            // `--safe-mode`: a clean sandbox (default settings, no restored session), like VS
+            // Code's fresh profile
+            c.args(["--safe-mode", "-n"]).args(file);
             c
         }),
         quit_name: Some("Sublime Text"),
@@ -187,6 +258,14 @@ fn apps(strata_bundle: Option<PathBuf>) -> Vec<App> {
             // caps socket paths at 103 bytes
             let home = std::env::temp_dir().join("sbv");
             let _ = std::fs::remove_dir_all(&home);
+            // open big files the way a person who clicks "Open anyway" does (the default asks
+            // first above about 1 GB), and keep the run offline
+            let user = home.join("vscode-user").join("User");
+            let _ = std::fs::create_dir_all(&user);
+            let _ = std::fs::write(
+                user.join("settings.json"),
+                r#"{"workbench.editorLargeFileConfirmation": 1000000, "telemetry.telemetryLevel": "off", "update.mode": "none"}"#,
+            );
             let mut c = Command::new("/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code");
             c.args(["--new-window", "--disable-extensions", "--skip-welcome", "--disable-workspace-trust"])
                 .arg("--user-data-dir")
@@ -221,9 +300,9 @@ impl Watcher {
         Ok(Watcher(child))
     }
 
-    /// `Some((epoch ms, on screen))` once it saw the window, `Some((NaN, false))` when it gave up,
-    /// `None` while it waits.
-    fn poll(&mut self) -> Option<(f64, bool)> {
+    /// `Some((epoch ms, on screen, window id))` once it saw the window, `Some((NaN, false, 0))`
+    /// when it gave up, `None` while it waits.
+    fn poll(&mut self) -> Option<(f64, bool, u64)> {
         match self.0.try_wait() {
             Ok(Some(_)) => {
                 let mut s = String::new();
@@ -232,10 +311,12 @@ impl Watcher {
                 }
                 let mut w = s.split_whitespace();
                 let at = w.next().and_then(|t| t.parse::<f64>().ok()).unwrap_or(f64::NAN);
-                Some((at, w.next() == Some("on")))
+                let on = w.next() == Some("on");
+                let id = w.next().and_then(|t| t.parse::<u64>().ok()).unwrap_or(0);
+                Some((at, on, id))
             }
             Ok(None) => None,
-            Err(_) => Some((f64::NAN, false)),
+            Err(_) => Some((f64::NAN, false, 0)),
         }
     }
 }
@@ -279,10 +360,13 @@ struct Run {
     /// The window was on screen when it was seen (a fullscreen app elsewhere keeps new windows
     /// on a Space nobody looks at: nothing is painted there).
     on_screen: bool,
+    window: u64,
+    /// The capture at settled, with the window's title and size then.
+    proof: Value,
 }
 
 /// Start `app` (with `file` or without), watch for its window and for it to settle.
-fn run_once(app: &App, script: &Path, home: &Path, file: Option<&Path>, idle_secs: u64) -> Result<Run, String> {
+fn run_once(app: &App, script: &Path, home: &Path, file: Option<&Path>, idle_secs: u64, shot: Option<&Path>) -> Result<Run, String> {
     let needle = file.and_then(Path::file_name).map(|n| n.to_string_lossy().to_string()).unwrap_or_default();
     let limit = Duration::from_secs(300);
     let _ = std::fs::create_dir_all(home.join("keys"));
@@ -323,10 +407,11 @@ fn run_once(app: &App, script: &Path, home: &Path, file: Option<&Path>, idle_sec
             break Err(format!("{} did not settle within {} s", app.name, limit.as_secs()));
         }
         if r.window_ms.is_none()
-            && let Some((at, on)) = watcher.poll()
+            && let Some((at, on, id)) = watcher.poll()
         {
             r.window_ms = Some(if at.is_nan() { f64::NAN } else { at - t0 });
             r.on_screen = on;
+            r.window = id;
         }
         let (cpu, rss, pids) = sample(&app.processes);
         r.rss_peak = r.rss_peak.max(rss);
@@ -359,6 +444,11 @@ fn run_once(app: &App, script: &Path, home: &Path, file: Option<&Path>, idle_sec
         std::thread::sleep(Duration::from_secs(idle_secs));
         let (b, _, _) = sample(&app.processes);
         r.idle_cpu = Some(((b - a).max(0.0) / idle_secs as f64 * 100.0 * 1000.0).round() / 1000.0);
+    }
+    if result.is_ok()
+        && let Some(path) = shot
+    {
+        r.proof = shoot(app, script.parent().unwrap_or(script), r.window, path);
     }
     drop(watcher);
     quit(app, &mut child);
@@ -393,7 +483,8 @@ fn measure_app(app: &App, script: &Path, dir: &Path, fixtures: &[Fixture], runs:
             Ok(h) => h,
             Err(e) => return json!({"app": app.name, "error": e}),
         };
-        match run_once(app, script, &home, None, 0) {
+        wait_unlocked(script.parent().unwrap_or(script));
+        match run_once(app, script, &home, None, 0, None) {
             Ok(r) if i > 0 => {
                 launch_on_screen += usize::from(r.on_screen);
                 launch.extend(r.window_ms);
@@ -407,8 +498,13 @@ fn measure_app(app: &App, script: &Path, dir: &Path, fixtures: &[Fixture], runs:
         std::thread::sleep(Duration::from_millis(500));
     }
     let mut files = Vec::new();
+    let mut failed_at: Vec<(String, u64)> = Vec::new();
     for f in fixtures {
         let name = format!("{} {}", f.format, f.label);
+        if let Some((_, at)) = failed_at.iter().find(|(fmt, at)| *fmt == f.format && f.bytes >= *at) {
+            files.push(json!({"file": name, "skipped": format!("not tried: the {} MB {} file already failed", at >> 20, f.format)}));
+            continue;
+        }
         if f.bytes > app.max_bytes {
             files.push(json!({"file": name, "skipped": format!("over {} MB, the largest size tried in {}", app.max_bytes >> 20, app.name)}));
             continue;
@@ -416,6 +512,7 @@ fn measure_app(app: &App, script: &Path, dir: &Path, fixtures: &[Fixture], runs:
         let (mut win, mut settled, mut rss, mut peak, mut idle) = (Vec::new(), Vec::new(), Vec::new(), Vec::new(), None);
         let mut error = None;
         let mut on_screen = 0;
+        let mut proofs = Vec::new();
         for i in 0..runs {
             eprintln!("bench: {} {name}: run {}/{runs}", app.name, i + 1);
             let home = match fresh(&dir.join("home")) {
@@ -425,8 +522,14 @@ fn measure_app(app: &App, script: &Path, dir: &Path, fixtures: &[Fixture], runs:
                     break;
                 }
             };
-            match run_once(app, script, &home, Some(&f.path), if i == 0 { idle_secs } else { 0 }) {
+            let waited = wait_unlocked(script.parent().unwrap_or(script));
+            let shot = dir.parent().unwrap_or(dir).join("shots").join(format!("{}-{}-{}-{}.png", f.format, f.label, app.key, i + 1));
+            match run_once(app, script, &home, Some(&f.path), if i == 0 { idle_secs } else { 0 }, Some(&shot)) {
                 Ok(r) => {
+                    let mut proof = r.proof.clone();
+                    proof["run"] = json!(i + 1);
+                    proof["waited_for_unlock_s"] = json!(waited);
+                    proofs.push(proof);
                     on_screen += usize::from(r.on_screen);
                     win.extend(r.window_ms);
                     settled.extend(r.settled_ms);
@@ -453,11 +556,12 @@ fn measure_app(app: &App, script: &Path, dir: &Path, fixtures: &[Fixture], runs:
             "idle_cpu_percent": idle,
             "idle_secs": idle_secs,
             "runs_with_window_on_screen": on_screen,
+            "proof": proofs,
             "error": error,
         }));
-        // a bigger file would only fail the same way, or worse
+        // a bigger file of the same format would only fail the same way, or worse
         if failed {
-            break;
+            failed_at.push((f.format.clone(), f.bytes));
         }
     }
     json!({
@@ -597,7 +701,9 @@ fn strata_bundle(exe: &Path, dir: &Path) -> Result<PathBuf, String> {
 pub fn run(root: &Path, o: &Options, fixtures: &[Fixture]) -> Value {
     let dir = crate::bench::target_dir(root).join("bench").join("apps");
     let script = dir.join("window.js");
-    if let Err(e) = std::fs::create_dir_all(&dir).and_then(|()| std::fs::write(&script, WINDOW_JS)) {
+    if let Err(e) =
+        std::fs::create_dir_all(&dir).and_then(|()| std::fs::write(&script, WINDOW_JS)).and_then(|()| std::fs::write(info_js(&dir), INFO_JS))
+    {
         return json!({"error": e.to_string()});
     }
     let runs = o.runs.min(5);

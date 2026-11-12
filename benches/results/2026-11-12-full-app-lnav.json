@@ -1,0 +1,734 @@
+{
+  "apps": [
+    {
+      "app": "lnav",
+      "files": [
+        {
+          "error": null,
+          "file": "plain 100M",
+          "headless": {
+            "field": {
+              "count": 7034,
+              "max_rss_mb": {
+                "max": 113.984,
+                "median": 113.328,
+                "min": 113.25,
+                "n": 5,
+                "samples": [
+                  113.484,
+                  113.984,
+                  113.328,
+                  113.25,
+                  113.281
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs WHERE log_level = 'error'",
+              "wall_ms": {
+                "max": 818.043,
+                "median": 807.79,
+                "min": 792.722,
+                "n": 5,
+                "samples": [
+                  807.79,
+                  818.043,
+                  792.722,
+                  812.213,
+                  795.057
+                ]
+              }
+            },
+            "index": {
+              "count": 1272463,
+              "max_rss_mb": {
+                "max": 113.547,
+                "median": 113.516,
+                "min": 113.469,
+                "n": 5,
+                "samples": [
+                  113.516,
+                  113.516,
+                  113.547,
+                  113.484,
+                  113.469
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs",
+              "wall_ms": {
+                "max": 854.641,
+                "median": 833.789,
+                "min": 824.874,
+                "n": 5,
+                "samples": [
+                  854.641,
+                  833.789,
+                  824.874,
+                  830.379,
+                  850.59
+                ]
+              }
+            },
+            "literal": {
+              "count": 3308,
+              "max_rss_mb": {
+                "max": 113.516,
+                "median": 113.5,
+                "min": 113.359,
+                "n": 5,
+                "samples": [
+                  113.359,
+                  113.5,
+                  113.516,
+                  113.516,
+                  113.406
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs WHERE log_raw_text LIKE '%timeout%'",
+              "wall_ms": {
+                "max": 952.241,
+                "median": 933.793,
+                "min": 921.166,
+                "n": 5,
+                "samples": [
+                  939.629,
+                  952.241,
+                  927.942,
+                  921.166,
+                  933.793
+                ]
+              }
+            },
+            "regex": {
+              "count": 4870,
+              "max_rss_mb": {
+                "max": 113.5,
+                "median": 113.422,
+                "min": 113.313,
+                "n": 5,
+                "samples": [
+                  113.313,
+                  113.453,
+                  113.375,
+                  113.5,
+                  113.422
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs WHERE regexp('r-[0-9a-f]{6}ff', log_raw_text)",
+              "wall_ms": {
+                "max": 1011.886,
+                "median": 991.284,
+                "min": 984.42,
+                "n": 5,
+                "samples": [
+                  989.271,
+                  984.42,
+                  1011.886,
+                  991.284,
+                  1007.0
+                ]
+              }
+            }
+          },
+          "tui": "not measured: lnav's terminal UI asks the terminal questions (cursor position, palette) and waits for answers a scripted pseudo-terminal does not give"
+        },
+        {
+          "error": null,
+          "file": "jsonl 100M",
+          "headless": {
+            "field": {
+              "count": 3109,
+              "max_rss_mb": {
+                "max": 253.391,
+                "median": 250.922,
+                "min": 250.875,
+                "n": 5,
+                "samples": [
+                  250.875,
+                  250.906,
+                  250.953,
+                  250.922,
+                  253.391
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs WHERE regexp('\"status\":5[0-9][0-9]', log_raw_text)",
+              "wall_ms": {
+                "max": 743.702,
+                "median": 706.289,
+                "min": 700.18,
+                "n": 5,
+                "samples": [
+                  700.18,
+                  704.661,
+                  711.989,
+                  706.289,
+                  743.702
+                ]
+              }
+            },
+            "index": {
+              "count": 577336,
+              "max_rss_mb": {
+                "max": 251.313,
+                "median": 250.938,
+                "min": 250.891,
+                "n": 5,
+                "samples": [
+                  250.938,
+                  251.313,
+                  250.922,
+                  250.891,
+                  250.938
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs",
+              "wall_ms": {
+                "max": 505.506,
+                "median": 469.553,
+                "min": 466.106,
+                "n": 5,
+                "samples": [
+                  505.506,
+                  477.204,
+                  466.106,
+                  467.063,
+                  469.553
+                ]
+              }
+            },
+            "literal": {
+              "count": 651,
+              "max_rss_mb": {
+                "max": 251.141,
+                "median": 250.922,
+                "min": 250.859,
+                "n": 5,
+                "samples": [
+                  250.922,
+                  250.891,
+                  250.938,
+                  250.859,
+                  251.141
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs WHERE log_raw_text LIKE '%timeout%'",
+              "wall_ms": {
+                "max": 568.85,
+                "median": 555.441,
+                "min": 554.107,
+                "n": 5,
+                "samples": [
+                  558.464,
+                  554.256,
+                  555.441,
+                  554.107,
+                  568.85
+                ]
+              }
+            },
+            "regex": {
+              "count": 2254,
+              "max_rss_mb": {
+                "max": 251.25,
+                "median": 250.938,
+                "min": 250.797,
+                "n": 5,
+                "samples": [
+                  250.938,
+                  250.969,
+                  251.25,
+                  250.828,
+                  250.797
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs WHERE regexp('r-[0-9a-f]{6}ff', log_raw_text)",
+              "wall_ms": {
+                "max": 580.261,
+                "median": 575.303,
+                "min": 567.994,
+                "n": 5,
+                "samples": [
+                  567.994,
+                  580.261,
+                  572.526,
+                  575.523,
+                  575.303
+                ]
+              }
+            }
+          },
+          "tui": "not measured: lnav's terminal UI asks the terminal questions (cursor position, palette) and waits for answers a scripted pseudo-terminal does not give"
+        },
+        {
+          "error": null,
+          "file": "plain 1G",
+          "headless": {
+            "field": {
+              "count": 74073,
+              "max_rss_mb": {
+                "max": 864.563,
+                "median": 862.609,
+                "min": 860.703,
+                "n": 5,
+                "samples": [
+                  864.563,
+                  863.172,
+                  862.609,
+                  861.063,
+                  860.703
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs WHERE log_level = 'error'",
+              "wall_ms": {
+                "max": 17360.178,
+                "median": 14387.936,
+                "min": 11328.196,
+                "n": 5,
+                "samples": [
+                  17360.178,
+                  14387.936,
+                  14796.392,
+                  13815.429,
+                  11328.196
+                ]
+              }
+            },
+            "index": {
+              "count": 13028146,
+              "max_rss_mb": {
+                "max": 860.5,
+                "median": 860.422,
+                "min": 860.156,
+                "n": 5,
+                "samples": [
+                  860.438,
+                  860.172,
+                  860.5,
+                  860.422,
+                  860.156
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs",
+              "wall_ms": {
+                "max": 8752.821,
+                "median": 8594.211,
+                "min": 8476.485,
+                "n": 5,
+                "samples": [
+                  8752.821,
+                  8533.028,
+                  8594.211,
+                  8620.7,
+                  8476.485
+                ]
+              }
+            },
+            "literal": {
+              "count": 34583,
+              "max_rss_mb": {
+                "max": 862.625,
+                "median": 860.422,
+                "min": 859.953,
+                "n": 5,
+                "samples": [
+                  860.422,
+                  860.172,
+                  862.625,
+                  859.953,
+                  862.25
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs WHERE log_raw_text LIKE '%timeout%'",
+              "wall_ms": {
+                "max": 9959.098,
+                "median": 9697.491,
+                "min": 9473.711,
+                "n": 5,
+                "samples": [
+                  9765.859,
+                  9697.491,
+                  9959.098,
+                  9473.711,
+                  9603.131
+                ]
+              }
+            },
+            "regex": {
+              "count": 50518,
+              "max_rss_mb": {
+                "max": 864.016,
+                "median": 861.344,
+                "min": 860.672,
+                "n": 5,
+                "samples": [
+                  860.672,
+                  860.797,
+                  862.797,
+                  861.344,
+                  864.016
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs WHERE regexp('r-[0-9a-f]{6}ff', log_raw_text)",
+              "wall_ms": {
+                "max": 18591.327,
+                "median": 12127.67,
+                "min": 10316.935,
+                "n": 5,
+                "samples": [
+                  10316.935,
+                  10563.312,
+                  12127.67,
+                  12561.557,
+                  18591.327
+                ]
+              }
+            }
+          },
+          "tui": "not measured: lnav's terminal UI asks the terminal questions (cursor position, palette) and waits for answers a scripted pseudo-terminal does not give"
+        },
+        {
+          "error": null,
+          "file": "jsonl 1G",
+          "headless": {
+            "field": {
+              "count": 33083,
+              "max_rss_mb": {
+                "max": 2220.016,
+                "median": 2219.5,
+                "min": 2217.75,
+                "n": 5,
+                "samples": [
+                  2217.75,
+                  2219.5,
+                  2219.547,
+                  2218.891,
+                  2220.016
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs WHERE regexp('\"status\":5[0-9][0-9]', log_raw_text)",
+              "wall_ms": {
+                "max": 7313.876,
+                "median": 7205.103,
+                "min": 6857.644,
+                "n": 5,
+                "samples": [
+                  7043.234,
+                  7313.876,
+                  7205.103,
+                  6857.644,
+                  7223.433
+                ]
+              }
+            },
+            "index": {
+              "count": 5912063,
+              "max_rss_mb": {
+                "max": 2219.563,
+                "median": 2219.109,
+                "min": 2218.734,
+                "n": 5,
+                "samples": [
+                  2219.563,
+                  2218.734,
+                  2219.109,
+                  2219.281,
+                  2219.109
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs",
+              "wall_ms": {
+                "max": 6370.452,
+                "median": 5442.977,
+                "min": 5055.371,
+                "n": 5,
+                "samples": [
+                  6370.452,
+                  5442.977,
+                  5516.231,
+                  5408.738,
+                  5055.371
+                ]
+              }
+            },
+            "literal": {
+              "count": 6594,
+              "max_rss_mb": {
+                "max": 2220.578,
+                "median": 2219.078,
+                "min": 2218.922,
+                "n": 5,
+                "samples": [
+                  2219.047,
+                  2219.078,
+                  2218.922,
+                  2220.578,
+                  2219.516
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs WHERE log_raw_text LIKE '%timeout%'",
+              "wall_ms": {
+                "max": 6952.997,
+                "median": 6062.169,
+                "min": 5849.433,
+                "n": 5,
+                "samples": [
+                  6062.169,
+                  5861.925,
+                  5849.433,
+                  6952.997,
+                  6200.563
+                ]
+              }
+            },
+            "regex": {
+              "count": 22988,
+              "max_rss_mb": {
+                "max": 2220.875,
+                "median": 2220.031,
+                "min": 2218.859,
+                "n": 5,
+                "samples": [
+                  2218.953,
+                  2220.031,
+                  2220.5,
+                  2220.875,
+                  2218.859
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs WHERE regexp('r-[0-9a-f]{6}ff', log_raw_text)",
+              "wall_ms": {
+                "max": 6280.727,
+                "median": 5699.498,
+                "min": 5377.898,
+                "n": 5,
+                "samples": [
+                  5699.498,
+                  5711.049,
+                  5506.16,
+                  6280.727,
+                  5377.898
+                ]
+              }
+            }
+          },
+          "tui": "not measured: lnav's terminal UI asks the terminal questions (cursor position, palette) and waits for answers a scripted pseudo-terminal does not give"
+        },
+        {
+          "error": null,
+          "file": "plain 5G",
+          "headless": {
+            "field": {
+              "count": 370509,
+              "max_rss_mb": {
+                "max": 4150.109,
+                "median": 4149.734,
+                "min": 4149.031,
+                "n": 3,
+                "samples": [
+                  4149.031,
+                  4149.734,
+                  4150.109
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs WHERE log_level = 'error'",
+              "wall_ms": {
+                "max": 38543.574,
+                "median": 38494.811,
+                "min": 38452.393,
+                "n": 3,
+                "samples": [
+                  38452.393,
+                  38494.811,
+                  38543.574
+                ]
+              }
+            },
+            "index": {
+              "count": 65140147,
+              "max_rss_mb": {
+                "max": 4151.453,
+                "median": 4151.063,
+                "min": 4149.797,
+                "n": 3,
+                "samples": [
+                  4149.797,
+                  4151.063,
+                  4151.453
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs",
+              "wall_ms": {
+                "max": 52502.307,
+                "median": 45821.212,
+                "min": 41384.475,
+                "n": 3,
+                "samples": [
+                  41384.475,
+                  45821.212,
+                  52502.307
+                ]
+              }
+            },
+            "literal": {
+              "count": 173074,
+              "max_rss_mb": {
+                "max": 4151.25,
+                "median": 4150.281,
+                "min": 4149.313,
+                "n": 3,
+                "samples": [
+                  4151.25,
+                  4150.281,
+                  4149.313
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs WHERE log_raw_text LIKE '%timeout%'",
+              "wall_ms": {
+                "max": 56452.293,
+                "median": 47266.454,
+                "min": 45417.287,
+                "n": 3,
+                "samples": [
+                  56452.293,
+                  47266.454,
+                  45417.287
+                ]
+              }
+            },
+            "regex": {
+              "count": 252693,
+              "max_rss_mb": {
+                "max": 4148.953,
+                "median": 4148.875,
+                "min": 4148.5,
+                "n": 3,
+                "samples": [
+                  4148.953,
+                  4148.5,
+                  4148.875
+                ]
+              },
+              "sql": "SELECT count(*) FROM all_logs WHERE regexp('r-[0-9a-f]{6}ff', log_raw_text)",
+              "wall_ms": {
+                "max": 48545.796,
+                "median": 48529.052,
+                "min": 48378.731,
+                "n": 3,
+                "samples": [
+                  48378.731,
+                  48529.052,
+                  48545.796
+                ]
+              }
+            }
+          },
+          "tui": "not measured: lnav's terminal UI asks the terminal questions (cursor position, palette) and waits for answers a scripted pseudo-terminal does not give"
+        },
+        {
+          "error": "lnav -n failed (exit status: 1)",
+          "file": "jsonl 5G",
+          "headless": {
+            "field": {
+              "count": null,
+              "max_rss_mb": null,
+              "sql": "SELECT count(*) FROM all_logs WHERE regexp('\"status\":5[0-9][0-9]', log_raw_text)",
+              "wall_ms": null
+            },
+            "index": {
+              "count": null,
+              "max_rss_mb": null,
+              "sql": "SELECT count(*) FROM all_logs",
+              "wall_ms": null
+            },
+            "literal": {
+              "count": null,
+              "max_rss_mb": null,
+              "sql": "SELECT count(*) FROM all_logs WHERE log_raw_text LIKE '%timeout%'",
+              "wall_ms": null
+            },
+            "regex": {
+              "count": null,
+              "max_rss_mb": null,
+              "sql": "SELECT count(*) FROM all_logs WHERE regexp('r-[0-9a-f]{6}ff', log_raw_text)",
+              "wall_ms": null
+            }
+          },
+          "tui": "not measured: lnav's terminal UI asks the terminal questions (cursor position, palette) and waits for answers a scripted pseudo-terminal does not give"
+        }
+      ],
+      "installed": true,
+      "key": "lnav",
+      "version": "lnav 0.14.1"
+    }
+  ],
+  "date": "2026-11-12",
+  "fixtures": [
+    {
+      "bytes": 104857659,
+      "detected": "timestamped",
+      "format": "plain",
+      "path": "benches/fixtures/plain-104857600-s42.log",
+      "size": "100M",
+      "source": null
+    },
+    {
+      "bytes": 104857711,
+      "detected": "jsonl",
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-104857600-s42.jsonl",
+      "size": "100M",
+      "source": null
+    },
+    {
+      "bytes": 1073741842,
+      "detected": "timestamped",
+      "format": "plain",
+      "path": "benches/fixtures/plain-1073741824-s42.log",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 1073741874,
+      "detected": "jsonl",
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-1073741824-s42.jsonl",
+      "size": "1G",
+      "source": null
+    },
+    {
+      "bytes": 5368709153,
+      "detected": "timestamped",
+      "format": "plain",
+      "path": "benches/fixtures/plain-5368709120-s42.log",
+      "size": "5G",
+      "source": null
+    },
+    {
+      "bytes": 5368709259,
+      "detected": "jsonl",
+      "format": "jsonl",
+      "path": "benches/fixtures/jsonl-5368709120-s42.jsonl",
+      "size": "5G",
+      "source": null
+    }
+  ],
+  "git": "2a05e8c",
+  "load_after": {
+    "loadavg": "{ 5.78 5.45 5.64 }",
+    "memgate": "available 18.48 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16432] pid 49722   rss      5 MB  peak   9.11 GB   16m49s  cargo run --quiet --release -p xtask -- bench --only apps --apps lnav --sizes 100M,1G,5G --out target/bench/full-app-lnav.json"
+  },
+  "load_before": {
+    "loadavg": "{ 4.20 4.97 5.96 }",
+    "memgate": "available 19.92 GB of 24.00 GB (floor 2.50 GB, start 6.00 GB) · 1 of 2 slots in use\nrunning:\n  [16432] pid 49722   rss      4 MB  peak    302 MB     3.4s  cargo run --quiet --release -p xtask -- bench --only apps --apps lnav --sizes 100M,1G,5G --out target/bench/full-app-lnav.json"
+  },
+  "machine": {
+    "arch": "aarch64",
+    "cores": 15,
+    "cpu": "Apple M5 Pro",
+    "memory_gb": 24.0,
+    "model": "Mac17,9",
+    "os": "macOS 26.6.2 (25G83)"
+  },
+  "mode": "full",
+  "runs": 9,
+  "schema": 1,
+  "started_unix": 1794484500
+}

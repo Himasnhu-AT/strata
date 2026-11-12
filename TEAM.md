@@ -12,7 +12,7 @@ Contracts (M0) are on `wt/contracts`; read docs/contracts.md before starting. St
 | claude (search) | search | .claude/worktrees/search · wt/search | done; rebased on main, integrated with index + formats | STR-SRCH.1, STR-SRCH.2 |
 | claude | ui | .claude/worktrees/ui · wt/ui | done; rebased on main (search + agent), ready to merge | STR-UI.1 window, user commands, scenes; STR-UI.2 agent integration, goldens, script, idle test |
 | claude | agent | .claude/worktrees/agent · wt/agent | done; rebased on main (search merged), ready to merge | STR-AGT.1 every MCP command, redaction, agent.undo, agent panel, Settings ▸ AI, tests; STR-AGT.2 search golden values on, chunk summaries on open |
-| claude (bench) | bench | .claude/worktrees/bench · wt/bench | done; ready to merge (touches xtask/Cargo.toml + main.rs: `bench` subcommand, deps ashlar-control 0.2 and serde_json) | STR-BENCH.1 `cargo xtask bench` harness + docs/benchmarks.md + benches/results |
+| claude (bench) | bench | .claude/worktrees/bench · wt/bench | done; competitor rows published, Strata rows pending re-measure after the perf stream; ready to merge (touches xtask/Cargo.toml + main.rs: `bench` subcommand, deps ashlar-control 0.2 and serde_json) | STR-BENCH.1 harness, STR-BENCH.2 formats + harness fixes, STR-BENCH.3 docs/benchmarks.md + benches/results |
 | claude | plainlog | .claude/worktrees/plainlog · wt/plainlog | done; ready to merge | STR-PLAIN.1 plain `.log` is the default face: fixtures, scenes, detail pane, continuation rows, tests, docs |
 
 ## Log (append one line: time · from → to · what)
