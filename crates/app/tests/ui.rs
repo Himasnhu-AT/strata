@@ -46,7 +46,10 @@ fn tree(d: &mut Driver<StrataDoc>) -> String {
         // a path cut to fit ("/var/folders/…/strata-scen…"): its length differs per machine
         if let (Some(a), Some(b)) = (l.find('"'), l.rfind("…\""))
             && b > a
-            && [FIXTURE_FILES[0], FIXTURE_FILES[1]].iter().any(|f| format!("{scenes}/{f}").starts_with(&l[a + 1..b]))
+            && [FIXTURE_FILES[0], FIXTURE_FILES[1]]
+                .iter()
+                .flat_map(|f| [format!("{scenes}/{f}"), format!("{scenes_tilde}/{f}")])
+                .any(|p| p.replace('\\', "/").starts_with(&l[a + 1..b]))
         {
             l.replace_range(a + 1..b, "<scenes>");
         }
@@ -69,7 +72,16 @@ fn check_tree(name: &str, got: &str) {
     let want = std::fs::read_to_string(&path).unwrap();
     if want != got {
         std::fs::write(path.with_extension("new.tree.txt"), got).unwrap();
-        panic!("{name}: the accessibility tree changed (see {name}.new.tree.txt; STRATA_UPDATE_GOLDEN=1 accepts it)");
+        // the changed lines, so a failure on a CI machine says what differs
+        let (w, g): (Vec<&str>, Vec<&str>) = (want.lines().collect(), got.lines().collect());
+        let mut diff = String::new();
+        for i in 0..w.len().max(g.len()) {
+            let (a, b) = (w.get(i).copied().unwrap_or("<none>"), g.get(i).copied().unwrap_or("<none>"));
+            if a != b {
+                diff.push_str(&format!("  line {}:\n    want {a}\n    got  {b}\n", i + 1));
+            }
+        }
+        panic!("{name}: the accessibility tree changed (see {name}.new.tree.txt; STRATA_UPDATE_GOLDEN=1 accepts it)\n{diff}");
     }
 }
 

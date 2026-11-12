@@ -13,7 +13,7 @@ use crate::commands::S;
 pub mod keys {
     /// `[Request]`: work for the view, oldest first.
     pub const REQUESTS: &str = "strata.ui.requests";
-    /// `{"path", "reason"}`: a file that could not be opened (the "Unreadable" dialog).
+    /// `{"path", "reason", "detail"}`: a file that could not be opened (the "Unreadable" dialog).
     pub const OPEN_ERROR: &str = "strata.ui.open_error";
     /// `bool`: start no background jobs (the `indexing` scene freezes a file part-way).
     pub const HOLD_JOBS: &str = "strata.ui.hold_jobs";

@@ -32,13 +32,18 @@ pub fn fixture_dir() -> PathBuf {
     std::fs::canonicalize(&dir).unwrap_or(dir)
 }
 
-/// Write `bytes` as `name` in the scene folder (once) and return its path.
+/// Write `bytes` as `name` in the scene folder (once) and return its path. Writers take turns:
+/// on Windows a file another scene has open cannot be replaced, and a failed write still counts
+/// when the file already holds `bytes` (another writer, or a scanner holding it, got there first).
 fn fixture(name: &str, bytes: &[u8]) -> Option<PathBuf> {
+    static WRITING: std::sync::Mutex<()> = std::sync::Mutex::new(());
+    let _turn = WRITING.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
     let dir = fixture_dir();
     std::fs::create_dir_all(&dir).ok()?;
     let path = dir.join(name);
-    if std::fs::read(&path).ok().as_deref() != Some(bytes) {
-        ashlar::fs::atomic_write(&path, bytes).ok()?;
+    let holds = || std::fs::read(&path).ok().as_deref() == Some(bytes);
+    if !holds() && ashlar::fs::atomic_write(&path, bytes).is_err() && !holds() {
+        return None;
     }
     Some(path)
 }
@@ -113,11 +118,14 @@ pub fn setup(name: &'static str) -> impl Fn(&mut S) + Send + Sync + 'static {
             }
             "unreadable" => {
                 let bytes: Vec<u8> = (0u32..4096).map(|i| if i % 3 == 0 { (i % 251) as u8 } else { 0 }).collect();
-                if let Some(path) = fixture("core-dump.bin", &bytes)
-                    && let Err(e) = user::open_path(s, &path, false)
-                {
-                    let reason = crate::views::states::reason(&e.to_string());
-                    s.set_view(keys::OPEN_ERROR, &json!({"path": path.display().to_string(), "reason": reason}));
+                let path = fixture("core-dump.bin", &bytes).unwrap_or_else(|| fixture_dir().join("core-dump.bin"));
+                if user::open_path(s, &path, false).is_err() {
+                    // what this file says on every OS: on Windows a virus scanner holding the new
+                    // file can make the open fail as "access denied" instead, and the scene would
+                    // show a different screen from run to run
+                    let detail = strata_core::error::Error::Binary { path: path.clone() }.to_string();
+                    let reason = crate::views::states::reason(&detail);
+                    s.set_view(keys::OPEN_ERROR, &json!({"path": path.display().to_string(), "reason": reason, "detail": detail}));
                 }
             }
             _ => {}

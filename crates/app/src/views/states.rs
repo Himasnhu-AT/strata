@@ -198,14 +198,17 @@ pub fn changed_banner(ui: &mut egui::Ui, cx: &mut Cx<'_, StrataDoc>, file: u64, 
     });
 }
 
-/// The "Unreadable" dialog: why a file could not be opened, and its path. Returns true when
-/// dismissed.
-pub fn unreadable_dialog(ctx: &egui::Context, path: &str, reason: &str) -> bool {
+/// The "Unreadable" dialog: why a file could not be opened (`detail`, the OS's own words, is the
+/// reason's tooltip), and its path. Returns true when dismissed.
+pub fn unreadable_dialog(ctx: &egui::Context, path: &str, reason: &str, detail: &str) -> bool {
     let buttons = [DialogButton::new("OK").default()];
     let shown = fmt::tilde(std::path::Path::new(path));
     let out = Dialog::new("strata.unreadable", "Can't open this file", &buttons).width(440.0).show(ctx, |ui| {
         let t = ashlar::ui::tokens::current(ui.ctx());
-        let r = ui.label(egui::RichText::new(reason).color(t.text.primary));
+        let mut r = ui.label(egui::RichText::new(reason).color(t.text.primary));
+        if !detail.is_empty() && detail != reason {
+            r = r.on_hover_text(detail);
+        }
         automation::register(ui, &r, "strata.unreadable.reason", reason, Role::Label);
         ui.add_space(t.space.sm);
         // one line, cut at the end: the full path is the tooltip
@@ -218,11 +221,16 @@ pub fn unreadable_dialog(ctx: &egui::Context, path: &str, reason: &str) -> bool 
 /// Why `e` (a `LogFile::open` error's text) happened, said for people.
 pub fn reason(e: &str) -> String {
     let lower = e.to_ascii_lowercase();
-    if lower.contains("permission") {
+    // Strata's own words, the same on every OS; the raw error stays in the dialog's tooltip
+    if lower.contains("permission") || lower.contains("access is denied") || lower.contains("os error 5)") {
         "You don't have permission to read it.".into()
     } else if lower.contains("binary") {
         "It looks like a binary file, not a text log.".into()
-    } else if lower.contains("not found") || lower.contains("no such file") {
+    } else if lower.contains("not found")
+        || lower.contains("no such file")
+        || lower.contains("cannot find the file")
+        || lower.contains("cannot find the path")
+    {
         "It doesn't exist (moved or deleted?).".into()
     } else {
         e.to_string()

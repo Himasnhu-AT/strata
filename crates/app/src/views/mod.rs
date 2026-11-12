@@ -139,7 +139,10 @@ impl Window {
     /// Open `path` (a drop, the dialog); a failure becomes the "Unreadable" dialog.
     fn open(cx: &mut Cx<'_, StrataDoc>, path: &std::path::Path) {
         if let Err(e) = cx.execute(ids::LOG_OPEN_DIALOG, json!({"path": path.display().to_string()})) {
-            cx.set_view(keys::OPEN_ERROR, &json!({"path": path.display().to_string(), "reason": states::reason(&e.to_string())}));
+            cx.set_view(
+                keys::OPEN_ERROR,
+                &json!({"path": path.display().to_string(), "reason": states::reason(&e.to_string()), "detail": e.to_string()}),
+            );
         }
     }
 
@@ -447,7 +450,8 @@ impl Window {
         if let Some(v) = cx.view::<Value>(keys::OPEN_ERROR) {
             let path = v.get("path").and_then(Value::as_str).unwrap_or_default().to_string();
             let reason = v.get("reason").and_then(Value::as_str).unwrap_or_default().to_string();
-            if states::unreadable_dialog(&ctx, &path, &reason) {
+            let detail = v.get("detail").and_then(Value::as_str).unwrap_or_default().to_string();
+            if states::unreadable_dialog(&ctx, &path, &reason, &detail) {
                 cx.set_view(keys::OPEN_ERROR, &Value::Null);
             }
         }

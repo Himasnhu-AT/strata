@@ -57,9 +57,14 @@ pub fn hms(t: Timestamp) -> String {
     full.get(11..19).map(str::to_string).unwrap_or(full)
 }
 
-/// The path with the home folder written `~`.
+/// The path with the home folder written `~`, and without Windows' `\\?\` prefix (which
+/// `canonicalize` adds and people never write).
 pub fn tilde(path: &std::path::Path) -> String {
     let shown = path.display().to_string();
+    let shown = match shown.strip_prefix(r"\\?\") {
+        Some(rest) => rest.strip_prefix(r"UNC\").map_or_else(|| rest.to_string(), |unc| format!(r"\\{unc}")),
+        None => shown,
+    };
     if let Some(home) = std::env::var_os("HOME").or_else(|| std::env::var_os("USERPROFILE")) {
         let home = home.to_string_lossy().to_string();
         if !home.is_empty()
@@ -91,6 +96,14 @@ pub fn keys(mac: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn tilde_drops_the_verbatim_prefix() {
+        let p = |s: &str| tilde(std::path::Path::new(s));
+        assert_eq!(p(r"\\?\Z:\logs\app.log"), r"Z:\logs\app.log");
+        assert_eq!(p(r"\\?\UNC\server\share\app.log"), r"\\server\share\app.log");
+        assert_eq!(p("/var/log/app.log"), "/var/log/app.log");
+    }
 
     #[test]
     fn numbers_read_well() {
