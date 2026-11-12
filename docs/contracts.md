@@ -63,8 +63,10 @@ epoch, UTC; shown as `Timestamp::to_rfc3339()` (`2026-11-12T07:41:03.118Z`). Lon
 | `Watcher` | follow.rs | events, poll fallback on network filesystems |
 | `gz::decompress`, `gz::is_gzip` | gz.rs | |
 | `FormatKind`, `detect`, `Parser`, `parser`, `FieldNames` | formats/mod.rs | ids `plain jsonl logfmt syslog timestamped access` |
-| `Redaction`, `RedactKind`, `Pattern` | redact.rs | replacement `[redacted:<kind>]` |
-| `time::parse_time`, `parse_duration`, `format_duration` | time.rs | |
+| `Detection`, `detect_scored`, `Parser::parse_into`, `level_word`, `level_number`, one `*Parser` per format | formats/* | `parse_into` reuses a `Parsed`; caps `MAX_FIELD_NAMES` 4096, `MAX_FIELD_NAME_BYTES` 128, `MAX_FIELDS_PER_LINE` 256, `JSON_FLATTEN_DEPTH` 4; `FieldNames::try_intern` is `None` past the caps, `intern` gives `FieldId(u32::MAX)` |
+| `Redaction`, `RedactKind`, `Pattern` | redact.rs | replacement `[redacted:<kind>]`; kinds also `api-key credit-card secret-field ipv4 ipv6` (`RedactKind::BUILTIN`, applied in that order); `Redaction.disabled` (serde default: the IPs) with `is_on`/`set`; `Pattern::check` |
+| `time::parse_time`, `parse_duration`, `format_duration` | time.rs | durations also `us` and a sign |
+| `time::scan_timestamp`, `scan_timestamp_near`, `epoch_number`, `days_from_civil` | time.rs | log timestamps at the start of bytes → UTC µs; `_near` infers syslog's year from a given time |
 | `Query`, `Matcher`, `Match`, `search`, `find_next`, `count` | search.rs | |
 | `Filter`, `Field`, `CmpOp`, `Literal` | filter.rs | text grammar in the module docs; `parse(to_text(f)) == f` |
 | `Histogram`, `Bucket`, `histogram`, `auto_width` | histogram.rs | |
