@@ -182,7 +182,11 @@ fn apps(strata_bundle: Option<PathBuf>) -> Vec<App> {
         installed: "/Applications/Visual Studio Code.app".into(),
         owner: "Code",
         processes: vec!["Visual Studio Code.app/".into()],
-        launch: Box::new(|file, home| {
+        launch: Box::new(|file, _| {
+            // a fresh profile per run, in a short path: VS Code's IPC socket lives in it and macOS
+            // caps socket paths at 103 bytes
+            let home = std::env::temp_dir().join("sbv");
+            let _ = std::fs::remove_dir_all(&home);
             let mut c = Command::new("/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code");
             c.args(["--new-window", "--disable-extensions", "--skip-welcome", "--disable-workspace-trust"])
                 .arg("--user-data-dir")
@@ -487,10 +491,18 @@ fn lnav_sql(lnav: &Path, home: &Path, file: &Path, sql: &str) -> Result<(f64, Op
         .output()
         .map_err(|e| format!("lnav: {e}"))?;
     let wall = ms(t.elapsed());
-    if !out.status.success() {
-        return Err(format!("lnav -n failed ({})", out.status));
-    }
     let err = String::from_utf8_lossy(&out.stderr);
+    if !out.status.success() {
+        // lnav's own message, without /usr/bin/time's counters
+        let said: Vec<&str> = err
+            .lines()
+            .filter(|l| !l.trim_start().starts_with(|c: char| c.is_ascii_digit()))
+            .map(str::trim)
+            .filter(|l| !l.is_empty())
+            .take(3)
+            .collect();
+        return Err(format!("lnav -n failed ({}): {}", out.status, said.join(" / ")));
+    }
     let rss = err
         .lines()
         .find(|l| l.contains("maximum resident set size"))
@@ -513,11 +525,12 @@ fn lnav(dir: &Path, fixtures: &[Fixture], runs: usize) -> Value {
         let runs = if f.bytes > 1 << 30 { runs.min(3) } else { runs };
         let mut error = None;
         eprintln!("bench: lnav {name}: {runs} runs per query");
-        let field = if f.format == "jsonl" { r#"regexp('"status":5[0-9][0-9]', log_raw_text)"# } else { "log_level = 'error'" };
+        let q = crate::bench::queries(&f.format);
+        let field = q.lnav_field;
         let queries = [
             ("index", "SELECT count(*) FROM all_logs".to_string()),
-            ("literal", "SELECT count(*) FROM all_logs WHERE log_raw_text LIKE '%timeout%'".to_string()),
-            ("regex", "SELECT count(*) FROM all_logs WHERE regexp('r-[0-9a-f]{6}ff', log_raw_text)".to_string()),
+            ("literal", format!("SELECT count(*) FROM all_logs WHERE log_raw_text LIKE '%{}%'", q.literal)),
+            ("regex", format!("SELECT count(*) FROM all_logs WHERE regexp('{}', log_raw_text)", q.regex.replace('\'', "''"))),
             ("field", format!("SELECT count(*) FROM all_logs WHERE {field}")),
         ];
         let mut headless = serde_json::Map::new();

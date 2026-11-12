@@ -331,11 +331,11 @@ fn launches(exe: &Path, dir: &Path, runs: usize) -> Result<Value, String> {
 
 /// The searches for one format: (name, command, params, job kind, element with the count).
 fn searches(format: &str) -> Vec<(&'static str, &'static str, Value, &'static str, &'static str)> {
-    let field = if format == "jsonl" { "status >= 500" } else { "level = error" };
+    let q = crate::bench::queries(format);
     vec![
-        ("literal", "search.run", json!({"query": "timeout"}), "strata.search", "strata.toolbar.matches"),
-        ("regex", "search.run", json!({"query": "r-[0-9a-f]{6}ff", "regex": true}), "strata.search", "strata.toolbar.matches"),
-        ("field", "view.filter", json!({"filter": field}), "strata.filter", "strata.status.filters"),
+        ("literal", "search.run", json!({"query": q.literal}), "strata.search", "strata.toolbar.matches"),
+        ("regex", "search.run", json!({"query": q.regex, "regex": true}), "strata.search", "strata.toolbar.matches"),
+        ("field", "view.filter", json!({"filter": q.field}), "strata.filter", "strata.status.filters"),
     ]
 }
 

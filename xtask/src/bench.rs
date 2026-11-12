@@ -39,6 +39,8 @@ pub struct Options {
     pub runs: usize,
     pub sizes: Vec<(String, u64)>,
     pub formats: Vec<String>,
+    /// `--files jsonl:1G,syslog:1G`: exactly these (format, size); else every size × format.
+    pub files: Option<Vec<(String, String, u64)>>,
     pub idle_secs: u64,
     pub strata: bool,
     pub others: bool,
@@ -72,7 +74,20 @@ fn options(args: &[String]) -> Result<Options, String> {
         } else {
             vec![("100M".into(), 100 << 20), ("1G".into(), 1 << 30), ("5G".into(), 5 << 30)]
         },
-        formats: vec!["jsonl".into(), "plain".into()],
+        formats: vec!["plain".into(), "jsonl".into()],
+        // the full run: plain text and JSON lines at every size, the other formats at 1 GB
+        files: (!quick).then(|| {
+            let mut f: Vec<(String, String, u64)> = Vec::new();
+            for fmt in ["plain", "jsonl"] {
+                for (l, b) in [("100M", 100u64 << 20), ("1G", 1 << 30), ("5G", 5 << 30)] {
+                    f.push((fmt.into(), l.into(), b));
+                }
+            }
+            for fmt in ["logfmt", "syslog", "access", "macos"] {
+                f.push((fmt.into(), "1G".into(), 1 << 30));
+            }
+            f
+        }),
         idle_secs: if quick { 10 } else { 60 },
         strata: true,
         others: true,
@@ -87,10 +102,25 @@ fn options(args: &[String]) -> Result<Options, String> {
         match a.as_str() {
             "--quick" => {}
             "--runs" => o.runs = value()?.parse::<usize>().map_err(|e| format!("bench: --runs: {e}"))?.clamp(1, 100),
-            "--sizes" => o.sizes = value()?.split(',').map(|s| size_of(s).map(|b| (s.trim().to_uppercase(), b))).collect::<Result<_, _>>()?,
+            "--files" => {
+                let mut files = Vec::new();
+                for item in value()?.split(',') {
+                    let (f, size) = item.trim().split_once(':').ok_or_else(|| format!("bench: --files {item}: format:size, e.g. syslog:1G"))?;
+                    if !FORMATS.contains(&f) {
+                        return Err(format!("bench: unknown format `{f}` ({})", FORMATS.join(", ")));
+                    }
+                    files.push((f.to_string(), size.to_uppercase(), size_of(size)?));
+                }
+                o.files = Some(files);
+            }
+            "--sizes" => {
+                o.files = None;
+                o.sizes = value()?.split(',').map(|s| size_of(s).map(|b| (s.trim().to_uppercase(), b))).collect::<Result<_, _>>()?;
+            }
             "--formats" => {
+                o.files = None;
                 o.formats = value()?.split(',').map(|s| s.trim().to_string()).collect();
-                if let Some(bad) = o.formats.iter().find(|f| !matches!(f.as_str(), "jsonl" | "plain")) {
+                if let Some(bad) = o.formats.iter().find(|f| !FORMATS.contains(&f.as_str())) {
                     return Err(format!("bench: unknown format `{bad}` (jsonl, plain)"));
                 }
             }
@@ -149,8 +179,61 @@ pub fn load() -> Value {
     })
 }
 
+/// The formats the harness knows: the generator's, and `macos` (a real log, see [`macos_log`]).
+pub const FORMATS: &[&str] = &["jsonl", "plain", "logfmt", "syslog", "access", "macos"];
+
+/// The real macOS log the `macos` fixture repeats.
+pub const MACOS_SOURCE: &str = "/var/log/install.log";
+
+/// `/var/log/install.log` repeated (whole copies, then whole lines) up to `bytes`: a real log
+/// with real line lengths and messages. Not reproducible across Macs (each has its own log): the
+/// results record its source size.
+fn macos_log(path: &Path, bytes: u64) -> Result<(), String> {
+    let src = std::fs::read(MACOS_SOURCE).map_err(|e| format!("bench: {MACOS_SOURCE}: {e}"))?;
+    if src.is_empty() {
+        return Err(format!("bench: {MACOS_SOURCE} is empty"));
+    }
+    let mut src = src;
+    if !src.ends_with(b"\n") {
+        src.push(b'\n');
+    }
+    if let Some(dir) = path.parent() {
+        std::fs::create_dir_all(dir).map_err(|e| e.to_string())?;
+    }
+    let mut w = std::io::BufWriter::new(std::fs::File::create(path).map_err(|e| format!("bench: {}: {e}", path.display()))?);
+    let mut written = 0u64;
+    while written < bytes {
+        let left = usize::try_from(bytes - written).unwrap_or(usize::MAX);
+        let piece = if left >= src.len() {
+            src.as_slice()
+        } else {
+            // up to the end of the line that crosses the size
+            let end = src.iter().skip(left).position(|b| *b == b'\n').map_or(src.len(), |i| left + i + 1);
+            src.get(..end).unwrap_or_default()
+        };
+        std::io::Write::write_all(&mut w, piece).map_err(|e| e.to_string())?;
+        written += piece.len() as u64;
+    }
+    std::io::Write::flush(&mut w).map_err(|e| e.to_string())
+}
+
+/// The format Strata detects for a file (from its first 64 KB).
+fn detected(path: &Path) -> Option<String> {
+    let mut head = vec![0u8; 64 * 1024];
+    let n = std::io::Read::read(&mut std::fs::File::open(path).ok()?, &mut head).ok()?;
+    Some(strata_core::formats::detect(head.get(..n)?).as_str().to_string())
+}
+
 /// Generate the fixture when it is missing (the same bytes for the same size and seed).
 fn fixture(root: &Path, format: &str, label: &str, bytes: u64) -> Result<Fixture, String> {
+    if format == "macos" {
+        let path = root.join("benches").join("fixtures").join(format!("macos-install-{bytes}.log"));
+        if !std::fs::metadata(&path).is_ok_and(|m| m.len() >= bytes) {
+            eprintln!("bench: writing {}", path.display());
+            macos_log(&path, bytes)?;
+        }
+        return Ok(Fixture { format: format.into(), label: label.into(), path, bytes });
+    }
     let ext = if format == "jsonl" { "jsonl" } else { "log" };
     let path = root.join("benches").join("fixtures").join(format!("{format}-{bytes}-s42.{ext}"));
     let complete = std::fs::metadata(&path).is_ok_and(|m| m.len() >= bytes);
@@ -163,6 +246,53 @@ fn fixture(root: &Path, format: &str, label: &str, bytes: u64) -> Result<Fixture
         crate::fixtures::main(&args)?;
     }
     Ok(Fixture { format: format.into(), label: label.into(), path, bytes })
+}
+
+/// The three searches of one format, written for each tool. `literal` is case-insensitive
+/// everywhere; `regex` is an extended regex every tool reads the same; `field` is Strata's filter,
+/// `grep_field` its text equivalent (ERE) and `lnav_field` lnav's SQL condition.
+pub struct Queries {
+    pub literal: &'static str,
+    pub regex: &'static str,
+    pub field: &'static str,
+    pub grep_field: &'static str,
+    pub lnav_field: &'static str,
+}
+
+pub fn queries(format: &str) -> Queries {
+    let ids = "r-[0-9a-f]{6}ff";
+    match format {
+        "jsonl" => Queries {
+            literal: "timeout",
+            regex: ids,
+            field: "status >= 500",
+            grep_field: r#""status":5[0-9][0-9]"#,
+            lnav_field: r#"regexp('"status":5[0-9][0-9]', log_raw_text)"#,
+        },
+        "logfmt" => Queries {
+            literal: "timeout",
+            regex: ids,
+            field: "status >= 500",
+            grep_field: " status=5[0-9][0-9] ",
+            lnav_field: "regexp(' status=5[0-9][0-9] ', log_raw_text)",
+        },
+        "syslog" => Queries { literal: "timeout", regex: ids, field: "level = error", grep_field: "^<11>", lnav_field: "log_level = 'error'" },
+        "access" => Queries {
+            literal: "/v1/pay",
+            regex: r#"" 50[0-9] "#,
+            field: "status >= 500",
+            grep_field: r#"" 5[0-9][0-9] "#,
+            lnav_field: r#"regexp('" 5[0-9][0-9] ', log_raw_text)"#,
+        },
+        "macos" => Queries {
+            literal: "error",
+            regex: "fail(ed|ure)",
+            field: "message ~ error",
+            grep_field: "[Ee][Rr][Rr][Oo][Rr]",
+            lnav_field: "log_raw_text LIKE '%error%'",
+        },
+        _ => Queries { literal: "timeout", regex: ids, field: "level = error", grep_field: r"\] ERROR ", lnav_field: "log_level = 'error'" },
+    }
 }
 
 /// Median, min and max of samples (the median of an even count is the mean of the middle two).
@@ -201,6 +331,14 @@ fn entry_id(v: &Value) -> Option<String> {
 /// Merge `b` into `a`: objects key by key, arrays of identified entries entry by entry (a later
 /// run of the same file replaces it), anything else from `b`.
 fn merge(a: &mut Value, b: Value) {
+    // an object of plain values (a summary, wake counts) is one measurement: replaced whole
+    let leaf = |v: &Value| {
+        v.as_object().is_some_and(|o| o.values().all(|x| !x.is_object() && x.as_array().is_none_or(|a| a.iter().all(|y| !y.is_object()))))
+    };
+    if leaf(&b) {
+        *a = b;
+        return;
+    }
     match (a, b) {
         (Value::Object(a), Value::Object(b)) => {
             for (k, v) in b {
@@ -254,9 +392,18 @@ pub fn run(root: &Path, args: &[String]) -> Result<(), String> {
     let mode = if o.quick { "quick" } else { "full" };
     let started = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map(|d| d.as_secs()).unwrap_or(0);
     let mut fixtures = Vec::new();
-    for (label, bytes) in &o.sizes {
-        for f in &o.formats {
-            fixtures.push(fixture(root, f, label, *bytes)?);
+    match &o.files {
+        Some(files) => {
+            for (f, label, bytes) in files {
+                fixtures.push(fixture(root, f, label, *bytes)?);
+            }
+        }
+        None => {
+            for (label, bytes) in &o.sizes {
+                for f in &o.formats {
+                    fixtures.push(fixture(root, f, label, *bytes)?);
+                }
+            }
         }
     }
     let load_before = load();
@@ -270,7 +417,7 @@ pub fn run(root: &Path, args: &[String]) -> Result<(), String> {
         "git": output("git", &["-C", &root.display().to_string(), "rev-parse", "--short", "HEAD"]),
         "machine": machine(),
         "load_before": load_before,
-        "fixtures": fixtures.iter().map(|f| json!({"format": f.format, "size": f.label, "bytes": std::fs::metadata(&f.path).map(|m| m.len()).unwrap_or(0), "path": f.path.strip_prefix(root).unwrap_or(&f.path).display().to_string()})).collect::<Vec<_>>(),
+        "fixtures": fixtures.iter().map(|f| json!({"format": f.format, "size": f.label, "detected": detected(&f.path), "source": (f.format == "macos").then(|| format!("{MACOS_SOURCE} ({} bytes), repeated", std::fs::metadata(MACOS_SOURCE).map(|m| m.len()).unwrap_or(0))), "bytes": std::fs::metadata(&f.path).map(|m| m.len()).unwrap_or(0), "path": f.path.strip_prefix(root).unwrap_or(&f.path).display().to_string()})).collect::<Vec<_>>(),
     });
     let out = o.out.clone().unwrap_or_else(|| target_dir(root).join("bench").join(format!("bench-{mode}.json")));
     if o.strata {
@@ -317,6 +464,9 @@ mod tests {
         assert_eq!(a["strata"]["launch"]["x"], 1);
         let files = a["strata"]["files"].as_array().unwrap();
         assert_eq!((files.len(), files[0]["lines"].clone(), files[1]["size"].clone()), (2, json!(2), json!("5G")));
+        let mut w = json!({"idle": {"by": {"input": 63}, "cpu": 1}});
+        merge(&mut w, json!({"idle": {"by": {"autosave": 2}}}));
+        assert_eq!(w, json!({"idle": {"by": {"autosave": 2}, "cpu": 1}}));
         let mut s = json!({"median": 1.0, "samples": [1.0]});
         merge(&mut s, json!({"median": 2.0, "samples": [2.0, 2.0]}));
         assert_eq!(s["samples"], json!([2.0, 2.0]));

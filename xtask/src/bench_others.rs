@@ -65,11 +65,6 @@ fn cli_case(cmd: &Path, args: &[&str], runs: usize) -> Value {
     json!({"command": format!("{} {}", cmd.display(), args.join(" ")), "wall_ms": summary(&wall), "max_rss_mb": summary(&rss), "output": out})
 }
 
-/// The text equivalent of Strata's field filter for grep and rg (an extended regex).
-fn field_pattern(format: &str) -> &'static str {
-    if format == "jsonl" { r#""status":5[0-9][0-9]"# } else { r"\] ERROR " }
-}
-
 fn cli_tools(f: &Fixture, runs: usize) -> Value {
     // BSD grep reads about 50–150 MB/s: one run on files over 1 GB
     let runs = if f.bytes > 1 << 30 { 1 } else { runs };
@@ -78,7 +73,7 @@ fn cli_tools(f: &Fixture, runs: usize) -> Value {
     let queries = crate::bench_strata::search_queries(&f.format);
     let q = |name: &str| queries.iter().find(|(n, _)| *n == name).map(|(_, q)| q.clone()).unwrap_or_default();
     let (literal, regex) = (q("literal"), q("regex"));
-    let field = field_pattern(&f.format);
+    let field = crate::bench::queries(&f.format).grep_field;
     let mut out = serde_json::Map::new();
     out.insert("wc_l".into(), cli_case(Path::new("/usr/bin/wc"), &["-l", p], runs));
     let grep = Path::new("/usr/bin/grep");
