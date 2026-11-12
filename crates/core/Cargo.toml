@@ -28,12 +28,27 @@ type_complexity = "allow"
 memchr = "2"
 regex = { version = "1", default-features = false, features = ["std", "perf", "unicode"] }
 serde = { workspace = true }
+# index stream: file maps, follow mode, .gz input
+memmap2 = "0.9"
+notify = { version = "8", default-features = false, features = ["macos_kqueue"] }
+same-file = "1"
+flate2 = "1"
+
+[target.'cfg(unix)'.dependencies]
+# statfs: is a followed file on a network filesystem (no reliable file events there)?
+rustix = { version = "1", features = ["fs"] }
 
 [dev-dependencies]
 proptest = { version = "1", default-features = false, features = ["std"] }
 serde_json = { workspace = true }
+tempfile = { workspace = true }
 
 # Parse and redaction throughput on `cargo xtask fixtures` output: `cargo bench -p strata-core --bench formats`.
 [[bench]]
 name = "formats"
+harness = false
+
+# Line index throughput: `cargo bench -p strata-core --bench index`.
+[[bench]]
+name = "index"
 harness = false
