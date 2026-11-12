@@ -9,3 +9,6 @@ workspace = true
 
 [dependencies]
 strata-core = { workspace = true }
+# the benchmark harness drives the app over its control port (the same version ashlar-rs uses)
+ashlar-control = "0.2"
+serde_json = { workspace = true }

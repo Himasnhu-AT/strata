@@ -3,10 +3,18 @@
 //! - `ci`: fmt check, clippy `-D warnings` on every target, then the tests (`--no-fail-fast`).
 //! - `fixtures [--size 100M] [--format plain|jsonl|logfmt|syslog|access] [--seed N] [--out PATH]`:
 //!   write a realistic log file, the same bytes for the same arguments (see `fixtures.rs`).
+//! - `bench [--quick] [--runs N] [--sizes 100M,1G,5G] [--formats jsonl,plain] [--idle SECS]
+//!   [--only strata|others|apps] [--apps strata,console,klogg,sublime,vscode,lnav] [--no-small] [--out PATH]`: the published benchmarks against other
+//!   log viewers; opens real windows, never run in CI (see `bench.rs`, docs/benchmarks.md).
 
 use std::path::{Path, PathBuf};
 use std::process::{Command, ExitCode};
 
+mod bench;
+mod bench_apps;
+mod bench_others;
+mod bench_report;
+mod bench_strata;
 mod fixtures;
 
 fn cargo() -> String {
@@ -36,7 +44,8 @@ fn main() -> ExitCode {
     let result = match args.first().map(String::as_str) {
         Some("ci") => ci(),
         Some("fixtures") => fixtures::main(args.get(1..).unwrap_or_default()),
-        _ => Err("usage: cargo xtask ci | fixtures [--size 100M] [--format plain|jsonl|logfmt|syslog|access] [--seed N] [--out PATH]".into()),
+        Some("bench") => bench::run(&root(), args.get(1..).unwrap_or_default()),
+        _ => Err("usage: cargo xtask ci | fixtures [--size 100M] [--format plain|jsonl|logfmt|syslog|access] [--seed N] [--out PATH] | bench [--quick] [--runs N] [--sizes 100M,1G,5G] [--formats jsonl,plain] [--idle SECS] [--only strata|others|apps] [--apps strata,console,klogg,sublime,vscode,lnav] [--no-small] [--out PATH]".into()),
     };
     match result {
         Ok(()) => ExitCode::SUCCESS,
